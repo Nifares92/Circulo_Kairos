@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Cuaderno de Música: Monografías acústicas de fondo, minimalismo sacro, modalismo y paisajes analógicos.">
+  <title>Música & Resonancias | Círculo Kairós</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* Barra de progreso de lectura */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px; width: 0%;
+      background-color: var(--accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Cabecera */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    /* Contenedor Principal */
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-header-box {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-tag {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-heading-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-summary-text {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Sumario de saltos */
+    .table-of-contents-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.6rem 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .toc-title {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.9rem;
+      display: block;
+      font-weight: 700;
+    }
+    .toc-links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem 1.8rem;
+      list-style: none;
+    }
+    .toc-item a {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .toc-item a span.num {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Disposición Editorial */
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    .articles-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+    }
+
+    .long-article {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .long-article::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .article-topic {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .article-headline {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .music-specs-header {
+      font-size: 0.95rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .article-meta-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .article-featured-media {
+      margin-bottom: 2.2rem;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      max-height: 420px;
+    }
+    .article-featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-featured-media figcaption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-soft);
+      font-style: italic;
+    }
+
+    /* Reproductor Integrado */
+    .embedded-audio-player {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.6rem;
+      margin: 1.8rem 0 2.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .player-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+    .player-label strong {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+    .player-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .play-audio-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: #ffffff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: background-color var(--transition);
+    }
+    .play-audio-btn:hover { background-color: var(--accent-dark); }
+    .audio-timeline-track {
+      flex-grow: 1;
+      height: 6px;
+      background-color: var(--border-soft);
+      border-radius: 3px;
+      position: relative;
+    }
+    .audio-timeline-fill {
+      height: 100%;
+      background-color: var(--accent);
+      border-radius: 3px;
+    }
+
+    .article-prose {
+      font-family: var(--font-reader);
+      font-size: 1.2rem;
+      line-height: 1.95;
+      color: #292624;
+    }
+    .article-prose p {
+      margin-bottom: 1.8rem;
+      text-align: justify;
+    }
+    .article-prose h3 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      margin: 3rem 0 1.2rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .article-prose .dropcap::first-letter {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 4.6rem;
+      line-height: 0.8;
+      padding-top: 6px;
+      padding-right: 14px;
+      padding-bottom: 2px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .article-prose blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.4rem 1.8rem;
+      margin: 2.5rem 0;
+      background-color: var(--bg-surface);
+      font-style: italic;
+      font-size: 1.22rem;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+    .article-prose blockquote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .article-bottom-actions {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 1.8rem;
+      margin-top: 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .signature-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .back-to-toc-link {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 2px;
+    }
+    .back-to-toc-link:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* Paginador Automático */
+    .pagination-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .page-btn {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .page-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .page-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      cursor: default;
+    }
+
+    /* Sidebar */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+
+    .vinyl-focus-card { text-align: center; }
+    .vinyl-focus-sleeve {
+      width: 155px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 1.1rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 2px 5px 14px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .vinyl-focus-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .vinyl-focus-card .artist {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+    }
+    .vinyl-focus-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      text-align: left;
+      margin-bottom: 1.1rem;
+    }
+
+    .quote-widget blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+    .quote-widget cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    .quick-music-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .quick-music-list li {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.65rem 0;
+    }
+    .quick-music-list li:last-child { border-bottom: none; }
+    .quick-music-list strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .quick-music-list span {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .toc-links-grid { grid-template-columns: 1fr; }
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .long-article { padding: 2.2rem 1.8rem; }
+      .sidebar-wrapper { position: static; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-heading-title { font-size: 2.2rem; }
+      .article-headline { font-size: 1.85rem; }
+      .article-prose p { text-align: left; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div id="progress-bar"></div>
+
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Cuaderno III</span>
+    <span><strong>Disciplina:</strong> Acústica, Liturgia & Resonancias</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
+          <li><a href="musica.html" class="active">Música</a></li>
+          <li><a href="filosofia.html">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+
+    <header class="section-header-box">
+      <span class="section-category-tag">Cuaderno Editorial III</span>
+      <h2 class="section-heading-title">Música & Resonancias</h2>
+      <p class="section-summary-text">
+        «La música es el silencio que encuentra su voz.» Monografías sonoras de fondo, la liturgia minimalista de Arvo Pärt, el modalismo de Miles Davis y la respiración analógica.
+      </p>
+    </header>
+
+    <!-- SUMARIO DINÁMICO -->
+    <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de monografías musicales de esta página">
+      <span class="toc-title">Monografías visibles en esta página · Haz clic para ir al texto</span>
+      <ul class="toc-links-grid" id="toc-container"></ul>
+    </nav>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL DE ENSAYOS DE MÚSICA -->
+      <section class="articles-stream" id="stream-ensayos" aria-label="Monografías sonoras completas">
+
+        <!-- ENSAYO 1: ARVO PÄRT - TABULA RASA -->
+        <article class="long-article" id="mus-part" data-titulo="I. Tabula Rasa (Arvo Pärt)">
+          <header class="article-header">
+            <span class="article-topic">Minimalismo Sacro · Monografía Sonora I</span>
+            <h2 class="article-headline">Tabula Rasa: Arvo Pärt, la arquitectura del silencio y la mística del tintinnabuli</h2>
+            <p class="music-specs-header">Arvo Pärt · ECM New Series (1984) · Manfred Eicher</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-05">05 de octubre de 2026</time> · <span>24 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=1200&q=80" alt="Vinilo girando en tocadiscos analógico">
+            <figcaption>El tañido de dos voces: la melodía errante del hombre y la tríada inmóvil de las campanas.</figcaption>
+          </figure>
+
+          <!-- Reproductor de la pieza -->
+          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+            <div class="player-label">
+              <strong>Muestra sugerida: Pärt — Fratres para violín y orquesta</strong>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">04:12 / 10:48</span>
+            </div>
+            <div class="player-ctrls">
+              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 38%;"></div></div>
+            </div>
+          </div>
+
+          <div class="article-prose">
+            <p class="dropcap">En el otoño de 1977, en la sala de conciertos de la Universidad de Tallin, se estrenó una obra que cambiaría para siempre el rumbo de la música clásica de finales del siglo XX. Dos violines solistas, un piano preparado con chinchetas entre sus fieltros y una orquesta de cuerdas interpretaron <em>Tabula Rasa</em> bajo la batuta de Eri Klas, con Gidon Kremer y Tatiana Grindenko a los arcos. Al concluir el segundo movimiento —un <em>Silentium</em> que parecía disolverse en el aire sin resolver en un acorde triunfal—, el público permaneció varios minutos en absoluto enmudecimiento antes de atreverse a romper el encantamiento con los aplausos.</p>
+            <h3>I. La gran renuncia: El desierto del silencio creativo</h3>
+            <p>Para llegar a esa pureza cristalina, Arvo Pärt (Paide, Estonia, 1935) debió atravesar un calvario de desencanto. Durante la década de 1960 había sido el niño terrible de la vanguardia soviética, experimentando con el serialismo de doce tonos, el collage politonal y la técnica aleatoria. Sin embargo, hacia 1968, tras componer su polémica obra <em>Credo</em> —que las autoridades censuraron por su confesión explícita de fe cristiana—, Pärt sintió una profunda náusea estética.</p>
+            <p>«Llegué a un punto muerto en el que no sabía cómo continuar componiendo», confesaría años más tarde. «Sentía que la música contemporánea había destruido los fundamentos mismos del alma humana para complacerse en una complejidad técnica fría y desprovista de oración». Pärt se recluyó en un mutismo creativo que se prolongó durante casi ocho años. Durante ese tiempo, se sumergió en el estudio riguroso de la monodia gregoriana, el organum de Notre Dame de París y la polifonía renacentista de Guillaume de Machaut y Josquin des Prés.</p>
+            <blockquote>«He descubierto que basta con que una sola nota sea tañida con hermosa intención. Esa sola nota, o un instante de puro silencio, pueden ser suficientes para alimentar el espíritu humano durante toda una vida.»<cite>— Arvo Pärt, Cuadernos de Tallin</cite></blockquote>
+            <h3>II. El milagro del Tintinnabuli: La dialéctica de las dos voces</h3>
+            <p>En 1976, Pärt rompió su largo retiro con una breve pieza para piano de apenas dos minutos titulada <em>Für Alina</em>. Allí se presentó al mundo una técnica compositiva sin precedentes en la historia de la música occidental: el estilo <em>tintinnabuli</em> (palabra derivada del latín que evoca el tañido de pequeñas campanas sacras).</p>
+            <p>El sistema es de una sencillez matemática deslumbrante, basada en la interacción de dos únicas voces: la voz melódica, que asciende y desciende por grados conjuntos reflejando las zozobras y el peregrinaje del hombre, y la voz tintinnabuli, que gravita eternamente en torno al acorde tríada fundamental, fija y protectora como la presencia de lo eterno. En el tintinnabuli, la música se despoja de artificio para convertirse en geometría sonora sagrada.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Acústica Sacra</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 2: MILES DAVIS - KIND OF BLUE -->
+        <article class="long-article" id="mus-miles" data-titulo="II. Kind of Blue (Miles Davis)">
+          <header class="article-header">
+            <span class="article-topic">Modal Jazz · Monografía Sonora II</span>
+            <h2 class="article-headline">Kind of Blue: Miles Davis, el modalismo y la invención del espacio en el jazz moderno</h2>
+            <p class="music-specs-header">Miles Davis · Columbia Records (1959) · 30th Street Studio</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-28">28 de septiembre de 2026</time> · <span>21 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Trompeta en penumbra de club de jazz">
+            <figcaption>La sordina Harmon y los acordes suspendidos de Bill Evans: la noche como lienzo.</figcaption>
+          </figure>
+
+          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+            <div class="player-label">
+              <strong>Muestra sugerida: Miles Davis — Blue in Green</strong>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">05:37</span>
+            </div>
+            <div class="player-ctrls">
+              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 50%;"></div></div>
+            </div>
+          </div>
+
+          <div class="article-prose">
+            <p class="dropcap">En marzo y abril de 1959, en los antiguos estudios de Columbia Records en la calle 30 de Manhattan —una antigua iglesia armenia con una reverberación natural cálida y profunda—, un sexteto irrepetible se reunió sin ensayos previos. Miles Davis entregó a músicos como John Coltrane, Cannonball Adderley y Bill Evans meros esbozos de escalas modales escritos a mano en papeles sueltos.</p>
+            <h3>I. La abolición de la tiranía armónica del bebop</h3>
+            <p>El bebop de Charlie Parker y Dizzy Gillespie había llevado la velocidad y la complejidad de los acordes a un límite acrobático; en piezas como <em>Giant Steps</em>, los acordes cambiaban a cada compás exigiendo una gimnasia técnica vertiginosa. Miles Davis propuso el camino inverso: la supresión de los acordes densos para abrir campos modales dilatados donde una sola escala gobernara durante dieciséis compases seguidos.</p>
+            <blockquote>«No toques lo que está ahí. Toca lo que no está. La música nace en la respiración entre dos notas.»<cite>— Miles Davis</cite></blockquote>
+            <p>El resultado fue <em>Kind of Blue</em>. El piano impresionista de Bill Evans introduce acordes con cuartas suspendidas que recuerdan a Debussy y Ravel, mientras la trompeta con sordina Harmon de Miles susurra melodías melancólicas que parecen surgir de la soledad misma de la noche neoyorquina.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Jazz Clásico</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 3: MAX RICHTER - THE BLUE NOTEBOOKS -->
+        <article class="long-article" id="mus-richter" data-titulo="III. The Blue Notebooks (Max Richter)">
+          <header class="article-header">
+            <span class="article-topic">Neoclásica Contemporánea · Monografía Sonora III</span>
+            <h2 class="article-headline">The Blue Notebooks: Max Richter, elegía para cuerdas y la resistencia de la belleza</h2>
+            <p class="music-specs-header">Max Richter · Deutsche Grammophon (2004) · Textos de Franz Kafka</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-18">18 de septiembre de 2026</time> · <span>19 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80" alt="Partituras sobre piano de cola">
+            <figcaption>El tecleo de la máquina de escribir y la voz de Kafka en On the Nature of Daylight.</figcaption>
+          </figure>
+
+          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+            <div class="player-label">
+              <strong>Muestra sugerida: Richter — On the Nature of Daylight</strong>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">06:11</span>
+            </div>
+            <div class="player-ctrls">
+              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 60%;"></div></div>
+            </div>
+          </div>
+
+          <div class="article-prose">
+            <p class="dropcap">Compuesto en 2003 como una protesta silenciosa y lírica contra la retórica belicista de la invasión de Irak, <em>The Blue Notebooks</em> se consolidó como uno de los manifiestos sonoros más influyentes del siglo XXI. El compositor británico-alemán Max Richter fusionó la herencia compositiva clásica con la música ambient y la literatura.</p>
+            <h3>I. La máquina de escribir y las cuerdas crepusculares</h3>
+            <p>La obra comienza con el sonido mecánico y rítmico de las teclas de una máquina de escribir antigua, seguido por la voz pausada de la actriz Tilda Swinton recitando fragmentos de los <em>Cuadernos en octava</em> de Franz Kafka. En el centro neurálgico del álbum resuena <em>On the Nature of Daylight</em>, una pieza donde un quinteto de cuerdas construye una polifonía desgarradora y serena que se ha convertido en himno universal contra el desconsuelo.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Acústica Contemporánea</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 4: VANGELIS - BLADE RUNNER OST -->
+        <article class="long-article" id="mus-vangelis" data-titulo="IV. Blade Runner OST (Vangelis)">
+          <header class="article-header">
+            <span class="article-topic">Banda Sonora Analógica · Monografía Sonora IV</span>
+            <h2 class="article-headline">Blade Runner OST: Vangelis, sintetizadores analógicos y la soledad del futuro</h2>
+            <p class="music-specs-header">Vangelis · Atlantic Records (1982/1994) · Yamaha CS-80</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-09">09 de septiembre de 2026</time> · <span>20 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" alt="Luces de sintetizador analógico en estudio oscuro">
+            <figcaption>La modulación orgánica de las ondas y el saxofón solitario de Dick Morrissey.</figcaption>
+          </figure>
+
+          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+            <div class="player-label">
+              <strong>Muestra sugerida: Vangelis — Memories of Green</strong>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">05:05</span>
+            </div>
+            <div class="player-ctrls">
+              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 45%;"></div></div>
+            </div>
+          </div>
+
+          <div class="article-prose">
+            <p class="dropcap">A principios de los años ochenta, el compositor griego Vangelis se encerró en sus estudios Nemo de Londres frente a los montajes preliminares del largometraje de Ridley Scott. En lugar de encargar una orquesta sinfónica convencional, Vangelis se sentó ante el teclado colosal del sintetizador analógico Yamaha CS-80.</p>
+            <h3>I. La respiración del instrumento analógico</h3>
+            <p>El CS-80 poseía sensibilidad de pulsación polifónica, lo que permitía modular el timbre de cada nota individualmente con la presión de los dedos, imitando la expresividad orgánica de un violonchelo o una voz humana. Al entrelazar estas ondas electrónicas monumentales con el saxofón solista de Dick Morrissey en <em>Love Theme</em>, Vangelis logró un milagro acústico: una música futurista empapada de un romanticismo crepuscular insustituible.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Paisajes Sonoros</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 5: ARVO PÄRT - SPIEGEL IM SPIEGEL -->
+        <article class="long-article" id="mus-spiegel" data-titulo="V. Spiegel im Spiegel (Arvo Pärt)">
+          <header class="article-header">
+            <span class="article-topic">Minimalismo Sacro · Monografía Sonora V</span>
+            <h2 class="article-headline">Spiegel im Spiegel: Dos espejos enfrentados y la quietud absoluta de Arvo Pärt</h2>
+            <p class="music-specs-header">Arvo Pärt · 1978 · Fa mayor · Violín & Piano</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-07-12">12 de julio de 2026</time> · <span>18 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" alt="Partitura y piano en luz zenital tenue">
+            <figcaption>El reflejo infinito del compás de 6/4 y la melodía que se aleja y regresa.</figcaption>
+          </figure>
+
+          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+            <div class="player-label">
+              <strong>Muestra sugerida: Pärt — Spiegel im Spiegel</strong>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">08:12</span>
+            </div>
+            <div class="player-ctrls">
+              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 70%;"></div></div>
+            </div>
+          </div>
+
+          <div class="article-prose">
+            <p class="dropcap">Compuesta en 1978 justo antes de su emigración forzosa de la Unión Soviética hacia Viena y Berlín, <em>Spiegel im Spiegel</em> (Espejo en el espejo) es un prodigio de desnudamiento musical. En compás de 6/4 y con una tonalidad inmutable de Fa mayor, el piano despliega arpegios continuos ascendentes como gotas de luz sobre una vidriera.</p>
+            <h3>I. La geometría del consuelo</h3>
+            <p>El violín o violonchelo no ejecuta virtuosismos; se limita a tocar notas largas que se alejan y regresan hacia la nota fundamental La. El oyente experimenta la sensación visual de dos espejos colocados en paralelo: una perspectiva infinita donde el tiempo lineal deja de existir para convertirse en contemplación pura.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Geometría Acústica</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- BARRA LATERAL PERMANENTE -->
+      <aside class="sidebar-wrapper" aria-label="Complementos musicales">
+        <div class="sidebar-widget vinyl-focus-card">
+          <h3 class="widget-heading">El Vinilo del Mes</h3>
+          <div class="vinyl-focus-sleeve">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=80" alt="Carátula de Spiegel im Spiegel">
+          </div>
+          <h4>Spiegel im Spiegel</h4>
+          <p class="artist">Arvo Pärt (1978)</p>
+          <p>Tres notas de piano y un violín sostenido. Una meditación sonora que funciona como el mejor acompañamiento para la lectura de la sección de Filosofía.</p>
+          <a href="javascript:void(0)" onclick="irAEnsayo('mus-spiegel')" class="back-to-toc-link" style="display: inline-block;">Saltar a la monografía &darr;</a>
+        </div>
+
+        <div class="sidebar-widget quote-widget">
+          <h3 class="widget-heading">Pensamiento Sonoro</h3>
+          <blockquote>«Las notas que no tocas son tan importantes como las que tocas.»</blockquote>
+          <cite>— Thelonious Monk</cite>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Guía del Cuaderno</h3>
+          <ul class="quick-music-list">
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-part')"><strong>Tabula Rasa (Arvo Pärt)</strong><span>Minimalismo sacro</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-miles')"><strong>Kind of Blue (Miles Davis)</strong><span>Modal jazz y silencio</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-richter')"><strong>The Blue Notebooks</strong><span>Elegía para cuerdas</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-vangelis')"><strong>Blade Runner OST</strong><span>Sintetizadores CS-80</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-spiegel')"><strong>Spiegel im Spiegel</strong><span>Geometría contemplativa</span></a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- BOTONES DE PAGINACIÓN AUTOMÁTICOS -->
+    <nav class="pagination-bar" id="barra-paginas" aria-label="Navegación de páginas de monografías musicales"></nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al análisis pausado de la acústica sacra, las partituras contemporáneas y la liturgia del silencio.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PAGINACIÓN INTELIGENTE -->
+  <script>
+    const ENSAYOS_POR_PAGINA = 2; // Cantidad de monografías por página
+
+    let paginaActual = 1;
+    const articulos = Array.from(document.querySelectorAll(".long-article"));
+    const totalPaginas = Math.ceil(articulos.length / ENSAYOS_POR_PAGINA);
+
+    function irAEnsayo(idObjetivo) {
+      const indice = articulos.findIndex(art => art.id === idObjetivo);
+      if (indice === -1) return;
+
+      const paginaDestino = Math.floor(indice / ENSAYOS_POR_PAGINA) + 1;
+
+      if (paginaActual !== paginaDestino) {
+        mostrarPagina(paginaDestino, false);
+      }
+
+      setTimeout(() => {
+        const el = document.getElementById(idObjetivo);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    }
+
+    function mostrarPagina(numPagina, hacerScroll = false) {
+      paginaActual = numPagina;
+
+      const inicio = (numPagina - 1) * ENSAYOS_POR_PAGINA;
+      const fin = inicio + ENSAYOS_POR_PAGINA;
+
+      articulos.forEach((art, index) => {
+        if (index >= inicio && index < fin) {
+          art.style.display = "block";
+        } else {
+          art.style.display = "none";
+        }
+      });
+
+      const tocContainer = document.getElementById("toc-container");
+      tocContainer.innerHTML = "";
+      articulos.slice(inicio, fin).forEach(art => {
+        const id = art.id;
+        const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+        const li = document.createElement("li");
+        li.className = "toc-item";
+        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+        tocContainer.appendChild(li);
+      });
+
+      const botones = document.querySelectorAll(".page-btn");
+      botones.forEach(btn => {
+        if (parseInt(btn.getAttribute("data-page")) === numPagina) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      if (hacerScroll) {
+        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function inicializarPaginacion() {
+      const barraPaginas = document.getElementById("barra-paginas");
+
+      if (totalPaginas > 1) {
+        barraPaginas.style.display = "flex";
+        barraPaginas.innerHTML = "";
+
+        const btnPrev = document.createElement("button");
+        btnPrev.className = "page-btn";
+        btnPrev.innerHTML = "&larr; Anterior";
+        btnPrev.onclick = () => {
+          if (paginaActual > 1) mostrarPagina(paginaActual - 1, true);
+        };
+        barraPaginas.appendChild(btnPrev);
+
+        for (let i = 1; i <= totalPaginas; i++) {
+          const btn = document.createElement("button");
+          btn.className = "page-btn";
+          btn.setAttribute("data-page", i);
+          btn.textContent = i;
+          btn.onclick = () => mostrarPagina(i, true);
+          barraPaginas.appendChild(btn);
+        }
+
+        const btnNext = document.createElement("button");
+        btnNext.className = "page-btn";
+        btnNext.innerHTML = "Siguiente &rarr;";
+        btnNext.onclick = () => {
+          if (paginaActual < totalPaginas) mostrarPagina(paginaActual + 1, true);
+        };
+        barraPaginas.appendChild(btnNext);
+      }
+
+      mostrarPagina(1, false);
+    }
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
+  </script>
+
+</body>
+</html>

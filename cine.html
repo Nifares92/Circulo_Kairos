@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Cuaderno de Cine: Crítica cinematográfica de fondo, poética del plano secuencia, expresionismo y la moral del film noir.">
+  <title>Cine & Mirada | Círculo Kairós</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* Barra de progreso de lectura */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px; width: 0%;
+      background-color: var(--accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Cabecera */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    /* Contenedor Principal */
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* Encabezado de Sección */
+    .section-header-box {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-tag {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-heading-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-summary-text {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Sumario de saltos */
+    .table-of-contents-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.6rem 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .toc-title {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.9rem;
+      display: block;
+      font-weight: 700;
+    }
+    .toc-links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem 1.8rem;
+      list-style: none;
+    }
+    .toc-item a {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .toc-item a span.num {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Disposición Editorial */
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    .articles-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+    }
+
+    .long-article {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .long-article::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .article-topic {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .article-headline {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .film-specs-header {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .article-meta-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .article-featured-media {
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      max-height: 440px;
+    }
+    .article-featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-featured-media figcaption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-soft);
+      font-style: italic;
+    }
+
+    .article-prose {
+      font-family: var(--font-reader);
+      font-size: 1.2rem;
+      line-height: 1.95;
+      color: #292624;
+    }
+    .article-prose p {
+      margin-bottom: 1.8rem;
+      text-align: justify;
+    }
+    .article-prose h3 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      margin: 3rem 0 1.2rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .article-prose .dropcap::first-letter {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 4.6rem;
+      line-height: 0.8;
+      padding-top: 6px;
+      padding-right: 14px;
+      padding-bottom: 2px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .article-prose blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.4rem 1.8rem;
+      margin: 2.5rem 0;
+      background-color: var(--bg-surface);
+      font-style: italic;
+      font-size: 1.22rem;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+    .article-prose blockquote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .article-bottom-actions {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 1.8rem;
+      margin-top: 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .signature-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .back-to-toc-link {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 2px;
+    }
+    .back-to-toc-link:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* Paginador Automático */
+    .pagination-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .page-btn {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .page-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .page-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      cursor: default;
+    }
+
+    /* Sidebar */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+
+    .film-focus-card { text-align: center; }
+    .film-focus-poster {
+      width: 155px;
+      margin: 0 auto 1.1rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 2px 5px 14px rgba(0,0,0,0.08);
+    }
+    .film-focus-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .film-focus-card .director {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+    }
+    .film-focus-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      text-align: left;
+      margin-bottom: 1.1rem;
+    }
+
+    .quote-widget blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+    .quote-widget cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    .quick-film-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .quick-film-list li {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.65rem 0;
+    }
+    .quick-film-list li:last-child { border-bottom: none; }
+    .quick-film-list strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .quick-film-list span {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .toc-links-grid { grid-template-columns: 1fr; }
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .long-article { padding: 2.2rem 1.8rem; }
+      .sidebar-wrapper { position: static; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-heading-title { font-size: 2.2rem; }
+      .article-headline { font-size: 1.85rem; }
+      .article-prose p { text-align: left; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div id="progress-bar"></div>
+
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Cuaderno II</span>
+    <span><strong>Disciplina:</strong> Cinematografía & Poética Visual</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html" class="active">Cine</a></li>
+          <li><a href="musica.html">Música</a></li>
+          <li><a href="filosofia.html">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+
+    <header class="section-header-box">
+      <span class="section-category-tag">Cuaderno Editorial II</span>
+      <h2 class="section-heading-title">Cine & Mirada Fílmica</h2>
+      <p class="section-summary-text">
+        «El cine es una cinta de sueños esculpida en el tiempo.» Crítica cinematográfica de fondo, la iluminación moral del cine negro, el plano secuencia ruso y la ciencia ficción existencial.
+      </p>
+    </header>
+
+    <!-- SUMARIO DINÁMICO -->
+    <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de críticas de cine de esta página">
+      <span class="toc-title">Críticas visibles en esta página · Haz clic para ir al ensayo</span>
+      <ul class="toc-links-grid" id="toc-container"></ul>
+    </nav>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL DE ENSAYOS DE CINE -->
+      <section class="articles-stream" id="stream-ensayos" aria-label="Críticas completas de cine">
+
+        <!-- ENSAYO 1: FILM NOIR -->
+        <article class="long-article" id="cine-noir" data-titulo="I. La sombra como destino (Film Noir)">
+          <header class="article-header">
+            <span class="article-topic">Film Noir Clásico · Ensayo Monográfico I</span>
+            <h2 class="article-headline">La sombra como destino: la geometría moral del cine negro y el claroscuro de posguerra</h2>
+            <p class="film-specs-header">De Fritz Lang a Billy Wilder · 1944-1958</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-08">08 de octubre de 2026</time> · <span>23 min de lectura de fondo</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80" alt="Claroscuro cinematográfico en blanco y negro">
+            <figcaption>Las persianas venecianas como barrotes del alma: la iluminación expresionista en Hollywood.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">El cine negro no es un mero catálogo de gabardinas empapadas, pistolas snub-nosed del calibre 38 y humo espeso de cigarrillos en tugurios nocturnos: es la radiografía formal y estética del desencanto moral tras el final de la Segunda Guerra Mundial. Heredero directo de la desazón expresionista traída a Hollywood por cineastas centroeuropeos exiliados como Fritz Lang, Billy Wilder, Robert Siodmak y Otto Preminger, el film noir desterró para siempre la iluminación plana y complaciente de los grandes estudios para sustituirla por diagonales afiladas de claroscuro.</p>
+            <h3>I. Las persianas venecianas como barrotes del alma</h3>
+            <p>En el cine negro clásico —desde <em>Perdición</em> (1944) hasta <em>Retorno al pasado</em> (1947)—, los personajes no habitan un mundo libre: habitan una trampa geométrica. La luz de los focos que penetra a través de las persianas venecianas proyecta sobre el torso y el rostro de Walter Neff o de Jeff Bailey una serie de sombras paralelas que recuerdan inequívocamente a los barrotes de una celda carcelaria. Antes incluso de que cometan el crimen o firmen la póliza fraudulenta, el lenguaje visual ya ha dictado sentencia: son reclusos de su propia codicia y de una fatalidad insalvable.</p>
+            <blockquote>«En el noir no hay inocentes; solo grados diversos de culpabilidad y supervivientes que aprendieron a caminar por la cuerda floja con las manos en los bolsillos.»<cite>— Paul Schrader, Notes on Film Noir</cite></blockquote>
+            <h3>II. La femme fatale: La esfinge de la desmitificación doméstica</h3>
+            <p>La mujer fatal —encarnada con frialdad milimétrica por actrices como Barbara Stanwyck, Jane Greer o Rita Hayworth— emerge en un contexto histórico preciso: los soldados regresan del frente europeo para descubrir que las mujeres han ocupado los puestos en las fábricas y no están dispuestas a someterse de nuevo a la sumisión doméstica tradicional. La femme fatale del noir no pide matrimonio ni protección; maneja el dinero, conoce las debilidades del deseo masculino y utiliza el sexo como un cálculo estratégico para conquistar su propia autonomía financiera a cualquier precio.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Cuaderno de Cinematografía</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 2: STALKER (TARKOVSKI) -->
+        <article class="long-article" id="cine-stalker" data-titulo="II. Stalker (Andrei Tarkovski)">
+          <header class="article-header">
+            <span class="article-topic">Cine de Autor · Ensayo Monográfico II</span>
+            <h2 class="article-headline">Stalker: Andrei Tarkovski y la Zona como espejo del alma humana</h2>
+            <p class="film-specs-header">Andrei Tarkovski · 1979 · Unión Soviética · Mosfilm</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-02">02 de octubre de 2026</time> · <span>26 min de lectura de fondo</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" alt="Niebla sobre aguas pantanosas y ruinas industriales">
+            <figcaption>La poética del plano sostenido y el miedo a la verdad interior de la Habitación.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">En <em>Stalker</em> (1979), basada libremente en la novela corta <em>Pícnic extraterrestre</em> de los hermanos Strugatski, tres hombres —el Escritor cínico, el Científico positivista y el Guía espiritual (el Stalker)— cruzan un cordón militar fuertemente vigilado para adentrarse en un territorio enigmático y desolado: la Zona. Se rumorea que en su centro se encuentra una Habitación donde se hacen realidad los deseos más íntimos de quien logra cruzar su umbral.</p>
+            <h3>I. El rechazo a la pirotecnia tecnológica</h3>
+            <p>Lo sobrecogedor del filme es que Tarkovski renuncia por completo a los efectos especiales típicos de la ciencia ficción de Hollywood. La Zona no contiene monstruos alienígenas ni naves flotantes; es un paisaje abandonado de hierba alta mecida por el viento, ruinas fabriles corroídas por el óxido y aguas turbias donde yacen jeringuillas, relojes y monedas de civilizaciones pretéritas. El peligro es moral y espiritual: la Zona es un ente vivo que castiga la arrogancia de los intrusos y premia la humildad de los desesperados.</p>
+            <blockquote>«La debilidad es algo sublime; la fuerza no es nada. Cuando un hombre nace, es suave y flexible; cuando muere, es duro y rígido. Lo duro y rígido no vencerá.»<cite>— Andrei Tarkovski, Stalker</cite></blockquote>
+            <h3>II. El umbral del miedo a uno mismo</h3>
+            <p>Cuando finalmente alcanzan la entrada de la Habitación de los Deseos, ninguno se atreve a dar el paso final. El Stalker les advierte de la verdad aterradora: la Habitación no cumple los anhelos nobles que uno proclama con la palabra consciente, sino el deseo inconfesable y oscuro que anida en el fondo de las vísceras. El ser humano que presume de dominar los secretos de la física atómica descubre aterrado que no se atreve a contemplar la verdad de su propio corazón.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Poética del Plano Secuencia</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 3: LA VENTANA INDISCRETA (HITCHCOCK) -->
+        <article class="long-article" id="cine-hitchcock" data-titulo="III. La ventana indiscreta (Alfred Hitchcock)">
+          <header class="article-header">
+            <span class="article-topic">Suspense Clásico · Ensayo Monográfico III</span>
+            <h2 class="article-headline">La ventana indiscreta: Alfred Hitchcock y el ojo culpable del espectador</h2>
+            <p class="film-specs-header">Alfred Hitchcock · 1954 · Paramount Pictures · Technicolor</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-22">22 de septiembre de 2026</time> · <span>20 min de lectura de fondo</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80" alt="Sala de cine con haz de luz de proyector">
+            <figcaption>El patio de vecinos de Greenwich Village como metáfora del voyeurismo cinematográfico.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">Sentado en su silla de ruedas con una pierna enyesada de arriba abajo, inmovilizado por un accidente profesional en medio de una ola de calor asfixiante en Manhattan, el fotógrafo Jefferies (James Stewart) contempla el patio trasero de su manzana como quien asiste a varias pantallas cinematográficas simultáneas.</p>
+            <h3>I. La sala de cine como patio de vecinos</h3>
+            <p>Hitchcock orquesta un tratado teórico perfecto sobre la esencia del cine: mirar impunemente desde la penumbra. Cada ventana del bloque representa un género cinematográfico: el melodrama de la solterona Miss Lonelyhearts, el musical de la bailarina, la comedia ligera de los recién casados y, en el extremo opuesto, el drama sórdido y criminal del viajante de comercio Lars Thorwald.</p>
+            <blockquote>«Nos hemos convertido en una civilización de mirones. La gente debería sentarse en su casa y mirarse a sí misma antes de juzgar lo que pasa al otro lado de la calle.»<cite>— Alfred Hitchcock, La ventana indiscreta</cite></blockquote>
+            <p>El clímax llega cuando la novia de Jefferies, Lisa Fremont (Grace Kelly), cruza físicamente la línea divisoria e invade el apartamento del asesino. En ese instante, mirar deja de ser un juego seguro para convertirse en una trampa mortal.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Estudio de Puesta en Escena</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 4: BLADE RUNNER (RIDLEY SCOTT) -->
+        <article class="long-article" id="cine-bladerunner" data-titulo="IV. Blade Runner (Ridley Scott)">
+          <header class="article-header">
+            <span class="article-topic">Ciencia Ficción Existencial · Ensayo Monográfico IV</span>
+            <h2 class="article-headline">Blade Runner: Ridley Scott, lágrimas en la lluvia y la fragilidad del replicante</h2>
+            <p class="film-specs-header">Ridley Scott · 1982 · Warner Bros · Música de Vangelis</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-14">14 de septiembre de 2026</time> · <span>22 min de lectura de fondo</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" alt="Luces de neón reflejadas sobre el asfalto mojado">
+            <figcaption>La lluvia ácida de Los Ángeles y la paloma de Roy Batty como elegía de la conciencia finita.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">Los Ángeles en noviembre de 2019: una metrópoli vertical ahogada bajo una lluvia ácida incesante, pirámides colosales de corporaciones financieras y pantallas gigantescas que anuncian colonias en el espacio exterior. Basada en la novela de Philip K. Dick <em>¿Sueñan los androides con ovejas eléctricas?</em>, <em>Blade Runner</em> refundó la ciencia ficción moderna al despojarla del optimismo espacial para sumergirla en una elegía crepuscular.</p>
+            <h3>I. Los ojos que vieron arder las naves de ataque</h3>
+            <p>El replicante Roy Batty (Rutger Hauer) no es un autómata asesino; es un Prometeo que busca a su creador, el Dr. Eldon Tyrell, para formular la única demanda que importa: «Quiero más vida, padre». Frente a él, el detective Rick Deckard (Harrison Ford) deambula como un hombre hueco cuya propia condición humana queda puesta en entredicho.</p>
+            <blockquote>«Yo he visto cosas que vosotros no creeríais: naves de ataque en llamas más allá del hombro de Orión. He visto rayos-C brillar en la oscuridad cerca de la Puerta de Tannhäuser. Todos esos momentos se perderán en el tiempo como lágrimas en la lluvia. Es hora de morir.»<cite>— Roy Batty, Blade Runner</cite></blockquote>
+            <p>La paloma blanca que Batty libera en el instante de expirar es el símbolo supremo de que la compasión y el asombro estético no pertenecen a la biología, sino a la conciencia que comprende la dolorosa fugacidad de existir.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Cyberpunk & Filosofía</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 5: PERDICIÓN (BILLY WILDER) -->
+        <article class="long-article" id="cine-wilder" data-titulo="V. Perdición (Billy Wilder)">
+          <header class="article-header">
+            <span class="article-topic">Film Noir · Ensayo Monográfico V</span>
+            <h2 class="article-headline">Perdición (Double Indemnity): Billy Wilder y la confesión en el dictáfono</h2>
+            <p class="film-specs-header">Billy Wilder & Raymond Chandler · 1944 · Paramount</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-08-01">01 de agosto de 2026</time> · <span>19 min de lectura de fondo</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=1200&q=80" alt="Cartel estilizado de cine clásico">
+            <figcaption>El calor pegajoso de Los Ángeles y la estadística implacable del crimen.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">«Lo maté. Maté a un hombre por dinero y por una mujer. Y ni conseguí el dinero, ni conseguí a la mujer. Estupendo, ¿verdad?». Con esta confesión susurrada a un dictáfono por Walter Neff mientras sangra por una herida de bala en su oficina vacía arranca la obra maestra fundacional del cine negro estadounidense.</p>
+            <h3>I. La fatalidad matemática</h3>
+            <p>Billy Wilder y Raymond Chandler adaptaron la novela corta de James M. Cain prescindiendo de toda moralina complaciente. El perito de seguros Barton Keyes (Edward G. Robinson) encarna la implacable ley de las tablas actuariales: no se puede engañar a la estadística del crimen porque la codicia humana siempre comete el mismo error vulgar.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Cine Negro Clásico</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- BARRA LATERAL PERMANENTE -->
+      <aside class="sidebar-wrapper" aria-label="Complementos de cine">
+        <div class="sidebar-widget film-focus-card">
+          <h3 class="widget-heading">En la Mirilla</h3>
+          <div class="film-focus-poster">
+            <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=400&q=80" alt="Póster de Perdición">
+          </div>
+          <h4>Perdición (1944)</h4>
+          <p class="director">Billy Wilder · Fred MacMurray & Barbara Stanwyck</p>
+          <p>El arquetipo absoluto del film noir: codicia, un calor pegajoso en Los Ángeles y un destino sellado desde la primera confesión en el dictáfono.</p>
+          <a href="javascript:void(0)" onclick="irAEnsayo('cine-wilder')" class="back-to-toc-link" style="display: inline-block;">Saltar al ensayo &darr;</a>
+        </div>
+
+        <div class="sidebar-widget quote-widget">
+          <h3 class="widget-heading">Voz de Cineasta</h3>
+          <blockquote>«El cine no es un arte que filma la vida; el cine es algo que está entre el arte y la vida.»</blockquote>
+          <cite>— Jean-Luc Godard</cite>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Guía del Cuaderno</h3>
+          <ul class="quick-film-list">
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-noir')"><strong>La sombra como destino</strong><span>Claroscuro y posguerra</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-stalker')"><strong>Stalker (Tarkovski)</strong><span>La Zona y la fe</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-hitchcock')"><strong>La ventana indiscreta</strong><span>Mirada culpable</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-bladerunner')"><strong>Blade Runner</strong><span>Tiempo y memoria</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-wilder')"><strong>Perdición</strong><span>Confesión al dictáfono</span></a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- BOTONES DE PAGINACIÓN AUTOMÁTICOS -->
+    <nav class="pagination-bar" id="barra-paginas" aria-label="Navegación de páginas de ensayos de cine"></nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al análisis pausado del cine de autor, la fotografía cinematográfica y el lenguaje de los planos.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PAGINACIÓN INTELIGENTE -->
+  <script>
+    const ENSAYOS_POR_PAGINA = 2; // Cantidad de críticas/ensayos por página
+
+    let paginaActual = 1;
+    const articulos = Array.from(document.querySelectorAll(".long-article"));
+    const totalPaginas = Math.ceil(articulos.length / ENSAYOS_POR_PAGINA);
+
+    function irAEnsayo(idObjetivo) {
+      const indice = articulos.findIndex(art => art.id === idObjetivo);
+      if (indice === -1) return;
+
+      const paginaDestino = Math.floor(indice / ENSAYOS_POR_PAGINA) + 1;
+
+      if (paginaActual !== paginaDestino) {
+        mostrarPagina(paginaDestino, false);
+      }
+
+      setTimeout(() => {
+        const el = document.getElementById(idObjetivo);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    }
+
+    function mostrarPagina(numPagina, hacerScroll = false) {
+      paginaActual = numPagina;
+
+      const inicio = (numPagina - 1) * ENSAYOS_POR_PAGINA;
+      const fin = inicio + ENSAYOS_POR_PAGINA;
+
+      articulos.forEach((art, index) => {
+        if (index >= inicio && index < fin) {
+          art.style.display = "block";
+        } else {
+          art.style.display = "none";
+        }
+      });
+
+      const tocContainer = document.getElementById("toc-container");
+      tocContainer.innerHTML = "";
+      articulos.slice(inicio, fin).forEach(art => {
+        const id = art.id;
+        const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+        const li = document.createElement("li");
+        li.className = "toc-item";
+        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+        tocContainer.appendChild(li);
+      });
+
+      const botones = document.querySelectorAll(".page-btn");
+      botones.forEach(btn => {
+        if (parseInt(btn.getAttribute("data-page")) === numPagina) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      if (hacerScroll) {
+        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function inicializarPaginacion() {
+      const barraPaginas = document.getElementById("barra-paginas");
+
+      if (totalPaginas > 1) {
+        barraPaginas.style.display = "flex";
+        barraPaginas.innerHTML = "";
+
+        const btnPrev = document.createElement("button");
+        btnPrev.className = "page-btn";
+        btnPrev.innerHTML = "&larr; Anterior";
+        btnPrev.onclick = () => {
+          if (paginaActual > 1) mostrarPagina(paginaActual - 1, true);
+        };
+        barraPaginas.appendChild(btnPrev);
+
+        for (let i = 1; i <= totalPaginas; i++) {
+          const btn = document.createElement("button");
+          btn.className = "page-btn";
+          btn.setAttribute("data-page", i);
+          btn.textContent = i;
+          btn.onclick = () => mostrarPagina(i, true);
+          barraPaginas.appendChild(btn);
+        }
+
+        const btnNext = document.createElement("button");
+        btnNext.className = "page-btn";
+        btnNext.innerHTML = "Siguiente &rarr;";
+        btnNext.onclick = () => {
+          if (paginaActual < totalPaginas) mostrarPagina(paginaActual + 1, true);
+        };
+        barraPaginas.appendChild(btnNext);
+      }
+
+      mostrarPagina(1, false);
+    }
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
+  </script>
+
+</body>
+</html>

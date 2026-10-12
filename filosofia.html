@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Cuaderno de Filosofía: Ensayos de fondo monográficos, kairología, ética estoica y la mística del límite.">
+  <title>Filosofía & Pensamiento | Círculo Kairós</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* Barra de progreso de lectura */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px; width: 0%;
+      background-color: var(--accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Cabecera */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-header-box {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-tag {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-heading-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-summary-text {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Sumario de saltos */
+    .table-of-contents-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.6rem 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .toc-title {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.9rem;
+      display: block;
+      font-weight: 700;
+    }
+    .toc-links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 2rem;
+      list-style: none;
+    }
+    .toc-item a {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .toc-item a span.num {
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Disposición Editorial */
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    .articles-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 5.5rem;
+    }
+
+    .long-article {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.8rem 3.2rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .long-article::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .article-topic {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .article-headline {
+      font-family: var(--font-serif);
+      font-size: 2.35rem;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .article-meta-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .article-featured-media {
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      max-height: 440px;
+    }
+    .article-featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-featured-media figcaption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-soft);
+      font-style: italic;
+    }
+
+    .article-prose {
+      font-family: var(--font-reader);
+      font-size: 1.22rem;
+      line-height: 2;
+      color: #292624;
+    }
+    .article-prose p {
+      margin-bottom: 2rem;
+      text-align: justify;
+    }
+    .article-prose h3 {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      margin: 3.2rem 0 1.2rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .article-prose .dropcap::first-letter {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 4.8rem;
+      line-height: 0.8;
+      padding-top: 6px;
+      padding-right: 14px;
+      padding-bottom: 2px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .article-prose blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2.8rem 0;
+      background-color: var(--bg-surface);
+      font-style: italic;
+      font-size: 1.24rem;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+    .article-prose blockquote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .article-bottom-actions {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 1.8rem;
+      margin-top: 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .signature-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .back-to-toc-link {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 2px;
+    }
+    .back-to-toc-link:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* Sidebar */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+
+    .concept-focus-card { text-align: left; }
+    .concept-greek-title {
+      font-family: var(--font-reader);
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.1rem;
+      display: block;
+    }
+    .concept-focus-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+    .concept-focus-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.1rem;
+    }
+
+    .quote-widget blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+    .quote-widget cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    .canon-reading-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .canon-reading-list li {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.65rem 0;
+    }
+    .canon-reading-list li:last-child { border-bottom: none; }
+    .canon-reading-list strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .canon-reading-list span {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .toc-links-grid { grid-template-columns: 1fr; }
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .long-article { padding: 2.2rem 1.8rem; }
+      .sidebar-wrapper { position: static; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-heading-title { font-size: 2.2rem; }
+      .article-headline { font-size: 1.85rem; }
+      .article-prose p { text-align: left; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div id="progress-bar"></div>
+
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Cuaderno IV</span>
+    <span><strong>Disciplina:</strong> Fenomenología, Dialéctica & Ética</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
+          <li><a href="musica.html">Música</a></li>
+          <li><a href="filosofia.html" class="active">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+
+    <header class="section-header-box">
+      <span class="section-category-tag">Cuaderno Editorial IV</span>
+      <h2 class="section-heading-title">Filosofía & Pensamiento Crítico</h2>
+      <p class="section-summary-text">
+        «El asombro es la raíz del pensar.» Dos tratados monográficos de fondo consagrados al rescate del tiempo oportuno, la soberanía interior del juicio y la mística de lo inexpresable.
+      </p>
+    </header>
+
+    <!-- SUMARIO DIRECTO DE LOS DOS TRATADOS -->
+    <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de tratados de esta sección">
+      <span class="toc-title">Tratados Monográficos Íntegros · Haz clic para ir al texto</span>
+      <ul class="toc-links-grid">
+        <li class="toc-item">
+          <a href="#kairos"><span class="num">I.</span> Contra la tiranía del Cronos (Kairología & Séneca)</a>
+        </li>
+        <li class="toc-item">
+          <a href="#soberania"><span class="num">II.</span> La fortaleza de la atención y el silencio del límite (Epicteto & Wittgenstein)</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL DE TRATADOS FILOSÓFICOS COMPLETOS -->
+      <section class="articles-stream" aria-label="Textos íntegros de filosofía">
+
+        <!-- ----------------------------------------------------------------
+             TRATADO 1: CONTRA LA TIRANÍA DEL CRONOS
+             ---------------------------------------------------------------- -->
+        <article class="long-article" id="kairos">
+          <header class="article-header">
+            <span class="article-topic">Fenomenología del Tiempo · Tratado Monográfico I</span>
+            <h2 class="article-headline">Contra la tiranía del Cronos: la rebelión del Kairós y la recuperación del instante sagrado</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-28">28 de septiembre de 2026</time> · <span>30 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80" alt="Busto de mármol clásico en penumbra">
+            <figcaption>El dios alado y el reloj devorador: de la queja de Séneca a la disritmia contemporánea.</figcaption>
+          </figure>
+
+          <div class="article-prose">
+            <p class="dropcap">Vivimos subordinados a la tiranía implacable del dios que devora a sus propios hijos. En la mitología arcaica, <em>Cronos</em> personificaba el tiempo cuantitativo, sucesivo y devorador: una línea homogénea y vacía de segundos idénticos que marchan hacia el abismo con la cadencia sorda de un engranaje fabril. En nuestra civilización hiperconectada, ese dios mecánico ha sido perfeccionado por el algoritmo: ya no medimos el día por el cambio de la luz solar ni por la maduración de los frutos, sino por la frecuencia milimétrica con que producimos datos, consumimos estímulos y respondemos a notificaciones instantáneas.</p>
+
+            <h3>I. La disritmia contemporánea: Cuando el tiempo pierde su aroma</h3>
+            <p>En su lúcido ensayo <em>El aroma del tiempo</em>, el filósofo Byung-Chul Han diagnostica la patología central de nuestra época no como una simple falta de minutos en la agenda, sino como una crisis ontológica: la <em>disritmia</em>. El tiempo se ha atomizado. Al perder su capacidad de articulación narrativa —sus ritos de paso, sus umbrales sagrados, sus pausas de contemplación—, cada instante se vuelve idéntico al anterior y se consume en el vacío.</p>
+            <p>La aceleración tecnológica prometió liberarnos del trabajo para regalarnos ocio; sin embargo, ha producido la paradoja inversa: un estado de agitación perpetua donde incluso el tiempo libre es colonizado por la lógica del rendimiento. Navegamos de un estímulo a otro sin demorarnos en ninguno; leemos en diagonal, escuchamos audios a velocidad multiplicada por dos y saltamos de pestaña en pestaña con la mirada ansiosa de quien teme perderse algo que en realidad carece de valor alguno. Cuando el tiempo carece de pausas rítmicas, se convierte en un torbellino donde nada arraiga ni engendra memoria duradera.</p>
+
+            <blockquote>«La contemplación presupone la demora. Quien no sabe demorarse es incapaz de percibir lo bello; el sentido de las cosas solo se desvela ante la mirada que se niega a pasar de largo.»<cite>— Byung-Chul Han, El aroma del tiempo</cite></blockquote>
+
+            <h3>II. Kairós: El tiempo oportuno y la fractura del reloj</h3>
+            <p>Frente a la tiranía horizontal de Cronos, la lengua y el pensamiento griego antiguo concibieron una noción subversiva: <em>Kairós</em> (καιρός). Kairós no es una medida que se pueda calcular con una esfera graduada ni con un cronómetro suizo; Kairós es la dimensión vertical, cualitativa y preñada de sentido del instante.</p>
+            <p>Los griegos representaban al dios Kairós como a un joven alado con un largo mechón de cabello en la frente y la nuca completamente calva. El significado alegórico era transparente: Kairós se aproxima con ligereza inaudita; cuando pasa frente a ti, debes estirar la mano y asirlo firmemente por el flequillo frontal. Si vacilas un solo segundo, el dios habrá pasado de largo y tus dedos resbalarán por su nuca desnuda sin poder atraparlo jamás.</p>
+            <p>Kairós es la oportunidad irrepetible: la hora exacta en que una decisión ética debe ser tomada, el segundo silencioso en que dos miradas se encuentran y sellan un destino, la media tarde en que abres un libro clásico y una frase escrita hace dos milenios ilumina con fulgor despiadado tu propia herida cotidiana. Kairós no transcurre: acontece. Rompe la uniformidad del reloj profano para instaurar un templo de presencia absoluta.</p>
+
+            <h3>III. Séneca y la falsa queja de la brevedad de la vida</h3>
+            <p>En el pórtico de su tratado moral <em>De brevitate vitae</em> (Sobre la brevedad de la vida), redactado en el siglo I de nuestra era para su amigo Paulino, Lucio Anneo Séneca fulmina la queja más común de la condición humana: la protesta lastimera de que la naturaleza nos ha concedido una existencia mezquina y fugaz.</p>
+            <p>«La mayor parte de los mortales se queja de la mezquindad de la naturaleza», escribe el sabio cordobés. «Dicen que nacemos para un breve espacio de tiempo y que los días que se nos dan corren con tanta prisa que, excepto a muy pocos, la vida los abandona en medio de los preparativos mismos de la vida». Sin embargo, Séneca responde con severidad estoica:</p>
+
+            <blockquote>«No tenemos un tiempo escaso, sino que perdemos mucho. La vida que se nos ha otorgado es suficientemente larga y nos ha sido dada con generosidad para la realización de las cosas más altas, si toda ella se empleara bien; pero cuando se disipa en el lujo, la desidia y la ambición desbocada, solo cuando la última necesidad nos aprieta sentimos que ha pasado lo que no comprendimos que estaba marchando.»<cite>— Lucio Anneo Séneca, De brevitate vitae</cite></blockquote>
+
+            <p>El hombre ocupado (el <em>occupatus</em> romano) vive arrojado hacia el porvenir: siempre haciendo planes, siempre postergando el pensamiento propio para más adelante, empeñando su presente a cambio de una gloria o un patrimonio que la muerte arrebatará sin previo aviso. Vivir de verdad es un arte que exige soberanía sobre el juicio interior y desdén hacia las distracciones vanas que intentan expropiarnos el único bien que nos pertenece por entero: el presente lúcido.</p>
+
+            <h3>IV. Manifiesto por una insurgencia contemplativa</h3>
+            <p>Habitar el Círculo Kairós no significa huir del mundo ni guarecerse en una nostalgia complaciente por pasados idealizados. Significa ejercer una rebelión cotidiana y silenciosa en medio del torbellino del siglo XXI. Cada vez que decidimos apagar una pantalla para conceder tres cuartos de hora de atención indivisa a un capítulo de Dostoyevski, cada vez que contemplamos el claroscuro de un plano secuencia sin consultar el teléfono móvil y cada vez que nos demoramos en una pregunta filosófica sin buscar la respuesta predigerida en un buscador, estamos liberando al tiempo de su condena productiva.</p>
+            <p>El pensamiento no es una mercancía que deba circular a toda prisa; es un templo que solo abre sus puertas cuando el caminante se descalza de la prisa y acepta que la profundidad exige paciencia, rigor y silencio.</p>
+          </div>
+
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Kairología y Ética del Presente</span>
+            <a href="#top" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+
+        <!-- ----------------------------------------------------------------
+             TRATADO 2: LA FORTALEZA DE LA ATENCIÓN Y EL SILENCIO DEL LÍMITE
+             ---------------------------------------------------------------- -->
+        <article class="long-article" id="soberania">
+          <header class="article-header">
+            <span class="article-topic">Ética & Filosofía del Lenguaje · Tratado Monográfico II</span>
+            <h2 class="article-headline">La fortaleza de la atención y el silencio del límite: de la soberanía estoica de Epicteto a la mística de Wittgenstein</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-12">12 de septiembre de 2026</time> · <span>28 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1200&q=80" alt="Camino desierto entre rocas y cielo silencioso">
+            <figcaption>La dicotomía del control de Roma y los confines lógicos del Tractatus.</figcaption>
+          </figure>
+
+          <div class="article-prose">
+            <p class="dropcap">Dos milenios separan las calles polvorientas de la Roma imperial de las trincheras heladas de la Primera Guerra Mundial. Sin embargo, el esclavo liberto Epicteto y el voluntario de artillería austriaco Ludwig Wittgenstein comparten una misma obsesión fundacional: trazar una línea implacable entre lo que está bajo el dominio de nuestra voluntad y aquello ante lo cual la razón humana debe enmudecer reverentemente.</p>
+
+            <h3>I. Epicteto y la soberanía de la ciudadela interior</h3>
+            <p>Epicteto (Hierápolis, 50 d.C. – Nicópolis, 135 d.C.) nació en la servidumbre más abyecta. Lisiado de una pierna por la crueldad arbitraria de su amo Epafrodito —secretario del emperador Nerón—, conoció de primera mano la fragilidad del cuerpo frente al poder despótico. No obstante, al alcanzar la libertad y abrir su escuela filosófica en Grecia, no enseñó el resentimiento ni la queja política: fundó la disciplina de la libertad absoluta.</p>
+            <p>Todo el edificio moral de su <em>Enquiridión</em> (Manual) descansa sobre una distinción tajante e inviolable:</p>
+            <ul>
+              <li><strong>Cosas que dependen de nosotros (tà eph' hēmîn):</strong> Nuestros juicios de valor, nuestros impulsos morales, nuestros deseos de virtud y nuestras aversiones al vicio. Este es el territorio sagrado de la <em>prohairesis</em> (la facultad de elección moral), un baluarte interior que ni el César ni las cadenas pueden vulnerar.</li>
+              <li><strong>Cosas que no dependen de nosotros (tà ouk eph' hēmîn):</strong> El cuerpo físico, la riqueza económica, los títulos nobiliarios, la opinión que los demás tengan de nosotros y la propia muerte biológica. Todas estas cosas pertenecen al orden del cosmos exterior y al azar de la necesidad.</li>
+            </ul>
+
+            <blockquote>«No son las cosas las que atormentan a los hombres, sino las opiniones y juicios que los hombres se forman sobre las cosas. Cuando nos encontramos con dificultades o tristeza, no culpemos a nadie sino a nosotros mismos; es decir, a nuestros propios juicios.»<cite>— Epicteto, Enquiridión</cite></blockquote>
+
+            <p>Para Epicteto, el sufrimiento psíquico no es una propiedad intrínseca de los acontecimientos, sino el resultado de un error lógico: pretender que el mundo exterior obedezca a nuestros deseos caprichosos. La muerte de un ser querido, la pérdida de un empleo o una enfermedad sobrevenida son sucesos naturales indiferentes (<em>adiáphora</em>); se convierten en tragedia solo cuando nuestra mente les añade el juicio temerario de que constituyen un mal intolerable. La libertad estoica no consiste en dominar el mundo, sino en reinar sobre la propia atención.</p>
+
+            <h3>II. Wittgenstein en las trincheras: Los confines de la lógica</h3>
+            <p>En el verano de 1914, Ludwig Wittgenstein abandonó la comodidad académica de Cambridge para alistarse voluntariamente en el ejército austrohúngaro. En medio del barro de Galitzia, bajo el fuego de la artillería rusa y con un cuaderno de notas en la mochila militar, el joven filósofo completó el manuscrito del <em>Tractatus Logico-Philosophicus</em>.</p>
+            <p>El propósito declarado del libro era establecer los límites del pensamiento a través del lenguaje: «Lo que se puede decir, se puede decir con claridad; y sobre lo que no se puede hablar, se debe guardar silencio». Para Wittgenstein, el lenguaje con sentido opera como una pintura isomórfica de los hechos empíricos del mundo (la ciencia natural). Una proposición tiene significado si describe un estado de cosas verificable en la realidad física: «la mesa es de madera», «el agua hierve a cien grados».</p>
+            <p>Sin embargo, la paradoja colosal del <em>Tractatus</em> —que muchos positivistas lógicos malinterpretaron— es que las cosas que verdaderamente importan al corazón humano no son hechos del mundo y, por lo tanto, quedan fuera del ámbito de lo decible:</p>
+
+            <blockquote>«Sentimos que incluso cuando todas las posibles cuestiones científicas hayan sido respondidas, nuestros problemas vitales ni siquiera habrán sido rozados. De lo que no se puede hablar, hay que callar.»<cite>— Ludwig Wittgenstein, Tractatus Logico-Philosophicus (6.52 - 7)</cite></blockquote>
+
+            <h3>III. La mística de lo que se muestra</h3>
+            <p>Wittgenstein no desprecia lo que trasciende la lógica; lo sitúa en una esfera superior a la que denomina <em>lo místico</em> (das Mystische). La ética, el bien moral, el sentido trascendente de la existencia y la belleza estética del arte no son proposiciones empíricas que se puedan demostrar en un laboratorio; no pueden ser <em>dichas</em>, pero se <em>muestran</em> a sí mismas en el modo en que un ser humano elige conducirse en la vida.</p>
+            <p>Aquí se produce el abrazo luminoso entre Epicteto y Wittgenstein: ambos coinciden en que la vida recta no es una teoría verbal ruidosa, sino una práctica silenciosa. El estoico no diserta sobre la virtud; la ejerce permaneciendo ecuánime ante la calumnia o la escasez. El autor del <em>Tractatus</em> renuncia a formular sermones metafísicos vacíos para señalar que la respuesta al enigma de la vida en el espacio y el tiempo se encuentra fuera del espacio y el tiempo: en la vivencia lúcida del presente puro.</p>
+
+            <h3>IV. Conclusión: El sosiego de saber callar</h3>
+            <p>Nuestra era padece de logorrea y parloteo continuo. Opinamos sobre todo, polemizamos al segundo en redes sociales y pretendemos encasillar el dolor ajeno y la complejidad del mundo en consignas de consumo inmediato. Recuperar a Epicteto y a Wittgenstein es aprender el arte del silencio digno: custodiar la propia mente de las perturbaciones exteriores y arrodillarse con respeto ante el misterio de la existencia.</p>
+          </div>
+
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Ética del Juicio y Filosofía Analítica</span>
+            <a href="#top" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+      </section>
+
+
+      <!-- ====================================================================
+           BARRA LATERAL (SIDEBAR DE COMPLEMENTOS EDITORIALES)
+           ==================================================================== -->
+      <aside class="sidebar-wrapper" aria-label="Complementos de filosofía">
+
+        <!-- Concepto del Mes -->
+        <div class="sidebar-widget concept-focus-card">
+          <h3 class="widget-heading">Concepto en Foco</h3>
+          <span class="concept-greek-title">ἐποχή</span>
+          <h4>Epojē (Epoché)</h4>
+          <p>
+            Término procedente de los escépticos clásicos y rescatado por la fenomenología de Husserl. Consiste en «poner entre paréntesis» el juicio precipitado sobre la realidad para contemplar las cosas tal y como se manifiestan en la conciencia pura.
+          </p>
+          <a href="#kairos" class="back-to-toc-link" style="display: inline-block;">Ver tratado del tiempo &darr;</a>
+        </div>
+
+        <!-- Aforismo Central -->
+        <div class="sidebar-widget quote-widget">
+          <h3 class="widget-heading">Aforismo Estoico</h3>
+          <blockquote>
+            «No nos perturban las cosas en sí mismas, sino las opiniones que tenemos de las cosas.»
+          </blockquote>
+          <cite>— Epicteto, Enquiridión</cite>
+        </div>
+
+        <!-- Canon de Referencia -->
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Lecturas del Canon</h3>
+          <ul class="canon-reading-list">
+            <li>
+              <a href="#kairos">
+                <strong>De brevitate vitae</strong>
+                <span>Séneca — Soberanía sobre el presente</span>
+              </a>
+            </li>
+            <li>
+              <a href="#soberania">
+                <strong>Enquiridión</strong>
+                <span>Epicteto — La dicotomía del control</span>
+              </a>
+            </li>
+            <li>
+              <a href="#soberania">
+                <strong>Tractatus Logico-Philosophicus</strong>
+                <span>Wittgenstein — La mística del silencio</span>
+              </a>
+            </li>
+            <li>
+              <a href="#kairos">
+                <strong>El aroma del tiempo</strong>
+                <span>Byung-Chul Han — Ensayo de la demora</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página Institucional -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>
+          Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.
+        </p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script ligero de barra de lectura superior -->
+  <script>
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+  </script>
+
+</body>
+</html>

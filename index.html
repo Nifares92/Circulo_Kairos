@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Publicación cultural independiente de literatura, cine, música y pensamiento filosófico.">
+  <title>Círculo Kairós | Cuaderno de Crítica, Artes y Pensamiento</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y PALETA EDITORIAL CÁLIDA
+       ========================================================================== */
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;          /* Terracota / lacre */
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* ==========================================================================
+       CABECERA Y FRANJA DINÁMICA
+       ========================================================================== */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ==========================================================================
+       BLOQUE 1: PORTADA ASIMÉTRICA
+       ========================================================================== */
+    .hero-editorial-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+      align-items: stretch;
+    }
+
+    .hero-lead-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .hero-lead-card::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px solid rgba(226, 216, 199, 0.4);
+      pointer-events: none;
+    }
+    .hero-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .discipline-badge {
+      font-family: var(--font-classical);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background-color: var(--bg-accent-tint);
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+    }
+    .reading-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .hero-lead-card h2 {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      line-height: 1.22;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .hero-lead-image {
+      margin: 1.25rem 0 1.5rem;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      height: 380px;
+    }
+    .hero-lead-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    .hero-lead-excerpt {
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: #332f2c;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    .btn-kairos {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      border-top: 1px solid var(--border-soft);
+      padding-top: 1rem;
+    }
+    .btn-kairos:hover { color: var(--accent-dark); }
+
+    /* Columna lateral: 2 Historias Secundarias */
+    .hero-side-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+    .side-story-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-subtle);
+      transition: transform var(--transition);
+    }
+    .side-story-card:hover { transform: translateY(-3px); }
+    .side-story-media {
+      height: 150px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      margin: 0.8rem 0 1rem;
+    }
+    .side-story-media img { width: 100%; height: 100%; object-fit: cover; }
+    .side-story-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .side-story-card p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       FRANJA DE PAUSA: MANIFIESTO Y CITA EDITORIAL
+       ========================================================================== */
+    .manifesto-banner {
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 3rem 1.5rem;
+      background-color: var(--bg-surface);
+      text-align: center;
+      margin: 4.5rem 0;
+      position: relative;
+    }
+    .manifesto-banner::after {
+      content: '§';
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-color);
+      padding: 0 1rem;
+      font-family: var(--font-classical);
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+    .manifesto-banner blockquote {
+      font-family: var(--font-reader);
+      font-size: 1.55rem;
+      font-style: italic;
+      color: var(--text-main);
+      max-width: 860px;
+      margin: 0 auto 0.75rem;
+      line-height: 1.55;
+    }
+    .manifesto-banner cite {
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    /* ==========================================================================
+       BLOQUE 2: CUARTETO DE SECCIONES
+       ========================================================================== */
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .section-title-wrap h2 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.35rem;
+    }
+    .section-title-wrap p {
+      font-family: var(--font-reader);
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .quad-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.6rem;
+      margin-bottom: 4.5rem;
+    }
+    .quad-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-subtle);
+      transition: transform var(--transition);
+    }
+    .quad-card:hover { transform: translateY(-4px); }
+    .quad-media {
+      height: 180px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      margin: 0.8rem 0 1rem;
+    }
+    .quad-media img { width: 100%; height: 100%; object-fit: cover; }
+    .quad-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.22rem;
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+    .quad-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+    .quad-link {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border-top: 1px solid var(--border-soft);
+      padding-top: 0.75rem;
+    }
+
+    /* ==========================================================================
+       BLOQUE 3: NOTICIAS CULTURALES ROTATIVAS & EFEMÉRIDES DEL DÍA
+       ========================================================================== */
+    .cultural-dispatch-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 3rem;
+      margin-top: 2rem;
+      border-top: 3px double var(--border-dark);
+      padding-top: 3rem;
+    }
+
+    .block-header {
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .block-header h3 { font-family: var(--font-serif); font-size: 1.6rem; }
+    .block-header span { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+    .news-card-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+    .news-item-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.6rem;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.6rem;
+      align-items: center;
+      box-shadow: var(--shadow-subtle);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .news-item-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(34, 31, 29, 0.08);
+      border-color: var(--accent);
+    }
+    .news-item-thumb {
+      height: 115px;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+    }
+    .news-item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .news-item-box:hover .news-item-thumb img {
+      transform: scale(1.04);
+    }
+    .news-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+      font-size: 0.72rem;
+    }
+    .news-tag {
+      font-family: var(--font-classical);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .news-source {
+      color: var(--text-muted);
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .news-source strong {
+      color: var(--text-main);
+      font-style: normal;
+    }
+    .news-item-box h4 {
+      font-family: var(--font-serif);
+      font-size: 1.22rem;
+      line-height: 1.35;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .news-item-box:hover h4 {
+      color: var(--accent);
+    }
+    .external-icon {
+      font-size: 0.9rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .news-item-box:hover .external-icon {
+      transform: translate(2px, -2px);
+    }
+    .news-item-box p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 0.6rem;
+    }
+    .news-read-more-text {
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    .sidebar-ephemeris-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .ephemeris-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .ephemeris-date-badge {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .ephemeris-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .ephemeris-card p {
+      font-family: var(--font-reader);
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .daily-quote-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .daily-quote-card blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.12rem;
+      color: var(--text-main);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+    .daily-quote-card cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    /* ==========================================================================
+       PIE DE PÁGINA INSTITUCIONAL
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .hero-editorial-grid { grid-template-columns: 1fr; }
+      .quad-grid { grid-template-columns: repeat(2, 1fr); }
+      .cultural-dispatch-layout { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
+      .quad-grid { grid-template-columns: 1fr; }
+      .hero-lead-card { padding: 1.5rem; }
+      .top-bar-meta { flex-direction: column; gap: 0.3rem; text-align: center; }
+      .news-item-box { grid-template-columns: 1fr; }
+      .news-item-thumb { height: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Franja Superior de Metadatos con Fecha Automática -->
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <span><strong>Kairós:</strong> El tiempo que no se mide, sino que se habita</span>
+    <span>Año I · Cuaderno Continuo</span>
+  </aside>
+
+  <!-- Cabecera Central -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
+          <li><a href="musica.html">Música</a></li>
+          <li><a href="filosofia.html">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+
+    <!-- ====================================================================
+         1. PORTADA ASIMÉTRICA (SE AUTOCONFIGURA MEDIANTE FETCH DE FILOSOFÍA)
+         ==================================================================== -->
+    <section class="hero-editorial-grid" aria-labelledby="portada-principal-titulo">
+
+      <!-- Noticia Principal (Se actualiza sola leyendo el 1er artículo de filosofia.html) -->
+      <article class="hero-lead-card" id="portada-lead-article">
+        <div class="hero-badge-row">
+          <span class="discipline-badge" id="lead-badge">Filosofía · Tratado de Fondo</span>
+          <span class="reading-time" id="lead-time">30 min de lectura de fondo</span>
+        </div>
+        <h2 id="portada-principal-titulo">
+          <a href="filosofia.html#kairos" id="lead-title">Contra la tiranía del Cronos: la rebelión del Kairós y la recuperación del instante sagrado</a>
+        </h2>
+        <div class="hero-lead-image">
+          <img id="lead-image" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80" alt="Busto clásico en penumbra">
+        </div>
+        <p class="hero-lead-excerpt" id="lead-excerpt">
+          Vivimos subordinados a la tiranía del reloj lineal, ese dios impasible que devora sus propios minutos. Un examen a fondo sobre la disritmia contemporánea diagnosticada por Byung-Chul Han, la alegoría griega del joven alado Kairós y el llamamiento estoico de Séneca en <em>De brevitate vitae</em>: pensar no es perder el tiempo, sino librarlo de su condena productiva.
+        </p>
+        <a href="filosofia.html#kairos" id="lead-link" class="btn-kairos">Leer tratado completo en Filosofía &rarr;</a>
+      </article>
+
+      <!-- Columna Lateral (Se actualiza sola leyendo literatura.html y cine.html) -->
+      <aside class="hero-side-column" aria-label="Otras lecturas destacadas">
+        
+        <!-- Tarjeta Secundaria 1: Literatura -->
+        <article class="side-story-card" id="side-card-literatura">
+          <span class="discipline-badge" id="side-lit-badge" style="align-self: flex-start;">Literatura</span>
+          <div class="side-story-media">
+            <img id="side-lit-img" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80" alt="Libro antiguo y pluma">
+          </div>
+          <h3><a href="literatura.html#enigma" id="side-lit-title">La arquitectura del enigma: el mecanismo de relojería en la novela policíaca</a></h3>
+          <p id="side-lit-excerpt">
+            Desde las bujías aromáticas de Edgar Allan Poe hasta el Decálogo de Ronald Knox: el pacto ético donde cada pista debe ser visible para el lector.
+          </p>
+          <a href="literatura.html#enigma" id="side-lit-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver en Literatura &rarr;</a>
+        </article>
+
+        <!-- Tarjeta Secundaria 2: Cine -->
+        <article class="side-story-card" id="side-card-cine">
+          <span class="discipline-badge" id="side-cine-badge" style="align-self: flex-start;">Cine</span>
+          <div class="side-story-media">
+            <img id="side-cine-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80" alt="Claroscuro cinematográfico">
+          </div>
+          <h3><a href="cine.html#cine-noir" id="side-cine-title">La sombra como destino: la geometría moral del cine negro</a></h3>
+          <p id="side-cine-excerpt">
+            Las persianas venecianas y las calles empapadas de asfalto como barrotes invisibles que aprisionan la ambigüedad ética de posguerra.
+          </p>
+          <a href="cine.html#cine-noir" id="side-cine-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver en Cine &rarr;</a>
+        </article>
+
+      </aside>
+
+    </section>
+
+    <!-- ====================================================================
+         FRANJA DE PAUSA: MANIFIESTO Y CITA EDITORIAL DEL DÍA
+         ==================================================================== -->
+    <section class="manifesto-banner" aria-label="Declaración de principios">
+      <blockquote id="banner-quote-text">
+        «Cronos mide la cantidad inerte de los minutos; Kairós revela su peso interior. Este espacio nace para pausar el reloj y habitar la mirada.»
+      </blockquote>
+      <cite id="banner-quote-author">— Cuaderno de Principios del Círculo</cite>
+    </section>
+
+    <!-- ====================================================================
+         2. CUARTETO DE SECCIONES (SE AUTOSINCRONIZAN CON LO ÚLTIMO ESCRITO)
+         ==================================================================== -->
+    <section class="disciplines-overview" aria-labelledby="cuarteto-titulo">
+      <div class="section-title-wrap">
+        <h2 id="cuarteto-titulo">Los Cuatro Cuadernos</h2>
+        <p>Sincronizados en tiempo real con la última publicación de cada sección</p>
+      </div>
+
+      <div class="quad-grid">
+        
+        <!-- Tarjeta 1: Literatura -->
+        <article class="quad-card" id="quad-card-lit">
+          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno I</span>
+          <div class="quad-media">
+            <img id="quad-lit-img" src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=500&q=80" alt="Literatura">
+          </div>
+          <h3><a href="literatura.html#enigma" id="quad-lit-title">Literatura: La arquitectura del enigma</a></h3>
+          <p id="quad-lit-desc">
+            Tratado sobre las habitaciones cerradas de Poe y Carr, junto a las monografías de Dostoyevski, Conan Doyle y Bulgákov.
+          </p>
+          <a href="literatura.html#enigma" id="quad-lit-link" class="quad-link">Leer en Literatura &rarr;</a>
+        </article>
+
+        <!-- Tarjeta 2: Cine -->
+        <article class="quad-card" id="quad-card-cine">
+          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno II</span>
+          <div class="quad-media">
+            <img id="quad-cine-img" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Cine">
+          </div>
+          <h3><a href="cine.html#cine-stalker" id="quad-cine-title">Cine: Stalker y la Zona de Tarkovski</a></h3>
+          <p id="quad-cine-desc">
+            La poética del plano secuencia ininterrumpido frente a los artificios de montaje, junto al análisis de Hitchcock y Blade Runner.
+          </p>
+          <a href="cine.html#cine-stalker" id="quad-cine-link" class="quad-link">Leer en Cine &rarr;</a>
+        </article>
+
+        <!-- Tarjeta 3: Música -->
+        <article class="quad-card" id="quad-card-mus">
+          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno III</span>
+          <div class="quad-media">
+            <img id="quad-mus-img" src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=500&q=80" alt="Música">
+          </div>
+          <h3><a href="musica.html#mus-part" id="quad-mus-title">Música: Tabula Rasa de Arvo Pärt</a></h3>
+          <p id="quad-mus-desc">
+            El estilo tintinnabuli y el silencio tras el mutismo creador, acompañado por el modal jazz de Miles Davis y Max Richter.
+          </p>
+          <a href="musica.html#mus-part" id="quad-mus-link" class="quad-link">Leer en Música &rarr;</a>
+        </article>
+
+        <!-- Tarjeta 4: Filosofía -->
+        <article class="quad-card" id="quad-card-filo">
+          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno IV</span>
+          <div class="quad-media">
+            <img id="quad-filo-img" src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=500&q=80" alt="Filosofía">
+          </div>
+          <h3><a href="filosofia.html#soberania" id="quad-filo-title">Filosofía: Epicteto & Wittgenstein</a></h3>
+          <p id="quad-filo-desc">
+            La soberanía de la atención en el estoicismo romano y la mística de lo inexpresable en el <em>Tractatus</em>.
+          </p>
+          <a href="filosofia.html#soberania" id="quad-filo-link" class="quad-link">Leer en Filosofía &rarr;</a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. DESPACHO CULTURAL: NOTICIAS ROTATIVAS & EFEMÉRIDES DEL DÍA
+         ==================================================================== -->
+    <section class="cultural-dispatch-layout" aria-labelledby="dispatch-titulo">
+      
+      <!-- Columna Izquierda: Noticias Culturales Actualizables -->
+      <div class="cultural-news-column">
+        <div class="block-header">
+          <h3 id="dispatch-titulo">Noticias de la Cultura & Letras</h3>
+          <span>Despacho Actualizado</span>
+        </div>
+
+        <div class="news-card-feed" id="feed-noticias-culturales">
+          <!-- Inyectadas mediante el script inferior -->
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Efemérides & Cita Diaria -->
+      <aside class="sidebar-ephemeris-column" aria-label="Efemérides y citas del día">
+        
+        <div class="block-header">
+          <h3>Efemérides del Día</h3>
+          <span id="efemeride-tag">Calendario</span>
+        </div>
+
+        <article class="ephemeris-card">
+          <span class="ephemeris-date-badge" id="efemeride-fecha-badge">Tal día como hoy</span>
+          <h4 id="efemeride-titulo">En la memoria de las artes</h4>
+          <p id="efemeride-cuerpo">Cargando efeméride cultural...</p>
+        </article>
+
+        <div class="block-header" style="margin-top: 1.5rem;">
+          <h3>Cita en el Margen</h3>
+          <span>Pensamiento</span>
+        </div>
+
+        <article class="daily-quote-card">
+          <blockquote id="daily-quote-text">«No hay nada más engañoso que un hecho obvio cuando la mirada carece de método analítico.»</blockquote>
+          <cite id="daily-quote-author">— Sir Arthur Conan Doyle</cite>
+        </article>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- Pie de Página Institucional -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      
+      <div class="footer-brand">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>
+          Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.
+        </p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       SCRIPT: LECTURA AUTOMÁTICA DE PÁGINAS (FETCH LOCAL EN SEGUNDO PLANO)
+       ==================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. MOTOR DE LECTURA AUTOMÁTICA DE ARCHIVOS HTML (FETCH LOCAL)
+       ========================================================================== */
+    // Lee un archivo HTML local, extrae su 1er <article class="long-article">
+    // y devuelve sus datos limpios (título, id, foto, resumen, etc.).
+    async function extraerUltimoEnsayo(nombreArchivo) {
+      try {
+        const respuesta = await fetch(nombreArchivo);
+        if (!respuesta.ok) return null;
+        const htmlTexto = await respuesta.text();
+
+        // Parsear el HTML recibido
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlTexto, "text/html");
+
+        // Buscar el primer artículo de fondo que tengas escrito
+        const primerArticulo = doc.querySelector(".long-article");
+        if (!primerArticulo) return null;
+
+        const id = primerArticulo.id || "";
+        const titularEl = primerArticulo.querySelector(".article-headline") || primerArticulo.querySelector("h2");
+        const titulo = titularEl ? titularEl.textContent.trim() : "";
+        
+        const imgEl = primerArticulo.querySelector(".article-featured-media img") || primerArticulo.querySelector("img");
+        const img = imgEl ? imgEl.getAttribute("src") : "";
+
+        const metaEl = primerArticulo.querySelector(".article-meta-line");
+        const tiempo = metaEl ? metaEl.textContent.trim() : "";
+
+        const badgeEl = primerArticulo.querySelector(".article-topic");
+        const badge = badgeEl ? badgeEl.textContent.trim() : "";
+
+        // Extraer el primer párrafo de texto para usarlo de entradilla
+        const primerParrafo = primerArticulo.querySelector(".article-prose p");
+        let resumen = "";
+        if (primerParrafo) {
+          resumen = primerParrafo.textContent.trim();
+          if (resumen.length > 240) {
+            resumen = resumen.substring(0, 240) + "...";
+          }
+        }
+
+        return {
+          id: id,
+          archivo: nombreArchivo,
+          enlace: `${nombreArchivo}#${id}`,
+          titulo: titulo,
+          img: img,
+          tiempo: tiempo,
+          badge: badge,
+          resumen: resumen
+        };
+      } catch (error) {
+        // Si se abre por file:// sin servidor local o hay un error de red,
+        // no pasa nada: la web conserva silenciosamente los datos que ya tiene maquetados.
+        return null;
+      }
+    }
+
+    // Actualiza en tiempo real la portada leyendo lo primero de cada cuaderno
+    async function sincronizarPortadaConSecciones() {
+      // 1. Sincronizar Portada Principal (Hero con Filosofía)
+      const dataFilosofia = await extraerUltimoEnsayo("filosofia.html");
+      if (dataFilosofia) {
+        if (dataFilosofia.badge) document.getElementById("lead-badge").textContent = dataFilosofia.badge;
+        if (dataFilosofia.titulo) document.getElementById("lead-title").textContent = dataFilosofia.titulo;
+        document.getElementById("lead-title").setAttribute("href", dataFilosofia.enlace);
+        document.getElementById("lead-link").setAttribute("href", dataFilosofia.enlace);
+        if (dataFilosofia.img) document.getElementById("lead-image").setAttribute("src", dataFilosofia.img);
+        if (dataFilosofia.resumen) document.getElementById("lead-excerpt").textContent = dataFilosofia.resumen;
+        if (dataFilosofia.tiempo) document.getElementById("lead-time").textContent = dataFilosofia.tiempo;
+      }
+
+      // 2. Sincronizar Tarjeta Lateral de Literatura
+      const dataLiteratura = await extraerUltimoEnsayo("literatura.html");
+      if (dataLiteratura) {
+        if (dataLiteratura.titulo) document.getElementById("side-lit-title").textContent = dataLiteratura.titulo;
+        document.getElementById("side-lit-title").setAttribute("href", dataLiteratura.enlace);
+        document.getElementById("side-lit-link").setAttribute("href", dataLiteratura.enlace);
+        if (dataLiteratura.img) document.getElementById("side-lit-img").setAttribute("src", dataLiteratura.img);
+        if (dataLiteratura.resumen) document.getElementById("side-lit-excerpt").textContent = dataLiteratura.resumen;
+      }
+
+      // 3. Sincronizar Tarjeta Lateral de Cine
+      const dataCine = await extraerUltimoEnsayo("cine.html");
+      if (dataCine) {
+        if (dataCine.titulo) document.getElementById("side-cine-title").textContent = dataCine.titulo;
+        document.getElementById("side-cine-title").setAttribute("href", dataCine.enlace);
+        document.getElementById("side-cine-link").setAttribute("href", dataCine.enlace);
+        if (dataCine.img) document.getElementById("side-cine-img").setAttribute("src", dataCine.img);
+        if (dataCine.resumen) document.getElementById("side-cine-excerpt").textContent = dataCine.resumen;
+      }
+
+      // 4. Sincronizar el Cuarteto de Secciones con lo último de cada cuaderno
+      if (dataLiteratura) {
+        document.getElementById("quad-lit-title").textContent = "Literatura: " + dataLiteratura.titulo;
+        document.getElementById("quad-lit-title").setAttribute("href", dataLiteratura.enlace);
+        document.getElementById("quad-lit-link").setAttribute("href", dataLiteratura.enlace);
+        if (dataLiteratura.img) document.getElementById("quad-lit-img").setAttribute("src", dataLiteratura.img);
+        if (dataLiteratura.resumen) document.getElementById("quad-lit-desc").textContent = dataLiteratura.resumen;
+      }
+
+      if (dataCine) {
+        document.getElementById("quad-cine-title").textContent = "Cine: " + dataCine.titulo;
+        document.getElementById("quad-cine-title").setAttribute("href", dataCine.enlace);
+        document.getElementById("quad-cine-link").setAttribute("href", dataCine.enlace);
+        if (dataCine.img) document.getElementById("quad-cine-img").setAttribute("src", dataCine.img);
+        if (dataCine.resumen) document.getElementById("quad-cine-desc").textContent = dataCine.resumen;
+      }
+
+      const dataMusica = await extraerUltimoEnsayo("musica.html");
+      if (dataMusica) {
+        document.getElementById("quad-mus-title").textContent = "Música: " + dataMusica.titulo;
+        document.getElementById("quad-mus-title").setAttribute("href", dataMusica.enlace);
+        document.getElementById("quad-mus-link").setAttribute("href", dataMusica.enlace);
+        if (dataMusica.img) document.getElementById("quad-mus-img").setAttribute("src", dataMusica.img);
+        if (dataMusica.resumen) document.getElementById("quad-mus-desc").textContent = dataMusica.resumen;
+      }
+
+      if (dataFilosofia) {
+        document.getElementById("quad-filo-title").textContent = "Filosofía: " + dataFilosofia.titulo;
+        document.getElementById("quad-filo-title").setAttribute("href", dataFilosofia.enlace);
+        document.getElementById("quad-filo-link").setAttribute("href", dataFilosofia.enlace);
+        if (dataFilosofia.img) document.getElementById("quad-filo-img").setAttribute("src", dataFilosofia.img);
+        if (dataFilosofia.resumen) document.getElementById("quad-filo-desc").textContent = dataFilosofia.resumen;
+      }
+    }
+
+    /* ==========================================================================
+       2. NOTICIAS CULTURALES, EFEMÉRIDES Y FECHA AUTOMÁTICA
+       ========================================================================== */
+    
+    /* ==========================================================================
+       FEED DE NOTICIAS CULTURALES EN TIEMPO REAL (RSS A JSON)
+       ========================================================================== */
+    // Feed RSS real de Cultura (RTVE Noticias - Canal Oficial de Cultura)
+    const RSS_CULTURA_URL = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.rtve.es%2Fapi%2Ftematicas%2Fcultura%2Fnoticias.rss";
+
+    async function cargarNoticiasCulturalesReales() {
+      const feedContainer = document.getElementById("feed-noticias-culturales");
+      if (!feedContainer) return;
+
+      try {
+        const res = await fetch(RSS_CULTURA_URL);
+        const data = await res.json();
+
+        if (data.status === "ok" && data.items && data.items.length > 0) {
+          feedContainer.innerHTML = "";
+
+          // Tomamos las 4 noticias culturales más recientes en tiempo real
+          const noticias = data.items.slice(0, 4);
+
+          noticias.forEach(item => {
+            // Limpieza del texto descriptivo (eliminar etiquetas HTML que pueda traer el feed)
+            const divTemp = document.createElement("div");
+            divTemp.innerHTML = item.description || "";
+            let textoLimpio = divTemp.textContent || divTemp.innerText || "";
+            if (textoLimpio.length > 180) {
+              textoLimpio = textoLimpio.substring(0, 180) + "...";
+            }
+
+            // Imagen por defecto o miniatura del feed
+            let imagenUrl = item.thumbnail || (item.enclosure ? item.enclosure.link : "");
+            if (!imagenUrl) {
+              imagenUrl = "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=400&q=80";
+            }
+
+            // Formato de fecha
+            const fechaPublicacion = new Date(item.pubDate).toLocaleDateString('es-ES', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric'
+            });
+
+            const card = document.createElement("a");
+            card.className = "news-item-box";
+            card.href = item.link; // ENLACE EXACTO AL ARTÍCULO REAL
+            card.target = "_blank";
+            card.rel = "noopener noreferrer";
+            card.title = `Leer noticia completa: ${item.title}`;
+
+            card.innerHTML = `
+              <div class="news-item-thumb">
+                <img src="${imagenUrl}" alt="${item.title}" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80'">
+              </div>
+              <div class="news-item-content">
+                <div class="news-header-meta">
+                  <span class="news-tag">Actualidad Cultural</span>
+                  <span class="news-source">RTVE Cultura · ${fechaPublicacion}</span>
+                </div>
+                <h4>
+                  <span>${item.title}</span>
+                  <span class="external-icon">&#8599;</span>
+                </h4>
+                <p>${textoLimpio}</p>
+                <span class="news-read-more-text">Leer noticia completa en la fuente &rarr;</span>
+              </div>
+            `;
+
+            feedContainer.appendChild(card);
+          });
+        }
+      } catch (err) {
+        console.warn("No se pudo conectar al canal RSS en vivo:", err);
+      }
+    }
+
+
+    const EFEMERIDES_CALENDARIO = [
+      {
+        fecha: "13 de Octubre",
+        titulo: "Arvo Pärt y la revolución del Tintinnabuli",
+        cuerpo: "Se conmemora la consolidación del minimalismo sacro contemporáneo, fecha en que el compositor unió el dolor humano con la quietud de las campanas."
+      },
+      {
+        fecha: "14 de Octubre",
+        titulo: "Publicación de 'El sabueso de los Baskerville'",
+        cuerpo: "Sir Arthur Conan Doyle entregaba al Strand Magazine los pliegos donde la niebla de Dartmoor desafió por primera vez a la ciencia analítica."
+      },
+      {
+        fecha: "15 de Octubre",
+        titulo: "Séneca y la redacción de 'De brevitate vitae'",
+        cuerpo: "Un día dedicado al recuerdo de la filosofía moral romana: el recordatorio de que la vida no es breve, sino que somos nosotros quienes la malgastamos."
+      },
+      {
+        fecha: "16 de Octubre",
+        titulo: "Estreno de 'La ventana indiscreta' de Hitchcock",
+        cuerpo: "Se proyectaba por primera vez la obra maestra del voyeurismo donde el espectador comprende que mirar el dolor ajeno nunca es un acto inocente."
+      }
+    ];
+
+    const CITAS_MARGINAL = [
+      { texto: "«No hay nada más engañoso que un hecho obvio cuando la mirada carece de método analítico.»", autor: "— Sir Arthur Conan Doyle" },
+      { texto: "«La vida no examinada con sosiego no merece la pena de ser vivida.»", autor: "— Sócrates" },
+      { texto: "«Las notas que no tocas son tan importantes como las que tocas.»", autor: "— Thelonious Monk" },
+      { texto: "«El cine no es un arte que filma la vida; es algo que está entre el arte y la vida.»", autor: "— Jean-Luc Godard" }
+    ];
+
+    function cargarDinamicos() {
+      // Fecha del día en español
+      const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const hoy = new Date();
+      const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
+      const metaSpan = document.getElementById("meta-fecha-hoy");
+      if (metaSpan) {
+        metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
+      }
+
+      // Cargar noticias culturales en vivo desde canal RSS oficial
+      cargarNoticiasCulturalesReales();
+
+      // Efeméride y Cita rotativa por día del año
+      const inicioAno = new Date(hoy.getFullYear(), 0, 0);
+      const dif = hoy - inicioAno;
+      const diaDelAno = Math.floor(dif / (1000 * 60 * 60 * 24));
+
+      const efemerideHoy = EFEMERIDES_CALENDARIO[diaDelAno % EFEMERIDES_CALENDARIO.length];
+      if (efemerideHoy) {
+        document.getElementById("efemeride-fecha-badge").textContent = efemerideHoy.fecha;
+        document.getElementById("efemeride-titulo").textContent = efemerideHoy.titulo;
+        document.getElementById("efemeride-cuerpo").textContent = efemerideHoy.cuerpo;
+      }
+
+      const citaHoy = CITAS_MARGINAL[diaDelAno % CITAS_MARGINAL.length];
+      if (citaHoy) {
+        document.getElementById("daily-quote-text").textContent = citaHoy.texto;
+        document.getElementById("daily-quote-author").textContent = citaHoy.autor;
+      }
+
+      // Sincronizar automáticamente con los otros HTML
+      sincronizarPortadaConSecciones();
+    }
+
+    document.addEventListener("DOMContentLoaded", cargarDinamicos);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Cuaderno de Literatura con paginación automática y ensayos extensos.">
+  <title>Literatura & Recomendaciones | Círculo Kairós</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px; width: 0%;
+      background-color: var(--accent);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Cabecera */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-header-box {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-tag {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-heading-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-summary-text {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Sumario de saltos */
+    .table-of-contents-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.6rem 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .toc-title {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.9rem;
+      display: block;
+      font-weight: 700;
+    }
+    .toc-links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem 1.8rem;
+      list-style: none;
+    }
+    .toc-item a {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .toc-item a span.num {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Disposición Editorial */
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    .articles-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+    }
+
+    .long-article {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .long-article::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .article-topic {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .article-headline {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+    .article-meta-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .article-featured-media {
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      max-height: 420px;
+    }
+    .article-featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-featured-media figcaption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-soft);
+      font-style: italic;
+    }
+
+    .article-prose {
+      font-family: var(--font-reader);
+      font-size: 1.2rem;
+      line-height: 1.95;
+      color: #292624;
+    }
+    .article-prose p {
+      margin-bottom: 1.8rem;
+      text-align: justify;
+    }
+    .article-prose h3 {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      margin: 3rem 0 1.2rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .article-prose .dropcap::first-letter {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 4.6rem;
+      line-height: 0.8;
+      padding-top: 6px;
+      padding-right: 14px;
+      padding-bottom: 2px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .article-prose blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.4rem 1.8rem;
+      margin: 2.5rem 0;
+      background-color: var(--bg-surface);
+      font-style: italic;
+      font-size: 1.22rem;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+    .article-prose blockquote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .article-bottom-actions {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 1.8rem;
+      margin-top: 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .signature-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .back-to-toc-link {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 2px;
+    }
+    .back-to-toc-link:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* Paginador Automático */
+    .pagination-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .page-btn {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .page-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .page-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      cursor: default;
+    }
+
+    /* Sidebar */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+
+    .focus-book-card { text-align: center; }
+    .focus-book-cover {
+      width: 145px;
+      margin: 0 auto 1.1rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 2px 5px 14px rgba(0,0,0,0.08);
+    }
+    .focus-book-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    .focus-book-card .author {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+    }
+    .focus-book-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      text-align: left;
+      margin-bottom: 1.1rem;
+    }
+
+    .quote-widget blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+    .quote-widget cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    .quick-reading-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .quick-reading-list li {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.65rem 0;
+    }
+    .quick-reading-list li:last-child { border-bottom: none; }
+    .quick-reading-list strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .quick-reading-list span {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .toc-links-grid { grid-template-columns: 1fr; }
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .long-article { padding: 2.2rem 1.8rem; }
+      .sidebar-wrapper { position: static; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-heading-title { font-size: 2.2rem; }
+      .article-headline { font-size: 1.85rem; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div id="progress-bar"></div>
+
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Cuaderno I</span>
+    <span><strong>Disciplina:</strong> Letras & Pensamiento Narrativo</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="literatura.html" class="active">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
+          <li><a href="musica.html">Música</a></li>
+          <li><a href="filosofia.html">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+
+    <header class="section-header-box">
+      <span class="section-category-tag">Cuaderno Editorial I</span>
+      <h2 class="section-heading-title">Literatura & Resonancias</h2>
+      <p class="section-summary-text">
+        «Un libro debe ser el hacha que rompa el mar helado dentro de nosotros.» Ensayos monográficos completos sobre la relojería deductiva del enigma, el realismo trágico ruso y el arte de la atmósfera.
+      </p>
+    </header>
+
+    <!-- SUMARIO DINÁMICO -->
+    <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de ensayos de esta página">
+      <span class="toc-title">Ensayos visibles en esta página · Haz clic para ir al texto</span>
+      <ul class="toc-links-grid" id="toc-container"></ul>
+    </nav>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL DE ENSAYOS -->
+      <section class="articles-stream" id="stream-ensayos" aria-label="Textos íntegros de literatura">
+
+        <!-- ENSAYO 1 -->
+        <article class="long-article" id="enigma" data-titulo="I. La arquitectura del enigma">
+          <header class="article-header">
+            <span class="article-topic">Teoría del Enigma · Ensayo I</span>
+            <h2 class="article-headline">La arquitectura del enigma: el mecanismo de relojería en la novela policíaca clásica y la geometría deductiva</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-10">10 de octubre de 2026</time> · <span>24 min de lectura</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80" alt="Libro antiguo encuadernado y reloj">
+            <figcaption>La deducción como geometría moral: de Auguste Dupin a la edad dorada británica.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">Toda gran narración de enigma obedece, en última instancia, a las leyes secretas y rigurosas de la relojería suiza. No basta con cometer un crimen en la penumbra ni con sembrar la escena de indicios equívocos; es indispensable que cada sombra proyectada sobre la alfombra, cada reloj detenido a las doce menos diez y cada billete de tren extraviado posean un valor funcional inequívoco dentro del engranaje deductivo. La novela policíaca de corte clásico no es un género sobre el horror del asesinato, sino sobre la restauración racional del cosmos frente al desorden del mal.</p>
+            <h3>I. El nacimiento del método: Edgar Allan Poe y el caballero Dupin</h3>
+            <p>Cuando Edgar Allan Poe publicó en la primavera de 1841 <em>Los crímenes de la calle Morgue</em> en las páginas de la <em>Graham's Magazine</em>, no inventó únicamente al detective analítico moderno; fundó una liturgia intelectual que perviviría durante siglos. El caballero C. Auguste Dupin no es un policía de a pie, ni un justiciero movido por la cólera social o la retribución económica. Dupin habita en una mansión ruinosa y aislada en el Faubourg Saint-Germain, vive con los postigos cerrados durante las horas del día encendiendo bujías aromáticas para preservar la penumbra del estudio, y solo sale a pasear a altas horas de la noche, cuando el tumulto urbano se aquieta y los contornos de las cosas se despojan de la distracción vulgar de los sentidos.</p>
+            <blockquote>«El verdadero intelecto analítico no busca lo extraordinario, sino lo insignificante que ha sido pasado por alto por la prisa cotidiana de los hombres que creen saberlo todo.»<cite>— Edgar Allan Poe, Los crímenes de la calle Morgue</cite></blockquote>
+            <h3>II. La habitación cerrada como paradoja epistemológica</h3>
+            <p>El problema del cuarto cerrado (el célebre <em>locked-room mystery</em>) es, en su raíz, un problema filosófico: ¿cómo puede un efecto producirse en un espacio sellado donde ninguna causa ha podido entrar ni salir? John Dickson Carr, en su célebre conferencia del capítulo decimoséptimo de <em>El hombre hueco</em> (1935), desglosó la taxonomía de esta paradoja con la meticulosidad de un cirujano. No se trata de magia ni de fuerzas demoníacas; la habitación cerrada es el templo donde la ciencia y la imaginación lógica colisionan.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Cuaderno de Teoría Narrativa</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 2 -->
+        <article class="long-article" id="dostoyevski" data-titulo="II. Crimen y castigo (Dostoyevski)">
+          <header class="article-header">
+            <span class="article-topic">Realismo Trágico · Ensayo II</span>
+            <h2 class="article-headline">Crimen y castigo: la geografía moral del remordimiento en el San Petersburgo de Dostoyevski</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-04">04 de octubre de 2026</time> · <span>26 min de lectura</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80" alt="Buhardilla y sombra en San Petersburgo">
+            <figcaption>El hachazo de Raskólnikov y la quiebra ontológica del superhombre napoleónico.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">A principios de julio, en una hora extraordinariamente calurosa del atardecer, un joven salía de su cuartucho en el callejón de S. y se dirigía lentamente, como indeciso, hacia el puente de K. Así arranca una de las mayores cumbres de la literatura universal: no en un palacio zarista ni en un salón noble, sino en los arrabales sofocantes de San Petersburgo, entre tabernas hediondas a aguardiente barato, mendigos y callejones polvorientos donde la miseria material engendra monstruos dialécticos.</p>
+            <h3>I. El armario de la buhardilla y el embrión de la soberbia</h3>
+            <p>Rodión Románovich Raskólnikov no comete un crimen por hambre ni por avaricia pedestre. Su cuartucho, situado bajo el tejado de un edificio de cinco plantas, recuerda más a un armario o a una tumba que a una vivienda humana; tiene apenas seis pasos de largo y el empapelado amarillento se desprende de las paredes como piel muerta. Es en esa claustrofobia física donde Raskólnikov pasa días enteros tumbado sobre un diván andrajoso, alimentándose de té rancio y rumiando una teoría abstracta que desafía el orden moral del universo.</p>
+            <blockquote>«No maté a un ser humano; maté un principio. Pero el principio permaneció de pie y fui yo quien cayó destrozado contra el suelo de mi propia miseria.»<cite>— Fiódor Dostoyevski, Crimen y castigo</cite></blockquote>
+            <h3>II. Sonia Marmeládova y la resurrección de Lázaro</h3>
+            <p>El contrapunto luminoso de la novela lo encarna Sonia, la hija del desdichado Marmeládov, empujada a la prostitución por la hambruna de sus hermanastros. Para la mente racional de Raskólnikov, Sonia debería haberse arrojado al canal de Catalina hace meses para poner fin a una degradación insoportable; sin embargo, Sonia vive sostenida por una fe ciega, humilde y silenciosa en el perdón divino.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Clásicos del Realismo Ruso</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 3 -->
+        <article class="long-article" id="baskerville" data-titulo="III. El sabueso de los Baskerville">
+          <header class="article-header">
+            <span class="article-topic">Gótico Victoriano · Ensayo III</span>
+            <h2 class="article-headline">La niebla de Dartmoor: razón y mito en 'El sabueso de los Baskerville'</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-26">26 de septiembre de 2026</time> · <span>21 min de lectura</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80" alt="Páramo solitario envuelto en niebla">
+            <figcaption>El fango de Grimpen: donde la leyenda demoníaca desafía a la química analítica.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">En los páramos pantanosos de Devonshire la tierra tiembla y traga sin aviso a hombres y bestias. Allí, la leyenda de un sabueso infernal parece gobernar los destinos de una estirpe maldita. Sir Arthur Conan Doyle logra en esta novela su mayor triunfo atmosférico: empapar la novela detectivesca del terror gótico más sugerente.</p>
+            <h3>I. El choque entre la superstición y la deducción química</h3>
+            <p>Sherlock Holmes representa el estandarte del positivismo victoriano, armado con lupas, reactivos y la lógica despiadada de la inferencia. Pero al situar la acción en el fango de Grimpen, Doyle confronta a su héroe con el terror primitivo de la noche inglesa. Las pisadas de un sabueso gigante halladas junto al cadáver de Sir Charles Baskerville son un reto a la mismísima razón ilustrada.</p>
+            <blockquote>«El mundo está lleno de cosas evidentes que nadie por casualidad se detiene a observar jamás.»<cite>— Arthur Conan Doyle, El sabueso de los Baskerville</cite></blockquote>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Narrativa de Enigma</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 4 -->
+        <article class="long-article" id="bulgakov" data-titulo="IV. El maestro y Margarita (Bulgákov)">
+          <header class="article-header">
+            <span class="article-topic">Sátira Mística · Ensayo IV</span>
+            <h2 class="article-headline">El maestro y Margarita: Mijaíl Bulgákov y los manuscritos que nunca arden</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-08-15">15 de agosto de 2026</time> · <span>22 min de lectura</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80" alt="Manuscritos antiguos y luz crepuscular">
+            <figcaption>El diablo en Moscú y el juicio eterno de Poncio Pilato.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">Bajo la dictadura estalinista de los años treinta, cuando escribir libremente equivalía a firmar la propia condena de deportación a Siberia, Mijaíl Bulgákov redactó en secreto, en noches febriles antes de morir ciego y perseguido, la obra cumbre de la fantasía filosófica rusa: <em>El maestro y Margarita</em>.</p>
+            <h3>I. El diablo en el parque de los Estanques del Patriarca</h3>
+            <p>En una tarde calurosa de primavera en Moscú, dos intelectuales ateos debaten sobre la inexistencia de Jesús de Nazaret. De pronto, un caballero extranjero de mirada penetrante y acento equívoco se sienta a su lado: es Woland, el mismísimo Satán. No viene a tentar almas vulgares, sino a celebrar un baile y desenmascarar la codicia, la hipocresía y la delación de los burócratas literarios que han vendido su talento al régimen.</p>
+            <blockquote>«La cobardía es, sin duda, uno de los defectos más terribles de la condición humana. Los manuscritos no arden.»<cite>— Mijaíl Bulgákov, El maestro y Margarita</cite></blockquote>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Clásicos del Siglo XX</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+        <!-- ENSAYO 5 -->
+        <article class="long-article" id="atmosfera" data-titulo="V. El arte de la atmósfera">
+          <header class="article-header">
+            <span class="article-topic">Teoría Narrativa · Ensayo V</span>
+            <h2 class="article-headline">El laberinto invisible: cómo crear atmósfera antes que argumento en la ficción moderna</h2>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-05">05 de septiembre de 2026</time> · <span>19 min de lectura</span></div>
+          </header>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80" alt="Tinta y cuaderno artesanal">
+            <figcaption>La respiración sensitiva del escenario antes de la primera peripecia.</figcaption>
+          </figure>
+          <div class="article-prose">
+            <p class="dropcap">Las narraciones que perduran en la memoria de los siglos rara vez son recordadas por la sucesión lineal de sus peripecias, sino por la textura del aire que se respiraba en sus páginas. Nadie recuerda la lista exacta de acontecimientos de <em>Pedro Páramo</em>; recordamos el calor asfixiante de Comala, un pueblo donde los muertos susurran detrás de las paredes de adobe.</p>
+            <h3>I. La primacía de la atmósfera sobre el esquema</h3>
+            <p>Muchos escritores cometen el error de diseñar escaletas argumentales minuciosas antes de saber a qué huelen sus habitaciones. Si el escenario carece de densidad táctil, temperatura y sombra, los personajes se mueven como muñecos de cartón en un plató deshabitado. La atmósfera es el alma silenciosa de la novela: condiciona la velocidad del pensamiento y determina la gravedad moral de cada decisión.</p>
+          </div>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Cuaderno de Creación</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- BARRA LATERAL PERMANENTE -->
+      <aside class="sidebar-wrapper" aria-label="Complementos de lectura">
+        <div class="sidebar-widget focus-book-card">
+          <h3 class="widget-heading">Obra en Foco</h3>
+          <div class="focus-book-cover">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Portada de El maestro y Margarita">
+          </div>
+          <h4>El maestro y Margarita</h4>
+          <p class="author">Mijaíl Bulgákov</p>
+          <p>Sátira mística donde el diablo visita Moscú para desenmascarar la hipocresía burocrática y consagrar los manuscritos que nunca arden.</p>
+          <a href="javascript:void(0)" onclick="irAEnsayo('bulgakov')" class="back-to-toc-link" style="display: inline-block;">Saltar al ensayo &darr;</a>
+        </div>
+
+        <div class="sidebar-widget quote-widget">
+          <h3 class="widget-heading">Cita en el Margen</h3>
+          <blockquote>«No hay nada más engañoso que un hecho obvio cuando la mirada carece de método analítico.»</blockquote>
+          <cite>— Arthur Conan Doyle</cite>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Guía del Cuaderno</h3>
+          <ul class="quick-reading-list">
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('enigma')"><strong>La arquitectura del enigma</strong><span>Poe, Carr y Knox</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('dostoyevski')"><strong>Crimen y castigo</strong><span>San Petersburgo</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('baskerville')"><strong>El sabueso de los Baskerville</strong><span>Dartmoor</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('bulgakov')"><strong>El maestro y Margarita</strong><span>Sátira mística</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('atmosfera')"><strong>El laberinto invisible</strong><span>Oficio de narrar</span></a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- BOTONES DE PAGINACIÓN AUTOMÁTICOS -->
+    <nav class="pagination-bar" id="barra-paginas" aria-label="Navegación de páginas de ensayos"></nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PAGINACIÓN INTELIGENTE -->
+  <script>
+    const ENSAYOS_POR_PAGINA = 2; // Cantidad de ensayos por página
+
+    let paginaActual = 1;
+    const articulos = Array.from(document.querySelectorAll(".long-article"));
+    const totalPaginas = Math.ceil(articulos.length / ENSAYOS_POR_PAGINA);
+
+    // Salto inteligente a cualquier ensayo (cambia de página si es necesario)
+    function irAEnsayo(idObjetivo) {
+      const indice = articulos.findIndex(art => art.id === idObjetivo);
+      if (indice === -1) return;
+
+      const paginaDestino = Math.floor(indice / ENSAYOS_POR_PAGINA) + 1;
+
+      if (paginaActual !== paginaDestino) {
+        mostrarPagina(paginaDestino, false);
+      }
+
+      setTimeout(() => {
+        const el = document.getElementById(idObjetivo);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    }
+
+    function mostrarPagina(numPagina, hacerScroll = false) {
+      paginaActual = numPagina;
+
+      const inicio = (numPagina - 1) * ENSAYOS_POR_PAGINA;
+      const fin = inicio + ENSAYOS_POR_PAGINA;
+
+      articulos.forEach((art, index) => {
+        if (index >= inicio && index < fin) {
+          art.style.display = "block";
+        } else {
+          art.style.display = "none";
+        }
+      });
+
+      // Sumario superior
+      const tocContainer = document.getElementById("toc-container");
+      tocContainer.innerHTML = "";
+      articulos.slice(inicio, fin).forEach(art => {
+        const id = art.id;
+        const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+        const li = document.createElement("li");
+        li.className = "toc-item";
+        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+        tocContainer.appendChild(li);
+      });
+
+      // Botones activos
+      const botones = document.querySelectorAll(".page-btn");
+      botones.forEach(btn => {
+        if (parseInt(btn.getAttribute("data-page")) === numPagina) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      if (hacerScroll) {
+        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function inicializarPaginacion() {
+      const barraPaginas = document.getElementById("barra-paginas");
+
+      if (totalPaginas > 1) {
+        barraPaginas.style.display = "flex";
+        barraPaginas.innerHTML = "";
+
+        const btnPrev = document.createElement("button");
+        btnPrev.className = "page-btn";
+        btnPrev.innerHTML = "&larr; Anterior";
+        btnPrev.onclick = () => {
+          if (paginaActual > 1) mostrarPagina(paginaActual - 1, true);
+        };
+        barraPaginas.appendChild(btnPrev);
+
+        for (let i = 1; i <= totalPaginas; i++) {
+          const btn = document.createElement("button");
+          btn.className = "page-btn";
+          btn.setAttribute("data-page", i);
+          btn.textContent = i;
+          btn.onclick = () => mostrarPagina(i, true);
+          barraPaginas.appendChild(btn);
+        }
+
+        const btnNext = document.createElement("button");
+        btnNext.className = "page-btn";
+        btnNext.innerHTML = "Siguiente &rarr;";
+        btnNext.onclick = () => {
+          if (paginaActual < totalPaginas) mostrarPagina(paginaActual + 1, true);
+        };
+        barraPaginas.appendChild(btnNext);
+      }
+
+      mostrarPagina(1, false);
+    }
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
+  </script>
+
+</body>
+</html>
