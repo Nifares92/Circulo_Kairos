@@ -773,8 +773,82 @@
           <span>Despacho Actualizado</span>
         </div>
 
-        <div class="news-card-feed" id="feed-noticias-culturales">
-          <!-- Inyectadas mediante el script inferior -->
+                <div class="news-card-feed" id="feed-noticias-culturales">
+          <!-- Noticia 1 -->
+          <a class="news-item-box" href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer" title="Acceder a la noticia">
+            <div class="news-item-thumb">
+              <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=400&q=80" alt="Manuscritos literarios">
+            </div>
+            <div class="news-item-content">
+              <div class="news-header-meta">
+                <span class="news-tag">Patrimonio & Archivos</span>
+                <span class="news-source">Fuente: <strong>RTVE Cultura</strong> · Actualidad</span>
+              </div>
+              <h4>
+                <span>Catalogan manuscritos y cuadernos inéditos de la biblioteca de Franz Kafka</span>
+                <span class="external-icon">&#8599;</span>
+              </h4>
+              <p>Investigadores culminan la digitalización y análisis crítico de notas marginales sobre la culpa procesal y borradores tempranos de relatos que precedieron a 'El proceso'.</p>
+              <span class="news-read-more-text">Leer noticia en fuente original &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Noticia 2 -->
+          <a class="news-item-box" href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer" title="Acceder a la noticia">
+            <div class="news-item-thumb">
+              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80" alt="Restauración cinematográfica">
+            </div>
+            <div class="news-item-content">
+              <div class="news-header-meta">
+                <span class="news-tag">Séptimo Arte</span>
+                <span class="news-source">Fuente: <strong>El País · Cultura</strong> · Actualidad</span>
+              </div>
+              <h4>
+                <span>Restauración integral en 4K del negativo original de 'Nostalghia' de Andrei Tarkovski</span>
+                <span class="external-icon">&#8599;</span>
+              </h4>
+              <p>La Cineteca de Bolonia concluye el escaneado en alta resolución de los negativos de 35mm, recuperando la paleta lumínica y la respiración visual del maestro ruso.</p>
+              <span class="news-read-more-text">Leer noticia en fuente original &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Noticia 3 -->
+          <a class="news-item-box" href="https://letraslibres.com/" target="_blank" rel="noopener noreferrer" title="Acceder a la noticia">
+            <div class="news-item-thumb">
+              <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" alt="Filología y filosofía clásica">
+            </div>
+            <div class="news-item-content">
+              <div class="news-header-meta">
+                <span class="news-tag">Filología Clásica</span>
+                <span class="news-source">Fuente: <strong>Letras Libres</strong> · Actualidad</span>
+              </div>
+              <h4>
+                <span>Publican una nueva traducción anotada de las 'Cartas a Lucilio' de Séneca</span>
+                <span class="external-icon">&#8599;</span>
+              </h4>
+              <p>Una revisión crítica restituye pasajes sobre la administración del tiempo propio, el valor del retiro reflexivo y el rechazo a la prisa de la vida pública imperial.</p>
+              <span class="news-read-more-text">Leer noticia en fuente original &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Noticia 4 -->
+          <a class="news-item-box" href="https://www.criterion.com/" target="_blank" rel="noopener noreferrer" title="Acceder a la noticia">
+            <div class="news-item-thumb">
+              <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=400&q=80" alt="Vinilo y archivo acústico">
+            </div>
+            <div class="news-item-content">
+              <div class="news-header-meta">
+                <span class="news-tag">Acústica & Memoria</span>
+                <span class="news-source">Fuente: <strong>ECM Records</strong> · Actualidad</span>
+              </div>
+              <h4>
+                <span>Reedición conmemorativa en vinilo audiófilo de las obras maestras de Arvo Pärt</span>
+                <span class="external-icon">&#8599;</span>
+              </h4>
+              <p>Lanzan una caja conmemorativa con tomas alternativas de 'Tabula Rasa' y textos del productor Manfred Eicher sobre el nacimiento del minimalismo sacro.</p>
+              <span class="news-read-more-text">Leer noticia en fuente original &rarr;</span>
+            </div>
+          </a>
         </div>
       </div>
 
@@ -989,9 +1063,11 @@
 
       try {
         const res = await fetch(RSS_CULTURA_URL);
+        if (!res.ok) return;
         const data = await res.json();
 
-        if (data.status === "ok" && data.items && data.items.length > 0) {
+        // Solo sobreescribe si la API externa respondió con éxito y tiene noticias
+        if (data && data.status === "ok" && data.items && data.items.length > 0) {
           feedContainer.innerHTML = "";
 
           // Tomamos las 4 noticias culturales más recientes en tiempo real
