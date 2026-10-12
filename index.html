@@ -1159,6 +1159,85 @@
       { texto: "«El cine no es un arte que filma la vida; es algo que está entre el arte y la vida.»", autor: "— Jean-Luc Godard" }
     ];
 
+    
+    /* ==========================================================================
+       ACTUALIZACIÓN AUTOMÁTICA EN TIEMPO REAL (FEED RSS CULTURAL)
+       ========================================================================== */
+    async function actualizarNoticiasEnTiempoReal() {
+      const feedContainer = document.getElementById("feed-noticias-culturales");
+      if (!feedContainer) return;
+
+      // Feed oficial de Cultura (El País) vía pasarela JSON abierta
+      const urlFeed = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/cultura/portada");
+
+      try {
+        const respuesta = await fetch(urlFeed);
+        if (!respuesta.ok) return;
+        const datos = await respuesta.json();
+
+        if (datos && datos.status === "ok" && datos.items && datos.items.length > 0) {
+          // Si hay conexión y devuelve noticias frescas, vaciamos el contenedor y ponemos las del día
+          feedContainer.innerHTML = "";
+          const ultimas = datos.items.slice(0, 4);
+
+          ultimas.forEach(item => {
+            // Limpieza de texto de la descripción
+            const divLimpio = document.createElement("div");
+            divLimpio.innerHTML = item.description || "";
+            let texto = divLimpio.textContent || divLimpio.innerText || "";
+            if (texto.length > 175) {
+              texto = texto.substring(0, 175) + "...";
+            }
+
+            // Imagen de la noticia o imagen estética de respaldo
+            let miniatura = item.thumbnail || (item.enclosure && item.enclosure.link ? item.enclosure.link : "");
+            if (!miniatura) {
+              miniatura = "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=400&q=80";
+            }
+
+            // Fecha formateada en español
+            let fechaStr = "Hoy";
+            if (item.pubDate) {
+              try {
+                fechaStr = new Date(item.pubDate).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+              } catch(e) {}
+            }
+
+            const tarjeta = document.createElement("a");
+            tarjeta.className = "news-item-box";
+            tarjeta.href = item.link; // ENLACE DIRECTO EXACTO A LA NOTICIA EN EL PAÍS
+            tarjeta.target = "_blank";
+            tarjeta.rel = "noopener noreferrer";
+            tarjeta.title = `Leer noticia en El País: ${item.title}`;
+
+            tarjeta.innerHTML = `
+              <div class="news-item-thumb">
+                <img src="${miniatura}" alt="${item.title}" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80'">
+              </div>
+              <div class="news-item-content">
+                <div class="news-header-meta">
+                  <span class="news-tag">Actualidad en Vivo</span>
+                  <span class="news-source">Fuente: <strong>EL PAÍS · Cultura</strong> · ${fechaStr}</span>
+                </div>
+                <h4>
+                  <span>${item.title}</span>
+                  <span class="external-icon">&#8599;</span>
+                </h4>
+                <p>${texto}</p>
+                <span class="news-read-more-text">Leer artículo completo en el diario &rarr;</span>
+              </div>
+            `;
+            feedContainer.appendChild(tarjeta);
+          });
+        }
+      } catch (error) {
+        // En caso de que el navegador bloquee la petición local, no hace nada y
+        // se mantienen las noticias maquetadas en el HTML sin quedar vacío.
+        console.info("Modo local: mostrando noticias editoriales fijas.");
+      }
+    }
+
+
     function cargarDinamicos() {
       // Fecha del día en español
       const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -1169,7 +1248,8 @@
         metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
       }
 
-      // Las noticias del despacho cuentan con enlaces URL verificados directos al artículo concreto en los diarios
+      // Intentar actualizar noticias culturales automáticamente en tiempo real
+      actualizarNoticiasEnTiempoReal();
 
       // Efeméride y Cita rotativa por día del año
       const inicioAno = new Date(hoy.getFullYear(), 0, 0);
