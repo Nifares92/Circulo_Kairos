@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&amp;display=swap');
+      .kairos-bg { fill: #fbf8f3; }
+      .kairos-ink { fill: #221f1d; }
+      .kairos-accent { fill: #9e4734; }
+      .kairos-stroke-ink { stroke: #221f1d; fill: none; }
+      .kairos-stroke-accent { stroke: #9e4734; fill: none; }
+      .kairos-text {
+        font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+        font-size: 15.5px;
+        font-weight: 700;
+        letter-spacing: 0.36em;
+        fill: #221f1d;
+      }
+    </style>
+
+    <!-- Trayectorias curvas para el texto circular concéntrico -->
+    <path id="textArcTop" d="M 125,300 A 175,175 0 0,1 475,300" />
+    <path id="textArcBottom" d="M 475,300 A 175,175 0 0,1 125,300" />
+  </defs>
+
+  <!-- Fondo Pergamino Editorial Kairós -->
+  <rect width="600" height="600" class="kairos-bg" />
+
+  <g transform="translate(0, 0)">
+    <!-- 1. Corona Exterior Punteada -->
+    <circle cx="300" cy="300" r="235" 
+            class="kairos-stroke-ink" 
+            stroke-width="2.2" 
+            stroke-dasharray="2 10" 
+            stroke-linecap="round" 
+            opacity="0.85" />
+
+    <!-- 2. Anillo Fino Exterior -->
+    <circle cx="300" cy="300" r="208" 
+            class="kairos-stroke-ink" 
+            stroke-width="1.2" 
+            opacity="0.65" />
+
+    <!-- 3. Texto Epigráfico Perimetral -->
+    <text class="kairos-text">
+      <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">
+        · C Í R C U L O   K A I R Ó S ·
+      </textPath>
+    </text>
+    <text class="kairos-text">
+      <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">
+        · E L   T I E M P O   H A B I T A D O ·
+      </textPath>
+    </text>
+
+    <!-- 4. Anillo Interior del Escudo -->
+    <circle cx="300" cy="300" r="142" 
+            class="kairos-stroke-ink" 
+            stroke-width="1.4" 
+            opacity="0.45" />
+
+    <!-- =========================================================
+         MONOGRAMA CENTRAL: C y K (CENTRADO VERTICAL EXACTO)
+         ========================================================= -->
+    <g transform="translate(0, -25)">
+      <!-- LA "C" CLÁSICA MODULADA -->
+      <path class="kairos-ink" d="
+        M 374,212
+        C 379,207 386,204 394,204
+        C 395,214 391,222 384,228
+        C 356,211 316,206 280,218
+        C 230,235 198,280 200,332
+        C 202,382 236,424 286,437
+        C 324,447 362,438 387,419
+        C 392,425 395,432 393,441
+        C 386,441 379,437 373,432
+        C 342,455 298,462 258,447
+        C 204,426 170,373 172,315
+        C 174,256 211,208 268,193
+        C 306,183 346,189 374,212
+        Z" />
+
+      <!-- LA "K" ROMANA -->
+      <!-- Fuste vertical de la K con serifas -->
+      <path class="kairos-ink" d="
+        M 252,228 L 278,228 L 278,235 L 269,236 L 269,404 L 278,405 L 278,412 L 252,412 L 252,405 L 261,404 L 261,236 L 252,235 Z
+      " />
+
+      <!-- Brazo superior diagonal de la K -->
+      <path class="kairos-ink" d="
+        M 267,322
+        L 348,241
+        C 355,234 362,231 370,230
+        L 374,238
+        C 367,243 358,249 351,257
+        L 282,328
+        Z" />
+
+      <!-- Pata inferior diagonal de la K -->
+      <path class="kairos-ink" d="
+        M 276,316
+        L 358,402
+        C 365,409 372,413 381,414
+        L 378,421
+        C 367,421 356,416 347,408
+        L 267,326
+        Z" />
+
+      <!-- Vértice Kairós en terracota -->
+      <polygon points="274,321 283,327 277,333" class="kairos-accent" />
+    </g>
+  </g>
+</svg>
