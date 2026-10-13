@@ -891,6 +891,29 @@
       document.getElementById('progress-bar').style.width = scrolled + '%';
     });
   </script>
+<script>
+function guardarEnCuaderno(titulo, autor, categoria, enlace, nota) {
+  const STORAGE_KEY = "kairos_favoritos_v1";
+  const actual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+  
+  // Evitar duplicados
+  if (actual.some(item => item.enlace === enlace)) {
+    alert("Ya tienes este texto guardado en tu Cuaderno.");
+    return;
+  }
 
+  actual.unshift({
+    id: Date.now(),
+    titulo: titulo,
+    autor: autor,
+    categoria: categoria,
+    enlace: enlace,
+    nota: nota
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(actual));
+  alert(`«${titulo}» se ha añadido a tu Cuaderno de Favoritos.`);
+}
+</script>
 </body>
 </html>
