@@ -359,6 +359,39 @@
       border-color: var(--accent);
     }
 
+    /* Paginador Automático */
+    .pagination-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .page-btn {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .page-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .page-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      cursor: default;
+    }
+
     /* Sidebar */
     .sidebar-wrapper {
       position: sticky;
@@ -539,18 +572,16 @@
       </p>
     </header>
 
-    <!-- SUMARIO AUTOMÁTICO (SE GENERA SOLO) -->
+    <!-- SUMARIO AUTOMÁTICO (SE GENERA SOLO POR PÁGINA) -->
     <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de tratados de esta sección">
-      <span class="toc-title">Tratados Monográficos Íntegros · Haz clic para ir al texto</span>
-      <ul class="toc-links-grid" id="toc-container">
-        <!-- Rellenado dinámicamente con JavaScript -->
-      </ul>
+      <span class="toc-title">Tratados visibles en esta página · Haz clic para ir al texto</span>
+      <ul class="toc-links-grid" id="toc-container"></ul>
     </nav>
 
     <div class="layout-columns">
 
       <!-- COLUMNA PRINCIPAL DE TRATADOS FILOSÓFICOS COMPLETOS -->
-      <section class="articles-stream" aria-label="Textos íntegros de filosofía">
+      <section class="articles-stream" id="stream-ensayos" aria-label="Textos íntegros de filosofía">
 
         <!-- NUEVO ENSAYO FILOSOFÍA: EL ENIGMA DEL FIN -->
         <article class="long-article" id="filosofia-muerte-finitud" data-titulo="VIII. El horizonte inexorable (La Muerte)">
@@ -616,44 +647,6 @@
 
           <footer class="article-bottom-actions">
             <span class="signature-note">— Círculo Kairós · Metafísica & Existencia</span>
-            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
-          </footer>
-        </article>
-
-        <!-- ENSAYO LITERATURA: FRANZ KAFKA -->
-        <article class="long-article" id="kafka-proceso" data-titulo="VII. El proceso (Franz Kafka)">
-          <header class="article-header">
-            <span class="article-topic">Parábola Existencial · Ensayo VII</span>
-            <h2 class="article-headline">El tribunal en la buhardilla: Franz Kafka y la arquitectura de la culpa innata en 'El proceso'</h2>
-            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-14">14 de octubre de 2026</time> · <span>32 min de lectura</span></div>
-          </header>
-
-          <figure class="article-featured-media">
-            <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80" 
-                 alt="Libros antiguos apilados y legajos con luz cenital en penumbra"
-                 onerror="this.src='https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80'">
-            <figcaption>Las oficinas polvorientas bajo los tejados de Praga: el laberinto burocrático como pesadilla ontológica.</figcaption>
-          </figure>
-
-          <div class="article-prose">
-            <p class="dropcap">«Alguien tenía que haber calumniado a Josef K., pues fue detenido una mañana sin haber hecho nada malo». Con esta frase sobria y desprovista de énfasis efectista arranca una de las parábolas más lacerantes del siglo XX. Franz Kafka no escribió una sátira de la administración de justicia austrohúngara ni un alegato sociológico contra el despotismo funcionarial; concibió una pesadilla metafísica sobre la imposibilidad del hombre moderno de justificar su propia existencia ante una Ley que permanece eternamente invisible e inmutable.</p>
-
-            <h3>I. La detención sin barrotes: La normalidad como condena</h3>
-            <p>Lo verdaderamente aterrador de la peripecia de Josef K., el apoderado bancario eficiente y ordenado, no es que lo encierren en una mazmorra húmeda rodeado de grilletes y cadenas; es exactamente lo contrario: se le notifica su arresto mientras desayuna en camisa de dormir y se le permite continuar acudiendo diariamente a su despacho del banco, conservando su sueldo, su estatus y su rutina burguesa. La prisión de Kafka no tiene rejas de hierro; está construida con la normalidad misma de los días.</p>
-            <p>La maquinaria judicial jamás desvela el contenido de la acusación. K. busca afanosamente en los códigos, contrata al achacoso abogado Huld —que despacha desde una cama envuelta en tinieblas— y visita a las cortes situadas en las buhardillas hediondas de barrios obreros donde la ropa recién lavada se seca entre pilas de expedientes amarillentos cubiertos de hollín. Cuanto más intenta demostrar su inocencia mediante memoriales racionales, más se hunde en la ciénaga procesal: alegar inocencia es ya, para el tribunal, la confesión explícita de un desacato fundamental.</p>
-
-            <blockquote>«El tribunal no quiere nada de ti; te acoge cuando vienes y te despide cuando te vas. La culpa atrae a los jueces por su propio peso gravitatorio.»<cite>— Franz Kafka, El proceso</cite></blockquote>
-
-            <h3>II. La parábola de la Ley: El campesino y la puerta infranqueable</h3>
-            <p>El núcleo hermenéutico de la obra se encuentra concentrado en el capítulo noveno, en la penumbra de la catedral de Praga, donde el sacerdote de prisiones narra a Josef K. la célebre fábula <em>Ante la Ley</em>. Un hombre procedente del campo solicita entrar a la Ley, pero el guardián de la puerta le advierte de que todavía no puede concederle el paso. El campesino se sienta sobre un taburete y aguarda durante días, estaciones y décadas enteras; intenta sobornar al guardián, suplica, maldice y envejece observando cómo su vida se extingue sin haber visto jamás el interior.</p>
-            <p>En el último aliento de sus fuerzas, casi ciego, el anciano pregunta al centinela por qué en tantos años nadie más ha acudido a solicitar la entrada si todos los hombres anhelan la Ley. El guardián brama a su oído sordo: «Nadie más podía entrar por aquí, pues esta puerta estaba destinada únicamente para ti. Ahora me voy y la cierro». La tragedia kafkiana no es que la puerta esté tapiada, sino que permaneció abierta para nosotros y fuimos incapaces de asumir el coraje sagrado de cruzar el umbral sin pedir permiso a los intermediarios del miedo.</p>
-
-            <h3>III. La ejecución en la cantera: La vergüenza inextinguible</h3>
-            <p>La víspera de su trigésimo primer cumpleaños, dos caballeros con levita y sombrero de copa conducen a K. hasta una cantera desierta en las afueras de la ciudad. Mientras uno le sostiene la garganta, el otro le hunde un cuchillo carnicero en el corazón. Con los ojos ya turbios, K. contempla una ventana lejana donde una figura humana estira los brazos en un gesto equívoco de auxilio. Sus últimas palabras —«¡Como un perro!»— rubrican la derrota de quien no supo descifrar la gracia secreta de su destino: la vergüenza, concluye Kafka con escalofriante lucidez, le sobreviviría para siempre.</p>
-          </div>
-
-          <footer class="article-bottom-actions">
-            <span class="signature-note">— Círculo Kairós · Clásicos del Absurdo</span>
             <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
           </footer>
         </article>
@@ -845,7 +838,7 @@
           <p>
             Término procedente de los escépticos clásicos y rescatado por la fenomenología de Husserl. Consiste en «poner entre paréntesis» el juicio precipitado sobre la realidad para contemplar las cosas tal y como se manifiestan en la conciencia pura.
           </p>
-          <a href="#kairos" class="back-to-toc-link" style="display: inline-block;">Ver tratado del tiempo &darr;</a>
+          <a href="javascript:void(0)" onclick="irAEnsayo('kairos')" class="back-to-toc-link" style="display: inline-block;">Ver tratado del tiempo &darr;</a>
         </div>
 
         <!-- Aforismo Central -->
@@ -861,20 +854,20 @@
         <div class="sidebar-widget">
           <h3 class="widget-heading">Lecturas del Canon</h3>
           <ul class="canon-reading-list">
-            <li><a href="#filosofia-muerte-finitud"><strong>El horizonte inexorable</strong><span>Filosofía y Muerte</span></a></li>
-            <li><a href="#kafka-proceso"><strong>El proceso (Franz Kafka)</strong><span>La culpa sin delito y la ley inaccesible</span></a></li>
-            <li><a href="#heidegger-tiempo"><strong>Ser y Tiempo</strong><span>Heidegger — La finitud y el ser-para-la-muerte</span></a></li>
-            <li><a href="#eterno-retorno"><strong>El gran peso del mediodía</strong><span>Nietzsche — La prueba del eterno retorno</span></a></li>
-            <li><a href="#kairos"><strong>De brevitate vitae</strong><span>Séneca — Soberanía sobre el presente</span></a></li>
-            <li><a href="#soberania"><strong>Enquiridión</strong><span>Epicteto — La dicotomía del control</span></a></li>
-            <li><a href="#soberania"><strong>Tractatus Logico-Philosophicus</strong><span>Wittgenstein — La mística del silencio</span></a></li>
-            <li><a href="#kairos"><strong>El aroma del tiempo</strong><span>Byung-Chul Han — Ensayo de la demora</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('filosofia-muerte-finitud')"><strong>El horizonte inexorable</strong><span>Filosofía y Muerte</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('heidegger-tiempo')"><strong>Ser y Tiempo</strong><span>Heidegger — La finitud</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('eterno-retorno')"><strong>El gran peso del mediodía</strong><span>Nietzsche — Eterno retorno</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('kairos')"><strong>De brevitate vitae</strong><span>Séneca — Soberanía del presente</span></a></li>
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('soberania')"><strong>Enquiridión</strong><span>Epicteto & Wittgenstein</span></a></li>
           </ul>
         </div>
 
       </aside>
 
     </div>
+
+    <!-- BOTONES DE PAGINACIÓN AUTOMÁTICOS -->
+    <nav class="pagination-bar" id="barra-paginas" aria-label="Navegación de páginas de tratados de filosofía"></nav>
 
   </main>
 
@@ -910,10 +903,115 @@
   </footer>
 
   <!-- ====================================================================
-       SCRIPTS: LECTURA, SUMARIO AUTOMÁTICO Y FAVORITOS
+       SCRIPTS: PAGINACIÓN DE 2 EN 2, SUMARIO Y BOTÓN DE FAVORITOS
        ==================================================================== -->
   <script>
-    // Barra de progreso
+    const ENSAYOS_POR_PAGINA = 2; // Exactamente 2 ensayos por página
+
+    let paginaActual = 1;
+    const articulos = Array.from(document.querySelectorAll(".long-article"));
+    const totalPaginas = Math.ceil(articulos.length / ENSAYOS_POR_PAGINA);
+
+    // Permite saltar a un ensayo desde la barra lateral cambiando de página si hace falta
+    function irAEnsayo(idObjetivo) {
+      const indice = articulos.findIndex(art => art.id === idObjetivo);
+      if (indice === -1) return;
+
+      const paginaDestino = Math.floor(indice / ENSAYOS_POR_PAGINA) + 1;
+
+      if (paginaActual !== paginaDestino) {
+        mostrarPagina(paginaDestino, false);
+      }
+
+      setTimeout(() => {
+        const el = document.getElementById(idObjetivo);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    }
+
+    function mostrarPagina(numPagina, hacerScroll = false) {
+      paginaActual = numPagina;
+
+      const inicio = (numPagina - 1) * ENSAYOS_POR_PAGINA;
+      const fin = inicio + ENSAYOS_POR_PAGINA;
+
+      // Ocultar los que no corresponden a esta página y mostrar solo los 2 activos
+      articulos.forEach((art, index) => {
+        if (index >= inicio && index < fin) {
+          art.style.display = "block";
+        } else {
+          art.style.display = "none";
+        }
+      });
+
+      // Sumario superior dinámico: lista solo los ensayos visibles en esta página
+      const tocContainer = document.getElementById("toc-container");
+      if (tocContainer) {
+        tocContainer.innerHTML = "";
+        articulos.slice(inicio, fin).forEach(art => {
+          const id = art.id;
+          const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+          const li = document.createElement("li");
+          li.className = "toc-item";
+          li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+          tocContainer.appendChild(li);
+        });
+      }
+
+      // Estilo activo en los botones de página
+      const botones = document.querySelectorAll(".page-btn");
+      botones.forEach(btn => {
+        if (parseInt(btn.getAttribute("data-page")) === numPagina) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      if (hacerScroll) {
+        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function inicializarPaginacion() {
+      const barraPaginas = document.getElementById("barra-paginas");
+
+      if (totalPaginas > 1 && barraPaginas) {
+        barraPaginas.style.display = "flex";
+        barraPaginas.innerHTML = "";
+
+        const btnPrev = document.createElement("button");
+        btnPrev.className = "page-btn";
+        btnPrev.innerHTML = "&larr; Anterior";
+        btnPrev.onclick = () => {
+          if (paginaActual > 1) mostrarPagina(paginaActual - 1, true);
+        };
+        barraPaginas.appendChild(btnPrev);
+
+        for (let i = 1; i <= totalPaginas; i++) {
+          const btn = document.createElement("button");
+          btn.className = "page-btn";
+          btn.setAttribute("data-page", i);
+          btn.textContent = i;
+          btn.onclick = () => mostrarPagina(i, true);
+          barraPaginas.appendChild(btn);
+        }
+
+        const btnNext = document.createElement("button");
+        btnNext.className = "page-btn";
+        btnNext.innerHTML = "Siguiente &rarr;";
+        btnNext.onclick = () => {
+          if (paginaActual < totalPaginas) mostrarPagina(paginaActual + 1, true);
+        };
+        barraPaginas.appendChild(btnNext);
+      }
+
+      mostrarPagina(1, false);
+    }
+
+    // Barra de progreso de lectura
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -921,29 +1019,10 @@
       document.getElementById('progress-bar').style.width = scrolled + '%';
     });
 
-    // GENERADOR AUTOMÁTICO DEL SUMARIO SUPERIOR
-    function generarSumarioAutomatico() {
-      const tocContainer = document.getElementById("toc-container");
-      if (!tocContainer) return;
-
-      const articulos = document.querySelectorAll(".long-article");
-      tocContainer.innerHTML = "";
-
-      articulos.forEach(art => {
-        const id = art.id;
-        const titularEl = art.querySelector(".article-headline") || art.querySelector("h2");
-        const titulo = art.getAttribute("data-titulo") || (titularEl ? titularEl.textContent.trim() : "Tratado");
-
-        const li = document.createElement("li");
-        li.className = "toc-item";
-        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
-        tocContainer.appendChild(li);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", generarSumarioAutomatico);
+    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
   </script>
 
+  <!-- MOTOR DE GUARDADO DE FAVORITOS -->
   <script>
     const STORAGE_KEY = "kairos_favoritos_v1";
 
