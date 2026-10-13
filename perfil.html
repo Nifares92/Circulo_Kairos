@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Colecciones.">
+  <title>Mi Cuaderno & Perfil | Círculo Kairós</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* Cabecera */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    /* Contenedor Principal */
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-hero-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-label {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-main-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-intro-text {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Layout en 2 columnas */
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    /* Tarjeta de Datos del Lector */
+    .reader-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    .reader-card::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+    .reader-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .reader-avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .avatar-seal {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background-color: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-classical);
+      font-size: 1.8rem;
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .reader-name-input {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background: transparent;
+      border: none;
+      border-bottom: 1px dashed var(--accent);
+      padding: 0.2rem 0.5rem;
+      outline: none;
+      max-width: 300px;
+    }
+    .reader-status {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.2rem;
+    }
+
+    /* Pestañas de Colecciones */
+    .tabs-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border-soft);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      padding: 0.75rem 1.4rem;
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      background-color: var(--bg-card);
+    }
+
+    /* Lista de Favoritos */
+    .collection-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .item-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      box-shadow: var(--shadow-subtle);
+      transition: transform var(--transition);
+    }
+    .item-card:hover { transform: translateY(-2px); }
+    .item-meta-tag {
+      font-family: var(--font-classical);
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    .item-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+    .item-card p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .btn-goto {
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .btn-goto:hover { background-color: var(--accent); color: #fff; }
+    .btn-delete {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .btn-delete:hover { color: var(--accent); }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--bg-card);
+      border: 1px dashed var(--border-soft);
+      font-family: var(--font-reader);
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Módulo de agregar manual */
+    .add-custom-panel {
+      margin-top: 3rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 2rem;
+    }
+    .add-custom-panel h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .add-custom-panel p {
+      font-family: var(--font-reader);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .add-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .add-form-grid input, .add-form-grid select {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-soft);
+      padding: 0.7rem 0.9rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .add-form-grid input:focus, .add-form-grid select:focus {
+      border-color: var(--accent);
+    }
+    .btn-add-item {
+      grid-column: 1 / -1;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background-color var(--transition);
+    }
+    .btn-add-item:hover { background-color: var(--accent-dark); }
+
+    /* Barra lateral */
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 2rem;
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+    .stats-counter {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      text-align: center;
+    }
+    .stat-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+    }
+    .stat-number {
+      font-family: var(--font-classical);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* Pie de página */
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-main-title { font-size: 2.2rem; }
+      .add-form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Espacio Personal</span>
+    <span><strong>Cuaderno:</strong> Archivo de lecturas & devociones</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
+          <li><a href="musica.html">Música</a></li>
+          <li><a href="filosofia.html">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+          <li><a href="perfil.html" class="active">Mi Cuaderno</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido-principal">
+
+    <header class="section-hero-header">
+      <span class="section-category-label">Archivo Interior</span>
+      <h2 class="section-main-title">Mi Cuaderno de Favoritos</h2>
+      <p class="section-intro-text">
+        «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado para custodiar ensayos, citas, libros, películas y partituras que han merecido tu demora.
+      </p>
+    </header>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL -->
+      <section>
+
+        <!-- Tarjeta del Lector -->
+        <article class="reader-card">
+          <div class="reader-header">
+            <div class="reader-avatar-row">
+              <div class="avatar-seal" id="avatar-inicial">K</div>
+              <div>
+                <input type="text" id="nombre-lector" class="reader-name-input" value="Lector de Kairós" title="Haz clic para cambiar tu nombre de lector">
+                <p class="reader-status">Guardián de textos · Almacenado localmente en este navegador</p>
+              </div>
+            </div>
+            <button onclick="guardarNombreLector()" class="btn-goto" style="cursor: pointer;">Guardar nombre</button>
+          </div>
+          <p style="font-family: var(--font-reader); font-size: 1.05rem; color: var(--text-muted); font-style: italic;">
+            Todos los elementos que guardes desde las diferentes secciones de Círculo Kairós o que agregues manualmente permanecerán aquí cada vez que regreses a este equipo.
+          </p>
+        </article>
+
+        <!-- Pestañas de Filtro -->
+        <nav class="tabs-bar" aria-label="Filtro de colecciones">
+          <button class="tab-btn active" onclick="cambiarFiltro('todos')">Todos</button>
+          <button class="tab-btn" onclick="cambiarFiltro('filosofia')">Filosofía</button>
+          <button class="tab-btn" onclick="cambiarFiltro('literatura')">Literatura</button>
+          <button class="tab-btn" onclick="cambiarFiltro('cine')">Cine</button>
+          <button class="tab-btn" onclick="cambiarFiltro('musica')">Música</button>
+          <button class="tab-btn" onclick="cambiarFiltro('propio')">Mis Notas</button>
+        </nav>
+
+        <!-- Lista de Favoritos -->
+        <div class="collection-stream" id="contenedor-favoritos">
+          <!-- Inyectado dinámicamente vía script -->
+        </div>
+
+        <!-- Formulario para agregar una obra/libro/música favorita manualmente -->
+        <section class="add-custom-panel">
+          <h3>+ Anotar una obra o referencia en mi cuaderno</h3>
+          <p>Puedes anotar un libro pendiente, una película o una composición que desees asociar a tu memoria:</p>
+          <div class="add-form-grid">
+            <input type="text" id="nuevo-titulo" placeholder="Título de la obra o ensayo *" required>
+            <input type="text" id="nuevo-autor" placeholder="Autor / Director / Compositor">
+            <select id="nueva-categoria">
+              <option value="filosofia">Filosofía</option>
+              <option value="literatura">Literatura</option>
+              <option value="cine">Cine</option>
+              <option value="musica">Música</option>
+              <option value="propio">Reflexión / Nota propia</option>
+            </select>
+            <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
+            <input type="text" id="nueva-nota" placeholder="Nota o cita breve sobre la obra" style="grid-column: 1 / -1;">
+            <button class="btn-add-item" onclick="agregarItemManual()">Añadir a mi archivo &rarr;</button>
+          </div>
+        </section>
+
+      </section>
+
+      <!-- BARRA LATERAL -->
+      <aside class="sidebar-wrapper" aria-label="Estadísticas de lectura">
+        
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Censo del Cuaderno</h3>
+          <div class="stats-counter">
+            <div class="stat-box">
+              <span class="stat-number" id="conteo-total">0</span>
+              <span class="stat-label">Obras Guardadas</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="conteo-ensayos">0</span>
+              <span class="stat-label">Ensayos Kairós</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Acceso & Privacidad</h3>
+          <p style="font-family: var(--font-reader); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+            Tus favoritos están almacenados de forma privada en el almacenamiento local de tu navegador (sin rastreo ni cookies externas).
+          </p>
+          <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
+          <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto;">Vaciar cuaderno completo</button>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al análisis pausado de las artes y el pensamiento.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="mailto:serabohe@gmail.com">Correspondencia Directa</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOTOR DE GESTIÓN LOCAL (LOCALSTORAGE) -->
+  <script>
+    const STORAGE_KEY = "kairos_favoritos_v1";
+    const NAME_KEY = "kairos_nombre_lector";
+
+    let categoriaActiva = "todos";
+
+    function obtenerFavoritos() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    }
+
+    function guardarFavoritos(lista) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+      renderizarFavoritos();
+      actualizarEstadisticas();
+    }
+
+    function cambiarFiltro(cat) {
+      categoriaActiva = cat;
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+      renderizarFavoritos();
+    }
+
+    function renderizarFavoritos() {
+      const cont = document.getElementById("contenedor-favoritos");
+      const lista = obtenerFavoritos();
+
+      const filtrados = categoriaActiva === "todos" 
+        ? lista 
+        : lista.filter(item => item.categoria.toLowerCase() === categoriaActiva);
+
+      if (filtrados.length === 0) {
+        cont.innerHTML = `
+          <div class="empty-state">
+            <p>Todavía no has guardado ninguna obra en esta sección.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Explora los ensayos de la revista o añade tus libros y notas con el formulario inferior.</p>
+          </div>
+        `;
+        return;
+      }
+
+      cont.innerHTML = "";
+      filtrados.forEach((item, index) => {
+        const card = document.createElement("article");
+        card.className = "item-card";
+        card.innerHTML = `
+          <div>
+            <span class="item-meta-tag">${item.categoria} ${item.autor ? '· ' + item.autor : ''}</span>
+            <h4>${item.titulo}</h4>
+            <p>${item.nota || 'Sin notas adicionales.'}</p>
+          </div>
+          <div class="item-actions">
+            ${item.enlace ? `<a href="\${item.enlace}" class="btn-goto">Ver obra &rarr;</a>` : ''}
+            <button class="btn-delete" onclick="eliminarItem(${item.id})">Eliminar</button>
+          </div>
+        `;
+        cont.appendChild(card);
+      });
+    }
+
+    function agregarItemManual() {
+      const titulo = document.getElementById("nuevo-titulo").value.trim();
+      const autor = document.getElementById("nuevo-autor").value.trim();
+      const categoria = document.getElementById("nueva-categoria").value;
+      const enlace = document.getElementById("nuevo-enlace").value.trim();
+      const nota = document.getElementById("nueva-nota").value.trim();
+
+      if (!titulo) {
+        alert("Por favor, introduce al menos el título de la obra.");
+        return;
+      }
+
+      const nuevo = {
+        id: Date.now(),
+        titulo: titulo,
+        autor: autor,
+        categoria: categoria,
+        enlace: enlace,
+        nota: nota
+      };
+
+      const lista = obtenerFavoritos();
+      lista.unshift(nuevo);
+      guardarFavoritos(lista);
+
+      // Limpiar formulario
+      document.getElementById("nuevo-titulo").value = "";
+      document.getElementById("nuevo-autor").value = "";
+      document.getElementById("nuevo-enlace").value = "";
+      document.getElementById("nueva-nota").value = "";
+    }
+
+    function eliminarItem(id) {
+      const lista = obtenerFavoritos().filter(item => item.id !== id);
+      guardarFavoritos(lista);
+    }
+
+    function actualizarEstadisticas() {
+      const lista = obtenerFavoritos();
+      document.getElementById("conteo-total").textContent = lista.length;
+      const deEnsayos = lista.filter(item => item.enlace && item.enlace.includes(".html")).length;
+      document.getElementById("conteo-ensayos").textContent = deEnsayos;
+    }
+
+    function guardarNombreLector() {
+      const nom = document.getElementById("nombre-lector").value.trim();
+      if (nom) {
+        localStorage.setItem(NAME_KEY, nom);
+        document.getElementById("avatar-inicial").textContent = nom.charAt(0).toUpperCase();
+        alert("Nombre de lector guardado correctamente.");
+      }
+    }
+
+    function cargarNombreLector() {
+      const guardado = localStorage.getItem(NAME_KEY);
+      if (guardado) {
+        document.getElementById("nombre-lector").value = guardado;
+        document.getElementById("avatar-inicial").textContent = guardado.charAt(0).toUpperCase();
+      }
+    }
+
+    function exportarColeccion() {
+      const data = JSON.stringify(obtenerFavoritos(), null, 2);
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "mis_favoritos_circulo_kairos.json";
+      a.click();
+    }
+
+    function borrarTodo() {
+      if (confirm("¿Seguro que deseas vaciar todas las obras guardadas en tu cuaderno?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderizarFavoritos();
+        actualizarEstadisticas();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      cargarNombreLector();
+      renderizarFavoritos();
+      actualizarEstadisticas();
+    });
+  </script>
+
+</body>
+</html>
