@@ -74,24 +74,31 @@
       border-bottom: 3px double var(--border-dark);
       padding: 2.2rem 1.5rem 1.25rem;
       background-color: var(--bg-color);
+      position: relative;
+      overflow: hidden;
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* Emblema Editorial Kairós */
-    .site-emblem-link {
-      display: inline-block;
-      margin-bottom: 0.75rem;
-      transition: transform var(--transition), opacity var(--transition);
+    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
+    .brand {
+      position: relative;
+      padding: 1.5rem 0 1rem;
     }
-    .site-emblem-link:hover {
-      transform: scale(1.04);
-      opacity: 0.95;
-    }
-    .site-emblem-img {
-      width: 95px;
-      height: 95px;
-      display: block;
-      margin: 0 auto;
+
+    /* FILIGRANA / MARCA DE AGUA DIFUMINADA POR DETRÁS */
+    .brand-watermark {
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;              /* Tamaño generoso y proporcionado */
+      height: 250px;
+      pointer-events: none;      /* No interfiere con clics en el título */
+      z-index: 1;                /* Capa inferior */
+      opacity: 0.14;             /* Transparencia sutil y elegante */
+      filter: blur(1px);         /* Difuminado suave */
+      mix-blend-mode: multiply;  /* Fusión natural con el tono pergamino */
+      transition: opacity var(--transition);
     }
 
     .site-title {
@@ -101,7 +108,9 @@
       letter-spacing: 0.24em;
       text-transform: uppercase;
       margin-bottom: 0.3rem;
-      text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.85);
+      position: relative;
+      z-index: 2;                /* Por encima de la marca de agua */
     }
     .site-tagline {
       font-family: var(--font-reader);
@@ -109,10 +118,17 @@
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;                /* Por encima de la marca de agua */
     }
 
-    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav { 
+      border-top: 1px solid var(--border-soft); 
+      padding-top: 0.9rem; 
+      position: relative;
+      z-index: 2;
+    }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
       font-size: 0.82rem;
@@ -690,12 +706,13 @@
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
       .monthly-theme-banner { padding: 1.4rem; }
       .monthly-theme-banner h2 { font-size: 1.6rem; }
+      .brand-watermark { width: 190px; height: 190px; }
     }
     @media (max-width: 500px) {
       .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
       .quad-grid { grid-template-columns: 1fr; }
       .hero-lead-card { padding: 1.5rem; }
-      .site-emblem-img { width: 75px; height: 75px; }
+      .brand-watermark { width: 160px; height: 160px; }
     }
   </style>
 </head>
@@ -711,11 +728,11 @@
   <!-- Cabecera Principal -->
   <header class="site-header">
     <div class="header-container">
+      
       <div class="brand">
-        <!-- LOGO / EMBLEMA OFICIAL KAIRÓS -->
-        <a href="index.html" class="site-emblem-link" title="Inicio | Círculo Kairós">
-          <img src="logo-kairos.svg" alt="Monograma Círculo Kairós" class="site-emblem-img">
-        </a>
+        <!-- MARCA DE AGUA EDITORIAL (DIFUMINADA, GRANDE Y POR DETRÁS) -->
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
