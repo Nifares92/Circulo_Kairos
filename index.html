@@ -6,6 +6,9 @@
   <meta name="description" content="Círculo Kairós — Publicación cultural independiente de literatura, cine, música y pensamiento filosófico.">
   <title>Círculo Kairós | Cuaderno de Crítica, Artes y Pensamiento</title>
 
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
   <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +76,23 @@
       background-color: var(--bg-color);
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    /* Emblema Editorial Kairós */
+    .site-emblem-link {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .site-emblem-link:hover {
+      transform: scale(1.04);
+      opacity: 0.95;
+    }
+    .site-emblem-img {
+      width: 95px;
+      height: 95px;
+      display: block;
+      margin: 0 auto;
+    }
 
     .site-title {
       font-family: var(--font-serif);
@@ -675,6 +695,7 @@
       .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
       .quad-grid { grid-template-columns: 1fr; }
       .hero-lead-card { padding: 1.5rem; }
+      .site-emblem-img { width: 75px; height: 75px; }
     }
   </style>
 </head>
@@ -691,6 +712,10 @@
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
+        <!-- LOGO / EMBLEMA OFICIAL KAIRÓS -->
+        <a href="index.html" class="site-emblem-link" title="Inicio | Círculo Kairós">
+          <img src="logo-kairos.svg" alt="Monograma Círculo Kairós" class="site-emblem-img">
+        </a>
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
@@ -1009,6 +1034,8 @@
     <div class="footer-container">
       
       <div class="footer-brand">
+        <!-- Monograma Kairós como cuño editorial en el pie -->
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
         <p>
           Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.
@@ -1190,7 +1217,6 @@
         }
       }
 
-      // Si se obtuvieron noticias frescas, actualizamos la cuadrícula con hasta 8 noticias
       if (todasLasNoticias.length >= 4) {
         feedContainer.innerHTML = "";
         const seleccionadas = todasLasNoticias.slice(0, 8);
