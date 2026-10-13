@@ -997,5 +997,93 @@ function guardarEnCuaderno(titulo, autor, categoria, enlace, nota) {
   alert(`«${titulo}» se ha añadido a tu Cuaderno de Favoritos.`);
 }
 </script>
+  <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (CÍRCULO KAIRÓS) -->
+<script>
+  const STORAGE_KEY = "kairos_favoritos_v1";
+
+  // Función que guarda o quita el artículo en LocalStorage
+  function conmutarFavorito(idArticulo, titulo, categoria, enlace) {
+    let lista = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+    const existe = lista.some(item => item.enlace === enlace);
+
+    if (existe) {
+      // Si ya estaba guardado, lo elimina
+      lista = lista.filter(item => item.enlace !== enlace);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+      actualizarEstadoBoton(idArticulo, false);
+      alert(`«${titulo}» se ha eliminado de tu Cuaderno de Favoritos.`);
+    } else {
+      // Si no estaba, lo añade al principio
+      lista.unshift({
+        id: Date.now(),
+        titulo: titulo,
+        autor: "Círculo Kairós",
+        categoria: categoria,
+        enlace: enlace,
+        nota: "Guardado desde la lectura del ensayo."
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+      actualizarEstadoBoton(idArticulo, true);
+      alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
+    }
+  }
+
+  function actualizarEstadoBoton(idArticulo, guardado) {
+    const btn = document.getElementById(`btn-fav-${idArticulo}`);
+    if (!btn) return;
+    if (guardado) {
+      btn.innerHTML = "&#9733; En tu Cuaderno";
+      btn.style.backgroundColor = "var(--accent)";
+      btn.style.color = "#ffffff";
+      btn.style.borderColor = "var(--accent)";
+    } else {
+      btn.innerHTML = "&#9734; Guardar en mi perfil";
+      btn.style.backgroundColor = "var(--bg-surface)";
+      btn.style.color = "var(--accent)";
+      btn.style.borderColor = "var(--border-soft)";
+    }
+  }
+
+  // Inserta el botón automáticamente en cada artículo visible
+  function inyectarBotonesFavoritos() {
+    const articulos = document.querySelectorAll(".long-article");
+    const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+    
+    // Obtiene el nombre del archivo actual (ej: cine.html)
+    const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop();
+    
+    articulos.forEach(art => {
+      const pieAcciones = art.querySelector(".article-bottom-actions");
+      if (!pieAcciones) return;
+
+      const id = art.id;
+      const titularEl = art.querySelector(".article-headline");
+      const titulo = titularEl ? titularEl.textContent.trim() : (art.getAttribute("data-titulo") || "Ensayo");
+      
+      // Extraer categoría limpia
+      let categoria = "Lectura";
+      if (archivoActual.includes("filosofia")) categoria = "Filosofía";
+      else if (archivoActual.includes("literatura")) categoria = "Literatura";
+      else if (archivoActual.includes("cine")) categoria = "Cine";
+      else if (archivoActual.includes("musica")) categoria = "Música";
+
+      const enlaceCompleto = `${archivoActual}#${id}`;
+      const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
+
+      // Crear el botón estilizado con el diseño de Kairós
+      const btn = document.createElement("button");
+      btn.id = `btn-fav-${id}`;
+      btn.className = "back-to-toc-link";
+      btn.style.cursor = "pointer";
+      btn.style.marginRight = "auto"; // Lo sitúa a la izquierda de la flecha de sumario
+      btn.onclick = () => conmutarFavorito(id, titulo, categoria, enlaceCompleto);
+
+      pieAcciones.insertBefore(btn, pieAcciones.querySelector(".back-to-toc-link"));
+      actualizarEstadoBoton(id, yaGuardado);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", inyectarBotonesFavoritos);
+</script>
 </body>
 </html>
