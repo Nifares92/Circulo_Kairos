@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Manifiesto fundacional, vocación editorial y buzón de correspondencia.">
+  <title>El Círculo | Manifiesto & Correspondencia</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y PALETA EDITORIAL KAIRÓS
+       ========================================================================== */
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* Franja Superior de Metadatos */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    /* Cabecera Principal */
+    .site-header {
+      border-bottom: 3px double var(--border-dark);
+      padding: 2.2rem 1.5rem 1.25rem;
+      background-color: var(--bg-color);
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    /* Contenedor Principal */
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-hero-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-label {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-main-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-intro-text {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Columnas */
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    /* Panel del Manifiesto */
+    .manifesto-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+      margin-bottom: 4rem;
+    }
+    .manifesto-panel::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .manifesto-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .manifesto-header h3 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
+    .manifesto-header p {
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .manifesto-body {
+      font-family: var(--font-reader);
+      font-size: 1.2rem;
+      line-height: 1.95;
+      color: #292624;
+    }
+    .manifesto-body p { margin-bottom: 1.8rem; text-align: justify; }
+
+    .dropcap::first-letter {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 4.6rem;
+      line-height: 0.8;
+      padding-top: 6px;
+      padding-right: 14px;
+      padding-bottom: 2px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .manifesto-principles {
+      margin: 2.5rem 0;
+      padding: 1.8rem 2.2rem;
+      background-color: var(--bg-surface);
+      border-left: 4px solid var(--accent);
+      list-style: none;
+    }
+    .manifesto-principles li {
+      font-family: var(--font-reader);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .manifesto-principles li:last-child { margin-bottom: 0; }
+    .manifesto-principles strong {
+      font-family: var(--font-classical);
+      color: var(--accent);
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Módulo de Buzón de Correspondencia */
+    .contact-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.5rem 3rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .contact-panel::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .contact-panel-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.2rem;
+    }
+    .contact-panel-header h3 {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+    }
+    .contact-panel-header p {
+      font-family: var(--font-reader);
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group.full-width { grid-column: 1 / -1; }
+
+    .form-label {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 0.85rem 1.1rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      border-radius: 2px;
+      transition: all var(--transition);
+      width: 100%;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      background-color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(158, 71, 52, 0.12);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 160px;
+      line-height: 1.7;
+    }
+
+    .submit-btn {
+      grid-column: 1 / -1;
+      justify-self: start;
+      background-color: var(--accent);
+      color: #ffffff;
+      border: 1px solid var(--accent);
+      padding: 0.95rem 2.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .submit-btn:hover {
+      background-color: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    /* Barra Lateral */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .widget-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+
+    /* Emblema Vectorial en la Barra Lateral */
+    .emblem-focus-card { text-align: center; }
+    .emblem-wrapper {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      border: 2px solid var(--border-soft);
+      padding: 8px;
+      background-color: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 2px 5px 14px rgba(34, 31, 29, 0.06);
+    }
+    .emblem-wrapper svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .emblem-focus-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 0.2rem;
+    }
+    .emblem-focus-card .role {
+      font-family: var(--font-classical);
+      font-size: 0.76rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      display: block;
+    }
+    .emblem-focus-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .quote-widget blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+    .quote-widget cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    .info-list {
+      list-style: none;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .info-list li {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.65rem 0;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-list strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--text-main);
+    }
+    .info-list span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Pie de Página */
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-about h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-about p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .manifesto-panel, .contact-panel { padding: 2.2rem 1.8rem; }
+      .sidebar-wrapper { position: static; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-main-title { font-size: 2.2rem; }
+      .contact-form { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: auto; }
+      .submit-btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Franja Superior -->
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Cuaderno Institucional</span>
+    <span><strong>Ideario:</strong> Manifiesto, Correspondencia & Diálogo</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <!-- Cabecera -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
+          <li><a href="musica.html">Música</a></li>
+          <li><a href="filosofia.html">Filosofía</a></li>
+          <li><a href="sobre-el-circulo.html" class="active" aria-current="page">El Círculo</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main id="contenido-principal">
+
+    <header class="section-hero-header">
+      <span class="section-category-label">Manifiesto & Encuentro</span>
+      <h2 class="section-main-title">El Círculo Kairós</h2>
+      <p class="section-intro-text">
+        «Reclamamos el derecho al sosiego: una publicación consagrada a rescatar la atención lúcida frente al ruido y la prisa cotidiana.»
+      </p>
+    </header>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL -->
+      <section class="main-feed" aria-label="Manifiesto fundacional y correspondencia">
+
+        <!-- Manifiesto Fundacional -->
+        <article class="manifesto-panel">
+          <div class="manifesto-header">
+            <h3>Manifiesto por el Tiempo Oportuno</h3>
+            <p>Principios editoriales de nuestra ágora cultural</p>
+          </div>
+
+          <div class="manifesto-body">
+            <p class="dropcap">
+              Vivimos cercados por el flujo incesante de datos efímeros, consignas veloces y opiniones de consumo inmediato. El tiempo se ha fracturado en una sucesión de instantes desechables. En respuesta a esa dispersión, Círculo Kairós nace no como un mero catálogo de reseñas comerciales, sino como una trinchera de lectura atenta, rigor crítico y contemplación demorada.
+            </p>
+
+            <p>
+              Reclamamos el derecho al sosiego: a releer una novela decimonónica sin mirar el reloj, a contemplar un fotograma en claroscuro dejando que su atmósfera moral repose en la retina, a escuchar un movimiento sinfónico en silencio íntegro y a formular preguntas filosóficas que no admiten respuestas prefabricadas ni fórmulas predigeridas.
+            </p>
+
+            <ul class="manifesto-principles">
+              <li>
+                <strong>I. La profundidad sobre la novedad</strong>
+                Preferimos rescatar un clásico postergado o un ensayo centenario que perseguir la última tendencia que mañana habrá sido olvidada.
+              </li>
+              <li>
+                <strong>II. El diálogo entre disciplinas</strong>
+                La literatura, el cine, la música y la filosofía no son compartimentos estancos; se iluminan mutuamente y cobran verdadero sentido en su cruce dialéctico.
+              </li>
+              <li>
+                <strong>III. La independencia de criterio</strong>
+                Escribimos al margen de algoritmos de visibilidad, intereses editoriales corporativos o imperativos de velocidad en redes.
+              </li>
+              <li>
+                <strong>IV. El lector como cómplice</strong>
+                No concebimos este espacio como un púlpito dogmático, sino como una mesa de tertulia donde la correspondencia pausada forma parte indisociable del texto.
+              </li>
+            </ul>
+
+            <p>
+              Aquí el tiempo no se gasta: se habita. Sean bienvenidos quienes deseen compartir este refugio de palabra, estética y pensamiento lúcido.
+            </p>
+          </div>
+        </article>
+
+        <!-- Formulario de Correspondencia y Contacto con envío a serabohe@gmail.com -->
+        <section class="contact-panel" id="buzon-correspondencia" aria-labelledby="titulo-contacto">
+          <div class="contact-panel-header">
+            <h3 id="titulo-contacto">Buzón de Correspondencia</h3>
+            <p>Para propuestas de lectura, réplicas a ensayos, sugerencias cinéfilas o consultas directas al cuaderno editorial.</p>
+          </div>
+
+          <form class="contact-form" action="https://formspree.io/f/serabohe@gmail.com" method="POST">
+            <div class="form-group">
+              <label for="nombre" class="form-label">Nombre o Seudónimo *</label>
+              <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Correo Electrónico *</label>
+              <input type="email" id="email" name="_replyto" class="form-input" placeholder="correo@ejemplo.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="disciplina" class="form-label">Área de Referencia</label>
+              <select id="disciplina" name="disciplina" class="form-select">
+                <option value="general">Correspondencia General</option>
+                <option value="literatura">Sobre Literatura & Enigma</option>
+                <option value="cine">Sobre Séptimo Arte & Poética Fílmica</option>
+                <option value="musica">Sobre Música & Acústica</option>
+                <option value="filosofia">Sobre Ensayos & Dialéctica</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="asunto" class="form-label">Asunto *</label>
+              <input type="text" id="asunto" name="_subject" class="form-input" placeholder="Motivo de tu mensaje" required>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="mensaje" class="form-label">Tu Mensaje *</label>
+              <textarea id="mensaje" name="mensaje" class="form-textarea" placeholder="Escribe aquí tu consulta o reflexión..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Enviar Misiva &rarr;</button>
+          </form>
+        </section>
+
+      </section>
+
+      <!-- BARRA LATERAL (CON EL SÍMBOLO VECTORIAL DE KAIRÓS) -->
+      <aside class="sidebar-wrapper" aria-label="Información complementaria">
+
+        <!-- Widget 1: Símbolo de Círculo Kairós (Sin fotos de personas) -->
+        <div class="sidebar-widget emblem-focus-card">
+          <h3 class="widget-title">El Emblema</h3>
+          <div class="emblem-wrapper" title="Emblema del Círculo Kairós">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo de Círculo Kairós">
+              <!-- Círculo exterior -->
+              <circle cx="50" cy="50" r="46" stroke="#9e4734" stroke-width="2.5" />
+              <!-- Círculo interior fino -->
+              <circle cx="50" cy="50" r="41" stroke="#221f1d" stroke-width="0.75" stroke-dasharray="2 3" />
+              <!-- Cuatro puntos cardinales del Kairós -->
+              <circle cx="50" cy="9" r="2.5" fill="#9e4734" />
+              <circle cx="50" cy="91" r="2.5" fill="#9e4734" />
+              <circle cx="9" cy="50" r="2.5" fill="#9e4734" />
+              <circle cx="91" cy="50" r="2.5" fill="#9e4734" />
+              <!-- Letra Kappa (K) clásica de Kairós -->
+              <path d="M42 28 V72 M42 50 L64 28 M48 44 L66 72" stroke="#221f1d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h4>Círculo Kairós</h4>
+          <span class="role">Ágora Cultural Independiente</span>
+          <p>
+            Espacio dedicado a la búsqueda estética, el análisis riguroso de tramas y la restitución del pensamiento filosófico en la vida cotidiana.
+          </p>
+        </div>
+
+        <!-- Widget 2: Cita de Apertura -->
+        <div class="sidebar-widget quote-widget">
+          <h3 class="widget-title">Palabra de Entrada</h3>
+          <blockquote>
+            «Las cartas son visitas que nos hacen los ausentes en el instante oportuno.»
+          </blockquote>
+          <cite>— Epistolario Clásico</cite>
+        </div>
+
+        <!-- Widget 3: Información de Contacto Directo -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Datos del Cuaderno</h3>
+          <ul class="info-list">
+            <li>
+              <strong>Correspondencia digital</strong>
+              <span><a href="mailto:serabohe@gmail.com" style="color: var(--accent); font-weight: 600;">serabohe@gmail.com</a></span>
+            </li>
+            <li>
+              <strong>Edición</strong>
+              <span>Publicación cultural diaria & Ensayos continuos</span>
+            </li>
+            <li>
+              <strong>Distribución</strong>
+              <span>Acceso abierto independiente</span>
+            </li>
+            <li>
+              <strong>Enfoque</strong>
+              <span>Literatura · Cine · Música · Filosofía</span>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Pie de Página Institucional -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="mailto:serabohe@gmail.com">Correspondencia Directa</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
