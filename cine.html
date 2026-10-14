@@ -6,6 +6,9 @@
   <meta name="description" content="Círculo Kairós — Cuaderno de Cine: Crítica cinematográfica de fondo, poética del plano secuencia, expresionismo y la moral del film noir.">
   <title>Cine & Mirada | Círculo Kairós</title>
 
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
   <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +58,7 @@
       top: 0; left: 0;
       height: 4px; width: 0%;
       background-color: var(--accent);
-      z-index: 9999;
+      z-index: 99999;
       transition: width 0.1s linear;
     }
 
@@ -75,41 +78,74 @@
     .top-bar-meta span strong { color: var(--accent); }
 
     .site-header {
-      border-bottom: 3px double var(--border-dark);
-      padding: 2.2rem 1.5rem 0; /* Ajuste para sticky nav */
+      border-bottom: 1px solid var(--border-soft);
+      padding: 2.2rem 1.5rem 1.6rem;
       background-color: var(--bg-color);
+      position: relative;
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
+    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
+    .brand {
+      position: relative;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .brand-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.13;
+      filter: blur(1px);
+      mix-blend-mode: multiply;
+    }
+
+    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
-      font-size: 3.4rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+      position: relative;
+      z-index: 2;
     }
+    .site-title a {
+      color: var(--text-main);
+      transition: color var(--transition), opacity var(--transition);
+    }
+    .site-title a:hover {
+      color: var(--accent);
+    }
+
     .site-tagline {
       font-family: var(--font-reader);
       font-style: italic;
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
     }
 
     /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
     .main-nav { 
-      border-top: 1px solid var(--border-soft); 
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0.85rem 1rem;
+      border-bottom: 3px double var(--border-dark);
+      padding: 0.9rem 1rem;
       position: sticky;
       top: 0;
       background-color: rgba(251, 248, 243, 0.98);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(34, 31, 29, 0.04);
+      z-index: 9999;
+      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
     }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
@@ -567,27 +603,31 @@
     <span>Año I · Edición Continua</span>
   </aside>
 
+  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
+        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
-
-    <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
-    <nav class="main-nav" aria-label="Navegación principal">
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="literatura.html">Literatura</a></li>
-        <li><a href="cine.html" class="active">Cine</a></li>
-        <li><a href="musica.html">Música</a></li>
-        <li><a href="filosofia.html">Filosofía</a></li>
-        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-        <li><a href="perfil.html">Mi Cuaderno</a></li>
-      </ul>
-    </nav>
   </header>
+
+  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <nav class="main-nav" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="literatura.html">Literatura</a></li>
+      <li><a href="cine.html" class="active">Cine</a></li>
+      <li><a href="musica.html">Música</a></li>
+      <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+      <li><a href="perfil.html">Mi Cuaderno</a></li>
+    </ul>
+  </nav>
 
   <main id="contenido-principal">
 
@@ -902,6 +942,7 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
         <p>Publicación cultural independiente consagrada al análisis pausado del cine de autor, la fotografía cinematográfica y el lenguaje de los planos.</p>
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
