@@ -76,7 +76,7 @@
 
     .site-header {
       border-bottom: 3px double var(--border-dark);
-      padding: 2.2rem 1.5rem 1.25rem;
+      padding: 2.2rem 1.5rem 0; /* Ajuste para sticky nav */
       background-color: var(--bg-color);
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
@@ -95,10 +95,22 @@
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
-    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    .main-nav { 
+      border-top: 1px solid var(--border-soft); 
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.85rem 1rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(34, 31, 29, 0.04);
+    }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
       font-size: 0.82rem;
@@ -403,7 +415,7 @@
     /* Sidebar */
     .sidebar-wrapper {
       position: sticky;
-      top: 2rem;
+      top: 5rem;
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
@@ -541,6 +553,7 @@
       .section-heading-title { font-size: 2.2rem; }
       .article-headline { font-size: 1.85rem; }
       .article-prose p { text-align: left; }
+      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -560,19 +573,20 @@
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
-
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="literatura.html">Literatura</a></li>
-          <li><a href="cine.html" class="active">Cine</a></li>
-          <li><a href="musica.html">Música</a></li>
-          <li><a href="filosofia.html">Filosofía</a></li>
-          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-          <li><a href="perfil.html">Mi Cuaderno</a></li>
-        </ul>
-      </nav>
     </div>
+
+    <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="literatura.html">Literatura</a></li>
+        <li><a href="cine.html" class="active">Cine</a></li>
+        <li><a href="musica.html">Música</a></li>
+        <li><a href="filosofia.html">Filosofía</a></li>
+        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        <li><a href="perfil.html">Mi Cuaderno</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main id="contenido-principal">
@@ -597,51 +611,51 @@
       <section class="articles-stream" id="stream-ensayos" aria-label="Críticas completas de cine">
 
         <!-- NUEVO ENSAYO CINE: EXPRESIONISMO Y LA SOMBRA DE LA MUERTE -->
-<article class="long-article" id="cine-nosferatu-murnau" data-titulo="VIII. La sombra del vampiro (F.W. Murnau)">
-  <header class="article-header">
-    <span class="article-topic">Expresionismo & Sombras · Ensayo VIII</span>
-    <h2 class="article-headline">La sinfonía del espanto: F.W. Murnau, 'Nosferatu' y la plaga que viaja en la mirada</h2>
-    <p class="film-specs-header">F.W. Murnau · 1922 · Prana Film · Fotografía de Fritz Arno Wagner</p>
-    <div class="article-meta-line">Por Redacción · <time datetime="2026-10-14">14 de octubre de 2026</time> · <span>22 min de lectura de fondo</span></div>
-  </header>
+        <article class="long-article" id="cine-nosferatu-murnau" data-titulo="VIII. La sombra del vampiro (F.W. Murnau)">
+          <header class="article-header">
+            <span class="article-topic">Expresionismo & Sombras · Ensayo VIII</span>
+            <h2 class="article-headline">La sinfonía del espanto: F.W. Murnau, 'Nosferatu' y la plaga que viaja en la mirada</h2>
+            <p class="film-specs-header">F.W. Murnau · 1922 · Prana Film · Fotografía de Fritz Arno Wagner</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-14">14 de octubre de 2026</time> · <span>22 min de lectura de fondo</span></div>
+          </header>
 
-  <figure class="article-featured-media">
-    <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" alt="Sombra afilada proyectada sobre una escalera antigua">
-    <figcaption>La ascensión de la silueta en la escalera: el expresionismo alemán convierte la luz en sentencia moral.</figcaption>
-  </figure>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" alt="Sombra afilada proyectada sobre una escalera antigua">
+            <figcaption>La ascensión de la silueta en la escalera: el expresionismo alemán convierte la luz en sentencia moral.</figcaption>
+          </figure>
 
-  <div class="article-prose">
-    <p class="dropcap">En el amanecer del arte cinematográfico mudo, cuando la cámara apenas comenzaba a emanciparse del teatro de variedades, Friedrich Wilhelm Murnau logró un prodigio que ninguna técnica digital contemporánea ha conseguido igualar: filmar el aire envenenado de la muerte. Estrenada en marzo de 1922 bajo el subtítulo revelador de <em>Una sinfonía del horror</em> (<em>Nosferatu, eine Symphonie des Grauens</em>), esta adaptación apócrifa de la novela de Bram Stoker no es una fantasía gótica convencional; es un réquiem hipnótico sobre la peste, la culpa colectiva de una Europa mutilada por la Gran Guerra y la fatalidad de la sombra.</p>
+          <div class="article-prose">
+            <p class="dropcap">En el amanecer del arte cinematográfico mudo, cuando la cámara apenas comenzaba a emanciparse del teatro de variedades, Friedrich Wilhelm Murnau logró un prodigio que ninguna técnica digital contemporánea ha conseguido igualar: filmar el aire envenenado de la muerte. Estrenada en marzo de 1922 bajo el subtítulo revelador de <em>Una sinfonía del horror</em> (<em>Nosferatu, eine Symphonie des Grauens</em>), esta adaptación apócrifa de la novela de Bram Stoker no es una fantasía gótica convencional; es un réquiem hipnótico sobre la peste, la culpa colectiva de una Europa mutilada por la Gran Guerra y la fatalidad de la sombra.</p>
 
-    <p>A diferencia de sus contemporáneos en los estudios de la UFA —que levantaban decorados artificiales de cartón piedra con arquitecturas inclinadas y perspectivas deformadas, como en <em>El gabinete del doctor Caligari</em>—, Murnau tomó su pesada cámara y salió al aire libre. Filmó las montañas escarpadas de los Cárpatos, los bosques bálticos azotados por el vendaval y los canales silenciosos de Lübeck y Wismar. Es precisamente esa colisión entre la naturaleza documental real y la intrusión monstruosa lo que dota a la película de un lirismo pavoroso.</p>
+            <p>A diferencia de sus contemporáneos en los estudios de la UFA —que levantaban decorados artificiales de cartón piedra con arquitecturas inclinadas y perspectivas deformadas, como en <em>El gabinete del doctor Caligari</em>—, Murnau tomó su pesada cámara y salió al aire libre. Filmó las montañas escarpadas de los Cárpatos, los bosques bálticos azotados por el vendaval y los canales silenciosos de Lübeck y Wismar. Es precisamente esa colisión entre la naturaleza documental real y la intrusión monstruosa lo que dota a la película de un lirismo pavoroso.</p>
 
-    <hr>
+            <hr>
 
-    <h3>I. El conde Orlok como parásito ontológico</h3>
-    <p>El vampiro encarnado por Max Schreck nada tiene que ver con los aristócratas seductores, cosmopolitas y elegantes que poblarían décadas más tarde las producciones de la Hammer o Hollywood. El conde Orlok no corteja; infesta. Con su cráneo calvo, sus orejas puntiagudas de murciélago, sus incisivos centrales de roedor y sus dedos filiformes terminados en garras cadavéricas, Orlok es la personificación física de la peste bubónica.</p>
+            <h3>I. El conde Orlok como parásito ontológico</h3>
+            <p>El vampiro encarnado por Max Schreck nada tiene que ver con los aristócratas seductores, cosmopolitas y elegantes que poblarían décadas más tarde las producciones de la Hammer o Hollywood. El conde Orlok no corteja; infesta. Con su cráneo calvo, sus orejas puntiagudas de murciélago, sus incisivos centrales de roedor y sus dedos filiformes terminados en garras cadavéricas, Orlok es la personificación física de la peste bubónica.</p>
 
-    <p>Murnau orquesta la travesía del buque *Empusa* como un descenso a los infiernos. Uno tras otro, los marineros sucumben a la fiebre y a las mordeduras en el cuello; cuando la nave fantasmal entra en el puerto de Wisborg sin capitán en el timón, el ataúd del conde se abre para liberar una horda de ratas negras que invaden las calles adoquinadas. La muerte no es un enemigo armado con el que se pueda negociar; es una marea biológica invisible que penetra por las ventanas abiertas de las alcobas.</p>
+            <p>Murnau orquesta la travesía del buque *Empusa* como un descenso a los infiernos. Uno tras otro, los marineros sucumben a la fiebre y a las mordeduras en el cuello; cuando la nave fantasmal entra en el puerto de Wisborg sin capitán en el timón, el ataúd del conde se abre para liberar una horda de ratas negras que invaden las calles adoquinadas. La muerte no es un enemigo armado con el que se pueda negociar; es una marea biológica invisible que penetra por las ventanas abiertas de las alcobas.</p>
 
-    <blockquote>«Y cuando cruzó el puente, los fantasmas salieron a su encuentro. La noche ya no era la ausencia del sol, sino una sustancia espesa que se pegaba a los pulmones.»<cite>— Rótulo original, Nosferatu (1922)</cite></blockquote>
+            <blockquote>«Y cuando cruzó el puente, los fantasmas salieron a su encuentro. La noche ya no era la ausencia del sol, sino una sustancia espesa que se pegaba a los pulmones.»<cite>— Rótulo original, Nosferatu (1922)</cite></blockquote>
 
-    <hr>
+            <hr>
 
-    <h3>II. La gramática del terror: El imperio de la silueta</h3>
-    <p>La escena climática del filme encierra la mayor lección visual del siglo XX: la subida por la escalera de caracol. Murnau no filma el cuerpo de Max Schreck; filma su sombra proyectada contra la pared encalada. Los dedos esqueléticos se alargan, la espalda corvada asciende peldaño a peldaño y la garra oscura se cierra sobre el pecho palpitante de Ellen antes de que el espectro toque físicamente el picaporte de la puerta.</p>
+            <h3>II. La gramática del terror: El imperio de la silueta</h3>
+            <p>La escena climática del filme encierra la mayor lección visual del siglo XX: la subida por la escalera de caracol. Murnau no filma el cuerpo de Max Schreck; filma su sombra proyectada contra la pared encalada. Los dedos esqueléticos se alargan, la espalda corvada asciende peldaño a peldaño y la garra oscura se cierra sobre el pecho palpitante de Ellen antes de que el espectro toque físicamente el picaporte de la puerta.</p>
 
-    <p>En esa decisión de puesta en escena reside la esencia del cine de Halloween y del misterio: el verdadero terror no se agota en el impacto gráfico de la víscera, sino en la anticipación geométrica de la fatalidad. La sombra nos pertenece a todos, camina a nuestro lado bajo la luz del mediodía y nos recuerda que el abismo ya está instalado en el espacio que habitamos.</p>
+            <p>En esa decisión de puesta en escena reside la esencia del cine de Halloween y del misterio: el verdadero terror no se agota en el impacto gráfico de la víscera, sino en la anticipación geométrica de la fatalidad. La sombra nos pertenece a todos, camina a nuestro lado bajo la luz del mediodía y nos recuerda que el abismo ya está instalado en el espacio que habitamos.</p>
 
-    <hr>
+            <hr>
 
-    <h3>III. El sacrificio del alba</h3>
-    <p>La redención final no proviene de la espada de los soldados ni del saber enciclopédico del doctor Bulwer (el Van Helsing murnauiano), sino del autosacrificio lúcido y voluntario de la mujer. Ellen entrega su sangre durante toda la noche para retener al vampiro junto a su lecho hasta el canto del gallo. Cuando el primer rayo de sol penetra por el ventanal, Orlok se disuelve en una voluta de humo blanco, dejando tras de sí únicamente la ceniza del horror y el silencio restaurado del mundo.</p>
-  </div>
+            <h3>III. El sacrificio del alba</h3>
+            <p>La redención final no proviene de la espada de los soldados ni del saber enciclopédico del doctor Bulwer (el Van Helsing murnauiano), sino del autosacrificio lúcido y voluntario de la mujer. Ellen entrega su sangre durante toda la noche para retener al vampiro junto a su lecho hasta el canto del gallo. Cuando el primer rayo de sol penetra por el ventanal, Orlok se disuelve en una voluta de humo blanco, dejando tras de sí únicamente la ceniza del horror y el silencio restaurado del mundo.</p>
+          </div>
 
-  <footer class="article-bottom-actions">
-    <span class="signature-note">— Círculo Kairós · Poética Visual & Cine de Autor</span>
-    <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
-  </footer>
-</article>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Poética Visual & Cine de Autor</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
 
         <!-- ENSAYO CINE: INGMAR BERGMAN -->
         <article class="long-article" id="cine-bergman-septimo" data-titulo="VII. El séptimo sello (Ingmar Bergman)">
@@ -866,6 +880,7 @@
         <div class="sidebar-widget">
           <h3 class="widget-heading">Guía del Cuaderno</h3>
           <ul class="quick-film-list">
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-nosferatu-murnau')"><strong>Nosferatu</strong><span>Murnau y la silueta del espanto</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-bergman-septimo')"><strong>El séptimo sello</strong><span>Bergman, el ajedrez y el silencio de Dios</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-wongkarwai')"><strong>Deseando amar</strong><span>Wong Kar-wai y el dolor aplazado</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-noir')"><strong>La sombra como destino</strong><span>Claroscuro y posguerra</span></a></li>
@@ -873,7 +888,6 @@
             <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-hitchcock')"><strong>La ventana indiscreta</strong><span>Mirada culpable</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-bladerunner')"><strong>Blade Runner</strong><span>Tiempo y memoria</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-wilder')"><strong>Perdición</strong><span>Confesión al dictáfono</span></a></li>
-            <li><a href="javascript:void(0)" onclick="irAEnsayo('cine-wilder')"><strong>Expresionismo & Sombras</strong><span>Confesión al dictáfono</span></a></li>
           </ul>
         </div>
       </aside>
