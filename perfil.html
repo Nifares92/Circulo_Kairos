@@ -6,6 +6,9 @@
   <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Colecciones.">
   <title>Mi Cuaderno & Perfil | Círculo Kairós</title>
 
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
   <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,30 +67,75 @@
     .top-bar-meta span strong { color: var(--accent); }
 
     .site-header {
-      border-bottom: 3px double var(--border-dark);
-      padding: 2.2rem 1.5rem 1.25rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding: 2.2rem 1.5rem 1.6rem;
       background-color: var(--bg-color);
+      position: relative;
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
+    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
+    .brand {
+      position: relative;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .brand-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.13;
+      filter: blur(1px);
+      mix-blend-mode: multiply;
+    }
+
+    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
-      font-size: 3.4rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+      position: relative;
+      z-index: 2;
     }
+    .site-title a {
+      color: var(--text-main);
+      transition: color var(--transition), opacity var(--transition);
+    }
+    .site-title a:hover {
+      color: var(--accent);
+    }
+
     .site-tagline {
       font-family: var(--font-reader);
       font-style: italic;
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    .main-nav { 
+      border-bottom: 3px double var(--border-dark);
+      padding: 0.9rem 1rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+    }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
       font-size: 0.82rem;
@@ -157,7 +205,7 @@
       align-items: start;
     }
 
-    /* Tarjeta de Datos del Lector */
+    /* Tarjeta del Lector */
     .reader-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -385,6 +433,14 @@
     .btn-add-item:hover { background-color: var(--accent-dark); }
 
     /* Barra lateral */
+    .sidebar-wrapper {
+      position: sticky;
+      top: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
     .sidebar-widget {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -473,6 +529,7 @@
       .site-title { font-size: 2.2rem; }
       .section-main-title { font-size: 2.2rem; }
       .add-form-grid { grid-template-columns: 1fr; }
+      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -484,26 +541,31 @@
     <span>Año I · Edición Continua</span>
   </aside>
 
+  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
+        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
-
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="literatura.html">Literatura</a></li>
-          <li><a href="cine.html">Cine</a></li>
-          <li><a href="musica.html">Música</a></li>
-          <li><a href="filosofia.html">Filosofía</a></li>
-          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-          <li><a href="perfil.html" class="active">Mi Cuaderno</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
+
+  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <nav class="main-nav" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="literatura.html">Literatura</a></li>
+      <li><a href="cine.html">Cine</a></li>
+      <li><a href="musica.html">Música</a></li>
+      <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+      <li><a href="perfil.html" class="active">Mi Cuaderno</a></li>
+    </ul>
+  </nav>
 
   <main id="contenido-principal">
 
@@ -609,6 +671,7 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
         <p>Publicación cultural independiente consagrada al análisis pausado de las artes y el pensamiento.</p>
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
@@ -653,8 +716,29 @@
     function cambiarFiltro(cat) {
       categoriaActiva = cat;
       document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-      event.target.classList.add("active");
+      if (event && event.target) {
+        event.target.classList.add("active");
+      }
       renderizarFavoritos();
+    }
+
+    // Limpia y normaliza el enlace guardado para que GitHub Pages nunca dé 404
+    function normalizarEnlace(enlace) {
+      if (!enlace) return "";
+      let limpio = enlace.trim();
+
+      // Si viene con el texto literal roto "\${item.enlace}", se ignora
+      if (limpio.includes("\${item.enlace}")) return "";
+
+      // Si es un enlace externo absoluto (http o https)
+      if (limpio.startsWith("http://") || limpio.startsWith("https://")) {
+        return limpio;
+      }
+
+      // Si es un enlace relativo de la web (ej: literatura.html#borges-laberintos)
+      // Extrae únicamente el nombre de archivo y el hash (#id)
+      const partes = limpio.split("/");
+      return partes[partes.length - 1];
     }
 
     function renderizarFavoritos() {
@@ -663,7 +747,7 @@
 
       const filtrados = categoriaActiva === "todos" 
         ? lista 
-        : lista.filter(item => item.categoria.toLowerCase() === categoriaActiva);
+        : lista.filter(item => (item.categoria || "").toLowerCase() === categoriaActiva);
 
       if (filtrados.length === 0) {
         cont.innerHTML = `
@@ -676,17 +760,23 @@
       }
 
       cont.innerHTML = "";
-      filtrados.forEach((item, index) => {
+      filtrados.forEach(item => {
         const card = document.createElement("article");
         card.className = "item-card";
+
+        const enlaceLimpio = normalizarEnlace(item.enlace);
+        const botonVer = enlaceLimpio 
+          ? `<a href="${enlaceLimpio}" class="btn-goto">Ver obra &rarr;</a>` 
+          : '';
+
         card.innerHTML = `
           <div>
-            <span class="item-meta-tag">${item.categoria} ${item.autor ? '· ' + item.autor : ''}</span>
+            <span class="item-meta-tag">${item.categoria || 'Lectura'} ${item.autor ? '· ' + item.autor : ''}</span>
             <h4>${item.titulo}</h4>
             <p>${item.nota || 'Sin notas adicionales.'}</p>
           </div>
           <div class="item-actions">
-            ${item.enlace ? `<a href="\${item.enlace}" class="btn-goto">Ver obra &rarr;</a>` : ''}
+            ${botonVer}
             <button class="btn-delete" onclick="eliminarItem(${item.id})">Eliminar</button>
           </div>
         `;
