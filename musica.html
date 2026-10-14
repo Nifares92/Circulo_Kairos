@@ -6,6 +6,9 @@
   <meta name="description" content="Círculo Kairós — Cuaderno de Música: Monografías acústicas de fondo, minimalismo sacro, modalismo y paisajes analógicos.">
   <title>Música & Resonancias | Círculo Kairós</title>
 
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
   <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +58,7 @@
       top: 0; left: 0;
       height: 4px; width: 0%;
       background-color: var(--accent);
-      z-index: 9999;
+      z-index: 99999;
       transition: width 0.1s linear;
     }
 
@@ -75,30 +78,75 @@
     .top-bar-meta span strong { color: var(--accent); }
 
     .site-header {
-      border-bottom: 3px double var(--border-dark);
-      padding: 2.2rem 1.5rem 1.25rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding: 2.2rem 1.5rem 1.6rem;
       background-color: var(--bg-color);
+      position: relative;
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
+    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
+    .brand {
+      position: relative;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .brand-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.13;
+      filter: blur(1px);
+      mix-blend-mode: multiply;
+    }
+
+    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
-      font-size: 3.4rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+      position: relative;
+      z-index: 2;
     }
+    .site-title a {
+      color: var(--text-main);
+      transition: color var(--transition), opacity var(--transition);
+    }
+    .site-title a:hover {
+      color: var(--accent);
+    }
+
     .site-tagline {
       font-family: var(--font-reader);
       font-style: italic;
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    .main-nav { 
+      border-bottom: 3px double var(--border-dark);
+      padding: 0.9rem 1rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+    }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
       font-size: 0.82rem;
@@ -457,7 +505,7 @@
     /* Sidebar */
     .sidebar-wrapper {
       position: sticky;
-      top: 2rem;
+      top: 5rem;
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
@@ -597,6 +645,7 @@
       .section-heading-title { font-size: 2.2rem; }
       .article-headline { font-size: 1.85rem; }
       .article-prose p { text-align: left; }
+      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -610,26 +659,31 @@
     <span>Año I · Edición Continua</span>
   </aside>
 
+  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
+        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
-
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="literatura.html">Literatura</a></li>
-          <li><a href="cine.html">Cine</a></li>
-          <li><a href="musica.html" class="active">Música</a></li>
-          <li><a href="filosofia.html">Filosofía</a></li>
-          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-          <li><a href="perfil.html">Mi Cuaderno</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
+
+  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <nav class="main-nav" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="literatura.html">Literatura</a></li>
+      <li><a href="cine.html">Cine</a></li>
+      <li><a href="musica.html" class="active">Música</a></li>
+      <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+      <li><a href="perfil.html">Mi Cuaderno</a></li>
+    </ul>
+  </nav>
 
   <main id="contenido-principal">
 
@@ -653,63 +707,63 @@
       <section class="articles-stream" id="stream-ensayos" aria-label="Monografías sonoras completas">
 
         <!-- NUEVO ENSAYO MÚSICA: EL RÉQUIEM Y LA LITURGIA DE DIFUNTOS -->
-<article class="long-article" id="mus-requiem-mozart" data-titulo="X. Lacrimosa dies illa (Réquiem de Mozart)">
-  <header class="article-header">
-    <span class="article-topic">Música Sacra & Liturgia · Ensayo X</span>
-    <h2 class="article-headline">Lacrimosa dies illa: El Réquiem de Mozart y la partitura inacabada del abismo</h2>
-    <p class="music-specs-header">W.A. Mozart · KV 626 (1791) · Orquesta y Coro / Philippe Herreweghe</p>
-    <div class="article-meta-line">Por Redacción · <time datetime="2026-10-14">14 de octubre de 2026</time> · <span>23 min de lectura de fondo</span></div>
-  </header>
+        <article class="long-article" id="mus-requiem-mozart" data-titulo="X. Lacrimosa dies illa (Réquiem de Mozart)">
+          <header class="article-header">
+            <span class="article-topic">Música Sacra & Liturgia · Ensayo X</span>
+            <h2 class="article-headline">Lacrimosa dies illa: El Réquiem de Mozart y la partitura inacabada del abismo</h2>
+            <p class="music-specs-header">W.A. Mozart · KV 626 (1791) · Orquesta y Coro / Philippe Herreweghe</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-14">14 de octubre de 2026</time> · <span>23 min de lectura de fondo</span></div>
+          </header>
 
-  <figure class="article-featured-media">
-    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Partitura sacra antigua iluminada por la luz de una vela">
-    <figcaption>El corte abrupto tras el octavo compás del Lacrimosa: el silencio donde cesa la mano del compositor.</figcaption>
-  </figure>
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Partitura sacra antigua iluminada por la luz de una vela">
+            <figcaption>El corte abrupto tras el octavo compás del Lacrimosa: el silencio donde cesa la mano del compositor.</figcaption>
+          </figure>
 
-  <!-- Reproductor sugerido -->
-  <div class="embedded-audio-player" aria-label="Reproductor de audio">
-    <div class="player-label">
-      <strong>Muestra sugerida: Mozart — Introitus & Lacrimosa (KV 626)</strong>
-      <span style="color: var(--text-muted); font-size: 0.8rem;">03:15 / 54:00</span>
-    </div>
-    <div class="player-ctrls">
-      <button class="play-audio-btn" title="Reproducir">&#9658;</button>
-      <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 15%;"></div></div>
-    </div>
-  </div>
+          <!-- Reproductor sugerido -->
+          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+            <div class="player-label">
+              <strong>Muestra sugerida: Mozart — Introitus & Lacrimosa (KV 626)</strong>
+              <span style="color: var(--text-muted); font-size: 0.8rem;">03:15 / 54:00</span>
+            </div>
+            <div class="player-ctrls">
+              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 15%;"></div></div>
+            </div>
+          </div>
 
-  <div class="article-prose">
-    <p class="dropcap">En los meses finales de 1791, en una Viena húmeda y helada por las primeras ventiscas del invierno, Wolfgang Amadeus Mozart se consumía en su lecho de la Rauhensteingasse con la convicción delirante de estar componiendo la misa de difuntos para su propio entierro. La visita de aquel mensajero anónimo vestido de gris —enviado por el excéntrico conde von Walsegg para encargar un réquiem que planeaba hacer pasar por propio— encendió en la mente febril del genio la chispa de una profecía fúnebre. Pocas creaciones en la historia de la música universal condensan con semejante dramatismo la cercanía física del umbral.</p>
+          <div class="article-prose">
+            <p class="dropcap">En los meses finales de 1791, en una Viena húmeda y helada por las primeras ventiscas del invierno, Wolfgang Amadeus Mozart se consumía en su lecho de la Rauhensteingasse con la convicción delirante de estar componiendo la misa de difuntos para su propio entierro. La visita de aquel mensajero anónimo vestido de gris —enviado por el excéntrico conde von Walsegg para encargar un réquiem que planeaba hacer pasar por propio— encendió en la mente febril del genio la chispa de una profecía fúnebre. Pocas creaciones en la historia de la música universal condensan con semejante dramatismo la cercanía física del umbral.</p>
 
-    <p>La <em>Missa pro defunctis</em> en re menor (KV 626) no es una plegaria piadosa de consuelo doméstico ni un ejercicio cortesano de polifonía decorativa. Es el terremoto ontológico del hombre clásico que mira cara a cara el juicio final, la desintegración del cuerpo y la plegaria desesperada por un átomo de piedad divina ante el silencio absoluto de la tumba.</p>
+            <p>La <em>Missa pro defunctis</em> en re menor (KV 626) no es una plegaria piadosa de consuelo doméstico ni un ejercicio cortesano de polifonía decorativa. Es el terremoto ontológico del hombre clásico que mira cara a cara el juicio final, la desintegración del cuerpo y la plegaria desesperada por un átomo de piedad divina ante el silencio absoluto de la tumba.</p>
 
-    <hr>
+            <hr>
 
-    <h3>I. La instrumentación de las sombras</h3>
-    <p>Desde los primeros compases del <em>Introitus</em>, Mozart despoja a la orquesta de todo brillo aristocrático mundano. Elimina las flautas y los oboes de registro agudo; en su lugar, entrega el protagonismo tímbrico a los <em>corni di bassetto</em> (clarinetes tenores de timbre oscuro y leñoso) y a los fagotes, arropados por el sordo rumor de tres trombones solemnes. La tonalidad elegida, re menor —la misma con la que abre la obertura de <em>Don Giovanni</em> cuando la estatua del Comendador rompe las puertas del salón terrenal—, establece una atmósfera de piedra pómez y catacumba.</p>
+            <h3>I. La instrumentación de las sombras</h3>
+            <p>Desde los primeros compases del <em>Introitus</em>, Mozart despoja a la orquesta de todo brillo aristocrático mundano. Elimina las flautas y los oboes de registro agudo; en su lugar, entrega el protagonismo tímbrico a los <em>corni di bassetto</em> (clarinetes tenores de timbre oscuro y leñoso) y a los fagotes, arropados por el sordo rumor de tres trombones solemnes. La tonalidad elegida, re menor —la misma con la que abre la obertura de <em>Don Giovanni</em> cuando la estatua del Comendador rompe las puertas del salón terrenal—, establece una atmósfera de piedra pómez y catacumba.</p>
 
-    <p>Las cuerdas avanzan con síncopas pesadas, como pasos de un cortejo mortuorio que arrastra los pies en el barro, mientras el coro entra con un lamento gregoriano arcaico: <em>Requiem aeternam dona eis, Domine</em>. No hay adorno; hay una gravedad arquitectónica que parece pesar toneladas métricas sobre el pecho del oyente.</p>
+            <p>Las cuerdas avanzan con síncopas pesadas, como pasos de un cortejo mortuorio que arrastra los pies en el barro, mientras el coro entra con un lamento gregoriano arcaico: <em>Requiem aeternam dona eis, Domine</em>. No hay adorno; hay una gravedad arquitectónica que parece pesar toneladas métricas sobre el pecho del oyente.</p>
 
-    <blockquote>«Siento que no duraré mucho más; estoy seguro de que he sido envenenado. No puedo quitarme este pensamiento de la cabeza: estoy escribiendo este réquiem para mí mismo.»<cite>— W.A. Mozart a Constanze, noviembre de 1791</cite></blockquote>
+            <blockquote>«Siento que no duraré mucho más; estoy seguro de que he sido envenenado. No puedo quitarme este pensamiento de la cabeza: estoy escribiendo este réquiem para mí mismo.»<cite>— W.A. Mozart a Constanze, noviembre de 1791</cite></blockquote>
 
-    <hr>
+            <hr>
 
-    <h3>II. La fractura del octavo compás</h3>
-    <p>En ninguna otra obra de la música occidental el límite biológico de la existencia ha quedado estampado de forma tan física como en el manuscrito original del <em>Lacrimosa</em>. Tras la furia apocalíptica del <em>Dies Irae</em> y el desgarro suplicante del <em>Rex tremendae</em>, el compás de 12/8 del Lacrimosa despliega un llanto de violines que asciende en gemidos cromáticos de dos en dos notas.</p>
+            <h3>II. La fractura del octavo compás</h3>
+            <p>En ninguna otra obra de la música occidental el límite biológico de la existencia ha quedado estampado de forma tan física como en el manuscrito original del <em>Lacrimosa</em>. Tras la furia apocalíptica del <em>Dies Irae</em> y el desgarro suplicante del <em>Rex tremendae</em>, el compás de 12/8 del Lacrimosa despliega un llanto de violines que asciende en gemidos cromáticos de dos en dos notas.</p>
 
-    <p>En el compás número ocho, las voces del coro culminan la frase <em>Homo reus</em> («hombre culpable») en un crescendo sobrecogedor. Justo allí, en la mitad de la frase musical, la pluma de Mozart trazó las últimas notas temblorosas y cayó sobre el papel. La tinta se detiene. El resto de la obra —completada con lealtad y maestría por su discípulo Franz Xaver Süssmayr— habita para siempre a la sombra de esa fractura irremediable: el instante exacto en que la muerte silenció la mano humana antes de que pudiera resolver el acorde.</p>
+            <p>En el compás número ocho, las voces del coro culminan la frase <em>Homo reus</em> («hombre culpable») en un crescendo sobrecogedor. Justo allí, en la mitad de la frase musical, la pluma de Mozart trazó las últimas notas temblorosas y cayó sobre el papel. La tinta se detiene. El resto de la obra —completada con lealtad y maestría por su discípulo Franz Xaver Süssmayr— habita para siempre a la sombra de esa fractura irremediable: el instante exacto en que la muerte silenció la mano humana antes de que pudiera resolver el acorde.</p>
 
-    <hr>
+            <hr>
 
-    <h3>III. El sonido del duelo</h3>
-    <p>Escuchar el Réquiem durante las vigilias de difuntos en otoño no es un ejercicio melancólico pasivo; es una purificación del oído interior. La música de difuntos mozartiana nos recuerda que el ser humano, incluso en la hora más solitaria de su extinción física, es capaz de transmutar el pavor ante lo desconocido en una catedral acústica de inmarcesible belleza.</p>
-  </div>
+            <h3>III. El sonido del duelo</h3>
+            <p>Escuchar el Réquiem durante las vigilias de difuntos en otoño no es un ejercicio melancólico pasivo; es una purificación del oído interior. La música de difuntos mozartiana nos recuerda que el ser humano, incluso en la hora más solitaria de su extinción física, es capaz de transmutar el pavor ante lo desconocido en una catedral acústica de inmarcesible belleza.</p>
+          </div>
 
-  <footer class="article-bottom-actions">
-    <span class="signature-note">— Círculo Kairós · Acústica Sacra & Pensamiento Sonoro</span>
-    <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
-  </footer>
-</article>
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Acústica Sacra & Pensamiento Sonoro</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
 
         <!-- ENSAYO MÚSICA: FILOSOFÍA Y ESTÉTICA SONORA -->
         <article class="long-article" id="musica-orden-tiempo-emocion" data-titulo="IX. La arquitectura del aire (Música y Sentido)">
