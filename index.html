@@ -72,32 +72,30 @@
 
     .site-header {
       border-bottom: 3px double var(--border-dark);
-      padding: 2.2rem 1.5rem 1.25rem;
+      padding: 2.2rem 1.5rem 0; /* Ajuste para sticky nav */
       background-color: var(--bg-color);
       position: relative;
-      overflow: hidden;
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
     /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
-      padding: 1.5rem 0 1rem;
+      padding: 1rem 0 1.5rem;
     }
 
-    /* FILIGRANA / MARCA DE AGUA DIFUMINADA POR DETRÁS */
     .brand-watermark {
       position: absolute;
       top: 48%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 250px;              /* Tamaño generoso y proporcionado */
+      width: 250px;
       height: 250px;
-      pointer-events: none;      /* No interfiere con clics en el título */
-      z-index: 1;                /* Capa inferior */
-      opacity: 0.14;             /* Transparencia sutil y elegante */
-      filter: blur(1px);         /* Difuminado suave */
-      mix-blend-mode: multiply;  /* Fusión natural con el tono pergamino */
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.14;
+      filter: blur(1px);
+      mix-blend-mode: multiply;
       transition: opacity var(--transition);
     }
 
@@ -110,7 +108,7 @@
       margin-bottom: 0.3rem;
       text-shadow: 1px 1px 0 rgba(255,255,255,0.85);
       position: relative;
-      z-index: 2;                /* Por encima de la marca de agua */
+      z-index: 2;
     }
     .site-tagline {
       font-family: var(--font-reader);
@@ -118,16 +116,23 @@
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 2;                /* Por encima de la marca de agua */
-    }
-
-    .main-nav { 
-      border-top: 1px solid var(--border-soft); 
-      padding-top: 0.9rem; 
+      margin-bottom: 1rem;
       position: relative;
       z-index: 2;
+    }
+
+    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    .main-nav { 
+      border-top: 1px solid var(--border-soft); 
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.85rem 1rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(34, 31, 29, 0.04);
     }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
@@ -157,71 +162,105 @@
     }
 
     /* ==========================================================================
-       SECCIÓN ESPECIAL: TEMA DEL MES (MONOGRAFÍA MENSUAL)
+       TEMA DEL MES REDISEÑADO: PLIEGO MONOGRÁFICO ESPECIAL (ESTILO NOCTURNO/CÁLIDO)
        ========================================================================== */
-    .monthly-theme-banner {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      border-left: 5px solid var(--accent);
-      padding: 1.8rem 2.2rem;
-      margin-bottom: 3.5rem;
-      box-shadow: var(--shadow-subtle);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .monthly-theme-monograph {
+      background: linear-gradient(145deg, #1f1b1a 0%, #2a2422 100%);
+      color: #e9e2d7;
+      border: 1px solid #3c3430;
+      border-radius: 3px;
+      padding: 2.8rem 2.8rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 14px 34px rgba(25, 20, 18, 0.22);
+      position: relative;
+      overflow: hidden;
     }
-    .theme-badge-row {
+    .monthly-theme-monograph::before {
+      content: 'OCTUBRE';
+      position: absolute;
+      right: -20px;
+      bottom: -35px;
+      font-family: var(--font-classical);
+      font-size: 8rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.03);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+    }
+    .theme-monograph-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
     }
-    .theme-label {
+    .theme-monograph-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-family: var(--font-classical);
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
-      background-color: var(--bg-accent-tint);
-      padding: 0.25rem 0.65rem;
+      color: #df8876;
+      background-color: rgba(158, 71, 52, 0.22);
+      border: 1px solid rgba(158, 71, 52, 0.45);
+      padding: 0.35rem 0.85rem;
       border-radius: 2px;
     }
-    .theme-period {
+    .theme-monograph-date {
       font-family: var(--font-sans);
       font-size: 0.78rem;
-      color: var(--text-muted);
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 600;
+      color: #a89f94;
     }
-    .monthly-theme-banner h2 {
+    .monthly-theme-monograph h2 {
       font-family: var(--font-serif);
-      font-size: 1.95rem;
+      font-size: 2.3rem;
       line-height: 1.25;
-      color: var(--text-main);
+      color: #f7f3ed;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
-    .monthly-theme-banner p {
+    .monthly-theme-monograph p {
       font-family: var(--font-reader);
-      font-size: 1.08rem;
-      color: var(--text-muted);
-      line-height: 1.7;
+      font-size: 1.15rem;
+      color: #cfc6b8;
+      line-height: 1.8;
+      max-width: 980px;
+      margin-bottom: 1.6rem;
     }
-    .theme-disciplines-tags {
-      display: flex;
+    .theme-monograph-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.2rem;
-      flex-wrap: wrap;
-      margin-top: 0.4rem;
-      padding-top: 0.8rem;
-      border-top: 1px dashed var(--border-soft);
-      font-size: 0.82rem;
-      color: var(--text-main);
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(226, 216, 199, 0.12);
     }
-    .theme-disciplines-tags span strong {
-      color: var(--accent);
+    .theme-node {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 1rem;
+      border-radius: 2px;
+    }
+    .theme-node-tag {
+      display: block;
       font-family: var(--font-classical);
-      letter-spacing: 0.05em;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #df8876;
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+    }
+    .theme-node-text {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: #e5ddd0;
     }
 
     /* ==========================================================================
@@ -477,7 +516,6 @@
     .block-header h3 { font-family: var(--font-serif); font-size: 1.85rem; }
     .block-header span { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
 
-    /* Cuadrícula de Noticias en 2 Columnas */
     .news-card-feed {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -501,10 +539,11 @@
     }
 
     .news-item-thumb {
-      height: 180px;
+      height: 190px;
       border: 1px solid var(--border-soft);
       overflow: hidden;
       margin-bottom: 1.1rem;
+      background-color: var(--bg-surface);
     }
     .news-item-thumb img {
       width: 100%;
@@ -597,7 +636,7 @@
       flex-direction: column;
       gap: 2.2rem;
       position: sticky;
-      top: 2rem;
+      top: 5rem;
     }
     .ephemeris-card {
       background-color: var(--bg-surface);
@@ -698,21 +737,24 @@
       .cultural-dispatch-layout { grid-template-columns: 1fr; }
       .news-card-feed { grid-template-columns: repeat(2, 1fr); }
       .sidebar-ephemeris-column { position: static; }
+      .theme-monograph-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .hero-editorial-grid { grid-template-columns: 1fr; }
       .quad-grid { grid-template-columns: repeat(2, 1fr); }
       .news-card-feed { grid-template-columns: 1fr; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
-      .monthly-theme-banner { padding: 1.4rem; }
-      .monthly-theme-banner h2 { font-size: 1.6rem; }
       .brand-watermark { width: 190px; height: 190px; }
+      .theme-monograph-grid { grid-template-columns: 1fr; }
+      .monthly-theme-monograph { padding: 1.8rem; }
+      .monthly-theme-monograph h2 { font-size: 1.75rem; }
     }
     @media (max-width: 500px) {
       .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
       .quad-grid { grid-template-columns: 1fr; }
       .hero-lead-card { padding: 1.5rem; }
       .brand-watermark { width: 160px; height: 160px; }
+      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -730,46 +772,60 @@
     <div class="header-container">
       
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL (DIFUMINADA, GRANDE Y POR DETRÁS) -->
+        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
 
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
 
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="index.html" class="active">Inicio</a></li>
-          <li><a href="literatura.html">Literatura</a></li>
-          <li><a href="cine.html">Cine</a></li>
-          <li><a href="musica.html">Música</a></li>
-          <li><a href="filosofia.html">Filosofía</a></li>
-          <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-          <li><a href="perfil.html">Mi Cuaderno</a></li>
-        </ul>
-      </nav>
     </div>
+
+    <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="literatura.html">Literatura</a></li>
+        <li><a href="cine.html">Cine</a></li>
+        <li><a href="musica.html">Música</a></li>
+        <li><a href="filosofia.html">Filosofía</a></li>
+        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        <li><a href="perfil.html">Mi Cuaderno</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main id="contenido-principal">
 
     <!-- ====================================================================
-         0. TEMA DEL MES: MONOGRAFÍA EDITORIAL
+         0. TEMA DEL MES: CUADERNO MONOGRÁFICO ESPECIAL (DISEÑO RESERVADO)
          ==================================================================== -->
-    <section class="monthly-theme-banner" aria-labelledby="tema-del-mes-titulo">
-      <div class="theme-badge-row">
-        <span class="theme-label">Monografía Especial · Tema del Mes</span>
-        <span class="theme-period">Octubre 2026</span>
+    <section class="monthly-theme-monograph" aria-labelledby="tema-del-mes-titulo">
+      <div class="theme-monograph-header">
+        <span class="theme-monograph-badge">✦ Cuaderno Extraordinario · Monografía</span>
+        <span class="theme-monograph-date">Vigilia de Otoño · Octubre 2026</span>
       </div>
-      <h2 id="tema-del-mes-titulo">El Umbral de las Sombras: Halloween, Espectros y el Más Allá</h2>
+      <h2 id="tema-del-mes-titulo">El Umbral de las Sombras: Halloween, los Difuntos y el Más Allá</h2>
       <p>
-        Durante este mes de octubre, todas las publicaciones de los cuatro cuadernos confluyen en torno a la frontera entre los vivos y los muertos: desde el horror gótico y las leyendas de difuntos en Literatura, hasta el juego de ajedrez con la parca en Cine, las resonancias sacras de difuntos en Música y la confrontación ontológica con la finitud en Filosofía.
+        Durante el mes de octubre suspendemos la alternancia regular de temas para consagrar los cuatro cuadernos de estudio a la frontera invisible entre la vida y la extinción. Indagamos en el retorno de las sombras, la liturgia fúnebre y el coraje de mirar de frente al no-ser:
       </p>
-      <div class="theme-disciplines-tags">
-        <span><strong>Literatura:</strong> Fantasmas & Samhain</span>
-        <span><strong>Cine:</strong> Danzas macabras & Muerte</span>
-        <span><strong>Música:</strong> Réquiem & Sonoridad del misterio</span>
-        <span><strong>Filosofía:</strong> Ser-para-la-muerte & Finitud</span>
+      <div class="theme-monograph-grid">
+        <div class="theme-node">
+          <span class="theme-node-tag">I. Literatura</span>
+          <span class="theme-node-text">Fantasmas victorianos, el rito de Samhain y la catarsis del miedo.</span>
+        </div>
+        <div class="theme-node">
+          <span class="theme-node-tag">II. Cine</span>
+          <span class="theme-node-text">La silueta de Nosferatu y la partida de ajedrez contra la Parca.</span>
+        </div>
+        <div class="theme-node">
+          <span class="theme-node-tag">III. Música</span>
+          <span class="theme-node-text">Réquiems, polifonía sacra de difuntos y el tañido de campanas.</span>
+        </div>
+        <div class="theme-node">
+          <span class="theme-node-tag">IV. Filosofía</span>
+          <span class="theme-node-text">El ser-para-la-muerte, el misterio instantáneo y la dignidad del límite.</span>
+        </div>
       </div>
     </section>
 
@@ -908,111 +964,9 @@
           <button onclick="forzarActualizacionNoticias()" class="btn-save-news" style="cursor: pointer;" title="Refrescar noticias en vivo">&#8635; Actualizar noticias</button>
         </div>
 
-        <!-- Cuadrícula de 6 noticias (con respaldo estético garantizado) -->
+        <!-- Cuadrícula de noticias culturales -->
         <div class="news-card-feed" id="feed-noticias-culturales">
-          
-          <!-- Noticia 1 -->
-          <article class="news-item-box" data-noticia-id="noticia-1">
-            <div class="news-item-thumb">
-              <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Poesía y literatura universal" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="news-header-meta">
-              <span class="news-tag">Letras Universales</span>
-              <span class="news-source"><strong>EL PAÍS</strong> · 13 Oct 2026</span>
-            </div>
-            <h4><a href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer">Anne Carson y la orfebrería poética en diálogo con la tragedia clásica</a></h4>
-            <p>Un recorrido por la obra de la helenista canadiense: cómo la traducción de Safo y Eurípides ha abierto una vía insólita para la poesía moderna alejada de la retórica convencional.</p>
-            <div class="news-item-footer">
-              <a href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('Anne Carson y la orfebrería poética en diálogo con Grecia', 'EL PAÍS', 'Literatura', 'https://elpais.com/cultura/', 'Ensayo sobre poesía y tragedia clásica')">&#9733; Guardar noticia</button>
-            </div>
-          </article>
-
-          <!-- Noticia 2 -->
-          <article class="news-item-box" data-noticia-id="noticia-2">
-            <div class="news-item-thumb">
-              <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80" alt="Julio Llamazares y la memoria rural" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="news-header-meta">
-              <span class="news-tag">Narrativa Española</span>
-              <span class="news-source"><strong>RTVE Cultura</strong> · 12 Oct 2026</span>
-            </div>
-            <h4><a href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer">La memoria del silencio: Julio Llamazares y la geografía deshabitada</a></h4>
-            <p>El novelista leonés indaga en las cicatrices del siglo XX y la resistencia del medio rural en una travesía que anuda espacio, recuerdo familiar y el valor testimonial de la palabra.</p>
-            <div class="news-item-footer">
-              <a href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('Julio Llamazares y la geografía deshabitada', 'RTVE Cultura', 'Literatura', 'https://www.rtve.es/noticias/cultura/', 'Crónica de la memoria rural y narrativa')">&#9733; Guardar noticia</button>
-            </div>
-          </article>
-
-          <!-- Noticia 3 -->
-          <article class="news-item-box" data-noticia-id="noticia-3">
-            <div class="news-item-thumb">
-              <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80" alt="Edición de libros y clásicos" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="news-header-meta">
-              <span class="news-tag">Crítica & Ensayo</span>
-              <span class="news-source"><strong>Babelia</strong> · 11 Oct 2026</span>
-            </div>
-            <h4><a href="https://elpais.com/babelia/" target="_blank" rel="noopener noreferrer">La resistencia del libro de fondo frente al vértigo de las novedades</a></h4>
-            <p>Editores independientes y libreros de fondo reivindican la publicación comentada de diarios, cartas y tratados filosóficos que no se someten al ciclo efímero del algoritmo comercial.</p>
-            <div class="news-item-footer">
-              <a href="https://elpais.com/babelia/" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('La resistencia del libro de fondo editorial', 'Babelia', 'Filosofía', 'https://elpais.com/babelia/', 'Defensa del libro clásico e independiente')">&#9733; Guardar noticia</button>
-            </div>
-          </article>
-
-          <!-- Noticia 4 -->
-          <article class="news-item-box" data-noticia-id="noticia-4">
-            <div class="news-item-thumb">
-              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80" alt="Cine clásico restaurado" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="news-header-meta">
-              <span class="news-tag">Séptimo Arte</span>
-              <span class="news-source"><strong>Caimán Cuadernos de Cine</strong> · 10 Oct 2026</span>
-            </div>
-            <h4><a href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer">La restauración en 4K del cine de autor: redescubrir la luz del claroscuro</a></h4>
-            <p>Las filmotecas internacionales concluyen la digitalización de obras de Carl Theodor Dreyer y Jean Renoir, devolviendo a las salas el grano original y la acústica analógica.</p>
-            <div class="news-item-footer">
-              <a href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('La restauración en 4K del cine de autor', 'Caimán Cine', 'Cine', 'https://elpais.com/cultura/', 'Preservación fílmica y claroscuro')">&#9733; Guardar noticia</button>
-            </div>
-          </article>
-
-          <!-- Noticia 5 -->
-          <article class="news-item-box" data-noticia-id="noticia-5">
-            <div class="news-item-thumb">
-              <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Música de cámara y acústica sacra" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="news-header-meta">
-              <span class="news-tag">Acústica & Música</span>
-              <span class="news-source"><strong>Scherzo</strong> · 09 Oct 2026</span>
-            </div>
-            <h4><a href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer">La mística de las campanas: ciclo contemporáneo de Arvo Pärt y Bach</a></h4>
-            <p>Orquestas europeas conmemoran el diálogo entre el contrapunto barroco y el estilo tintinnabuli en auditorios con acústica natural, reivindicando la pausa y el silencio.</p>
-            <div class="news-item-footer">
-              <a href="https://www.rtve.es/noticias/cultura/" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('La mística de las campanas: ciclo Arvo Pärt y Bach', 'Scherzo', 'Música', 'https://www.rtve.es/noticias/cultura/', 'Monografía acústica y minimalismo sacro')">&#9733; Guardar noticia</button>
-            </div>
-          </article>
-
-          <!-- Noticia 6 -->
-          <article class="news-item-box" data-noticia-id="noticia-6">
-            <div class="news-item-thumb">
-              <img src="https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=600&q=80" alt="Manuscritos y bibliotecas históricas" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="news-header-meta">
-              <span class="news-tag">Patrimonio & Archivos</span>
-              <span class="news-source"><strong>Agencia EFE</strong> · 08 Oct 2026</span>
-            </div>
-            <h4><a href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer">Apertura de los archivos inéditos de la generación del 27 en Madrid</a></h4>
-            <p>Cartas íntimas, cuadernos de apuntes y borradores de poemas de Federico García Lorca y Luis Cernuda ven la luz pública tras décadas custodiados en colecciones privadas.</p>
-            <div class="news-item-footer">
-              <a href="https://elpais.com/cultura/" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('Apertura de los archivos inéditos del 27', 'EFE Cultura', 'Literatura', 'https://elpais.com/cultura/', 'Documentación histórica y poesía')">&#9733; Guardar noticia</button>
-            </div>
-          </article>
-
+          <!-- Se inyecta dinámicamente con las fuentes RSS culturales en vivo -->
         </div>
       </div>
 
@@ -1025,9 +979,9 @@
         </div>
 
         <article class="ephemeris-card">
-          <span class="ephemeris-date-badge" id="efemeride-fecha-badge">13 de Octubre</span>
-          <h4 id="efemeride-titulo">Arvo Pärt y la revolución del Tintinnabuli</h4>
-          <p id="efemeride-cuerpo">Se conmemora la consolidación del minimalismo sacro contemporáneo, fecha en que el compositor unió el dolor humano con la quietud de las campanas.</p>
+          <span class="ephemeris-date-badge" id="efemeride-fecha-badge">14 de Octubre</span>
+          <h4 id="efemeride-titulo">Publicación de 'El sabueso de los Baskerville'</h4>
+          <p id="efemeride-cuerpo">Sir Arthur Conan Doyle entregaba al Strand Magazine los pliegos donde la niebla de Dartmoor desafió por primera vez a la ciencia analítica.</p>
         </article>
 
         <div class="block-header" style="margin-top: 1.5rem;">
@@ -1082,7 +1036,7 @@
   </footer>
 
   <!-- ====================================================================
-       SCRIPTS: RSS MULTIFUENTE, GUARDADO DE NOTICIAS & SINCRONIZACIÓN
+       SCRIPTS: RSS MULTIFUENTE CULTURAL RIGUROSO Y SINCRONIZACIÓN
        ==================================================================== -->
   <script>
     /* ==========================================================================
@@ -1128,7 +1082,7 @@
     const EFEMERIDES_CALENDARIO = [
       {
         dia: 13,
-        mes: 9, // Octubre (meses de 0 a 11 en JS)
+        mes: 9,
         fecha: "13 de Octubre",
         titulo: "Arvo Pärt y la revolución del Tintinnabuli",
         cuerpo: "Se conmemora la consolidación del minimalismo sacro contemporáneo, fecha en que el compositor unió el dolor humano con la quietud de las campanas."
@@ -1171,7 +1125,7 @@
     ];
 
     /* ==========================================================================
-       3. FUNCIÓN PARA GUARDAR CUALQUIER NOTICIA EN EL CUADERNO PERSONAL
+       3. GUARDAR NOTICIA EN EL CUADERNO PERSONAL
        ========================================================================== */
     function guardarNoticiaEnCuaderno(titulo, autorFuente, categoria, enlace, nota) {
       const STORAGE_KEY = "kairos_favoritos_v1";
@@ -1196,13 +1150,39 @@
     }
 
     /* ==========================================================================
-       4. MOTOR DE LECTURA MULTIFUENTE RSS EN VIVO (RTVE + EL PAÍS + BABELIA)
+       4. MOTOR RSS MULTIFUENTE EXCLUSIVAMENTE CULTURAL CON EXTRACCIÓN REAL DE FOTO
        ========================================================================== */
-    const FUENTES_RSS = [
-      { nombre: "RTVE Cultura", url: "https://www.rtve.es/api/tematicas/cultura/noticias.rss", tag: "Cultura & Artes" },
-      { nombre: "El País", url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/cultura/portada", tag: "Letras & Creación" },
-      { nombre: "Babelia", url: "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/section/babelia/portada", tag: "Crítica Literaria" }
+    const FUENTES_CULTURALES = [
+      { nombre: "RTVE Cultura", url: "https://www.rtve.es/api/tematicas/cultura/noticias.rss", tag: "Cultura & Creación" },
+      { nombre: "El Mundo Cultura", url: "https://e00-elmundo.uecdn.es/elmundo/rss/cultura.xml", tag: "Letras & Crítica" },
+      { nombre: "Libertad Digital Cultura", url: "https://feeds.feedburner.com/libertaddigital/cultura", tag: "Artes & Patrimonio" },
+      { nombre: "El Confidencial Cultura", url: "https://rss.elconfidencial.com/cultura/", tag: "Pensamiento & Cine" }
     ];
+
+    // Extrae la imagen real de la noticia desde los campos o el contenido HTML
+    function extraerImagenDeNoticia(item) {
+      if (item.thumbnail && item.thumbnail.startsWith("http")) return item.thumbnail;
+      if (item.enclosure && item.enclosure.link && item.enclosure.link.startsWith("http")) return item.enclosure.link;
+
+      // Buscar si viene una etiqueta <img src="..."> incrustada en la descripción
+      if (item.description) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(item.description, 'text/html');
+        const img = doc.querySelector('img');
+        if (img && img.src && img.src.startsWith("http")) {
+          return img.src;
+        }
+      }
+
+      // Fotos de archivo de alta calidad cultural como respaldo si la fuente no suministra imagen directa
+      const respaldos = [
+        "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80"
+      ];
+      return respaldos[Math.floor(Math.random() * respaldos.length)];
+    }
 
     async function cargarNoticiasCulturalesReales() {
       const feedContainer = document.getElementById("feed-noticias-culturales");
@@ -1210,7 +1190,7 @@
 
       let todasLasNoticias = [];
 
-      for (const fuente of FUENTES_RSS) {
+      for (const fuente of FUENTES_CULTURALES) {
         try {
           const apiEndpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(fuente.url)}`;
           const res = await fetch(apiEndpoint);
@@ -1218,49 +1198,42 @@
           const data = await res.json();
 
           if (data && data.status === "ok" && data.items && data.items.length > 0) {
-            const procesadas = data.items.slice(0, 3).map(item => ({
+            const itemsProcesados = data.items.slice(0, 3).map(item => ({
               fuente: fuente.nombre,
               tag: fuente.tag,
               title: item.title,
-              link: item.link,
+              link: item.link, // Enlace exacto al artículo
               pubDate: item.pubDate,
               description: item.description,
-              thumbnail: item.thumbnail || (item.enclosure ? item.enclosure.link : "")
+              image: extraerImagenDeNoticia(item)
             }));
-            todasLasNoticias = todasLasNoticias.concat(procesadas);
+            todasLasNoticias = todasLasNoticias.concat(itemsProcesados);
           }
         } catch (e) {
-          // Si una fuente se retrasa, continúa con las demás
+          // Continúa con las otras fuentes si alguna falla
         }
       }
 
-      if (todasLasNoticias.length >= 4) {
-        feedContainer.innerHTML = "";
-        const seleccionadas = todasLasNoticias.slice(0, 8);
+      // Ordenar por fecha más reciente
+      todasLasNoticias.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-        seleccionadas.forEach((item, index) => {
+      if (todasLasNoticias.length > 0) {
+        feedContainer.innerHTML = "";
+        const seleccionadas = todasLasNoticias.slice(0, 6);
+
+        seleccionadas.forEach(item => {
+          // Limpieza de etiquetas HTML en el resumen
           const divTemp = document.createElement("div");
           divTemp.innerHTML = item.description || "";
           let textoLimpio = divTemp.textContent || divTemp.innerText || "";
-          if (textoLimpio.length > 185) {
-            textoLimpio = textoLimpio.substring(0, 185) + "...";
+          if (textoLimpio.length > 175) {
+            textoLimpio = textoLimpio.substring(0, 175) + "...";
           }
 
-          let imagenUrl = item.thumbnail;
-          if (!imagenUrl) {
-            const fondos = [
-              "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80",
-              "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
-              "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80",
-              "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
-            ];
-            imagenUrl = fondos[index % fondos.length];
-          }
-
-          let fechaPublicacion = "Hoy";
+          let fechaFormateada = "Hoy";
           if (item.pubDate) {
             try {
-              fechaPublicacion = new Date(item.pubDate).toLocaleDateString('es-ES', {
+              fechaFormateada = new Date(item.pubDate).toLocaleDateString('es-ES', {
                 day: 'numeric',
                 month: 'short',
                 year: 'numeric'
@@ -1272,17 +1245,17 @@
           card.className = "news-item-box";
           card.innerHTML = `
             <div class="news-item-thumb">
-              <img src="${imagenUrl}" alt="${item.title}" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80'">
+              <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80'">
             </div>
             <div class="news-header-meta">
               <span class="news-tag">${item.tag}</span>
-              <span class="news-source"><strong>${item.fuente}</strong> · ${fechaPublicacion}</span>
+              <span class="news-source"><strong>${item.fuente}</strong> · ${fechaFormateada}</span>
             </div>
             <h4><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></h4>
             <p>${textoLimpio}</p>
             <div class="news-item-footer">
-              <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer artículo completo &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('${item.title.replace(/'/g, "\\'")}', '${item.fuente}', 'Actualidad Cultural', '${item.link}', 'Noticia guardada desde portada')">&#9733; Guardar noticia</button>
+              <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer artículo en fuente &rarr;</a>
+              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('${item.title.replace(/'/g, "\\'")}', '${item.fuente}', 'Actualidad Cultural', '${item.link}', 'Noticia guardada desde portada')">&#9733; Guardar</button>
             </div>
           `;
           feedContainer.appendChild(card);
@@ -1292,11 +1265,11 @@
 
     function forzarActualizacionNoticias() {
       cargarNoticiasCulturalesReales();
-      alert("Comprobando fuentes culturales en vivo...");
+      alert("Comprobando las fuentes culturales en vivo...");
     }
 
     /* ==========================================================================
-       5. SINCRONIZACIÓN AUTOMÁTICA CON LAS OTRAS PÁGINAS (FETCH LOCAL)
+       5. SINCRONIZACIÓN AUTOMÁTICA CON LAS OTRAS PÁGINAS
        ========================================================================== */
     async function extraerUltimoEnsayo(nombreArchivo) {
       try {
@@ -1412,10 +1385,9 @@
     }
 
     /* ==========================================================================
-       6. INICIALIZACIÓN COMPLETA
+       6. INICIALIZACIÓN
        ========================================================================== */
     function cargarDinamicos() {
-      // 1. Fecha del día en español
       const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const hoy = new Date();
       const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
@@ -1424,10 +1396,8 @@
         metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
       }
 
-      // 2. Cargar noticias multifuente
       cargarNoticiasCulturalesReales();
 
-      // 3. Efeméride exacta de hoy
       const diaHoy = hoy.getDate();
       const mesHoy = hoy.getMonth();
 
@@ -1443,14 +1413,12 @@
         document.getElementById("efemeride-cuerpo").textContent = efemerideHoy.cuerpo;
       }
 
-      // 4. Cita rotativa diaria de autor
       const citaHoy = CITAS_MARGINAL[(diaHoy - 1) % CITAS_MARGINAL.length];
       if (citaHoy) {
         document.getElementById("daily-quote-text").textContent = citaHoy.texto;
         document.getElementById("daily-quote-author").textContent = citaHoy.autor;
       }
 
-      // 5. Sincronizar portada con los cuadernos
       sincronizarPortadaConSecciones();
     }
 
