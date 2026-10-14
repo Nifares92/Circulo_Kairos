@@ -6,6 +6,9 @@
   <meta name="description" content="Círculo Kairós — Manifiesto fundacional, vocación editorial y buzón de correspondencia.">
   <title>El Círculo | Manifiesto & Correspondencia</title>
 
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
   <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,30 +72,75 @@
 
     /* Cabecera Principal */
     .site-header {
-      border-bottom: 3px double var(--border-dark);
-      padding: 2.2rem 1.5rem 1.25rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding: 2.2rem 1.5rem 1.6rem;
       background-color: var(--bg-color);
+      position: relative;
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
+    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
+    .brand {
+      position: relative;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .brand-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.13;
+      filter: blur(1px);
+      mix-blend-mode: multiply;
+    }
+
+    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
-      font-size: 3.4rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+      position: relative;
+      z-index: 2;
     }
+    .site-title a {
+      color: var(--text-main);
+      transition: color var(--transition), opacity var(--transition);
+    }
+    .site-title a:hover {
+      color: var(--accent);
+    }
+
     .site-tagline {
       font-family: var(--font-reader);
       font-style: italic;
       font-size: 1.15rem;
       color: var(--text-muted);
       letter-spacing: 0.04em;
-      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .main-nav { border-top: 1px solid var(--border-soft); padding-top: 0.9rem; }
+    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    .main-nav { 
+      border-bottom: 3px double var(--border-dark);
+      padding: 0.9rem 1rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+    }
     .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
     .main-nav a {
       font-size: 0.82rem;
@@ -347,7 +395,7 @@
     /* Barra Lateral */
     .sidebar-wrapper {
       position: sticky;
-      top: 2rem;
+      top: 5rem;
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
@@ -366,7 +414,7 @@
       padding-bottom: 0.4rem;
     }
 
-    /* Emblema Vectorial en la Barra Lateral */
+    /* Emblema en la Barra Lateral */
     .emblem-focus-card { text-align: center; }
     .emblem-wrapper {
       width: 140px;
@@ -381,10 +429,11 @@
       justify-content: center;
       box-shadow: 2px 5px 14px rgba(34, 31, 29, 0.06);
     }
-    .emblem-wrapper svg {
+    .emblem-wrapper img {
       width: 100%;
       height: 100%;
       display: block;
+      object-fit: contain;
     }
 
     .emblem-focus-card h4 {
@@ -502,6 +551,7 @@
       .contact-form { grid-template-columns: 1fr; }
       .form-group.full-width { grid-column: auto; }
       .submit-btn { width: 100%; text-align: center; }
+      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -514,27 +564,31 @@
     <span>Año I · Edición Continua</span>
   </aside>
 
-  <!-- Cabecera -->
+  <!-- Cabecera Principal con Filigrana de Fondo -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
+        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
-
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="literatura.html">Literatura</a></li>
-          <li><a href="cine.html">Cine</a></li>
-          <li><a href="musica.html">Música</a></li>
-          <li><a href="filosofia.html">Filosofía</a></li>
-          <li><a href="sobre-el-circulo.html" class="active" aria-current="page">El Círculo</a></li>
-          <li><a href="perfil.html">Mi Cuaderno</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
+
+  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <nav class="main-nav" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="literatura.html">Literatura</a></li>
+      <li><a href="cine.html">Cine</a></li>
+      <li><a href="musica.html">Música</a></li>
+      <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="sobre-el-circulo.html" class="active" aria-current="page">El Círculo</a></li>
+      <li><a href="perfil.html">Mi Cuaderno</a></li>
+    </ul>
+  </nav>
 
   <!-- Contenedor Principal -->
   <main id="contenido-principal">
@@ -638,26 +692,14 @@
 
       </section>
 
-      <!-- BARRA LATERAL (CON EL SÍMBOLO VECTORIAL DE KAIRÓS) -->
+      <!-- BARRA LATERAL (CON EL SÍMBOLO OFICIAL DE KAIRÓS) -->
       <aside class="sidebar-wrapper" aria-label="Información complementaria">
 
-        <!-- Widget 1: Símbolo de Círculo Kairós (Sin fotos de personas) -->
+        <!-- Widget 1: Símbolo oficial de Círculo Kairós -->
         <div class="sidebar-widget emblem-focus-card">
           <h3 class="widget-title">El Emblema</h3>
           <div class="emblem-wrapper" title="Emblema del Círculo Kairós">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo de Círculo Kairós">
-              <!-- Círculo exterior -->
-              <circle cx="50" cy="50" r="46" stroke="#9e4734" stroke-width="2.5" />
-              <!-- Círculo interior fino -->
-              <circle cx="50" cy="50" r="41" stroke="#221f1d" stroke-width="0.75" stroke-dasharray="2 3" />
-              <!-- Cuatro puntos cardinales del Kairós -->
-              <circle cx="50" cy="9" r="2.5" fill="#9e4734" />
-              <circle cx="50" cy="91" r="2.5" fill="#9e4734" />
-              <circle cx="9" cy="50" r="2.5" fill="#9e4734" />
-              <circle cx="91" cy="50" r="2.5" fill="#9e4734" />
-              <!-- Letra Kappa (K) clásica de Kairós -->
-              <path d="M42 28 V72 M42 50 L64 28 M48 44 L66 72" stroke="#221f1d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <img src="logo-kairos.svg" alt="Emblema de Círculo Kairós">
           </div>
           <h4>Círculo Kairós</h4>
           <span class="role">Ágora Cultural Independiente</span>
@@ -708,6 +750,7 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-about">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
         <p>Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.</p>
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
