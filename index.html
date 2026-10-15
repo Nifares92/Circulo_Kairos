@@ -15,6 +15,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
+    /* ==========================================================================
+       VARIABLES Y PALETA EDITORIAL CÁLIDA
+       ========================================================================== */
     :root {
       --bg-color: #fbf8f3;
       --bg-surface: #f4ede1;
@@ -23,7 +26,7 @@
       --text-main: #221f1d;
       --text-muted: #6d665f;
       --text-light: #8a8279;
-      --accent: #9e4734;
+      --accent: #9e4734;          /* Terracota / lacre oficial */
       --accent-dark: #783324;
       --border-soft: #e2d8c7;
       --border-dark: #221f1d;
@@ -93,6 +96,7 @@
       mix-blend-mode: multiply;
     }
 
+    /* ESTILOGRAFÍA Y COLOR DEL TITULAR KAIRÓS (TERRACOTA OFICIAL) */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -100,12 +104,18 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 0.35rem;
-      color: var(--text-main);
+      color: var(--accent);
       position: relative;
       z-index: 2;
     }
-    .site-title a { color: var(--text-main); transition: color var(--transition); }
-    .site-title a:hover { color: var(--accent); }
+    .site-title a {
+      color: var(--accent);
+      transition: color var(--transition), opacity var(--transition);
+    }
+    .site-title a:hover {
+      color: var(--accent-dark);
+      opacity: 0.95;
+    }
 
     .site-tagline {
       font-family: var(--font-reader);
@@ -791,7 +801,7 @@
 
   <aside class="top-bar-meta" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
-    <span><strong>Ritmo Editorial:</strong> Lunes (Lit) · Martes (Cine) · Miér (Mús) · Juev (Filo) · Vier (Pensamiento)</span>
+    <span><strong>Disciplina:</strong> Crítica de Fondo, Artes & Pensamiento</span>
     <span>Año I · Cuaderno Continuo</span>
   </aside>
 
@@ -831,77 +841,88 @@
       </p>
       <div class="theme-monograph-grid">
         <div class="theme-node">
-          <span class="theme-node-tag">I. Lunes · Letras</span>
+          <span class="theme-node-tag">I. Literatura</span>
           <span class="theme-node-text">Fantasmas victorianos, el rito de Samhain y la catarsis del miedo.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">II. Martes · Cine</span>
+          <span class="theme-node-tag">II. Cine</span>
           <span class="theme-node-text">La silueta de Nosferatu y la partida de ajedrez contra la Parca.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">III. Miér · Acústica</span>
+          <span class="theme-node-tag">III. Música</span>
           <span class="theme-node-text">Réquiems, polifonía sacra de difuntos y el tañido de campanas.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">IV. Juev · Filosofía</span>
+          <span class="theme-node-tag">IV. Filosofía</span>
           <span class="theme-node-text">El ser-para-la-muerte, el instante lúcido y la dignidad del límite.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">V. Vier · Pensamiento</span>
+          <span class="theme-node-tag">V. Pensamiento</span>
           <span class="theme-node-text">La arquitectura de la pérdida y la custodia de lo irrecuperable.</span>
         </div>
       </div>
     </section>
 
-    <!-- PORTADA PRINCIPAL: EXTRACTO DEL ENSAYO DEL DIRECTOR -->
+    <!-- PORTADA DINÁMICA: ENSAYO MÁS RECIENTE + 2 LATERALES (CASCADA AUTOMÁTICA) -->
     <section class="hero-editorial-grid" aria-labelledby="portada-principal-titulo">
 
+      <!-- 1. ENSAYO MÁS RECIENTE DE TODA LA WEB (TARJETA PRINCIPAL) -->
       <article class="hero-lead-card" id="portada-lead-article">
         <div class="hero-badge-row">
-          <span class="discipline-badge" id="lead-badge">Viernes · Pensamiento del Director</span>
-          <span class="reading-time" id="lead-time">45 min de lectura de fondo</span>
+          <span class="discipline-badge" id="lead-badge">Pensamiento</span>
+          <span class="reading-time" id="lead-time">45 min de lectura</span>
         </div>
         
         <h2 id="portada-principal-titulo">
           <a href="pensamiento.html#tratado-perdida-director" id="lead-title">La arquitectura de la ausencia: Fenomenología de la pérdida, el duelo insumiso y los objetos que sobreviven al naufragio</a>
         </h2>
-        <span class="lead-author-tag">Por el Director de Círculo Kairós · Tratado Monográfico I</span>
+        <span class="lead-author-tag" id="lead-author">Tribuna de la Dirección</span>
 
         <div class="hero-lead-image">
-          <img id="lead-image" src="https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=1200&q=80" alt="Gabinete de lectura en penumbra con luz crepuscular">
+          <img id="lead-image" 
+               src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80" 
+               alt="Gabinete de lectura en penumbra con manuscritos y cartas"
+               onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80'">
         </div>
 
         <p class="hero-lead-excerpt" id="lead-excerpt">
           Toda pérdida verdadera comienza mucho antes de que la ausencia sea formalmente proclamada. Comienza en el instante imperceptible en que la mente advierte que el presente ha dejado de engendrar porvenir y ha empezado, con silenciosa crueldad, a transformarse en monumento. Perder no es la mera sustracción aritmética de una presencia; es la quiebra ontológica del espacio circundante: los objetos cotidianos que retienen la huella de quien ya no habita el mundo, la desaparición repentina de una lengua privada forjada en años de convivencia y el coraje de rechazar el consuelo apresurado para aprender a custodiar el vacío con reverente lucidez.
         </p>
 
-        <a href="pensamiento.html#tratado-perdida-director" id="lead-link" class="btn-kairos">Continuar leyendo el tratado completo en Pensamiento &rarr;</a>
+        <a href="pensamiento.html#tratado-perdida-director" id="lead-link" class="btn-kairos">Continuar leyendo el tratado completo &rarr;</a>
       </article>
 
-      <aside class="hero-side-column" aria-label="Otras lecturas destacadas de la semana">
+      <!-- 2. LOS DOS ENSAYOS INMEDIATAMENTE ANTERIORES (COLUMNA LATERAL) -->
+      <aside class="hero-side-column" aria-label="Lecturas anteriores destacadas">
         
-        <article class="side-story-card" id="side-card-literatura">
-          <span class="discipline-badge" id="side-lit-badge" style="align-self: flex-start;">Lunes · Literatura</span>
+        <!-- Segundo más reciente -->
+        <article class="side-story-card" id="side-card-1">
+          <span class="discipline-badge" id="side-1-badge" style="align-self: flex-start;">Literatura</span>
           <div class="side-story-media">
-            <img id="side-lit-img" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Libros y legajos antiguos">
+            <img id="side-1-img" 
+                 src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" 
+                 alt="Mansión victoriana">
           </div>
-          <h3><a href="literatura.html#kafka-proceso" id="side-lit-title">El tribunal en la buhardilla: Franz Kafka y la arquitectura de la culpa innata</a></h3>
-          <p id="side-lit-excerpt">
-            La detención invisible de Josef K., la parábola ante la Ley y la tragedia del hombre moderno ante tribunales inaccesibles.
+          <h3><a href="literatura.html#lit-fantasma-victoriano" id="side-1-title">El frío en la nuca: La anatomía del cuento de fantasmas victoriano</a></h3>
+          <p id="side-1-excerpt">
+            A mediados del siglo XIX, mientras el Imperio británico trazaba líneas férreas, una corriente subterránea de pavor invadió la literatura inglesa desde la intimidad doméstica.
           </p>
-          <a href="literatura.html#kafka-proceso" id="side-lit-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver en Literatura &rarr;</a>
+          <a href="literatura.html#lit-fantasma-victoriano" id="side-1-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver ensayo completo &rarr;</a>
         </article>
 
-        <article class="side-story-card" id="side-card-cine">
-          <span class="discipline-badge" id="side-cine-badge" style="align-self: flex-start;">Martes · Cine</span>
+        <!-- Tercer más reciente -->
+        <article class="side-story-card" id="side-card-2">
+          <span class="discipline-badge" id="side-2-badge" style="align-self: flex-start;">Cine</span>
           <div class="side-story-media">
-            <img id="side-cine-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80" alt="Olas y rocas en la costa">
+            <img id="side-2-img" 
+                 src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80" 
+                 alt="Escalera expresionista">
           </div>
-          <h3><a href="cine.html#cine-bergman-septimo" id="side-cine-title">El tablero sobre las piedras: Bergman y el ajedrez con la Muerte</a></h3>
-          <p id="side-cine-excerpt">
-            La partida de Antonius Block en la playa pedregosa de Hovs Hallar y el silencio de Dios frente al consuelo terrenal.
+          <h3><a href="cine.html#cine-nosferatu-murnau" id="side-2-title">La sinfonía del espanto: F.W. Murnau, 'Nosferatu' y la sombra</a></h3>
+          <p id="side-2-excerpt">
+            Murnau filma el aire envenenado de la muerte: el conde Orlok como parásito ontológico y la lección geométrica de la silueta en la escalera de caracol.
           </p>
-          <a href="cine.html#cine-bergman-septimo" id="side-cine-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver en Cine &rarr;</a>
+          <a href="cine.html#cine-nosferatu-murnau" id="side-2-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver ensayo completo &rarr;</a>
         </article>
 
       </aside>
@@ -916,73 +937,80 @@
       <cite id="banner-quote-author">— Cuaderno de Principios del Círculo</cite>
     </section>
 
-    <!-- Quinteto de Secciones -->
+    <!-- Quinteto de Secciones: Los Cinco Cuadernos (Sin días de la semana) -->
     <section class="disciplines-overview" aria-labelledby="cuarteto-titulo">
       <div class="section-title-wrap">
-        <h2 id="cuarteto-titulo">Los Cinco Cuadernos de la Semana</h2>
-        <p>Un compás diario de publicación coordinado de lunes a viernes</p>
+        <h2 id="cuarteto-titulo">Los Cinco Cuadernos</h2>
+        <p>Sincronizados en tiempo real con la última publicación de cada sección</p>
       </div>
 
       <div class="penta-grid">
         
+        <!-- 1. Literatura -->
         <article class="penta-card" id="quad-card-lit">
-          <span class="discipline-badge" style="align-self: flex-start;">Lunes · I</span>
+          <span class="discipline-badge" style="align-self: flex-start;">Literatura</span>
           <div class="penta-media">
-            <img id="quad-lit-img" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&q=80" alt="Literatura">
+            <img id="quad-lit-img" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Literatura">
           </div>
-          <h3><a href="literatura.html#kafka-proceso" id="quad-lit-title">Literatura: Franz Kafka</a></h3>
+          <h3><a href="literatura.html" id="quad-lit-title">Literatura</a></h3>
           <p id="quad-lit-desc">
-            La culpa sin delito, los tribunales polvorientos de Praga y la parábola inexpugnable ante las puertas de la Ley.
+            Crítica literaria de fondo, la relojería deductiva del enigma policial, el realismo trágico y el arte de la atmósfera narrativa.
           </p>
-          <a href="literatura.html#kafka-proceso" id="quad-lit-link" class="penta-link">Leer en Letras &rarr;</a>
+          <a href="literatura.html" id="quad-lit-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
+        <!-- 2. Cine -->
         <article class="penta-card" id="quad-card-cine">
-          <span class="discipline-badge" style="align-self: flex-start;">Martes · II</span>
+          <span class="discipline-badge" style="align-self: flex-start;">Cine</span>
           <div class="penta-media">
             <img id="quad-cine-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80" alt="Cine">
           </div>
-          <h3><a href="cine.html#cine-bergman-septimo" id="quad-cine-title">Cine: Bergman</a></h3>
+          <h3><a href="cine.html" id="quad-cine-title">Cine</a></h3>
           <p id="quad-cine-desc">
-            El caballero cruzado, la partida en la orilla del mar Báltico y el misterio del silencio de Dios.
+            Poética del plano secuencia, la geometría moral del claroscuro en el cine negro clásico y la ciencia ficción existencial.
           </p>
-          <a href="cine.html#cine-bergman-septimo" id="quad-cine-link" class="penta-link">Leer en Cine &rarr;</a>
+          <a href="cine.html" id="quad-cine-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
+        <!-- 3. Música -->
         <article class="penta-card" id="quad-card-mus">
-          <span class="discipline-badge" style="align-self: flex-start;">Miércoles · III</span>
+          <span class="discipline-badge" style="align-self: flex-start;">Música</span>
           <div class="penta-media">
             <img id="quad-mus-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" alt="Música">
           </div>
-          <h3><a href="musica.html#mus-beethoven-op111" id="quad-mus-title">Música: Beethoven</a></h3>
+          <h3><a href="musica.html" id="quad-mus-title">Música</a></h3>
           <p id="quad-mus-desc">
-            El cataclismo del primer movimiento y los trinos celestiales del Arietta como despedida del teclado clásico.
+            Monografías sonoras de fondo, la liturgia minimalista del tintinnabuli, el modalismo de medianoche y la textura analógica.
           </p>
-          <a href="musica.html#mus-beethoven-op111" id="quad-mus-link" class="penta-link">Leer en Música &rarr;</a>
+          <a href="musica.html" id="quad-mus-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
+        <!-- 4. Filosofía -->
         <article class="penta-card" id="quad-card-filo">
-          <span class="discipline-badge" style="align-self: flex-start;">Jueves · IV</span>
+          <span class="discipline-badge" style="align-self: flex-start;">Filosofía</span>
           <div class="penta-media">
             <img id="quad-filo-img" src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=500&q=80" alt="Filosofía">
           </div>
-          <h3><a href="filosofia.html#heidegger-tiempo" id="quad-filo-title">Filosofía: Heidegger</a></h3>
+          <h3><a href="filosofia.html" id="quad-filo-title">Filosofía</a></h3>
           <p id="quad-filo-desc">
-            La caída en el anonimato cotidiano del «Se» impersonal y la conquista de la resolución lúcida ante la finitud.
+            Tratados monográficos sobre el tiempo kairológico, la soberanía interior estoica del juicio y la fenomenología del límite.
           </p>
-          <a href="filosofia.html#heidegger-tiempo" id="quad-filo-link" class="penta-link">Leer en Filosofía &rarr;</a>
+          <a href="filosofia.html" id="quad-filo-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
+        <!-- 5. Pensamiento -->
         <article class="penta-card" id="quad-card-pens">
-          <span class="discipline-badge" style="align-self: flex-start; background-color: rgba(158, 71, 52, 0.15);">Viernes · V</span>
+          <span class="discipline-badge" style="align-self: flex-start; background-color: rgba(158, 71, 52, 0.15);">Pensamiento</span>
           <div class="penta-media">
-            <img id="quad-pens-img" src="https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=500&q=80" alt="Pensamiento del Director">
+            <img id="quad-pens-img" 
+                 src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&q=80" 
+                 alt="Pensamiento">
           </div>
-          <h3><a href="pensamiento.html#tratado-perdida-director" id="quad-pens-title">Pensamiento: La Pérdida</a></h3>
+          <h3><a href="pensamiento.html" id="quad-pens-title">Pensamiento</a></h3>
           <p id="quad-pens-desc">
-            Fenomenología de la ausencia, el rescoldo del duelo y la custodia de la memoria en la pluma del Director.
+            Tribuna de la Dirección consagrada a la deliberación profunda, el duelo insumiso y la custodia de la memoria viva.
           </p>
-          <a href="pensamiento.html#tratado-perdida-director" id="quad-pens-link" class="penta-link">Leer Tribuna &rarr;</a>
+          <a href="pensamiento.html" id="quad-pens-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
       </div>
@@ -1050,13 +1078,13 @@
       </div>
 
       <nav class="footer-nav" aria-label="Navegación del pie">
-        <h4>Cuadernos Semanales</h4>
+        <h4>Cuadernos</h4>
         <ul>
-          <li><a href="literatura.html">Lunes · Literatura & Enigma</a></li>
-          <li><a href="cine.html">Martes · Cine & Mirada</a></li>
-          <li><a href="musica.html">Miércoles · Música & Acústica</a></li>
-          <li><a href="filosofia.html">Jueves · Filosofía & Ensayo</a></li>
-          <li><a href="pensamiento.html">Viernes · Pensamiento (Director)</a></li>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Acústica</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
         </ul>
       </nav>
 
@@ -1296,7 +1324,10 @@
       { dia: 18, mes: 9, fecha: "18 de Octubre", titulo: "Estreno de 'Moby Dick' de Herman Melville", cuerpo: "Salía a la luz la colosal epopeya metafísica sobre el capitán Ahab, el leviatán blanco y el combate ciego del hombre contra el destino." }
     ];
 
-    async function extraerUltimoEnsayo(nombreArchivo) {
+    /* ==========================================================================
+       EXTRACCIÓN AUTOMÁTICA Y CASCADA DE ENSAYOS: PRINCIPAL + 2 LATERALES
+       ========================================================================== */
+    async function extraerUltimoEnsayo(nombreArchivo, seccionNombre) {
       try {
         const respuesta = await fetch(nombreArchivo);
         if (!respuesta.ok) return null;
@@ -1313,76 +1344,121 @@
         const titulo = titularEl ? titularEl.textContent.trim() : "";
         
         const imgEl = primerArticulo.querySelector(".article-featured-media img") || primerArticulo.querySelector("img");
-        const img = imgEl ? imgEl.getAttribute("src") : "";
+        const img = imgEl ? (imgEl.getAttribute("src") || "") : "";
+
+        const timeEl = primerArticulo.querySelector("time");
+        const fechaRaw = timeEl ? (timeEl.getAttribute("datetime") || timeEl.textContent) : "";
+        const fechaEpoch = fechaRaw ? new Date(fechaRaw).getTime() : 0;
 
         const metaEl = primerArticulo.querySelector(".article-meta-line");
-        const tiempo = metaEl ? metaEl.textContent.trim() : "";
+        const tiempoLectura = metaEl ? metaEl.textContent.trim() : "Lectura de fondo";
 
         const badgeEl = primerArticulo.querySelector(".article-topic");
-        const badge = badgeEl ? badgeEl.textContent.trim() : "";
+        const badge = badgeEl ? badgeEl.textContent.trim() : seccionNombre;
 
         const primerParrafo = primerArticulo.querySelector(".article-prose p");
         let resumen = "";
         if (primerParrafo) {
           resumen = primerParrafo.textContent.trim();
-          if (resumen.length > 240) {
-            resumen = resumen.substring(0, 240) + "...";
+          if (resumen.length > 280) {
+            resumen = resumen.substring(0, 280) + "...";
           }
         }
 
-        return { id, archivo: nombreArchivo, enlace: `${nombreArchivo}#${id}`, titulo, img, tiempo, badge, resumen };
+        return {
+          id,
+          archivo: nombreArchivo,
+          seccion: seccionNombre,
+          enlace: `${nombreArchivo}#${id}`,
+          titulo,
+          img,
+          tiempoLectura,
+          badge,
+          resumen,
+          fechaEpoch
+        };
       } catch (error) {
         return null;
       }
     }
 
-    async function sincronizarPortadaConSecciones() {
-      const dataLiteratura = await extraerUltimoEnsayo("literatura.html");
-      if (dataLiteratura) {
-        if (dataLiteratura.titulo) document.getElementById("side-lit-title").textContent = dataLiteratura.titulo;
-        document.getElementById("side-lit-title").setAttribute("href", dataLiteratura.enlace);
-        document.getElementById("side-lit-link").setAttribute("href", dataLiteratura.enlace);
-        if (dataLiteratura.img) document.getElementById("side-lit-img").setAttribute("src", dataLiteratura.img);
-        if (dataLiteratura.resumen) document.getElementById("side-lit-excerpt").textContent = dataLiteratura.resumen;
+    async function actualizarCascadaEnsayos() {
+      // 1. Extraer el ensayo más reciente de cada uno de los 5 cuadernos
+      const fuentes = [
+        { archivo: "pensamiento.html", seccion: "Pensamiento" },
+        { archivo: "literatura.html", seccion: "Literatura" },
+        { archivo: "cine.html", seccion: "Cine" },
+        { archivo: "musica.html", seccion: "Música" },
+        { archivo: "filosofia.html", seccion: "Filosofía" }
+      ];
 
-        document.getElementById("quad-lit-title").textContent = "Literatura: " + dataLiteratura.titulo;
-        document.getElementById("quad-lit-title").setAttribute("href", dataLiteratura.enlace);
-        document.getElementById("quad-lit-link").setAttribute("href", dataLiteratura.enlace);
-        if (dataLiteratura.img) document.getElementById("quad-lit-img").setAttribute("src", dataLiteratura.img);
-        if (dataLiteratura.resumen) document.getElementById("quad-lit-desc").textContent = dataLiteratura.resumen;
-      }
+      const resultados = await Promise.all(
+        fuentes.map(f => extraerUltimoEnsayo(f.archivo, f.seccion))
+      );
 
-      const dataCine = await extraerUltimoEnsayo("cine.html");
-      if (dataCine) {
-        if (dataCine.titulo) document.getElementById("side-cine-title").textContent = dataCine.titulo;
-        document.getElementById("side-cine-title").setAttribute("href", dataCine.enlace);
-        document.getElementById("side-cine-link").setAttribute("href", dataCine.enlace);
-        if (dataCine.img) document.getElementById("side-cine-img").setAttribute("src", dataCine.img);
-        if (dataCine.resumen) document.getElementById("side-cine-excerpt").textContent = dataCine.resumen;
+      // Filtrar los que hayan cargado correctamente
+      const validos = resultados.filter(item => item !== null && item.titulo);
 
-        document.getElementById("quad-cine-title").textContent = "Cine: " + dataCine.titulo;
-        document.getElementById("quad-cine-title").setAttribute("href", dataCine.enlace);
-        document.getElementById("quad-cine-link").setAttribute("href", dataCine.enlace);
-        if (dataCine.img) document.getElementById("quad-cine-img").setAttribute("src", dataCine.img);
-        if (dataCine.resumen) document.getElementById("quad-cine-desc").textContent = dataCine.resumen;
-      }
+      // Ordenar por fecha de publicación (el más reciente primero)
+      validos.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
 
-      const dataMusica = await extraerUltimoEnsayo("musica.html");
-      if (dataMusica) {
-        document.getElementById("quad-mus-title").textContent = "Música: " + dataMusica.titulo;
-        document.getElementById("quad-mus-title").setAttribute("href", dataMusica.enlace);
-        document.getElementById("quad-mus-link").setAttribute("href", dataMusica.enlace);
-        if (dataMusica.img) document.getElementById("quad-mus-img").setAttribute("src", dataMusica.img);
-        if (dataMusica.resumen) document.getElementById("quad-mus-desc").textContent = dataMusica.resumen;
-      }
+      if (validos.length > 0) {
+        // A. El ensayo MÁS RECIENTE de toda la web se coloca en la TARJETA PRINCIPAL
+        const principal = validos[0];
+        const leadBadge = document.getElementById("lead-badge");
+        const leadTitle = document.getElementById("lead-title");
+        const leadLink = document.getElementById("lead-link");
+        const leadImg = document.getElementById("lead-image");
+        const leadExcerpt = document.getElementById("lead-excerpt");
 
-      const dataFilosofia = await extraerUltimoEnsayo("filosofia.html");
-      if (dataFilosofia) {
-        document.getElementById("quad-filo-title").textContent = "Filosofía: " + dataFilosofia.titulo;
-        document.getElementById("quad-filo-title").setAttribute("href", dataFilosofia.enlace);
-        document.getElementById("quad-filo-link").setAttribute("href", dataFilosofia.enlace);
-        if (dataFilosofia.img) document.getElementById("quad-filo-img").setAttribute("src", dataFilosofia.img);
-        if (dataFilosofia.resumen) document.getElementById("quad-filo-desc").textContent = dataFilosofia.resumen;
+        if (leadBadge) leadBadge.textContent = principal.seccion;
+        if (leadTitle) {
+          leadTitle.textContent = principal.titulo;
+          leadTitle.setAttribute("href", principal.enlace);
+        }
+        if (leadLink) leadLink.setAttribute("href", principal.enlace);
+        if (leadImg && principal.img) leadImg.setAttribute("src", principal.img);
+        if (leadExcerpt && principal.resumen) leadExcerpt.textContent = principal.resumen;
+
+        // B. El SEGUNDO más reciente en la primera tarjeta lateral
+        if (validos.length > 1) {
+          const lateral1 = validos[1];
+          const s1Badge = document.getElementById("side-1-badge");
+          const s1Title = document.getElementById("side-1-title");
+          const s1Link = document.getElementById("side-1-link");
+          const s1Img = document.getElementById("side-1-img");
+          const s1Excerpt = document.getElementById("side-1-excerpt");
+
+          if (s1Badge) s1Badge.textContent = lateral1.seccion;
+          if (s1Title) {
+            s1Title.textContent = lateral1.titulo;
+            s1Title.setAttribute("href", lateral1.enlace);
+          }
+          if (s1Link) s1Link.setAttribute("href", lateral1.enlace);
+          if (s1Img && lateral1.img) s1Img.setAttribute("src", lateral1.img);
+          if (s1Excerpt && lateral1.resumen) s1Excerpt.textContent = lateral1.resumen;
+        }
+
+        // C. El TERCER más reciente en la segunda tarjeta lateral
+        if (validos.length > 2) {
+          const lateral2 = validos[2];
+          const s2Badge = document.getElementById("side-2-badge");
+          const s2Title = document.getElementById("side-2-title");
+          const s2Link = document.getElementById("side-2-link");
+          const s2Img = document.getElementById("side-2-img");
+          const s2Excerpt = document.getElementById("side-2-excerpt");
+
+          if (s2Badge) s2Badge.textContent = lateral2.seccion;
+          if (s2Title) {
+            s2Title.textContent = lateral2.titulo;
+            s2Title.setAttribute("href", lateral2.enlace);
+          }
+          if (s2Link) s2Link.setAttribute("href", lateral2.enlace);
+          if (s2Img && lateral2.img) s2Img.setAttribute("src", lateral2.img);
+          if (s2Excerpt && lateral2.resumen) s2Excerpt.textContent = lateral2.resumen;
+        }
+
+        // Nota: Los que ocupen la 4ª y 5ª posición quedan fuera de la cabecera automáticamente.
       }
     }
 
@@ -1417,7 +1493,8 @@
         document.getElementById("daily-quote-author").textContent = citaHoy.autor;
       }
 
-      sincronizarPortadaConSecciones();
+      // Ejecutar la cascada automática al cargar la página
+      actualizarCascadaEnsayos();
     }
 
     document.addEventListener("DOMContentLoaded", cargarDinamicos);
