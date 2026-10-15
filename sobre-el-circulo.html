@@ -141,7 +141,7 @@
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
     }
-    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.2rem; }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -551,7 +551,7 @@
       .contact-form { grid-template-columns: 1fr; }
       .form-group.full-width { grid-column: auto; }
       .submit-btn { width: 100%; text-align: center; }
-      .main-nav ul { gap: 1.2rem; }
+      .main-nav ul { gap: 1rem; }
     }
   </style>
 </head>
@@ -585,6 +585,7 @@
       <li><a href="cine.html">Cine</a></li>
       <li><a href="musica.html">Música</a></li>
       <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="pensamiento.html">Pensamiento</a></li>
       <li><a href="sobre-el-circulo.html" class="active" aria-current="page">El Círculo</a></li>
       <li><a href="perfil.html">Mi Cuaderno</a></li>
     </ul>
@@ -647,14 +648,19 @@
           </div>
         </article>
 
-        <!-- Formulario de Correspondencia y Contacto con envío a ............... -->
+        <!-- Formulario de Correspondencia y Contacto con FormSubmit (Sin registro previo) -->
         <section class="contact-panel" id="buzon-correspondencia" aria-labelledby="titulo-contacto">
           <div class="contact-panel-header">
             <h3 id="titulo-contacto">Buzón de Correspondencia</h3>
             <p>Para propuestas de lectura, réplicas a ensayos, sugerencias cinéfilas o consultas directas al cuaderno editorial.</p>
           </div>
 
-          <form class="contact-form" action="https://formspree.io/f/serabohe@gmail.com" method="POST">
+          <form class="contact-form" action="https://formsubmit.co/serabohe@gmail.com" method="POST">
+            <!-- Configuración FormSubmit -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://serabohe-rgb.github.io/circulo-kairos/sobre-el-circulo.html?enviado=1#buzon-correspondencia">
+
             <div class="form-group">
               <label for="nombre" class="form-label">Nombre o Seudónimo *</label>
               <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
@@ -662,7 +668,7 @@
 
             <div class="form-group">
               <label for="email" class="form-label">Correo Electrónico *</label>
-              <input type="email" id="email" name="_replyto" class="form-input" placeholder="correo@ejemplo.com" required>
+              <input type="email" id="email" name="email" class="form-input" placeholder="correo@ejemplo.com" required>
             </div>
 
             <div class="form-group">
@@ -673,6 +679,7 @@
                 <option value="cine">Sobre Séptimo Arte & Poética Fílmica</option>
                 <option value="musica">Sobre Música & Acústica</option>
                 <option value="filosofia">Sobre Ensayos & Dialéctica</option>
+                <option value="pensamiento">Sobre Tribuna de Pensamiento</option>
               </select>
             </div>
 
@@ -735,7 +742,7 @@
             </li>
             <li>
               <strong>Enfoque</strong>
-              <span>Literatura · Cine · Música · Filosofía</span>
+              <span>Literatura · Cine · Música · Filosofía · Pensamiento</span>
             </li>
           </ul>
         </div>
@@ -757,12 +764,13 @@
       </div>
 
       <nav class="footer-nav" aria-label="Navegación del pie">
-        <h4>Cuadernos</h4>
+        <h4>Cuadernos Semanales</h4>
         <ul>
-          <li><a href="literatura.html">Literatura & Enigma</a></li>
-          <li><a href="cine.html">Cine & Mirada</a></li>
-          <li><a href="musica.html">Música & Resonancias</a></li>
-          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="literatura.html">Lunes · Literatura & Enigma</a></li>
+          <li><a href="cine.html">Martes · Cine & Mirada</a></li>
+          <li><a href="musica.html">Miércoles · Música & Acústica</a></li>
+          <li><a href="filosofia.html">Jueves · Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Viernes · Pensamiento (Director)</a></li>
         </ul>
       </nav>
 
@@ -775,6 +783,13 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Aviso discreto si vuelve tras enviar el formulario con éxito
+    if (window.location.search.includes("enviado=1")) {
+      alert("Tu misiva ha sido enviada con éxito al buzón de Círculo Kairós. Gracias por tu correspondencia.");
+    }
+  </script>
 
 </body>
 </html>
