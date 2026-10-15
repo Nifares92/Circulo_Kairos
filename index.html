@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Círculo Kairós — Publicación cultural independiente de literatura, cine, música y pensamiento filosófico.">
+  <meta name="description" content="Círculo Kairós — Publicación cultural independiente: literatura, cine, música, filosofía y tribuna de pensamiento del Director.">
   <title>Círculo Kairós | Cuaderno de Crítica, Artes y Pensamiento</title>
 
   <!-- Favicon SVG oficial -->
@@ -15,9 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       VARIABLES Y PALETA EDITORIAL CÁLIDA
-       ========================================================================== */
     :root {
       --bg-color: #fbf8f3;
       --bg-surface: #f4ede1;
@@ -26,7 +23,7 @@
       --text-main: #221f1d;
       --text-muted: #6d665f;
       --text-light: #8a8279;
-      --accent: #9e4734;          /* Terracota / lacre */
+      --accent: #9e4734;
       --accent-dark: #783324;
       --border-soft: #e2d8c7;
       --border-dark: #221f1d;
@@ -55,7 +52,6 @@
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    /* Cabecera y Franja */
     .top-bar-meta {
       border-bottom: 1px solid var(--border-soft);
       padding: 0.6rem 1.5rem;
@@ -78,7 +74,6 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
       padding: 1rem 0 0.5rem;
@@ -98,7 +93,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -110,13 +104,8 @@
       position: relative;
       z-index: 2;
     }
-    .site-title a {
-      color: var(--text-main);
-      transition: color var(--transition), opacity var(--transition);
-    }
-    .site-title a:hover {
-      color: var(--accent);
-    }
+    .site-title a { color: var(--text-main); transition: color var(--transition); }
+    .site-title a:hover { color: var(--accent); }
 
     .site-tagline {
       font-family: var(--font-reader);
@@ -128,7 +117,6 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -140,7 +128,7 @@
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
     }
-    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.2rem; }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -167,9 +155,7 @@
       padding: 3rem 1.5rem 5rem;
     }
 
-    /* ==========================================================================
-       TEMA DEL MES REDISEÑADO: PLIEGO MONOGRÁFICO ESPECIAL
-       ========================================================================== */
+    /* Módulo Monográfico Mensual */
     .monthly-theme-monograph {
       background: linear-gradient(145deg, #1f1b1a 0%, #2a2422 100%);
       color: #e9e2d7;
@@ -242,15 +228,15 @@
     }
     .theme-monograph-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
       padding-top: 1.5rem;
       border-top: 1px solid rgba(226, 216, 199, 0.12);
     }
     .theme-node {
       background-color: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 0.9rem 1rem;
+      padding: 0.9rem 0.8rem;
       border-radius: 2px;
     }
     .theme-node-tag {
@@ -258,20 +244,19 @@
       font-family: var(--font-classical);
       font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       color: #df8876;
       margin-bottom: 0.25rem;
       font-weight: 700;
     }
     .theme-node-text {
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: #e5ddd0;
+      line-height: 1.5;
     }
 
-    /* ==========================================================================
-       BLOQUE 1: PORTADA ASIMÉTRICA
-       ========================================================================== */
+    /* Portada Editorial Asimétrica */
     .hero-editorial-grid {
       display: grid;
       grid-template-columns: 1.8fr 1fr;
@@ -283,7 +268,7 @@
     .hero-lead-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      padding: 2.5rem;
+      padding: 2.8rem 2.5rem;
       display: flex;
       flex-direction: column;
       box-shadow: var(--shadow-subtle);
@@ -321,13 +306,23 @@
 
     .hero-lead-card h2 {
       font-family: var(--font-serif);
-      font-size: 2.4rem;
-      line-height: 1.22;
-      margin-bottom: 1rem;
+      font-size: 2.3rem;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
       font-weight: 700;
     }
+    .lead-author-tag {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      color: var(--accent-dark);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
     .hero-lead-image {
-      margin: 1.25rem 0 1.5rem;
+      margin: 0.5rem 0 1.5rem;
       border: 1px solid var(--border-soft);
       overflow: hidden;
       height: 380px;
@@ -336,12 +331,14 @@
 
     .hero-lead-excerpt {
       font-family: var(--font-reader);
-      font-size: 1.15rem;
-      line-height: 1.75;
+      font-size: 1.18rem;
+      line-height: 1.85;
       color: #332f2c;
       margin-bottom: 1.5rem;
+      text-align: justify;
       flex-grow: 1;
     }
+
     .btn-kairos {
       display: inline-flex;
       align-items: center;
@@ -352,7 +349,7 @@
       letter-spacing: 0.12em;
       color: var(--accent);
       border-top: 1px solid var(--border-soft);
-      padding-top: 1rem;
+      padding-top: 1.2rem;
     }
     .btn-kairos:hover { color: var(--accent-dark); }
 
@@ -381,18 +378,17 @@
     .side-story-media img { width: 100%; height: 100%; object-fit: cover; }
     .side-story-card h3 {
       font-family: var(--font-serif);
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       line-height: 1.3;
       margin-bottom: 0.5rem;
     }
     .side-story-card p {
       font-family: var(--font-reader);
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       color: var(--text-muted);
       line-height: 1.65;
     }
 
-    /* Franja de Pausa */
     .manifesto-banner {
       border-top: 1px solid var(--border-soft);
       border-bottom: 1px solid var(--border-soft);
@@ -431,7 +427,6 @@
       font-style: normal;
     }
 
-    /* Cuarteto de Secciones */
     .section-title-wrap {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -449,45 +444,45 @@
       font-size: 1.05rem;
     }
 
-    .quad-grid {
+    .penta-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.6rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.3rem;
       margin-bottom: 4.5rem;
     }
-    .quad-card {
+    .penta-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      padding: 1.4rem;
+      padding: 1.3rem;
       display: flex;
       flex-direction: column;
       box-shadow: var(--shadow-subtle);
       transition: transform var(--transition);
     }
-    .quad-card:hover { transform: translateY(-4px); }
-    .quad-media {
-      height: 180px;
+    .penta-card:hover { transform: translateY(-4px); }
+    .penta-media {
+      height: 160px;
       overflow: hidden;
       border: 1px solid var(--border-soft);
-      margin: 0.8rem 0 1rem;
+      margin: 0.8rem 0 0.9rem;
     }
-    .quad-media img { width: 100%; height: 100%; object-fit: cover; }
-    .quad-card h3 {
+    .penta-media img { width: 100%; height: 100%; object-fit: cover; }
+    .penta-card h3 {
       font-family: var(--font-serif);
-      font-size: 1.22rem;
+      font-size: 1.15rem;
       line-height: 1.35;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
-    .quad-card p {
+    .penta-card p {
       font-family: var(--font-reader);
-      font-size: 0.96rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
       flex-grow: 1;
     }
-    .quad-link {
-      font-size: 0.78rem;
+    .penta-link {
+      font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -496,9 +491,6 @@
       padding-top: 0.75rem;
     }
 
-    /* ==========================================================================
-       BLOQUE 3: GRAN ÁGORA CULTURAL Y DESPACHO EXPANDIDO CON FEED ROTATIVO
-       ========================================================================== */
     .cultural-dispatch-layout {
       display: grid;
       grid-template-columns: 2.6fr 1fr;
@@ -522,7 +514,6 @@
     .block-header h3 { font-family: var(--font-serif); font-size: 1.85rem; }
     .block-header span { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
 
-    /* Barra de controles del carrusel cultural */
     .feed-controls-row {
       display: flex;
       align-items: center;
@@ -553,7 +544,6 @@
       margin: 0 0.2rem;
     }
 
-    /* Cuadrícula de Noticias que ocupa el 100% del ancho disponible */
     .news-card-feed {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -591,9 +581,7 @@
       object-fit: cover;
       transition: transform 0.4s ease;
     }
-    .news-item-box:hover .news-item-thumb img {
-      transform: scale(1.04);
-    }
+    .news-item-box:hover .news-item-thumb img { transform: scale(1.04); }
 
     .news-header-meta {
       display: flex;
@@ -670,7 +658,6 @@
       border-color: var(--accent);
     }
 
-    /* Columna Derecha (Lateral) */
     .sidebar-ephemeris-column {
       display: flex;
       flex-direction: column;
@@ -732,7 +719,6 @@
       font-style: normal;
     }
 
-    /* Pie de Página */
     .site-footer {
       background-color: var(--bg-surface);
       border-top: 3px double var(--border-dark);
@@ -773,15 +759,18 @@
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
     .footer-nav a:hover { color: var(--accent); }
 
+    @media (max-width: 1180px) {
+      .penta-grid { grid-template-columns: repeat(3, 1fr); }
+      .theme-monograph-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 1080px) {
       .cultural-dispatch-layout { grid-template-columns: 1fr; }
       .news-card-feed { grid-template-columns: repeat(2, 1fr); min-height: auto; }
       .sidebar-ephemeris-column { position: static; }
-      .theme-monograph-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .hero-editorial-grid { grid-template-columns: 1fr; }
-      .quad-grid { grid-template-columns: repeat(2, 1fr); }
+      .penta-grid { grid-template-columns: repeat(2, 1fr); }
       .news-card-feed { grid-template-columns: 1fr; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
       .brand-watermark { width: 190px; height: 190px; }
@@ -791,36 +780,31 @@
     }
     @media (max-width: 500px) {
       .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
-      .quad-grid { grid-template-columns: 1fr; }
+      .penta-grid { grid-template-columns: 1fr; }
       .hero-lead-card { padding: 1.5rem; }
       .brand-watermark { width: 160px; height: 160px; }
-      .main-nav ul { gap: 1.2rem; }
+      .main-nav ul { gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Franja Superior -->
   <aside class="top-bar-meta" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
-    <span><strong>Kairós:</strong> El tiempo que no se mide, sino que se habita</span>
+    <span><strong>Ritmo Editorial:</strong> Lunes (Lit) · Martes (Cine) · Miér (Mús) · Juev (Filo) · Vier (Pensamiento)</span>
     <span>Año I · Cuaderno Continuo</span>
   </aside>
 
-  <!-- Cabecera Principal -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY (FUERA DEL HEADER PARA QUE FUNCIONE EL SCROLL FIJO) -->
   <nav class="main-nav" aria-label="Navegación principal">
     <ul>
       <li><a href="index.html" class="active">Inicio</a></li>
@@ -828,6 +812,7 @@
       <li><a href="cine.html">Cine</a></li>
       <li><a href="musica.html">Música</a></li>
       <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="pensamiento.html">Pensamiento</a></li>
       <li><a href="sobre-el-circulo.html">El Círculo</a></li>
       <li><a href="perfil.html">Mi Cuaderno</a></li>
     </ul>
@@ -835,9 +820,6 @@
 
   <main id="contenido-principal">
 
-    <!-- ====================================================================
-         0. TEMA DEL MES: CUADERNO MONOGRÁFICO ESPECIAL (DISEÑO RESERVADO)
-         ==================================================================== -->
     <section class="monthly-theme-monograph" aria-labelledby="tema-del-mes-titulo">
       <div class="theme-monograph-header">
         <span class="theme-monograph-badge">✦ Cuaderno Extraordinario · Monografía</span>
@@ -845,56 +827,63 @@
       </div>
       <h2 id="tema-del-mes-titulo">El Umbral de las Sombras: Halloween, los Difuntos y el Más Allá</h2>
       <p>
-        Durante el mes de octubre suspendemos la alternancia regular de temas para consagrar los cuatro cuadernos de estudio a la frontera invisible entre la vida y la extinción. Indagamos en el retorno de las sombras, la liturgia fúnebre y el coraje de mirar de frente al no-ser:
+        Durante el mes de octubre consagramos los cinco cuadernos de estudio a la frontera invisible entre la vida y la extinción. Indagamos en el retorno de las sombras, la liturgia fúnebre y el coraje de mirar de frente al no-ser:
       </p>
       <div class="theme-monograph-grid">
         <div class="theme-node">
-          <span class="theme-node-tag">I. Literatura</span>
+          <span class="theme-node-tag">I. Lunes · Letras</span>
           <span class="theme-node-text">Fantasmas victorianos, el rito de Samhain y la catarsis del miedo.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">II. Cine</span>
+          <span class="theme-node-tag">II. Martes · Cine</span>
           <span class="theme-node-text">La silueta de Nosferatu y la partida de ajedrez contra la Parca.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">III. Música</span>
+          <span class="theme-node-tag">III. Miér · Acústica</span>
           <span class="theme-node-text">Réquiems, polifonía sacra de difuntos y el tañido de campanas.</span>
         </div>
         <div class="theme-node">
-          <span class="theme-node-tag">IV. Filosofía</span>
-          <span class="theme-node-text">El ser-para-la-muerte, el misterio instantáneo y la dignidad del límite.</span>
+          <span class="theme-node-tag">IV. Juev · Filosofía</span>
+          <span class="theme-node-text">El ser-para-la-muerte, el instante lúcido y la dignidad del límite.</span>
+        </div>
+        <div class="theme-node">
+          <span class="theme-node-tag">V. Vier · Pensamiento</span>
+          <span class="theme-node-text">La arquitectura de la pérdida y la custodia de lo irrecuperable.</span>
         </div>
       </div>
     </section>
 
-    <!-- ====================================================================
-         1. PORTADA PRINCIPAL (SINCRONIZADA CON FILOSOFÍA)
-         ==================================================================== -->
+    <!-- PORTADA PRINCIPAL: EXTRACTO DEL ENSAYO DEL DIRECTOR -->
     <section class="hero-editorial-grid" aria-labelledby="portada-principal-titulo">
 
       <article class="hero-lead-card" id="portada-lead-article">
         <div class="hero-badge-row">
-          <span class="discipline-badge" id="lead-badge">Filosofía · Tratado de Fondo</span>
-          <span class="reading-time" id="lead-time">35 min de lectura de fondo</span>
+          <span class="discipline-badge" id="lead-badge">Viernes · Pensamiento del Director</span>
+          <span class="reading-time" id="lead-time">45 min de lectura de fondo</span>
         </div>
+        
         <h2 id="portada-principal-titulo">
-          <a href="filosofia.html#heidegger-tiempo" id="lead-title">La campana de la finitud: Martin Heidegger, la caída en lo impersonal y el ser-para-la-muerte</a>
+          <a href="pensamiento.html#tratado-perdida-director" id="lead-title">La arquitectura de la ausencia: Fenomenología de la pérdida, el duelo insumiso y los objetos que sobreviven al naufragio</a>
         </h2>
+        <span class="lead-author-tag">Por el Director de Círculo Kairós · Tratado Monográfico I</span>
+
         <div class="hero-lead-image">
-          <img id="lead-image" src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1200&q=80" alt="Sendero solitario en la niebla">
+          <img id="lead-image" src="https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=1200&q=80" alt="Gabinete de lectura en penumbra con luz crepuscular">
         </div>
+
         <p class="hero-lead-excerpt" id="lead-excerpt">
-          El olvido del ser y la tiranía de la charlatanería cotidiana frente al horizonte intransferible de la finitud. Un tratado monográfico sobre la resolución precursora, el instante lúcido (Augenblick) y la recuperación del tiempo auténtico frente al murmullo gregario.
+          Toda pérdida verdadera comienza mucho antes de que la ausencia sea formalmente proclamada. Comienza en el instante imperceptible en que la mente advierte que el presente ha dejado de engendrar porvenir y ha empezado, con silenciosa crueldad, a transformarse en monumento. Perder no es la mera sustracción aritmética de una presencia; es la quiebra ontológica del espacio circundante: los objetos cotidianos que retienen la huella de quien ya no habita el mundo, la desaparición repentina de una lengua privada forjada en años de convivencia y el coraje de rechazar el consuelo apresurado para aprender a custodiar el vacío con reverente lucidez.
         </p>
-        <a href="filosofia.html#heidegger-tiempo" id="lead-link" class="btn-kairos">Leer tratado completo en Filosofía &rarr;</a>
+
+        <a href="pensamiento.html#tratado-perdida-director" id="lead-link" class="btn-kairos">Continuar leyendo el tratado completo en Pensamiento &rarr;</a>
       </article>
 
-      <aside class="hero-side-column" aria-label="Otras lecturas destacadas">
+      <aside class="hero-side-column" aria-label="Otras lecturas destacadas de la semana">
         
         <article class="side-story-card" id="side-card-literatura">
-          <span class="discipline-badge" id="side-lit-badge" style="align-self: flex-start;">Literatura</span>
+          <span class="discipline-badge" id="side-lit-badge" style="align-self: flex-start;">Lunes · Literatura</span>
           <div class="side-story-media">
-            <img id="side-lit-img" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80" alt="Libros y legajos antiguos">
+            <img id="side-lit-img" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" alt="Libros y legajos antiguos">
           </div>
           <h3><a href="literatura.html#kafka-proceso" id="side-lit-title">El tribunal en la buhardilla: Franz Kafka y la arquitectura de la culpa innata</a></h3>
           <p id="side-lit-excerpt">
@@ -904,7 +893,7 @@
         </article>
 
         <article class="side-story-card" id="side-card-cine">
-          <span class="discipline-badge" id="side-cine-badge" style="align-self: flex-start;">Cine</span>
+          <span class="discipline-badge" id="side-cine-badge" style="align-self: flex-start;">Martes · Cine</span>
           <div class="side-story-media">
             <img id="side-cine-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80" alt="Olas y rocas en la costa">
           </div>
@@ -927,72 +916,81 @@
       <cite id="banner-quote-author">— Cuaderno de Principios del Círculo</cite>
     </section>
 
-    <!-- Cuarteto de Secciones -->
+    <!-- Quinteto de Secciones -->
     <section class="disciplines-overview" aria-labelledby="cuarteto-titulo">
       <div class="section-title-wrap">
-        <h2 id="cuarteto-titulo">Los Cuatro Cuadernos</h2>
-        <p>Sincronizados en tiempo real con la última publicación de cada sección</p>
+        <h2 id="cuarteto-titulo">Los Cinco Cuadernos de la Semana</h2>
+        <p>Un compás diario de publicación coordinado de lunes a viernes</p>
       </div>
 
-      <div class="quad-grid">
+      <div class="penta-grid">
         
-        <article class="quad-card" id="quad-card-lit">
-          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno I</span>
-          <div class="quad-media">
-            <img id="quad-lit-img" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=500&q=80" alt="Literatura">
+        <article class="penta-card" id="quad-card-lit">
+          <span class="discipline-badge" style="align-self: flex-start;">Lunes · I</span>
+          <div class="penta-media">
+            <img id="quad-lit-img" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&q=80" alt="Literatura">
           </div>
-          <h3><a href="literatura.html#kafka-proceso" id="quad-lit-title">Literatura: El proceso (Franz Kafka)</a></h3>
+          <h3><a href="literatura.html#kafka-proceso" id="quad-lit-title">Literatura: Franz Kafka</a></h3>
           <p id="quad-lit-desc">
             La culpa sin delito, los tribunales polvorientos de Praga y la parábola inexpugnable ante las puertas de la Ley.
           </p>
-          <a href="literatura.html#kafka-proceso" id="quad-lit-link" class="quad-link">Leer en Literatura &rarr;</a>
+          <a href="literatura.html#kafka-proceso" id="quad-lit-link" class="penta-link">Leer en Letras &rarr;</a>
         </article>
 
-        <article class="quad-card" id="quad-card-cine">
-          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno II</span>
-          <div class="quad-media">
+        <article class="penta-card" id="quad-card-cine">
+          <span class="discipline-badge" style="align-self: flex-start;">Martes · II</span>
+          <div class="penta-media">
             <img id="quad-cine-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80" alt="Cine">
           </div>
-          <h3><a href="cine.html#cine-bergman-septimo" id="quad-cine-title">Cine: El séptimo sello (Ingmar Bergman)</a></h3>
+          <h3><a href="cine.html#cine-bergman-septimo" id="quad-cine-title">Cine: Bergman</a></h3>
           <p id="quad-cine-desc">
-            El caballero cruzado, la partida en la orilla del mar Báltico y la revelación de la trascendencia en las fresas silvestres.
+            El caballero cruzado, la partida en la orilla del mar Báltico y el misterio del silencio de Dios.
           </p>
-          <a href="cine.html#cine-bergman-septimo" id="quad-cine-link" class="quad-link">Leer en Cine &rarr;</a>
+          <a href="cine.html#cine-bergman-septimo" id="quad-cine-link" class="penta-link">Leer en Cine &rarr;</a>
         </article>
 
-        <article class="quad-card" id="quad-card-mus">
-          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno III</span>
-          <div class="quad-media">
+        <article class="penta-card" id="quad-card-mus">
+          <span class="discipline-badge" style="align-self: flex-start;">Miércoles · III</span>
+          <div class="penta-media">
             <img id="quad-mus-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" alt="Música">
           </div>
-          <h3><a href="musica.html#mus-beethoven-op111" id="quad-mus-title">Música: Sonata Op. 111 (Beethoven)</a></h3>
+          <h3><a href="musica.html#mus-beethoven-op111" id="quad-mus-title">Música: Beethoven</a></h3>
           <p id="quad-mus-desc">
-            El cataclismo del primer movimiento y los trinos celestiales del Arietta como despedida definitiva del teclado clásico.
+            El cataclismo del primer movimiento y los trinos celestiales del Arietta como despedida del teclado clásico.
           </p>
-          <a href="musica.html#mus-beethoven-op111" id="quad-mus-link" class="quad-link">Leer en Música &rarr;</a>
+          <a href="musica.html#mus-beethoven-op111" id="quad-mus-link" class="penta-link">Leer en Música &rarr;</a>
         </article>
 
-        <article class="quad-card" id="quad-card-filo">
-          <span class="discipline-badge" style="align-self: flex-start;">Cuaderno IV</span>
-          <div class="quad-media">
+        <article class="penta-card" id="quad-card-filo">
+          <span class="discipline-badge" style="align-self: flex-start;">Jueves · IV</span>
+          <div class="penta-media">
             <img id="quad-filo-img" src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=500&q=80" alt="Filosofía">
           </div>
-          <h3><a href="filosofia.html#heidegger-tiempo" id="quad-filo-title">Filosofía: Ser y tiempo (Heidegger)</a></h3>
+          <h3><a href="filosofia.html#heidegger-tiempo" id="quad-filo-title">Filosofía: Heidegger</a></h3>
           <p id="quad-filo-desc">
             La caída en el anonimato cotidiano del «Se» impersonal y la conquista de la resolución lúcida ante la finitud.
           </p>
-          <a href="filosofia.html#heidegger-tiempo" id="quad-filo-link" class="quad-link">Leer en Filosofía &rarr;</a>
+          <a href="filosofia.html#heidegger-tiempo" id="quad-filo-link" class="penta-link">Leer en Filosofía &rarr;</a>
+        </article>
+
+        <article class="penta-card" id="quad-card-pens">
+          <span class="discipline-badge" style="align-self: flex-start; background-color: rgba(158, 71, 52, 0.15);">Viernes · V</span>
+          <div class="penta-media">
+            <img id="quad-pens-img" src="https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=500&q=80" alt="Pensamiento del Director">
+          </div>
+          <h3><a href="pensamiento.html#tratado-perdida-director" id="quad-pens-title">Pensamiento: La Pérdida</a></h3>
+          <p id="quad-pens-desc">
+            Fenomenología de la ausencia, el rescoldo del duelo y la custodia de la memoria en la pluma del Director.
+          </p>
+          <a href="pensamiento.html#tratado-perdida-director" id="quad-pens-link" class="penta-link">Leer Tribuna &rarr;</a>
         </article>
 
       </div>
     </section>
 
-    <!-- ====================================================================
-         3. GRAN DESPACHO CULTURAL: FEED ROTATIVO EN ESPAÑOL A PANTALLA COMPLETA
-         ==================================================================== -->
+    <!-- DESPACHO CULTURAL ROTATIVO -->
     <section class="cultural-dispatch-layout" aria-labelledby="dispatch-titulo">
       
-      <!-- Columna Izquierda: Gran Feed de Noticias Culturales Dinámicas -->
       <div class="cultural-news-column">
         <div class="block-header">
           <div>
@@ -1007,13 +1005,9 @@
           </div>
         </div>
 
-        <!-- Cuadrícula de 4 noticias por tanda que ocupa todo el ancho y alto -->
-        <div class="news-card-feed" id="feed-noticias-culturales">
-          <!-- Renderizado dinámico vía JavaScript -->
-        </div>
+        <div class="news-card-feed" id="feed-noticias-culturales"></div>
       </div>
 
-      <!-- Columna Derecha: Efemérides & Cita Diaria Rotativa -->
       <aside class="sidebar-ephemeris-column" aria-label="Efemérides y citas del día">
         
         <div class="block-header">
@@ -1043,7 +1037,6 @@
 
   </main>
 
-  <!-- Pie de Página Institucional -->
   <footer class="site-footer">
     <div class="footer-container">
       
@@ -1057,12 +1050,13 @@
       </div>
 
       <nav class="footer-nav" aria-label="Navegación del pie">
-        <h4>Cuadernos</h4>
+        <h4>Cuadernos Semanales</h4>
         <ul>
-          <li><a href="literatura.html">Literatura & Enigma</a></li>
-          <li><a href="cine.html">Cine & Mirada</a></li>
-          <li><a href="musica.html">Música & Resonancias</a></li>
-          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="literatura.html">Lunes · Literatura & Enigma</a></li>
+          <li><a href="cine.html">Martes · Cine & Mirada</a></li>
+          <li><a href="musica.html">Miércoles · Música & Acústica</a></li>
+          <li><a href="filosofia.html">Jueves · Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Viernes · Pensamiento (Director)</a></li>
         </ul>
       </nav>
 
@@ -1070,20 +1064,15 @@
         <h4>El Círculo</h4>
         <ul>
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
-          <li><a href="mailto:serabohe@gmail.com">Buzón de Correspondencia</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
         </ul>
       </div>
 
     </div>
   </footer>
 
-  <!-- ====================================================================
-       SCRIPTS: MOTOR DEL FEED CULTURAL EN ESPAÑOL, ROTACIÓN Y PORTADA
-       ==================================================================== -->
   <script>
-    /* ==========================================================================
-       1. REPOSITORIO DE NOTICIAS CULTURALES EN ESPAÑOL CON FOTOS Y ENLACES REALES
-       ========================================================================== */
     const NOTICIAS_CULTURALES = [
       {
         fuente: "RTVE Cultura",
@@ -1159,9 +1148,6 @@
       }
     ];
 
-    /* ==========================================================================
-       2. CONTROLADOR DEL CARRUSEL ROTATIVO DINÁMICO
-       ========================================================================== */
     const NOTICIAS_POR_TANDA = 4;
     let indicePaginaFeed = 0;
     const totalPaginasFeed = Math.ceil(NOTICIAS_CULTURALES.length / NOTICIAS_POR_TANDA);
@@ -1223,7 +1209,7 @@
         if (rotacionActiva) {
           cambiarPaginaFeed(1);
         }
-      }, 7000); // Rota suavemente cada 7 segundos
+      }, 7000);
     }
 
     function reiniciarTemporizador() {
@@ -1245,7 +1231,6 @@
       }
     }
 
-    /* Guardar en favoritos de LocalStorage */
     function guardarNoticiaEnCuaderno(titulo, autorFuente, categoria, enlace, nota) {
       const STORAGE_KEY = "kairos_favoritos_v1";
       let actual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
@@ -1268,9 +1253,6 @@
       alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
     }
 
-    /* ==========================================================================
-       3. CITAS Y EFEMÉRIDES ROTATIVAS DEL CALENDARIO
-       ========================================================================== */
     const CITAS_MARGINAL = [
       { texto: "«La vida no examinada con sosiego no merece la pena de ser vivida.»", autor: "— Sócrates" },
       { texto: "«Un libro debe ser el hacha que rompa el mar helado dentro de nosotros.»", autor: "— Franz Kafka" },
@@ -1314,9 +1296,6 @@
       { dia: 18, mes: 9, fecha: "18 de Octubre", titulo: "Estreno de 'Moby Dick' de Herman Melville", cuerpo: "Salía a la luz la colosal epopeya metafísica sobre el capitán Ahab, el leviatán blanco y el combate ciego del hombre contra el destino." }
     ];
 
-    /* ==========================================================================
-       4. SINCRONIZACIÓN DE PORTADA CON LAS OTRAS PÁGINAS
-       ========================================================================== */
     async function extraerUltimoEnsayo(nombreArchivo) {
       try {
         const respuesta = await fetch(nombreArchivo);
@@ -1358,17 +1337,6 @@
     }
 
     async function sincronizarPortadaConSecciones() {
-      const dataFilosofia = await extraerUltimoEnsayo("filosofia.html");
-      if (dataFilosofia) {
-        if (dataFilosofia.badge) document.getElementById("lead-badge").textContent = dataFilosofia.badge;
-        if (dataFilosofia.titulo) document.getElementById("lead-title").textContent = dataFilosofia.titulo;
-        document.getElementById("lead-title").setAttribute("href", dataFilosofia.enlace);
-        document.getElementById("lead-link").setAttribute("href", dataFilosofia.enlace);
-        if (dataFilosofia.img) document.getElementById("lead-image").setAttribute("src", dataFilosofia.img);
-        if (dataFilosofia.resumen) document.getElementById("lead-excerpt").textContent = dataFilosofia.resumen;
-        if (dataFilosofia.tiempo) document.getElementById("lead-time").textContent = dataFilosofia.tiempo;
-      }
-
       const dataLiteratura = await extraerUltimoEnsayo("literatura.html");
       if (dataLiteratura) {
         if (dataLiteratura.titulo) document.getElementById("side-lit-title").textContent = dataLiteratura.titulo;
@@ -1376,6 +1344,12 @@
         document.getElementById("side-lit-link").setAttribute("href", dataLiteratura.enlace);
         if (dataLiteratura.img) document.getElementById("side-lit-img").setAttribute("src", dataLiteratura.img);
         if (dataLiteratura.resumen) document.getElementById("side-lit-excerpt").textContent = dataLiteratura.resumen;
+
+        document.getElementById("quad-lit-title").textContent = "Literatura: " + dataLiteratura.titulo;
+        document.getElementById("quad-lit-title").setAttribute("href", dataLiteratura.enlace);
+        document.getElementById("quad-lit-link").setAttribute("href", dataLiteratura.enlace);
+        if (dataLiteratura.img) document.getElementById("quad-lit-img").setAttribute("src", dataLiteratura.img);
+        if (dataLiteratura.resumen) document.getElementById("quad-lit-desc").textContent = dataLiteratura.resumen;
       }
 
       const dataCine = await extraerUltimoEnsayo("cine.html");
@@ -1385,17 +1359,7 @@
         document.getElementById("side-cine-link").setAttribute("href", dataCine.enlace);
         if (dataCine.img) document.getElementById("side-cine-img").setAttribute("src", dataCine.img);
         if (dataCine.resumen) document.getElementById("side-cine-excerpt").textContent = dataCine.resumen;
-      }
 
-      if (dataLiteratura) {
-        document.getElementById("quad-lit-title").textContent = "Literatura: " + dataLiteratura.titulo;
-        document.getElementById("quad-lit-title").setAttribute("href", dataLiteratura.enlace);
-        document.getElementById("quad-lit-link").setAttribute("href", dataLiteratura.enlace);
-        if (dataLiteratura.img) document.getElementById("quad-lit-img").setAttribute("src", dataLiteratura.img);
-        if (dataLiteratura.resumen) document.getElementById("quad-lit-desc").textContent = dataLiteratura.resumen;
-      }
-
-      if (dataCine) {
         document.getElementById("quad-cine-title").textContent = "Cine: " + dataCine.titulo;
         document.getElementById("quad-cine-title").setAttribute("href", dataCine.enlace);
         document.getElementById("quad-cine-link").setAttribute("href", dataCine.enlace);
@@ -1412,6 +1376,7 @@
         if (dataMusica.resumen) document.getElementById("quad-mus-desc").textContent = dataMusica.resumen;
       }
 
+      const dataFilosofia = await extraerUltimoEnsayo("filosofia.html");
       if (dataFilosofia) {
         document.getElementById("quad-filo-title").textContent = "Filosofía: " + dataFilosofia.titulo;
         document.getElementById("quad-filo-title").setAttribute("href", dataFilosofia.enlace);
@@ -1421,11 +1386,7 @@
       }
     }
 
-    /* ==========================================================================
-       5. INICIALIZACIÓN COMPLETA
-       ========================================================================== */
     function cargarDinamicos() {
-      // 1. Fecha del día
       const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const hoy = new Date();
       const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
@@ -1434,11 +1395,9 @@
         metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
       }
 
-      // 2. Iniciar feed rotativo cultural en español
       renderizarTandaNoticias();
       iniciarRotacionAutomatica();
 
-      // 3. Efeméride del calendario real
       const diaHoy = hoy.getDate();
       const mesHoy = hoy.getMonth();
       let efemerideHoy = EFEMERIDES_CALENDARIO.find(e => e.dia === diaHoy && e.mes === mesHoy);
@@ -1452,14 +1411,12 @@
         document.getElementById("efemeride-cuerpo").textContent = efemerideHoy.cuerpo;
       }
 
-      // 4. Cita del día
       const citaHoy = CITAS_MARGINAL[(diaHoy - 1) % CITAS_MARGINAL.length];
       if (citaHoy) {
         document.getElementById("daily-quote-text").textContent = citaHoy.texto;
         document.getElementById("daily-quote-author").textContent = citaHoy.autor;
       }
 
-      // 5. Sincronización de portada con cuadernos
       sincronizarPortadaConSecciones();
     }
 
