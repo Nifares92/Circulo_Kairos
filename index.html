@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Círculo Kairós — Publicación cultural independiente: literatura, cine, música, filosofía y tribuna de pensamiento del Director.">
+  <meta name="description" content="Círculo Kairós — Publicación cultural independiente: literatura, cine, música, filosofía, tribuna del Director y El Rincón del Lector.">
   <title>Círculo Kairós | Cuaderno de Crítica, Artes y Pensamiento</title>
 
   <!-- Favicon SVG oficial -->
@@ -77,10 +77,7 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    .brand {
-      position: relative;
-      padding: 1rem 0 0.5rem;
-    }
+    .brand { position: relative; padding: 1rem 0 0.5rem; }
 
     .brand-watermark {
       position: absolute;
@@ -96,7 +93,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* ESTILOGRAFÍA Y COLOR DEL TITULAR KAIRÓS (TERRACOTA OFICIAL) */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -346,6 +342,7 @@
       color: #332f2c;
       margin-bottom: 1.5rem;
       text-align: justify;
+      hyphens: auto;
       flex-grow: 1;
     }
 
@@ -501,6 +498,9 @@
       padding-top: 0.75rem;
     }
 
+    /* ==========================================================================
+       EL RINCÓN DEL LECTOR: CARTILLAS LITERARIAS ROTATIVAS
+       ========================================================================== */
     .cultural-dispatch-layout {
       display: grid;
       grid-template-columns: 2.6fr 1fr;
@@ -558,7 +558,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.8rem;
-      min-height: 640px;
+      min-height: 600px;
       transition: opacity 0.35s ease;
     }
 
@@ -579,11 +579,12 @@
     }
 
     .news-item-thumb {
-      height: 195px;
+      height: 185px;
       border: 1px solid var(--border-soft);
       overflow: hidden;
       margin-bottom: 1.1rem;
       background-color: var(--bg-surface);
+      cursor: pointer;
     }
     .news-item-thumb img {
       width: 100%;
@@ -620,6 +621,7 @@
       margin-bottom: 0.6rem;
       color: var(--text-main);
     }
+    .news-item-box h4 a { cursor: pointer; }
     .news-item-box h4 a:hover { color: var(--accent); }
 
     .news-item-box p {
@@ -644,6 +646,11 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: inherit;
     }
     .news-read-more-link:hover { color: var(--accent-dark); }
 
@@ -729,6 +736,140 @@
       font-style: normal;
     }
 
+    /* ==========================================================================
+       GABINETE DE LECTURA (INTRAPÁGINA / MODAL TIPOGRÁFICO)
+       ========================================================================== */
+    .reader-modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(34, 31, 29, 0.78);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .reader-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .reader-modal-sheet {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      width: 100%;
+      max-width: 820px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border: 1px solid var(--border-dark);
+      padding: 3.5rem 3.5rem 3rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      position: relative;
+      animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalSlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .btn-close-modal {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.6rem;
+      background: none;
+      border: 1px solid var(--border-soft);
+      padding: 0.4rem 0.8rem;
+      font-family: var(--font-classical);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .btn-close-modal:hover {
+      background-color: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .modal-reading-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .modal-genre-badge {
+      font-family: var(--font-classical);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .modal-story-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+    }
+    .modal-story-meta {
+      font-family: var(--font-reader);
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .modal-featured-image {
+      margin: 1.5rem 0 2rem;
+      border: 1px solid var(--border-soft);
+      max-height: 360px;
+      overflow: hidden;
+    }
+    .modal-featured-image img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+    }
+    .modal-story-prose {
+      font-family: var(--font-reader);
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: #2b2825;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .modal-story-prose p {
+      margin-bottom: 1.5rem;
+      text-indent: 1.5rem;
+    }
+    .modal-story-prose p:first-of-type {
+      text-indent: 0;
+    }
+    .modal-story-prose p.poem-line {
+      text-indent: 0;
+      text-align: center;
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+    .modal-story-prose .poem-stanza {
+      margin: 2rem 0;
+    }
+    .modal-closing-seal {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-soft);
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
     .site-footer {
       background-color: var(--bg-surface);
       border-top: 3px double var(--border-dark);
@@ -787,6 +928,8 @@
       .theme-monograph-grid { grid-template-columns: 1fr; }
       .monthly-theme-monograph { padding: 1.8rem; }
       .monthly-theme-monograph h2 { font-size: 1.75rem; }
+      .reader-modal-sheet { padding: 2.2rem 1.6rem; }
+      .modal-story-title { font-size: 1.7rem; }
     }
     @media (max-width: 500px) {
       .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
@@ -801,7 +944,7 @@
 
   <aside class="top-bar-meta" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
-    <span><strong>Disciplina:</strong> Crítica de Fondo, Artes & Pensamiento</span>
+    <span><strong>Disciplina:</strong> Crítica de Fondo, Artes & Creación Literaria</span>
     <span>Año I · Cuaderno Continuo</span>
   </aside>
 
@@ -863,10 +1006,10 @@
       </div>
     </section>
 
-    <!-- PORTADA DINÁMICA: ENSAYO MÁS RECIENTE + 2 LATERALES (CASCADA AUTOMÁTICA) -->
+    <!-- PORTADA DINÁMICA: ENSAYO MÁS RECIENTE + 2 LATERALES -->
     <section class="hero-editorial-grid" aria-labelledby="portada-principal-titulo">
 
-      <!-- 1. ENSAYO MÁS RECIENTE DE TODA LA WEB (TARJETA PRINCIPAL) -->
+      <!-- 1. ENSAYO MÁS RECIENTE DE TODA LA WEB -->
       <article class="hero-lead-card" id="portada-lead-article">
         <div class="hero-badge-row">
           <span class="discipline-badge" id="lead-badge">Pensamiento</span>
@@ -892,10 +1035,9 @@
         <a href="pensamiento.html#tratado-perdida-director" id="lead-link" class="btn-kairos">Continuar leyendo el tratado completo &rarr;</a>
       </article>
 
-      <!-- 2. LOS DOS ENSAYOS INMEDIATAMENTE ANTERIORES (COLUMNA LATERAL) -->
+      <!-- 2. LOS DOS ENSAYOS ANTERIORES -->
       <aside class="hero-side-column" aria-label="Lecturas anteriores destacadas">
         
-        <!-- Segundo más reciente -->
         <article class="side-story-card" id="side-card-1">
           <span class="discipline-badge" id="side-1-badge" style="align-self: flex-start;">Literatura</span>
           <div class="side-story-media">
@@ -910,7 +1052,6 @@
           <a href="literatura.html#lit-fantasma-victoriano" id="side-1-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver ensayo completo &rarr;</a>
         </article>
 
-        <!-- Tercer más reciente -->
         <article class="side-story-card" id="side-card-2">
           <span class="discipline-badge" id="side-2-badge" style="align-self: flex-start;">Cine</span>
           <div class="side-story-media">
@@ -937,7 +1078,7 @@
       <cite id="banner-quote-author">— Cuaderno de Principios del Círculo</cite>
     </section>
 
-    <!-- Quinteto de Secciones: Los Cinco Cuadernos (Sin días de la semana) -->
+    <!-- Quinteto de Secciones -->
     <section class="disciplines-overview" aria-labelledby="cuarteto-titulo">
       <div class="section-title-wrap">
         <h2 id="cuarteto-titulo">Los Cinco Cuadernos</h2>
@@ -946,7 +1087,6 @@
 
       <div class="penta-grid">
         
-        <!-- 1. Literatura -->
         <article class="penta-card" id="quad-card-lit">
           <span class="discipline-badge" style="align-self: flex-start;">Literatura</span>
           <div class="penta-media">
@@ -959,7 +1099,6 @@
           <a href="literatura.html" id="quad-lit-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
-        <!-- 2. Cine -->
         <article class="penta-card" id="quad-card-cine">
           <span class="discipline-badge" style="align-self: flex-start;">Cine</span>
           <div class="penta-media">
@@ -972,7 +1111,6 @@
           <a href="cine.html" id="quad-cine-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
-        <!-- 3. Música -->
         <article class="penta-card" id="quad-card-mus">
           <span class="discipline-badge" style="align-self: flex-start;">Música</span>
           <div class="penta-media">
@@ -985,7 +1123,6 @@
           <a href="musica.html" id="quad-mus-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
-        <!-- 4. Filosofía -->
         <article class="penta-card" id="quad-card-filo">
           <span class="discipline-badge" style="align-self: flex-start;">Filosofía</span>
           <div class="penta-media">
@@ -998,7 +1135,6 @@
           <a href="filosofia.html" id="quad-filo-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
-        <!-- 5. Pensamiento -->
         <article class="penta-card" id="quad-card-pens">
           <span class="discipline-badge" style="align-self: flex-start; background-color: rgba(158, 71, 52, 0.15);">Pensamiento</span>
           <div class="penta-media">
@@ -1016,20 +1152,19 @@
       </div>
     </section>
 
-    <!-- DESPACHO CULTURAL ROTATIVO -->
+    <!-- EL RINCÓN DEL LECTOR: CARTILLAS LITERARIAS ROTATIVAS -->
     <section class="cultural-dispatch-layout" aria-labelledby="dispatch-titulo">
       
       <div class="cultural-news-column">
         <div class="block-header">
           <div>
-            <h3 id="dispatch-titulo">Despacho Cultural & Letras</h3>
-            <span>Crónica de fondo, novedades del canon y actualidad en vivo</span>
+            <h3 id="dispatch-titulo">El Rincón del Lector</h3>
+            <span>Relatos breves, prosa poética y cuadernos de ficción en entrega periódica</span>
           </div>
           <div class="feed-controls-row">
             <button class="feed-ctrl-btn" onclick="cambiarPaginaFeed(-1)" title="Página anterior">&larr;</button>
             <span class="feed-page-indicator" id="indicador-pagina-noticias">1 / 2</span>
             <button class="feed-ctrl-btn" onclick="cambiarPaginaFeed(1)" title="Siguiente página">&rarr;</button>
-            <button class="feed-ctrl-btn" onclick="conmutarAutoRotacion()" id="btn-pausa-feed" style="margin-left: 0.3rem;" title="Pausar o reanudar rotación">⏸ Pausar</button>
           </div>
         </div>
 
@@ -1064,6 +1199,31 @@
     </section>
 
   </main>
+
+  <!-- GABINETE DE LECTURA (INTRAPÁGINA / MODAL INTERNO) -->
+  <div class="reader-modal-overlay" id="lector-intrapagina" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="reader-modal-sheet">
+      <button class="btn-close-modal" onclick="cerrarLectorIntrapagina()" aria-label="Cerrar lectura">✕ Cerrar cuaderno</button>
+      
+      <div class="modal-reading-header">
+        <span class="modal-genre-badge" id="modal-genero">Relato</span>
+        <h2 class="modal-story-title" id="modal-titulo">Título del Relato</h2>
+        <div class="modal-story-meta" id="modal-meta">Por Autor · Entrega Semanal</div>
+      </div>
+
+      <div class="modal-featured-image" id="modal-image-container">
+        <img id="modal-img" src="" alt="Ilustración de la obra">
+      </div>
+
+      <div class="modal-story-prose" id="modal-contenido">
+        <!-- Se inyecta el texto íntegro -->
+      </div>
+
+      <div class="modal-closing-seal">
+        ✦ Círculo Kairós · Fin de la Pieza Literaria ✦
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="footer-container">
@@ -1101,88 +1261,126 @@
   </footer>
 
   <script>
-    const NOTICIAS_CULTURALES = [
+    /* ==========================================================================
+       CATÁLOGO DE RELATOS Y POEMAS: EL RINCÓN DEL LECTOR
+       ========================================================================== */
+    const OBRAS_RINCON_LECTOR = [
       {
-        fuente: "RTVE Cultura",
-        tag: "Letras & Creación",
-        fecha: "15 Oct 2026",
-        titulo: "Los archivos rescatados de la Edad de Plata: epistolarios inéditos y memoria poética",
-        resumen: "Un recorrido por manuscritos y cuadernos de apuntes recientemente catalogados que arrojan nueva luz sobre las vanguardias literarias del siglo XX y la intimidad creativa de sus autores.",
-        enlace: "https://www.rtve.es/noticias/cultura/",
-        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80"
+        id: "obra-relojero-vidriera",
+        titulo: "El relojero de la calle de los Cristales Rotos",
+        autor: "S. P. Paredes",
+        genero: "Misterio & Atmósfera",
+        fecha: "Semana I · Octubre 2026",
+        tiempo: "7 min de lectura",
+        resumen: "Hermann sostenía que los relojes de cuerda no marcaban el paso de las horas, sino el ritmo con el que los inquilinos de la casa iban olvidando sus propias promesas.",
+        imagen: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>Hermann sostenía que los relojes de péndulo no miden el paso del tiempo exterior, sino la velocidad con que los habitantes de una estancia van desgastando el silencio. Su taller, encajonado entre dos casonas desvencijadas en el callejón de los Cristales Rotos, olía a trementina, grasa mineral y papel quemado. Allí no entraba la luz del sol; entraba una claridad grisácea y sesgada que parecía filtrada a través de un vaso de ginebra turbia.</p>
+          <p>La noche del primer jueves de octubre, una mujer envuelta en un abrigo de paño azul pizarra empujó la cancela. Sobre el mostrador de nogal no depositó una joya de oro ni una fiambrera de repuesto, sino una caja de cedro sellada con alambre de cobre. «No se detiene nunca», susurró ella con una voz que carecía de aspaviento dramático. «Y temo que, si sigue sonando cuando llegue la medianoche del sábado, el testamento que firmó mi tío en Viena perderá su tinta».</p>
+          <p>Hermann aproximó la lupa de relojero a su cuenca izquierda. Al destapar la caja no halló ruedas dentadas de latón ni la espiral templada de acero suizo que esperaba, sino un laberinto concéntrico de varillas de hueso que golpeaban con sequedad rítmica una diminuta lámina de pizarra. Cada pulsación arrancaba del aire una partícula de polvo luminiscente. «Esto no lo fabricó ningún gremio de este lado del río», murmuró Hermann sin apartar la mirada. «Esto es un cronómetro de deuda. Alguien pagó para que el tiempo de esa casa no fuera hacia adelante, sino hacia el momento exacto en que ustedes cometieron la primera mentira».</p>
+          <p>La mujer no pestañeó. Dio un paso hacia la penumbra de la puerta y dejó sobre el mostrador una moneda de plata tan gastada que ya no ostentaba el rostro de ningún rey: «Solo le pido que lo atrase dos horas. Dos horas bastan para confesar antes de que la policía precinte la biblioteca».</p>
+        `
       },
       {
-        fuente: "Babelia",
-        tag: "Crítica & Ensayo",
-        fecha: "15 Oct 2026",
-        titulo: "La resistencia del libro de fondo frente al vértigo de las novedades efímeras",
-        resumen: "Editores independientes y libreros de fondo reivindican la publicación comentada de diarios, cartas y tratados filosóficos que no se someten al ciclo acelerado del consumo algorítmico.",
-        enlace: "https://elpais.com/babelia/",
-        imagen: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+        id: "obra-vigilia-farero",
+        titulo: "Elegía para la última campana del muelle",
+        autor: "Cuaderno de Letras",
+        genero: "Poesía de Medianoche",
+        fecha: "Semana II · Octubre 2026",
+        tiempo: "3 min de lectura",
+        resumen: "Versos consagrados a la niebla portuaria, el óxido de los cabrestantes y el eco de los buques que zarpan sin retorno anunciado.",
+        imagen: "https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <div class="poem-stanza">
+            <p class="poem-line">Se oxida la aldaba sobre el muelle de piedra.</p>
+            <p class="poem-line">El agua negra sube sin consultar la hora,</p>
+            <p class="poem-line">trayendo entre las algas</p>
+            <p class="poem-line">los nombres de madera que el carbón olvidó.</p>
+          </div>
+          <div class="poem-stanza">
+            <p class="poem-line">Tañe la campana con un metal herido,</p>
+            <p class="poem-line">no avisa del naufragio ni convoca al piloto:</p>
+            <p class="poem-line">tañe porque la noche pesa sobre los techos</p>
+            <p class="poem-line">como el sayal de plomo de un monje cenobita.</p>
+          </div>
+          <div class="poem-stanza">
+            <p class="poem-line">Quien mira la baliza desde el malecón yermo</p>
+            <p class="poem-line">aprende que la espera no es ausencia de ruido,</p>
+            <p class="poem-line">sino la forma exacta en que la sombra escucha</p>
+            <p class="poem-line">el paso de la quilla que jamás volverá.</p>
+          </div>
+        `
       },
       {
-        fuente: "Filmoteca Española",
-        tag: "Séptimo Arte",
-        fecha: "14 Oct 2026",
-        titulo: "La restauración en 4K del claroscuro expresionista: Murnau y Lang bajo nueva luz",
-        resumen: "Los archivos fílmicos europeos culminan la digitalización fotoquímica de obras maestras del cine mudo, recuperando las texturas analógicas y el rango dinámico de las sombras originales.",
-        enlace: "https://www.culturaydeporte.gob.es/cultura/areas/cine/mc/fe/portada.html",
-        imagen: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
+        id: "obra-manuscrito-archivo",
+        titulo: "El protocolo número catorce",
+        autor: "Ignacio de la Hoz",
+        genero: "Enigma & Relato Policial",
+        fecha: "Semana III · Octubre 2026",
+        tiempo: "9 min de lectura",
+        resumen: "En la sección de piezas de convicción de la Audiencia, un legajo de 1924 aparece con el sello lacrado intacto y un peso que desafía las leyes de la física documental.",
+        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>Don Valeriano llevaba treinta y dos años custodiando el sótano de legajos y piezas archivadas sin haber extraviado jamás una cuartilla. Conocía la caligrafía nerviosa de los escribanos del siglo XIX, la tinta ferrogaloplástica que carcomía el papel de estraza y el olor agrio que despedían los expedientes de homicidio cuando el verano recalentaba los sótanos del juzgado.</p>
+          <p>Por eso, cuando encontró la carpeta marcada con el número catorce sobre la mesa de clasificación, supo de inmediato que algo infringía la liturgia del recinto. No figuraba en el libro de registro de entradas de aquel año ni en el inventario de causas fenecidas de la década anterior. El legajo estaba precintado con una cinta de bramante rojo y un sello de lacre bermellón donde apenas se distinguía la impronta de un compás y una llave cruzada.</p>
+          <p>Al levantarlo para cotejar su signatura, Valeriano sintió un frío anómalo en la palma. El cartón pesaba el triple de lo ordinario, como si entre sus folios descansara una lámina de plomo. Con una plegadera de hueso quebró con reverencia el lacre seco. En el interior no había declaraciones sumariales, ni actas de autopsia, ni recibos de fianza. Había seis hojas de papel cebolla cubiertas de una caligrafía pulcra y diminuta donde se narraban, con fecha, hora y minuto exactos, todos los movimientos que el propio Valeriano había realizado desde que encendió el candil a las ocho de la mañana.</p>
+          <p>Al llegar al último párrafo de la página final, la tinta aún parecía húmeda: <em>«A las diez y diecisiete, el archivero comprenderá que este sumario no investiga un delito pasado, sino la causa formal de su propia desaparición...»</em>. Valeriano miró el reloj de pared: marcaba exactamente las diez y dieciséis con cincuenta segundos.</p>
+        `
       },
       {
-        fuente: "Scherzo",
-        tag: "Acústica & Música",
-        fecha: "14 Oct 2026",
-        titulo: "Ciclo de polifonía y liturgia de difuntos: el reencuentro con el timbre sacro",
-        resumen: "Auditorios europeos consagran programas monográficos al Réquiem de Mozart y a la técnica del tintinnabuli de Arvo Pärt, explorando la relación entre el contrapunto y el silencio.",
-        enlace: "https://scherzo.es/",
-        imagen: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80"
+        id: "obra-jardin-ciegos",
+        titulo: "La biblioteca del botánico ausente",
+        autor: "Clara M. Soler",
+        genero: "Fantasía & Erudición",
+        fecha: "Semana IV · Octubre 2026",
+        tiempo: "8 min de lectura",
+        resumen: "Un herbario encuadernado en cuero marroquí cuyas hojas secas continúan germinando entre las páginas a medida que el lector avanza en su traducción.",
+        imagen: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>La biblioteca de fray Anselmo no contenía volúmenes de teología moral ni sermones de Cuaresma, sino una colección de setenta y cuatro herbarios mudos recolectados en las marismas durante las epidemias de 1834. Anselmo estaba convencido de que los vegetales no se secan al prensarse entre pliegos de papel secante, sino que aprenden a leer en silencio las frases que los aprisionan.</p>
+          <p>Cuando la joven botánica Elena recibió en herencia el tomo titulado <em>Taxonomía de las raíces umbrías</em>, advirtió que el lomo crujía con una elasticidad insólita para un libro de casi dos siglos. Al abrir la lámina correspondiente a la <em>Mandragora autumnalis</em>, observó que una filigrana de zarcillos verde oliva había perforado el margen del texto en latín, enlazando los verbos copulativos y estrangulando las notas al pie.</p>
+          <p>A lo largo de las noches de estudio, Elena comprendió la regla del manuscrito: cada vez que pronunciaba en voz alta el nombre vernáculo de una especie, las fibras secas palpitaban absorbiendo la humedad de su aliento. El libro no era un archivo de plantas extintas; era un invernadero de papel donde la memoria del viejo fraile se conservaba verde, esperando que una boca atenta le devolviera el oxígeno del mundo exterior.</p>
+        `
       },
       {
-        fuente: "El Cultural",
-        tag: "Filosofía & Ensayo",
-        fecha: "13 Oct 2026",
-        titulo: "El debate sobre la atención profunda: filósofos reclaman el derecho a la demora",
-        resumen: "Nuevos tratados traducidos al castellano abordan la dispersión cognitiva y reivindican el silencio contemplativo frente a la aceleración técnica impuesta por las pantallas.",
-        enlace: "https://www.elespanol.com/el-cultural/",
-        imagen: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80"
+        id: "obra-estacion-niebla",
+        titulo: "El último expreso de las tres y veinte",
+        autor: "S. P. Paredes",
+        genero: "Misterio Urbano",
+        fecha: "Semana V · Octubre 2026",
+        tiempo: "6 min de lectura",
+        resumen: "En el andén tercero de una estación de paso, un hombre espera un tren que fue retirado del itinerario oficial hace cuarenta años por orden gubernativa.",
+        imagen: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>A las tres de la madrugada, la estación de término pierde su condición de edificio público y se convierte en una catedral de hierro donde resuena el goteo de las tuberías de vapor. El jefe de estación nocturno, don Emilio, sabía que ningún tren de pasajeros figuraba en el panel electromecánico a partir de la una y media.</p>
+          <p>Sin embargo, invariablemente los martes de otoño, la campana de aguja del desvío norte emitía dos tañidos secos. Por la curva de vía muerta aparecía una locomotora diésel sin matrícula que arrastraba un único coche de viajeros con las ventanillas empañadas. Del estribo no descendía ninguna multitud con maletas; solo bajaba un viajero con gabardina de paño verde oliva que cruzaba el andén con paso uniforme, dejaba un sobre manila sin señas sobre la ventanilla de billetes y se perdía por la escalinata que daba a los descampados.</p>
+          <p>Don Emilio nunca abrió ninguno de esos sobres durante veinte años. Los guardaba en un cajón de roble bajo la balanza de equipajes. La noche de su jubilación, antes de entregar el juego de llaves al nuevo titular, rasgó por fin el borde del sobre más antiguo. En su interior no encontró dinero, ni billetes caducados, ni confesiones de fugitivos: solo había una cuartilla blanca con una frase escrita a máquina: <em>«Gracias por no haber preguntado nunca la estación de donde venimos»</em>.</p>
+        `
       },
       {
-        fuente: "EFE Cultura",
-        tag: "Patrimonio & Archivos",
-        fecha: "12 Oct 2026",
-        titulo: "Digitalizan códices renacentistas de tratados de estética y perspectiva geométrica",
-        resumen: "La Biblioteca Nacional concluye la conservación preventiva de manuscritos y tratados humanistas, poniéndolos a disposición del público con resolución facsímil.",
-        enlace: "https://efe.com/cultura/",
-        imagen: "https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        fuente: "Caimán Cuadernos de Cine",
-        tag: "Cine de Autor",
-        fecha: "11 Oct 2026",
-        titulo: "El legado del plano secuencia en el cine de Tarkovski y Béla Tarr",
-        resumen: "Un estudio monográfico analiza cómo el tiempo cinematográfico sostenido transforma la mirada del espectador de mero voyeurismo en experiencia meditativa.",
-        enlace: "https://www.caimanediciones.es/",
-        imagen: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80"
-      },
-      {
-        fuente: "Revista de Occidente",
-        tag: "Pensamiento & Letras",
-        fecha: "10 Oct 2026",
-        titulo: "Kafka en el centenario de 'El castillo': la vigencia de la laberíntica burocracia",
-        resumen: "Especialistas en literatura centroeuropea revisitan la geografía de la alienación y la búsqueda de sentido en las parábolas más densas del autor checo.",
-        enlace: "https://www.revistadeoccidente.es/",
-        imagen: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80"
+        id: "obra-soneto-tiempo",
+        titulo: "Tratado de la ceniza matinal",
+        autor: "Cuaderno de Letras",
+        genero: "Prosa Lírica",
+        fecha: "Semana VI · Octubre 2026",
+        tiempo: "4 min de lectura",
+        resumen: "Reflexión poética sobre el despertar solitario, los restos de lumbre en el hogar y la certidumbre de que escribir es custodiar brasas apagadas.",
+        imagen: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>La ceniza de la chimenea no es el testimonio de la destrucción de la madera, sino su descanso mineral. A las seis de la mañana, antes de que el vendedor de carbón golpee los adoquines, la casa entera pertenece a quien sabe permanecer inmóvil frente a los leños carbonizados.</p>
+          <p>Hay un arte riguroso en remover el rescoldo con el atizador de hierro sin levantar polvo: buscar el punto donde todavía titila un grano de luz roja, oculto bajo el manto gris como un secreto que se resiste a ser confesado. Ese pequeño punto incandescente basta para demostrar que la noche no venció por completo; que las palabras pronunciadas la víspera retienen su calor y que escribir no es otra cosa que soplar con paciencia sobre el residuo hasta que la llama vuelva a alumbrar la mesa de estudio.</p>
+        `
       }
     ];
 
-    const NOTICIAS_POR_TANDA = 4;
-    let indicePaginaFeed = 0;
-    const totalPaginasFeed = Math.ceil(NOTICIAS_CULTURALES.length / NOTICIAS_POR_TANDA);
-    let temporizadorRotacion = null;
-    let rotacionActiva = true;
+    /* ==========================================================================
+       PAGINACIÓN Y RENDERIZADO (4 EN 4 CARTILLAS)
+       ========================================================================== */
+    const OBRAS_POR_PAGINA = 4;
+    let indicePaginaLector = 0;
+    const totalPaginasLector = Math.ceil(OBRAS_RINCON_LECTOR.length / OBRAS_POR_PAGINA);
 
-    function renderizarTandaNoticias() {
+    function renderizarObrasLector() {
       const contenedor = document.getElementById("feed-noticias-culturales");
       const indicador = document.getElementById("indicador-pagina-noticias");
       if (!contenedor) return;
@@ -1191,96 +1389,110 @@
 
       setTimeout(() => {
         contenedor.innerHTML = "";
-        const inicio = indicePaginaFeed * NOTICIAS_POR_TANDA;
-        const noticiasMostradas = NOTICIAS_CULTURALES.slice(inicio, inicio + NOTICIAS_POR_TANDA);
+        const inicio = indicePaginaLector * OBRAS_POR_PAGINA;
+        const obrasMostradas = OBRAS_RINCON_LECTOR.slice(inicio, inicio + OBRAS_POR_PAGINA);
 
-        noticiasMostradas.forEach(item => {
+        obrasMostradas.forEach(item => {
           const card = document.createElement("article");
           card.className = "news-item-box";
           card.innerHTML = `
-            <div class="news-item-thumb">
+            <div class="news-item-thumb" onclick="abrirLectorIntrapagina('${item.id}')">
               <img src="${item.imagen}" alt="${item.titulo}" loading="lazy">
             </div>
             <div class="news-header-meta">
-              <span class="news-tag">${item.tag}</span>
-              <span class="news-source"><strong>${item.fuente}</strong> · ${item.fecha}</span>
+              <span class="news-tag">${item.genero}</span>
+              <span class="news-source"><strong>${item.autor}</strong> · ${item.tiempo}</span>
             </div>
-            <h4><a href="${item.enlace}" target="_blank" rel="noopener noreferrer">${item.titulo}</a></h4>
+            <h4><a onclick="abrirLectorIntrapagina('${item.id}')">${item.titulo}</a></h4>
             <p>${item.resumen}</p>
             <div class="news-item-footer">
-              <a href="${item.enlace}" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer en fuente &rarr;</a>
-              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('${item.titulo.replace(/'/g, "\\'")}', '${item.fuente}', '${item.tag}', '${item.enlace}', 'Noticia guardada desde portada')">&#9733; Guardar</button>
+              <button class="news-read-more-link" onclick="abrirLectorIntrapagina('${item.id}')">Leer obra completa &rarr;</button>
+              <button class="btn-save-news" onclick="guardarObraEnCuaderno('${item.titulo.replace(/'/g, "\\'")}', '${item.autor}', '${item.genero}')">&#9733; Guardar</button>
             </div>
           `;
           contenedor.appendChild(card);
         });
 
         if (indicador) {
-          indicador.textContent = `${indicePaginaFeed + 1} / ${totalPaginasFeed}`;
+          indicador.textContent = `${indicePaginaLector + 1} / ${totalPaginasLector}`;
         }
 
         contenedor.style.opacity = "1";
-      }, 200);
+      }, 180);
     }
 
     function cambiarPaginaFeed(direccion) {
-      indicePaginaFeed += direccion;
-      if (indicePaginaFeed >= totalPaginasFeed) indicePaginaFeed = 0;
-      if (indicePaginaFeed < 0) indicePaginaFeed = totalPaginasFeed - 1;
-      renderizarTandaNoticias();
-      reiniciarTemporizador();
+      indicePaginaLector += direccion;
+      if (indicePaginaLector >= totalPaginasLector) indicePaginaLector = 0;
+      if (indicePaginaLector < 0) indicePaginaLector = totalPaginasLector - 1;
+      renderizarObrasLector();
     }
 
-    function iniciarRotacionAutomatica() {
-      if (temporizadorRotacion) clearInterval(temporizadorRotacion);
-      temporizadorRotacion = setInterval(() => {
-        if (rotacionActiva) {
-          cambiarPaginaFeed(1);
-        }
-      }, 7000);
-    }
+    /* ==========================================================================
+       CONTROL DEL LECTOR INTRAPÁGINA (MODAL LITERARIO)
+       ========================================================================== */
+    function abrirLectorIntrapagina(idObra) {
+      const obra = OBRAS_RINCON_LECTOR.find(o => o.id === idObra);
+      if (!obra) return;
 
-    function reiniciarTemporizador() {
-      if (rotacionActiva) {
-        iniciarRotacionAutomatica();
+      const modal = document.getElementById("lector-intrapagina");
+      document.getElementById("modal-genero").textContent = obra.genero;
+      document.getElementById("modal-titulo").textContent = obra.titulo;
+      document.getElementById("modal-meta").textContent = `Por ${obra.autor} · ${obra.fecha} · ${obra.tiempo}`;
+      
+      const img = document.getElementById("modal-img");
+      if (img) img.src = obra.imagen;
+
+      document.getElementById("modal-contenido").innerHTML = obra.contenido;
+
+      if (modal) {
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // Evita el doble scroll
       }
     }
 
-    function conmutarAutoRotacion() {
-      const btn = document.getElementById("btn-pausa-feed");
-      rotacionActiva = !rotacionActiva;
-      if (btn) {
-        btn.textContent = rotacionActiva ? "⏸ Pausar" : "▶ Reanudar";
-      }
-      if (rotacionActiva) {
-        iniciarRotacionAutomatica();
-      } else {
-        clearInterval(temporizadorRotacion);
+    function cerrarLectorIntrapagina() {
+      const modal = document.getElementById("lector-intrapagina");
+      if (modal) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
       }
     }
 
-    function guardarNoticiaEnCuaderno(titulo, autorFuente, categoria, enlace, nota) {
+    // Cerrar al pulsar escape o hacer clic fuera de la cartilla
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") cerrarLectorIntrapagina();
+    });
+
+    document.getElementById("lector-intrapagina")?.addEventListener("click", (e) => {
+      if (e.target.id === "lector-intrapagina") cerrarLectorIntrapagina();
+    });
+
+    function guardarObraEnCuaderno(titulo, autor, categoria) {
       const STORAGE_KEY = "kairos_favoritos_v1";
       let actual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
 
-      if (actual.some(item => item.enlace === enlace && item.titulo === titulo)) {
-        alert("Ya tienes esta noticia guardada en tu Cuaderno.");
+      if (actual.some(item => item.titulo === titulo)) {
+        alert("Ya tienes esta pieza guardada en tu Cuaderno.");
         return;
       }
 
       actual.unshift({
         id: Date.now(),
         titulo: titulo,
-        autor: autorFuente,
+        autor: autor,
         categoria: categoria,
-        enlace: enlace,
-        nota: nota || "Noticia guardada desde la portada cultural."
+        enlace: "#",
+        nota: "Obra guardada desde El Rincón del Lector."
       });
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(actual));
       alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
     }
 
+    /* ==========================================================================
+       EFEMÉRIDES, CITAS Y CASCADA DE ENSAYOS
+       ========================================================================== */
     const CITAS_MARGINAL = [
       { texto: "«La vida no examinada con sosiego no merece la pena de ser vivida.»", autor: "— Sócrates" },
       { texto: "«Un libro debe ser el hacha que rompa el mar helado dentro de nosotros.»", autor: "— Franz Kafka" },
@@ -1291,28 +1503,8 @@
       { texto: "«La belleza salvará al mundo.»", autor: "— Fiódor Dostoyevski" },
       { texto: "«El tiempo es un río que me arrebata, pero yo soy el río; es un tigre que me destroza, pero yo soy el tigre.»", autor: "— Jorge Luis Borges" },
       { texto: "«Quien tiene un porqué para vivir puede soportar casi cualquier cómo.»", autor: "— Friedrich Nietzsche" },
-      { texto: "«El plano cinematográfico debe esculpir el tiempo, no apresurarlo con pirotecnia de montaje.»", autor: "— Andrei Tarkovski" },
-      { texto: "«Basta con que una sola nota sea tañida con hermosa intención para alimentar el espíritu.»", autor: "— Arvo Pärt" },
       { texto: "«No tenemos un tiempo escaso, sino que perdemos mucho.»", autor: "— Lucio Anneo Séneca" },
-      { texto: "«No hay nada más engañoso que un hecho obvio cuando la mirada carece de método analítico.»", autor: "— Sir Arthur Conan Doyle" },
-      { texto: "«El arte es la resistencia contra la muerte cotidiana del espíritu.»", autor: "— Gilles Deleuze" },
-      { texto: "«La contemplación presupone la demora. El sentido solo se desvela ante quien se niega a pasar de largo.»", autor: "— Byung-Chul Han" },
-      { texto: "«Los manuscritos no arden.»", autor: "— Mijaíl Bulgákov" },
-      { texto: "«La música empieza donde acaban las palabras.»", autor: "— Heinrich Heine" },
-      { texto: "«En el cine negro no hay inocentes; solo grados diversos de lucidez y extravío.»", autor: "— Paul Schrader" },
-      { texto: "«De lo que no se puede hablar, hay que callar en silencio reverente.»", autor: "— Ludwig Wittgenstein" },
-      { texto: "«El misterio es la cosa más bella que podemos experimentar. Es la fuente de todo arte verdadero.»", autor: "— Albert Einstein" },
-      { texto: "«La música es la aritmética de los sonidos, como la óptica es la geometría de la luz.»", autor: "— Claude Debussy" },
-      { texto: "«Vivir es demorarse en la orilla de lo no formulado.»", autor: "— María Zambrano" },
-      { texto: "«Todos esos momentos se perderán en el tiempo, como lágrimas en la lluvia.»", autor: "— Roy Batty (Blade Runner)" },
-      { texto: "«La verdadera patria del escritor es la memoria atenta de sus lecturas.»", autor: "— Marcel Proust" },
-      { texto: "«No toques lo que está ahí. Toca lo que no está.»", autor: "— Miles Davis" },
-      { texto: "«La duda es el principio de la sabiduría.»", autor: "— Aristóteles" },
-      { texto: "«El miedo a mirar hacia dentro es la raíz de todos los laberintos humanos.»", autor: "— Carl Gustav Jung" },
-      { texto: "«La poesía es el intento de pintar con palabras lo que la música expresa sin ellas.»", autor: "— Edgar Allan Poe" },
-      { texto: "«La sencillez es la máxima sofisticación del contrapunto.»", autor: "— Johann Sebastian Bach" },
-      { texto: "«Mirar a través de la ventana es asistir al teatro moral de la existencia.»", autor: "— Alfred Hitchcock" },
-      { texto: "«Kairós es la oportunidad irrepetible donde el instante se preña de eternidad.»", autor: "— Cuaderno de Principios" }
+      { texto: "«No hay nada más engañoso que un hecho obvio cuando la mirada carece de método analítico.»", autor: "— Sir Arthur Conan Doyle" }
     ];
 
     const EFEMERIDES_CALENDARIO = [
@@ -1320,13 +1512,9 @@
       { dia: 14, mes: 9, fecha: "14 de Octubre", titulo: "Publicación de 'El sabueso de los Baskerville'", cuerpo: "Sir Arthur Conan Doyle entregaba al Strand Magazine los pliegos donde la niebla de Dartmoor desafió por primera vez a la ciencia analítica." },
       { dia: 15, mes: 9, fecha: "15 de Octubre", titulo: "Séneca y la redacción de 'De brevitate vitae'", cuerpo: "Un día dedicado al recuerdo de la filosofía moral romana: el recordatorio de que la vida no es breve, sino que somos nosotros quienes la malgastamos." },
       { dia: 16, mes: 9, fecha: "16 de Octubre", titulo: "Estreno de 'La ventana indiscreta' de Hitchcock", cuerpo: "Se proyectaba por primera vez la obra maestra del voyeurismo donde el espectador comprende que mirar el dolor ajeno nunca es un acto inocente." },
-      { dia: 17, mes: 9, fecha: "17 de Octubre", titulo: "Elegía por Frédéric Chopin", cuerpo: "Fecha conmemorativa del fallecimiento del compositor en París, dejando sobre el teclado el testimonio insuperable del nocturno romántico." },
-      { dia: 18, mes: 9, fecha: "18 de Octubre", titulo: "Estreno de 'Moby Dick' de Herman Melville", cuerpo: "Salía a la luz la colosal epopeya metafísica sobre el capitán Ahab, el leviatán blanco y el combate ciego del hombre contra el destino." }
+      { dia: 17, mes: 9, fecha: "17 de Octubre", titulo: "Elegía por Frédéric Chopin", cuerpo: "Fecha conmemorativa del fallecimiento del compositor en París, dejando sobre el teclado el testimonio insuperable del nocturno romántico." }
     ];
 
-    /* ==========================================================================
-       EXTRACCIÓN AUTOMÁTICA Y CASCADA DE ENSAYOS: PRINCIPAL + 2 LATERALES
-       ========================================================================== */
     async function extraerUltimoEnsayo(nombreArchivo, seccionNombre) {
       try {
         const respuesta = await fetch(nombreArchivo);
@@ -1383,7 +1571,6 @@
     }
 
     async function actualizarCascadaEnsayos() {
-      // 1. Extraer el ensayo más reciente de cada uno de los 5 cuadernos
       const fuentes = [
         { archivo: "pensamiento.html", seccion: "Pensamiento" },
         { archivo: "literatura.html", seccion: "Literatura" },
@@ -1396,14 +1583,10 @@
         fuentes.map(f => extraerUltimoEnsayo(f.archivo, f.seccion))
       );
 
-      // Filtrar los que hayan cargado correctamente
       const validos = resultados.filter(item => item !== null && item.titulo);
-
-      // Ordenar por fecha de publicación (el más reciente primero)
       validos.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
 
       if (validos.length > 0) {
-        // A. El ensayo MÁS RECIENTE de toda la web se coloca en la TARJETA PRINCIPAL
         const principal = validos[0];
         const leadBadge = document.getElementById("lead-badge");
         const leadTitle = document.getElementById("lead-title");
@@ -1420,7 +1603,6 @@
         if (leadImg && principal.img) leadImg.setAttribute("src", principal.img);
         if (leadExcerpt && principal.resumen) leadExcerpt.textContent = principal.resumen;
 
-        // B. El SEGUNDO más reciente en la primera tarjeta lateral
         if (validos.length > 1) {
           const lateral1 = validos[1];
           const s1Badge = document.getElementById("side-1-badge");
@@ -1439,7 +1621,6 @@
           if (s1Excerpt && lateral1.resumen) s1Excerpt.textContent = lateral1.resumen;
         }
 
-        // C. El TERCER más reciente en la segunda tarjeta lateral
         if (validos.length > 2) {
           const lateral2 = validos[2];
           const s2Badge = document.getElementById("side-2-badge");
@@ -1457,8 +1638,6 @@
           if (s2Img && lateral2.img) s2Img.setAttribute("src", lateral2.img);
           if (s2Excerpt && lateral2.resumen) s2Excerpt.textContent = lateral2.resumen;
         }
-
-        // Nota: Los que ocupen la 4ª y 5ª posición quedan fuera de la cabecera automáticamente.
       }
     }
 
@@ -1471,8 +1650,8 @@
         metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
       }
 
-      renderizarTandaNoticias();
-      iniciarRotacionAutomatica();
+      // Inicializar El Rincón del Lector
+      renderizarObrasLector();
 
       const diaHoy = hoy.getDate();
       const mesHoy = hoy.getMonth();
@@ -1493,7 +1672,6 @@
         document.getElementById("daily-quote-author").textContent = citaHoy.autor;
       }
 
-      // Ejecutar la cascada automática al cargar la página
       actualizarCascadaEnsayos();
     }
 
