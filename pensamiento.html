@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Cuaderno de Pensamiento: La tribuna de los viernes escrita por la Dirección del Círculo. Ensayos de fondo, ética del tiempo y fenomenología.">
+  <title>Pensamiento & Tribuna | Círculo Kairós</title>
+
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    /* Barra de progreso de lectura */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px; width: 0%;
+      background-color: var(--accent);
+      z-index: 99999;
+      transition: width 0.1s linear;
+    }
+
+    /* Cabecera */
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 2.2rem 1.5rem 1.6rem;
+      background-color: var(--bg-color);
+      position: relative;
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .brand {
+      position: relative;
+      padding: 1rem 0 0.5rem;
+    }
+
+    .brand-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.13;
+      filter: blur(1px);
+      mix-blend-mode: multiply;
+    }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+      position: relative;
+      z-index: 2;
+    }
+    .site-title a { color: var(--text-main); transition: color var(--transition); }
+    .site-title a:hover { color: var(--accent); }
+
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .main-nav { 
+      border-bottom: 3px double var(--border-dark);
+      padding: 0.9rem 1rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+    }
+    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.2rem; }
+    .main-nav a {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-header-box {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-tag {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .section-heading-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+    .section-summary-text {
+      max-width: 780px;
+      margin: 0 auto;
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .table-of-contents-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--accent);
+      padding: 1.6rem 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .toc-title {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 0.9rem;
+      display: block;
+      font-weight: 700;
+    }
+    .toc-links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 2rem;
+      list-style: none;
+    }
+    .toc-item a {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .toc-item a span.num {
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
+
+    .articles-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 5.5rem;
+    }
+
+    .long-article {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 3.8rem 3.2rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .long-article::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(226, 216, 199, 0.35);
+      pointer-events: none;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+    .article-topic {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .article-headline {
+      font-family: var(--font-serif);
+      font-size: 2.35rem;
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .director-badge-line {
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      color: var(--accent-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .article-meta-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .article-featured-media {
+      margin-bottom: 2.5rem;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      max-height: 440px;
+    }
+    .article-featured-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .article-featured-media figcaption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-soft);
+      font-style: italic;
+    }
+
+    .article-prose {
+      font-family: var(--font-reader);
+      font-size: 1.22rem;
+      line-height: 2;
+      color: #292624;
+    }
+    .article-prose p {
+      margin-bottom: 2rem;
+      text-align: justify;
+    }
+    .article-prose h3 {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      margin: 3.4rem 0 1.2rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .article-prose .dropcap::first-letter {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 4.8rem;
+      line-height: 0.8;
+      padding-top: 6px;
+      padding-right: 14px;
+      padding-bottom: 2px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .article-prose blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2.8rem 0;
+      background-color: var(--bg-surface);
+      font-style: italic;
+      font-size: 1.24rem;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+    .article-prose blockquote cite {
+      display: block;
+      margin-top: 0.75rem;
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .article-bottom-actions {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 1.8rem;
+      margin-top: 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .signature-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .back-to-toc-link {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      padding: 0.45rem 0.95rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 2px;
+    }
+    .back-to-toc-link:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .pagination-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .page-btn {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .page-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .page-btn.active {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      cursor: default;
+    }
+
+    .sidebar-wrapper {
+      position: sticky;
+      top: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+
+    .director-profile-card { text-align: center; }
+    .director-seal-symbol {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1.2rem;
+      border-radius: 50%;
+      border: 2px solid var(--border-soft);
+      padding: 6px;
+      background-color: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .director-seal-symbol img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .director-profile-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+    }
+    .director-profile-card .director-title-label {
+      font-family: var(--font-classical);
+      font-size: 0.76rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      display: block;
+    }
+    .director-profile-card p {
+      font-family: var(--font-reader);
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .quote-widget blockquote {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      margin-bottom: 0.8rem;
+      color: var(--text-main);
+    }
+    .quote-widget cite {
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      font-style: normal;
+    }
+
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .footer-nav h4 {
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-soft);
+      padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .toc-links-grid { grid-template-columns: 1fr; }
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .long-article { padding: 2.2rem 1.8rem; }
+      .sidebar-wrapper { position: static; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .site-title { font-size: 2.2rem; }
+      .section-heading-title { font-size: 2.2rem; }
+      .article-headline { font-size: 1.85rem; }
+      .article-prose p { text-align: left; }
+      .main-nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <div id="progress-bar"></div>
+
+  <aside class="top-bar-meta" aria-label="Información de publicación">
+    <span>Círculo Kairós · Cuaderno V</span>
+    <span><strong>Disciplina:</strong> Tribuna de Pensamiento & Dirección</span>
+    <span>Edición de los Viernes · Año I</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Navegación principal">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="literatura.html">Literatura</a></li>
+      <li><a href="cine.html">Cine</a></li>
+      <li><a href="musica.html">Música</a></li>
+      <li><a href="filosofia.html">Filosofía</a></li>
+      <li><a href="pensamiento.html" class="active">Pensamiento</a></li>
+      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+      <li><a href="perfil.html">Mi Cuaderno</a></li>
+    </ul>
+  </nav>
+
+  <main id="contenido-principal">
+
+    <header class="section-header-box">
+      <span class="section-category-tag">Cuaderno Editorial V · La Tribuna del Viernes</span>
+      <h2 class="section-heading-title">Pensamiento & Deliberación</h2>
+      <p class="section-summary-text">
+        «El pensamiento verdadero no persigue la certeza complaciente, sino la fidelidad a la herida que nos hace lúcidos.» Una tribuna semanal consagrada a la reflexión profunda sobre las fracturas ontológicas de la existencia contemporánea, firmada por la Dirección del Círculo.
+      </p>
+    </header>
+
+    <!-- SUMARIO DEL TRATADO -->
+    <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de capítulos del tratado">
+      <span class="toc-title">Estructura del Tratado de la Pérdida · Haz clic para ir al capítulo</span>
+      <ul class="toc-links-grid" id="toc-container">
+        <li class="toc-item"><a href="#cap-1"><span class="num">I.</span> La grieta invisible antes del adiós</a></li>
+        <li class="toc-item"><a href="#cap-2"><span class="num">II.</span> La ontología del objeto huérfano</a></li>
+        <li class="toc-item"><a href="#cap-3"><span class="num">III.</span> El naufragio del lenguaje compartido</a></li>
+        <li class="toc-item"><a href="#cap-4"><span class="num">IV.</span> La rebelión contra la prisa del consuelo</a></li>
+        <li class="toc-item"><a href="#cap-5"><span class="num">V.</span> El laberinto de la memoria y la culpa</a></li>
+        <li class="toc-item"><a href="#cap-6"><span class="num">VI.</span> La custodia sagrada de lo ausente</a></li>
+      </ul>
+    </nav>
+
+    <div class="layout-columns">
+
+      <section class="articles-stream" id="stream-ensayos" aria-label="Ensayos monográficos de Pensamiento">
+
+        <!-- TRATADO MONUMENTAL DEL DIRECTOR SOBRE LA PÉRDIDA -->
+        <article class="long-article" id="tratado-perdida-director" data-titulo="La arquitectura de la ausencia (Tratado de la Pérdida)">
+          <header class="article-header">
+            <span class="article-topic">Tribuna de la Dirección · Tratado Monográfico I</span>
+            <h2 class="article-headline">La arquitectura de la ausencia: Fenomenología de la pérdida, el duelo insumiso y los objetos que sobreviven al naufragio</h2>
+            <span class="director-badge-line">Escrito por la Dirección de Círculo Kairós</span>
+            <div class="article-meta-line">Por Dirección Editorial · <time datetime="2026-10-16">16 de octubre de 2026</time> · <span>50 min de lectura de fondo</span></div>
+          </header>
+
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=1200&q=80" alt="Mesa de despacho antigua en penumbra con libros y cartas">
+            <figcaption>El testimonio mudo del espacio: la permanencia insensible de las cosas frente a la fragilidad irremediable de la vida.</figcaption>
+          </figure>
+
+          <div class="article-prose">
+            <p class="dropcap">Toda pérdida verdadera comienza mucho antes de que la ausencia sea formalmente proclamada por el testimonio de los médicos, el repique funeral de las campanas o la burocracia civil del certificado de defunción. Comienza en ese instante imperceptible, sutil y vertiginoso en que la mente advierte que el presente ha dejado de engendrar porvenir y ha empezado, con silenciosa crueldad, a transformarse en monumento. Perder no es la mera sustracción aritmética de una presencia dentro del censo del mundo; es la quiebra ontológica del espacio circundante. Es el desmoronamiento de esa red invisible de complicidades, miradas tangenciales y silencios compartidos que sustentaba, sin necesidad de proclamas, la arquitectura de nuestros días.</p>
+
+            <p>Nuestra civilización técnica, enferma de prisa y adicta al cálculo de utilidades inmediatas, trata al dolor de la pérdida como a una avería biológica que debe ser subsanada con premura clínica. Nos conminan a «pasar página», a «cerrar ciclos» y a metabolizar la catástrofe íntima en las cómodas casillas de las etapas psicológicas del duelo, como si la devastación del alma pudiera someterse al calendario laboral o a un protocolo de recursos humanos. Frente a esa cobardía contemporánea que procura maquillar el vacío para que la maquinaria productiva no se detenga, la filosofía y el arte reivindican la dignidad del duelo insumiso: la certeza lúcida de que el amor humano se mide por su capacidad de sostener la mirada ante el abismo de lo irremediable.</p>
+
+            <hr>
+
+            <h3 id="cap-1">I. La grieta invisible antes del adiós: La anticipación del vacío</h3>
+            <p>Hay una ceguera voluntaria en la dicha. Mientras habitamos la presencia del ser amado —ya sea la compañía de un progenitor anciano, la mirada cómplice de la pareja o la fraternidad cómplice de un amigo de juventud—, damos por sentado el milagro de su continuidad. La respiración ajena nos parece un derecho natural, un telón de fondo perpetuo sobre el cual desplegar nuestras pequeñas ambiciones, nuestros enfados pueriles y nuestras distracciones cotidianas.</p>
+
+            <p>Sin embargo, la pérdida suele emitir relámpagos precursores que desoímos cobardemente: una tos persistente en la madrugada, la vacilación repentina al cruzar un umbral, el temblor involuntario de los dedos al desabotonar una chaqueta o esa mirada fija en la lejanía que delata que el espíritu ya ha comenzado a descalzarse de la tierra. Cuando la cesación se consuma, esos recuerdos menores regresan con la fuerza demoledora de un reproche cósmico. Comprendemos con espanto que la muerte no fue un rayo imprevisto en un cielo despejado, sino una marea paciente que llevaba meses minando el acantilado sin que nosotros hubiéramos tenido la decencia de detener el reloj para contemplarla.</p>
+
+            <blockquote>«No hay mayor amargura para el entendimiento humano que reconocer la víspera del desastre cuando ya nada puede ser dicho. El tiempo que perdimos en vanidades se vuelve de plomo en el instante en que la última puerta se cierra con un chasquido definitivo.»<cite>— Cuaderno del Director, Notas Marginales</cite></blockquote>
+
+            <hr>
+
+            <h3 id="cap-2">II. La ontología del objeto huérfano: La victoria ciega de la materia</h3>
+            <p>En el plano estrictamente fenomenológico, la pérdida no se experimenta como la nada: se experimenta como una presencia invertida. Cuando caminamos por las habitaciones de una casa deshabitada tras la partida de quien amábamos, no tropezamos con el vacío; tropezamos con una densidad asfixiante. Cada rincón, cada quicio de puerta y cada sonido de la madera al crujir bajo nuestros pasos funciona como un eco diferido. El objeto cotidiano —aquel que en horas ordinarias pasa inadvertido por su docilidad doméstica— experimenta una mutación sagrada tras la pérdida: se transmuta en relicario.</p>
+
+            <p>El filósofo Vladimir Jankélévitch formuló con agudeza insuperable esta asimetría trágica: la persona desaparece, pero su universo instrumental sobrevive con una indiferencia intolerable. El par de gafas que descansa doblado sobre la mesilla de noche; la pluma estilográfica que aún conserva una gota de tinta seca en el plumín; el reloj de pulsera que continúa con su latido mecánico de cuarzo o resorte, marcando horas vacías que ya no pertenecen a nadie; las llaves de la vivienda que siguen tintineando en el bolsillo con su promesa intacta de franqueo, pero la cerradura que abrían da acceso ahora a un desierto moral. Los objetos huérfanos nos interpelan porque exhiben la victoria ciega de la materia bruta sobre la conciencia sensible.</p>
+
+            <p>Tocar esos objetos no produce nostalgia; produce un corte limpio en la carne del espíritu. Poseen la frialdad de los monumentos funerarios pero con el filo añadido de lo cotidiano. En ellos constatamos que el universo no tiene ojos para llorar ni memoria para registrar la piedad: la cuchara de plata sobrevivirá doscientos años en la vitrina mientras el cerebro que ideó grandes obras y el corazón que amó con devoción absoluta se disuelven en el polvo anónimo de los cementerios.</p>
+
+            <hr>
+
+            <h3 id="cap-3">III. El naufragio del lenguaje compartido: La muerte de una lengua privada</h3>
+            <p>Perder a un semejante no significa únicamente lamentar la interrupción de su aliento biológico; significa asistir a la muerte de una lengua privada. Toda convivencia prolongada, toda amistad dilatada en el estudio y toda devoción amorosa construye con los años un dialecto único: sobreentendidos, cadencias de voz, silencios compartidos frente al fuego y una mitología compartida que solo dos seres sobre la faz de la tierra podían descifrar.</p>
+
+            <p>Una simple inflexión de la voz, una alusión cifrada a un viaje pretérito o un gesto apenas perceptible de las cejas bastaban para comunicar un mundo entero de significados sin necesidad de vocablos formales. Cuando uno de los dos muere, ese idioma se extingue instantáneamente. El superviviente se convierte de la noche a la mañana en el último hablante de una lengua muerta: nadie más en el planeta entenderá el chiste íntimo, nadie comprenderá la referencia al suceso oscuro de hace una década y nadie sabrá qué significaba aquel silencio compartido en el balcón mientras la tarde caía sobre los tejados.</p>
+
+            <p>Intentar explicar ese dialecto a un tercero es un ejercicio estéril que solo consigue banalizar el misterio. El dolor de la pérdida es, en gran medida, la condena a un mutismo forzoso: habitamos una multitud ruidosa donde las palabras comunes siguen circulando como moneda de curso legal, pero la moneda de oro de nuestra verdad interior ha perdido para siempre su contraparte en el banco del mundo.</p>
+
+            <hr>
+
+            <h3 id="cap-4">IV. La rebelión contra la prisa del consuelo: El elogio de la pesadumbre lúcida</h3>
+            <p>La sociedad terapéutica del siglo XXI ha convertido el duelo en un proceso patológico que debe ser abreviado a toda costa mediante fármacos, técnicas de autoayuda o evasiones turísticas. Existe una presión social obscena para mostrar una «pronta recuperación», para exhibir una sonrisa de resiliencia y demostrar al entorno que seguimos siendo funcionales en el engranaje económico. La tristeza prolongada es vista como una falta de educación o un fracaso de la voluntad.</p>
+
+            <p>Frente a ese imperativo de ligereza, el Círculo Kairós reivindica el elogio de la pesadumbre lúcida. El duelo no es una enfermedad que se cura con el transcurso de las semanas; es el precio inexorable que la inteligencia paga por haber amado. Reducir la ausencia a una herida que cicatriza hasta no dejar rastro equivaldría a admitir que quien se fue era reemplazable, intercambiable o accesorio.</p>
+
+            <blockquote>«El consuelo rápido es una forma refinada de traición. Pretender que la amputación de un miembro del alma puede resolverse con frases hechas es insultar la grandeza de lo que fue vivido. Quien no sabe llorar en soledad y en silencio durante años no ha entendido nada del misterio de la existencia.»<cite>— Cuaderno del Director, Tratado de la Pérdida</cite></blockquote>
+
+            <p>El duelo insumiso no busca el regodeo mórbido en el sufrimiento ni la autodestrucción estéril; busca la lealtad. Acepta que la cicatriz no debe borrarse, sino que debe ser integrada en el caminar cotidiano como un elemento estructurante del carácter. Se aprende a caminar cojeando del alma, sin pedir limosna de piedad al prójimo y sin simular una alegría que ofendería la memoria de la tumba.</p>
+
+            <hr>
+
+            <h3 id="cap-5">V. El laberinto de la memoria y la culpa: La batalla contra el olvido</h3>
+            <p>El enemigo más siniestro de la pérdida no es el dolor desgarrador de los primeros meses: es la piedad amarga del olvido. Jorge Luis Borges lo observó con escalofriante exactitud: con el paso inexorable de los años, el rostro de los muertos empieza a desdibujarse en la memoria. Ya no recordamos la mirada directa, sino el recuerdo del recuerdo; ya no escuchamos el timbre metálico de su risa, sino una reverberación amortiguada por la distancia.</p>
+
+            <p>Aparece entonces el veneno de la culpa. El doliente experimenta un remordimiento feroz cuando advierte que han pasado tres horas enteras sin pensar en el ausente, o cuando un estímulo involuntario le arranca una carcajada genuina. Sentimos que reír es una deslealtad y que continuar vivos es una suerte de usurpación. La memoria libra una guerra de trincheras contra el tiempo: nos aferramos a fotografías descoloridas, releemos cartas polvorientas donde la caligrafía tiembla sobre el papel y nos esforzamos por retener en las fosas nasales el aroma de un perfume que el aire de las habitaciones va diluyendo implacablemente.</p>
+
+            <p>En esa batalla, la memoria descubre su propia paradoja: cuanto más desesperadamente intentamos forzar el recuerdo de un rostro, más artificial y fotográfico se vuelve; en cambio, es en el descuido de una tarde cualquiera, al escuchar el chirrido de una puerta o al oler el café recién molido, cuando la presencia ausente irrumpe con la nitidez de un relámpago, desgarrando de nuevo el pecho con su belleza fantasmal.</p>
+
+            <hr>
+
+            <h3 id="cap-6">VI. La custodia sagrada de lo ausente: Kairós frente a la ceniza</h3>
+            <p>¿Qué nos queda, pues, en la orilla del naufragio? Nos queda la transfiguración del tiempo. Para el tiempo lineal de los relojes (Cronos), la pérdida es una línea que se aleja hacia el pasado: una acumulación estéril de semanas y meses que van enterrando el acontecimiento bajo capas de polvo geológico. Pero para el tiempo de la conciencia profunda (Kairós), los ausentes no están en el pasado: están en el fundamento.</p>
+
+            <p>Quien ha atravesado el fuego de una gran pérdida y ha rechazado el consuelo vulgar adquiere una visión de rayos X sobre el mundo. Las ambiciones de la multitud, las vanidades de la posición social y las pequeñas mezquindades de la conversación pública se vuelven transparentes y ridículas. La cercanía del abismo confiere una aristocracia moral al pensamiento: se aprende a atesorar cada instante de vigilia con reverencia estremecida, a no postergar la palabra de afecto y a mirar a los seres que aún caminan a nuestro lado con la ternura desgarradora de quien sabe que mañana pueden ser polvo.</p>
+
+            <p>Los muertos no nos piden que nos encerremos en una cripta de melancolía perpetua; nos piden que seamos sus embajadores en la tierra. Custodiar su memoria es continuar leyendo los libros que ellos amaron, escuchar la música que encendía su espíritu y defender las causas nobles que sus manos tuvieron que abandonar a medio hacer. En ese pacto silencioso entre los vivos y las sombras, la pérdida deja de ser una derrota absoluta para convertirse en la raíz más fecunda de nuestra dignidad humana.</p>
+          </div>
+
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Tribuna de la Dirección</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
+
+      </section>
+
+      <!-- BARRA LATERAL DEL DIRECTOR -->
+      <aside class="sidebar-wrapper" aria-label="Complementos de la Tribuna">
+        
+        <div class="sidebar-widget director-profile-card">
+          <div class="director-seal-symbol">
+            <img src="logo-kairos.svg" alt="Sello de la Dirección">
+          </div>
+          <h4>Tribuna del Director</h4>
+          <span class="director-title-label">Círculo Kairós · Edición del Viernes</span>
+          <p>
+            Espacio reservado al final de cada ciclo semanal para la deliberación profunda, el ensayo testimonial y la meditación sobre las heridas abiertas de nuestro tiempo.
+          </p>
+        </div>
+
+        <div class="sidebar-widget quote-widget">
+          <h3 class="widget-heading">Voz en el Margen</h3>
+          <blockquote>
+            «El dolor de la pérdida no es un túnel del que se sale; es un paisaje que se aprende a habitar con paso sobrio y mirada limpia.»
+          </blockquote>
+          <cite>— Cuaderno del Director</cite>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Los Cuadernos Semanales</h3>
+          <ul class="quick-reading-list" style="list-style: none; font-size: 0.9rem; line-height: 1.7;">
+            <li style="border-bottom: 1px solid var(--border-soft); padding: 0.65rem 0;">
+              <a href="literatura.html"><strong>Lunes · Literatura & Enigma</strong><span style="color: var(--text-muted); font-size: 0.82rem;">Crítica de fondo y relojería deductiva</span></a>
+            </li>
+            <li style="border-bottom: 1px solid var(--border-soft); padding: 0.65rem 0;">
+              <a href="cine.html"><strong>Martes · Cine & Mirada</strong><span style="color: var(--text-muted); font-size: 0.82rem;">Claroscuro, autor y lenguaje visual</span></a>
+            </li>
+            <li style="border-bottom: 1px solid var(--border-soft); padding: 0.65rem 0;">
+              <a href="musica.html"><strong>Miércoles · Música & Acústica</strong><span style="color: var(--text-muted); font-size: 0.82rem;">Minimalismo sacro y paisajes analógicos</span></a>
+            </li>
+            <li style="border-bottom: 1px solid var(--border-soft); padding: 0.65rem 0;">
+              <a href="filosofia.html"><strong>Jueves · Filosofía & Dialéctica</strong><span style="color: var(--text-muted); font-size: 0.82rem;">Fenomenología, estoicismo y finitud</span></a>
+            </li>
+            <li style="padding: 0.65rem 0;">
+              <a href="pensamiento.html" style="color: var(--accent);"><strong>Viernes · Tribuna del Director</strong><span style="color: var(--text-muted); font-size: 0.82rem; display: block;">Pensamiento, duelo y memoria</span></a>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- BOTONES DE PAGINACIÓN AUTOMÁTICOS -->
+    <nav class="pagination-bar" id="barra-paginas" aria-label="Navegación de tratados de pensamiento"></nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al análisis pausado del pensamiento, las artes y la salvaguarda de la memoria.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos Semanales</h4>
+        <ul>
+          <li><a href="literatura.html">Lunes · Literatura & Enigma</a></li>
+          <li><a href="cine.html">Martes · Cine & Mirada</a></li>
+          <li><a href="musica.html">Miércoles · Música & Acústica</a></li>
+          <li><a href="filosofia.html">Jueves · Filosofía & Dialéctica</a></li>
+          <li><a href="pensamiento.html">Viernes · Tribuna del Director</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PAGINACIÓN Y FAVORITOS -->
+  <script>
+    const ENSAYOS_POR_PAGINA = 2;
+    let paginaActual = 1;
+    const articulos = Array.from(document.querySelectorAll(".long-article"));
+    const totalPaginas = Math.ceil(articulos.length / ENSAYOS_POR_PAGINA);
+
+    function mostrarPagina(numPagina, hacerScroll = false) {
+      paginaActual = numPagina;
+      const inicio = (numPagina - 1) * ENSAYOS_POR_PAGINA;
+      const fin = inicio + ENSAYOS_POR_PAGINA;
+
+      articulos.forEach((art, index) => {
+        art.style.display = (index >= inicio && index < fin) ? "block" : "none";
+      });
+
+      const botones = document.querySelectorAll(".page-btn");
+      botones.forEach(btn => {
+        btn.classList.toggle("active", parseInt(btn.getAttribute("data-page")) === numPagina);
+      });
+
+      if (hacerScroll) {
+        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function inicializarPaginacion() {
+      const barraPaginas = document.getElementById("barra-paginas");
+      if (totalPaginas > 1 && barraPaginas) {
+        barraPaginas.style.display = "flex";
+        barraPaginas.innerHTML = "";
+
+        const btnPrev = document.createElement("button");
+        btnPrev.className = "page-btn";
+        btnPrev.innerHTML = "&larr; Anterior";
+        btnPrev.onclick = () => { if (paginaActual > 1) mostrarPagina(paginaActual - 1, true); };
+        barraPaginas.appendChild(btnPrev);
+
+        for (let i = 1; i <= totalPaginas; i++) {
+          const btn = document.createElement("button");
+          btn.className = "page-btn";
+          btn.setAttribute("data-page", i);
+          btn.textContent = i;
+          btn.onclick = () => mostrarPagina(i, true);
+          barraPaginas.appendChild(btn);
+        }
+
+        const btnNext = document.createElement("button");
+        btnNext.className = "page-btn";
+        btnNext.innerHTML = "Siguiente &rarr;";
+        btnNext.onclick = () => { if (paginaActual < totalPaginas) mostrarPagina(paginaActual + 1, true); };
+        barraPaginas.appendChild(btnNext);
+      }
+      mostrarPagina(1, false);
+    }
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
+  </script>
+
+  <!-- MOTOR DE FAVORITOS (CÍRCULO KAIRÓS) -->
+  <script>
+    const STORAGE_KEY = "kairos_favoritos_v1";
+
+    function conmutarFavorito(idArticulo, titulo, categoria, enlace) {
+      let lista = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+      const existe = lista.some(item => item.enlace === enlace);
+
+      if (existe) {
+        lista = lista.filter(item => item.enlace !== enlace);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+        actualizarEstadoBoton(idArticulo, false);
+        alert(`«${titulo}» se ha eliminado de tu Cuaderno de Favoritos.`);
+      } else {
+        lista.unshift({
+          id: Date.now(),
+          titulo: titulo,
+          autor: "Director de Círculo Kairós",
+          categoria: categoria,
+          enlace: enlace,
+          nota: "Guardado desde la lectura del ensayo."
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+        actualizarEstadoBoton(idArticulo, true);
+        alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
+      }
+    }
+
+    function actualizarEstadoBoton(idArticulo, guardado) {
+      const btn = document.getElementById(`btn-fav-${idArticulo}`);
+      if (!btn) return;
+      if (guardado) {
+        btn.innerHTML = "&#9733; En tu Cuaderno";
+        btn.style.backgroundColor = "var(--accent)";
+        btn.style.color = "#ffffff";
+        btn.style.borderColor = "var(--accent)";
+      } else {
+        btn.innerHTML = "&#9734; Guardar en mi perfil";
+        btn.style.backgroundColor = "var(--bg-surface)";
+        btn.style.color = "var(--accent)";
+        btn.style.borderColor = "var(--border-soft)";
+      }
+    }
+
+    function inyectarBotonesFavoritos() {
+      const articulos = document.querySelectorAll(".long-article");
+      const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+      const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop();
+
+      articulos.forEach(art => {
+        const pieAcciones = art.querySelector(".article-bottom-actions");
+        if (!pieAcciones) return;
+
+        const id = art.id;
+        const titularEl = art.querySelector(".article-headline");
+        const titulo = titularEl ? titularEl.textContent.trim() : (art.getAttribute("data-titulo") || "Tratado");
+
+        let categoria = "Pensamiento";
+        const enlaceCompleto = `${archivoActual}#${id}`;
+        const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
+
+        const btn = document.createElement("button");
+        btn.id = `btn-fav-${id}`;
+        btn.className = "back-to-toc-link";
+        btn.style.cursor = "pointer";
+        btn.style.marginRight = "auto";
+        btn.onclick = () => conmutarFavorito(id, titulo, categoria, enlaceCompleto);
+
+        pieAcciones.insertBefore(btn, pieAcciones.querySelector(".back-to-toc-link"));
+        actualizarEstadoBoton(id, yaGuardado);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", inyectarBotonesFavoritos);
+  </script>
+</body>
+</html>
