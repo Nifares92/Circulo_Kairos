@@ -98,7 +98,7 @@
       mix-blend-mode: multiply;
     }
 
-    /* ESTILOGRAFÍA Y COLOR DEL TITULAR KAIRÓS */
+    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -106,17 +106,16 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 0.35rem;
-      color: var(--accent);
+      color: var(--text-main);
       position: relative;
       z-index: 2;
     }
     .site-title a {
-      color: var(--accent);
+      color: var(--text-main);
       transition: color var(--transition), opacity var(--transition);
     }
     .site-title a:hover {
-      color: var(--accent-dark);
-      opacity: 0.95;
+      color: var(--accent);
     }
 
     .site-tagline {
@@ -498,7 +497,7 @@
     }
 
     /* ==========================================================================
-       BLOQUE 3: GRAN ÁGORA CULTURAL Y DESPACHO CON WIDGET FEEDWIND
+       BLOQUE 3: GRAN ÁGORA CULTURAL Y DESPACHO EXPANDIDO CON FEED ROTATIVO
        ========================================================================== */
     .cultural-dispatch-layout {
       display: grid;
@@ -513,7 +512,7 @@
     .block-header {
       border-bottom: 2px solid var(--border-dark);
       padding-bottom: 0.6rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -523,14 +522,152 @@
     .block-header h3 { font-family: var(--font-serif); font-size: 1.85rem; }
     .block-header span { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
 
-    /* Contenedor del widget FeedWind integrado */
-    .feedwind-widget-frame {
+    /* Barra de controles del carrusel cultural */
+    .feed-controls-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .feed-ctrl-btn {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      padding: 0.35rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .feed-ctrl-btn:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    .feed-page-indicator {
+      font-size: 0.75rem;
+      font-family: var(--font-classical);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin: 0 0.2rem;
+    }
+
+    /* Cuadrícula de Noticias que ocupa el 100% del ancho disponible */
+    .news-card-feed {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+      min-height: 640px;
+      transition: opacity 0.35s ease;
+    }
+
+    .news-item-box {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      padding: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
       box-shadow: var(--shadow-subtle);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+    }
+    .news-item-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(34, 31, 29, 0.08);
+      border-color: var(--accent);
+    }
+
+    .news-item-thumb {
+      height: 195px;
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+      margin-bottom: 1.1rem;
+      background-color: var(--bg-surface);
+    }
+    .news-item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .news-item-box:hover .news-item-thumb img {
+      transform: scale(1.04);
+    }
+
+    .news-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.45rem;
+      font-size: 0.72rem;
+    }
+    .news-tag {
+      font-family: var(--font-classical);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .news-source {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .news-source strong { color: var(--text-main); font-style: normal; }
+
+    .news-item-box h4 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+    }
+    .news-item-box h4 a:hover { color: var(--accent); }
+
+    .news-item-box p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .news-item-footer {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.76rem;
+    }
+    .news-read-more-link {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+    .news-read-more-link:hover { color: var(--accent-dark); }
+
+    .btn-save-news {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      color: var(--accent);
+      padding: 0.35rem 0.65rem;
+      font-size: 0.74rem;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      cursor: pointer;
       border-radius: 2px;
-      min-height: 580px;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .btn-save-news:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
     }
 
     /* Columna Derecha (Lateral) */
@@ -638,12 +775,14 @@
 
     @media (max-width: 1080px) {
       .cultural-dispatch-layout { grid-template-columns: 1fr; }
+      .news-card-feed { grid-template-columns: repeat(2, 1fr); min-height: auto; }
       .sidebar-ephemeris-column { position: static; }
       .theme-monograph-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .hero-editorial-grid { grid-template-columns: 1fr; }
       .quad-grid { grid-template-columns: repeat(2, 1fr); }
+      .news-card-feed { grid-template-columns: 1fr; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
       .brand-watermark { width: 190px; height: 190px; }
       .theme-monograph-grid { grid-template-columns: 1fr; }
@@ -849,22 +988,28 @@
     </section>
 
     <!-- ====================================================================
-         3. GRAN DESPACHO CULTURAL: WIDGET FEEDWIND EN VIVO
+         3. GRAN DESPACHO CULTURAL: FEED ROTATIVO EN ESPAÑOL A PANTALLA COMPLETA
          ==================================================================== -->
     <section class="cultural-dispatch-layout" aria-labelledby="dispatch-titulo">
       
-      <!-- Columna Izquierda: Widget FeedWind integrado -->
+      <!-- Columna Izquierda: Gran Feed de Noticias Culturales Dinámicas -->
       <div class="cultural-news-column">
         <div class="block-header">
           <div>
             <h3 id="dispatch-titulo">Despacho Cultural & Letras</h3>
             <span>Crónica de fondo, novedades del canon y actualidad en vivo</span>
           </div>
+          <div class="feed-controls-row">
+            <button class="feed-ctrl-btn" onclick="cambiarPaginaFeed(-1)" title="Página anterior">&larr;</button>
+            <span class="feed-page-indicator" id="indicador-pagina-noticias">1 / 2</span>
+            <button class="feed-ctrl-btn" onclick="cambiarPaginaFeed(1)" title="Siguiente página">&rarr;</button>
+            <button class="feed-ctrl-btn" onclick="conmutarAutoRotacion()" id="btn-pausa-feed" style="margin-left: 0.3rem;" title="Pausar o reanudar rotación">⏸ Pausar</button>
+          </div>
         </div>
 
-        <!-- WIDGET OFICIAL FEEDWIND -->
-        <div class="feedwind-widget-frame">
-          <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Cargando crónica cultural..." data-fw-param="171058/"></script>
+        <!-- Cuadrícula de 4 noticias por tanda que ocupa todo el ancho y alto -->
+        <div class="news-card-feed" id="feed-noticias-culturales">
+          <!-- Renderizado dinámico vía JavaScript -->
         </div>
       </div>
 
@@ -877,9 +1022,9 @@
         </div>
 
         <article class="ephemeris-card">
-          <span class="ephemeris-date-badge" id="efemeride-fecha-badge">14 de Octubre</span>
-          <h4 id="efemeride-titulo">Publicación de 'El sabueso de los Baskerville'</h4>
-          <p id="efemeride-cuerpo">Sir Arthur Conan Doyle entregaba al Strand Magazine los pliegos donde la niebla de Dartmoor desafió por primera vez a la ciencia analítica.</p>
+          <span class="ephemeris-date-badge" id="efemeride-fecha-badge">15 de Octubre</span>
+          <h4 id="efemeride-titulo">Séneca y la redacción de 'De brevitate vitae'</h4>
+          <p id="efemeride-cuerpo">Un día dedicado al recuerdo de la filosofía moral romana: el recordatorio de que la vida no es breve, sino que somos nosotros quienes la malgastamos.</p>
         </article>
 
         <div class="block-header" style="margin-top: 1.5rem;">
@@ -933,9 +1078,199 @@
   </footer>
 
   <!-- ====================================================================
-       SCRIPTS: EFEMÉRIDES, CITAS Y SINCRONIZACIÓN DE PORTADA
+       SCRIPTS: MOTOR DEL FEED CULTURAL EN ESPAÑOL, ROTACIÓN Y PORTADA
        ==================================================================== -->
   <script>
+    /* ==========================================================================
+       1. REPOSITORIO DE NOTICIAS CULTURALES EN ESPAÑOL CON FOTOS Y ENLACES REALES
+       ========================================================================== */
+    const NOTICIAS_CULTURALES = [
+      {
+        fuente: "RTVE Cultura",
+        tag: "Letras & Creación",
+        fecha: "15 Oct 2026",
+        titulo: "Los archivos rescatados de la Edad de Plata: epistolarios inéditos y memoria poética",
+        resumen: "Un recorrido por manuscritos y cuadernos de apuntes recientemente catalogados que arrojan nueva luz sobre las vanguardias literarias del siglo XX y la intimidad creativa de sus autores.",
+        enlace: "https://www.rtve.es/noticias/cultura/",
+        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "Babelia",
+        tag: "Crítica & Ensayo",
+        fecha: "15 Oct 2026",
+        titulo: "La resistencia del libro de fondo frente al vértigo de las novedades efímeras",
+        resumen: "Editores independientes y libreros de fondo reivindican la publicación comentada de diarios, cartas y tratados filosóficos que no se someten al ciclo acelerado del consumo algorítmico.",
+        enlace: "https://elpais.com/babelia/",
+        imagen: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "Filmoteca Española",
+        tag: "Séptimo Arte",
+        fecha: "14 Oct 2026",
+        titulo: "La restauración en 4K del claroscuro expresionista: Murnau y Lang bajo nueva luz",
+        resumen: "Los archivos fílmicos europeos culminan la digitalización fotoquímica de obras maestras del cine mudo, recuperando las texturas analógicas y el rango dinámico de las sombras originales.",
+        enlace: "https://www.culturaydeporte.gob.es/cultura/areas/cine/mc/fe/portada.html",
+        imagen: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "Scherzo",
+        tag: "Acústica & Música",
+        fecha: "14 Oct 2026",
+        titulo: "Ciclo de polifonía y liturgia de difuntos: el reencuentro con el timbre sacro",
+        resumen: "Auditorios europeos consagran programas monográficos al Réquiem de Mozart y a la técnica del tintinnabuli de Arvo Pärt, explorando la relación entre el contrapunto y el silencio.",
+        enlace: "https://scherzo.es/",
+        imagen: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "El Cultural",
+        tag: "Filosofía & Ensayo",
+        fecha: "13 Oct 2026",
+        titulo: "El debate sobre la atención profunda: filósofos reclaman el derecho a la demora",
+        resumen: "Nuevos tratados traducidos al castellano abordan la dispersión cognitiva y reivindican el silencio contemplativo frente a la aceleración técnica impuesta por las pantallas.",
+        enlace: "https://www.elespanol.com/el-cultural/",
+        imagen: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "EFE Cultura",
+        tag: "Patrimonio & Archivos",
+        fecha: "12 Oct 2026",
+        titulo: "Digitalizan códices renacentistas de tratados de estética y perspectiva geométrica",
+        resumen: "La Biblioteca Nacional concluye la conservación preventiva de manuscritos y tratados humanistas, poniéndolos a disposición del público con resolución facsímil.",
+        enlace: "https://efe.com/cultura/",
+        imagen: "https://images.unsplash.com/photo-1507842229452-9f939e65e43d?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "Caimán Cuadernos de Cine",
+        tag: "Cine de Autor",
+        fecha: "11 Oct 2026",
+        titulo: "El legado del plano secuencia en el cine de Tarkovski y Béla Tarr",
+        resumen: "Un estudio monográfico analiza cómo el tiempo cinematográfico sostenido transforma la mirada del espectador de mero voyeurismo en experiencia meditativa.",
+        enlace: "https://www.caimanediciones.es/",
+        imagen: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        fuente: "Revista de Occidente",
+        tag: "Pensamiento & Letras",
+        fecha: "10 Oct 2026",
+        titulo: "Kafka en el centenario de 'El castillo': la vigencia de la laberíntica burocracia",
+        resumen: "Especialistas en literatura centroeuropea revisitan la geografía de la alienación y la búsqueda de sentido en las parábolas más densas del autor checo.",
+        enlace: "https://www.revistadeoccidente.es/",
+        imagen: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=600&q=80"
+      }
+    ];
+
+    /* ==========================================================================
+       2. CONTROLADOR DEL CARRUSEL ROTATIVO DINÁMICO
+       ========================================================================== */
+    const NOTICIAS_POR_TANDA = 4;
+    let indicePaginaFeed = 0;
+    const totalPaginasFeed = Math.ceil(NOTICIAS_CULTURALES.length / NOTICIAS_POR_TANDA);
+    let temporizadorRotacion = null;
+    let rotacionActiva = true;
+
+    function renderizarTandaNoticias() {
+      const contenedor = document.getElementById("feed-noticias-culturales");
+      const indicador = document.getElementById("indicador-pagina-noticias");
+      if (!contenedor) return;
+
+      contenedor.style.opacity = "0";
+
+      setTimeout(() => {
+        contenedor.innerHTML = "";
+        const inicio = indicePaginaFeed * NOTICIAS_POR_TANDA;
+        const noticiasMostradas = NOTICIAS_CULTURALES.slice(inicio, inicio + NOTICIAS_POR_TANDA);
+
+        noticiasMostradas.forEach(item => {
+          const card = document.createElement("article");
+          card.className = "news-item-box";
+          card.innerHTML = `
+            <div class="news-item-thumb">
+              <img src="${item.imagen}" alt="${item.titulo}" loading="lazy">
+            </div>
+            <div class="news-header-meta">
+              <span class="news-tag">${item.tag}</span>
+              <span class="news-source"><strong>${item.fuente}</strong> · ${item.fecha}</span>
+            </div>
+            <h4><a href="${item.enlace}" target="_blank" rel="noopener noreferrer">${item.titulo}</a></h4>
+            <p>${item.resumen}</p>
+            <div class="news-item-footer">
+              <a href="${item.enlace}" target="_blank" rel="noopener noreferrer" class="news-read-more-link">Leer en fuente &rarr;</a>
+              <button class="btn-save-news" onclick="guardarNoticiaEnCuaderno('${item.titulo.replace(/'/g, "\\'")}', '${item.fuente}', '${item.tag}', '${item.enlace}', 'Noticia guardada desde portada')">&#9733; Guardar</button>
+            </div>
+          `;
+          contenedor.appendChild(card);
+        });
+
+        if (indicador) {
+          indicador.textContent = `${indicePaginaFeed + 1} / ${totalPaginasFeed}`;
+        }
+
+        contenedor.style.opacity = "1";
+      }, 200);
+    }
+
+    function cambiarPaginaFeed(direccion) {
+      indicePaginaFeed += direccion;
+      if (indicePaginaFeed >= totalPaginasFeed) indicePaginaFeed = 0;
+      if (indicePaginaFeed < 0) indicePaginaFeed = totalPaginasFeed - 1;
+      renderizarTandaNoticias();
+      reiniciarTemporizador();
+    }
+
+    function iniciarRotacionAutomatica() {
+      if (temporizadorRotacion) clearInterval(temporizadorRotacion);
+      temporizadorRotacion = setInterval(() => {
+        if (rotacionActiva) {
+          cambiarPaginaFeed(1);
+        }
+      }, 7000); // Rota suavemente cada 7 segundos
+    }
+
+    function reiniciarTemporizador() {
+      if (rotacionActiva) {
+        iniciarRotacionAutomatica();
+      }
+    }
+
+    function conmutarAutoRotacion() {
+      const btn = document.getElementById("btn-pausa-feed");
+      rotacionActiva = !rotacionActiva;
+      if (btn) {
+        btn.textContent = rotacionActiva ? "⏸ Pausar" : "▶ Reanudar";
+      }
+      if (rotacionActiva) {
+        iniciarRotacionAutomatica();
+      } else {
+        clearInterval(temporizadorRotacion);
+      }
+    }
+
+    /* Guardar en favoritos de LocalStorage */
+    function guardarNoticiaEnCuaderno(titulo, autorFuente, categoria, enlace, nota) {
+      const STORAGE_KEY = "kairos_favoritos_v1";
+      let actual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+
+      if (actual.some(item => item.enlace === enlace && item.titulo === titulo)) {
+        alert("Ya tienes esta noticia guardada en tu Cuaderno.");
+        return;
+      }
+
+      actual.unshift({
+        id: Date.now(),
+        titulo: titulo,
+        autor: autorFuente,
+        categoria: categoria,
+        enlace: enlace,
+        nota: nota || "Noticia guardada desde la portada cultural."
+      });
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(actual));
+      alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
+    }
+
+    /* ==========================================================================
+       3. CITAS Y EFEMÉRIDES ROTATIVAS DEL CALENDARIO
+       ========================================================================== */
     const CITAS_MARGINAL = [
       { texto: "«La vida no examinada con sosiego no merece la pena de ser vivida.»", autor: "— Sócrates" },
       { texto: "«Un libro debe ser el hacha que rompa el mar helado dentro de nosotros.»", autor: "— Franz Kafka" },
@@ -979,6 +1314,9 @@
       { dia: 18, mes: 9, fecha: "18 de Octubre", titulo: "Estreno de 'Moby Dick' de Herman Melville", cuerpo: "Salía a la luz la colosal epopeya metafísica sobre el capitán Ahab, el leviatán blanco y el combate ciego del hombre contra el destino." }
     ];
 
+    /* ==========================================================================
+       4. SINCRONIZACIÓN DE PORTADA CON LAS OTRAS PÁGINAS
+       ========================================================================== */
     async function extraerUltimoEnsayo(nombreArchivo) {
       try {
         const respuesta = await fetch(nombreArchivo);
@@ -1083,7 +1421,11 @@
       }
     }
 
+    /* ==========================================================================
+       5. INICIALIZACIÓN COMPLETA
+       ========================================================================== */
     function cargarDinamicos() {
+      // 1. Fecha del día
       const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const hoy = new Date();
       const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
@@ -1092,27 +1434,32 @@
         metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
       }
 
+      // 2. Iniciar feed rotativo cultural en español
+      renderizarTandaNoticias();
+      iniciarRotacionAutomatica();
+
+      // 3. Efeméride del calendario real
       const diaHoy = hoy.getDate();
       const mesHoy = hoy.getMonth();
-
       let efemerideHoy = EFEMERIDES_CALENDARIO.find(e => e.dia === diaHoy && e.mes === mesHoy);
       if (!efemerideHoy) {
         const indice = diaHoy % EFEMERIDES_CALENDARIO.length;
         efemerideHoy = EFEMERIDES_CALENDARIO[indice];
       }
-
       if (efemerideHoy) {
         document.getElementById("efemeride-fecha-badge").textContent = efemerideHoy.fecha;
         document.getElementById("efemeride-titulo").textContent = efemerideHoy.titulo;
         document.getElementById("efemeride-cuerpo").textContent = efemerideHoy.cuerpo;
       }
 
+      // 4. Cita del día
       const citaHoy = CITAS_MARGINAL[(diaHoy - 1) % CITAS_MARGINAL.length];
       if (citaHoy) {
         document.getElementById("daily-quote-text").textContent = citaHoy.texto;
         document.getElementById("daily-quote-author").textContent = citaHoy.autor;
       }
 
+      // 5. Sincronización de portada con cuadernos
       sincronizarPortadaConSecciones();
     }
 
