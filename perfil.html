@@ -287,7 +287,7 @@
       border-color: var(--accent-dark);
     }
 
-    /* ZONA PRIVADA (PERFIL DE LECTOR LOGUEADO) */
+    /* ZONA PRIVADA DEL LECTOR */
     #vista-perfil-activo {
       display: none;
     }
@@ -650,7 +650,6 @@
 
   <main id="contenido-principal">
 
-    <!-- CABECERA DE SECCIÓN -->
     <header class="section-hero-header">
       <span class="section-category-label">Archivo Interior</span>
       <h2 class="section-main-title" id="titulo-vista-principal">Mi Cuaderno de Favoritos</h2>
@@ -659,7 +658,7 @@
       </p>
     </header>
 
-    <!-- 1. VISTA DE AUTENTICACIÓN (LOGIN / REGISTRO) CUANDO NO HAY SESIÓN -->
+    <!-- 1. VISTA DE AUTENTICACIÓN (LOGIN / REGISTRO) -->
     <section class="auth-wrapper" id="vista-auth">
       <div class="auth-nav-tabs">
         <button class="auth-tab-btn active" id="tab-login" onclick="conmutarAuthTab('login')">Entrar</button>
@@ -827,6 +826,15 @@
 
     let categoriaActiva = "todos";
 
+    // Normalizador que elimina tildes y mayúsculas para emparejamientos seguros
+    function normalizarTexto(texto) {
+      return (texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
     // Encriptación nativa en navegador (SHA-256)
     async function hashPassword(pass) {
       const msgBuffer = new TextEncoder().encode(pass);
@@ -879,9 +887,11 @@
       usuarios.push(nuevoUsuario);
       localStorage.setItem(USERS_KEY, JSON.stringify(usuarios));
 
-      // Iniciar sesión automáticamente
+      // Asignar un cuaderno vacío exclusivo para el nuevo usuario
+      localStorage.setItem(`kairos_favoritos_user_${nuevoUsuario.id}`, JSON.stringify([]));
+
       iniciarSesionUsuario(nuevoUsuario);
-      alert(`Bienvenido a Círculo Kairós, ${nombre}. Tu cuaderno ha sido creado.`);
+      alert(`Bienvenido a Círculo Kairós, ${nombre}. Tu cuaderno personal ha sido creado.`);
     }
 
     async function procesarInicioSesion(e) {
@@ -951,7 +961,6 @@
       }
     }
 
-    // CLAVE DE FAVORITOS INDEPENDIENTE POR USUARIO
     function getStorageKeyUsuario() {
       const usuario = obtenerUsuarioActivo();
       return usuario ? `kairos_favoritos_user_${usuario.id}` : GLOBAL_FAVS_KEY;
@@ -959,24 +968,13 @@
 
     function obtenerFavoritos() {
       const key = getStorageKeyUsuario();
-      let data = localStorage.getItem(key);
-
-      // Migración amigable: si el usuario recién registrado aún no tiene favoritos pero había guardados globales
-      if (!data && key !== GLOBAL_FAVS_KEY) {
-        const globalData = localStorage.getItem(GLOBAL_FAVS_KEY);
-        if (globalData) {
-          localStorage.setItem(key, globalData);
-          data = globalData;
-        }
-      }
-
+      const data = localStorage.getItem(key);
       return data ? JSON.parse(data) : [];
     }
 
     function guardarFavoritos(lista) {
       const key = getStorageKeyUsuario();
       localStorage.setItem(key, JSON.stringify(lista));
-      // Sincronizar clave global para que los botones de "Guardar" de los ensayos sigan funcionando
       localStorage.setItem(GLOBAL_FAVS_KEY, JSON.stringify(lista));
       renderizarFavoritos();
       actualizarEstadisticas();
@@ -1006,9 +1004,11 @@
       if (!cont) return;
 
       const lista = obtenerFavoritos();
-      const filtrados = categoriaActiva === "todos" 
-        ? lista 
-        : lista.filter(item => (item.categoria || "").toLowerCase() === categoriaActiva);
+
+      const filtroLimpio = normalizarTexto(categoriaActiva);
+      const filtrados = filtroLimpio === "todos"
+        ? lista
+        : lista.filter(item => normalizarTexto(item.categoria) === filtroLimpio);
 
       if (filtrados.length === 0) {
         cont.innerHTML = `
@@ -1105,11 +1105,7 @@
 
     function borrarTodo() {
       if (confirm("¿Seguro que deseas vaciar todas las obras guardadas en tu cuaderno?")) {
-        const key = getStorageKeyUsuario();
-        localStorage.removeItem(key);
-        localStorage.removeItem(GLOBAL_FAVS_KEY);
-        renderizarFavoritos();
-        actualizarEstadisticas();
+        guardarFavoritos([]);
       }
     }
 
