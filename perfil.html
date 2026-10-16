@@ -74,7 +74,6 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
       padding: 1rem 0 0.5rem;
@@ -94,7 +93,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -124,7 +122,7 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    /* BARRA DE NAVEGACIÓN STICKY */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -480,7 +478,6 @@
       color: var(--text-muted);
     }
 
-    /* Pie de página */
     .site-footer {
       background-color: var(--bg-surface);
       border-top: 3px double var(--border-dark);
@@ -545,16 +542,14 @@
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <!-- NAVEGACIÓN STICKY -->
   <nav class="main-nav" aria-label="Navegación principal">
     <ul>
       <li><a href="index.html">Inicio</a></li>
@@ -602,18 +597,17 @@
 
         <!-- Pestañas de Filtro -->
         <nav class="tabs-bar" aria-label="Filtro de colecciones">
-          <button class="tab-btn active" onclick="cambiarFiltro('todos')">Todos</button>
-          <button class="tab-btn" onclick="cambiarFiltro('filosofia')">Filosofía</button>
-          <button class="tab-btn" onclick="cambiarFiltro('literatura')">Literatura</button>
-          <button class="tab-btn" onclick="cambiarFiltro('cine')">Cine</button>
-          <button class="tab-btn" onclick="cambiarFiltro('musica')">Música</button>
-          <button class="tab-btn" onclick="cambiarFiltro('propio')">Mis Notas</button>
+          <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todos</button>
+          <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
+          <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">Literatura</button>
+          <button class="tab-btn" onclick="cambiarFiltro('cine', this)">Cine</button>
+          <button class="tab-btn" onclick="cambiarFiltro('musica', this)">Música</button>
+          <button class="tab-btn" onclick="cambiarFiltro('pensamiento', this)">Pensamiento</button>
+          <button class="tab-btn" onclick="cambiarFiltro('propio', this)">Mis Notas</button>
         </nav>
 
         <!-- Lista de Favoritos -->
-        <div class="collection-stream" id="contenedor-favoritos">
-          <!-- Inyectado dinámicamente vía script -->
-        </div>
+        <div class="collection-stream" id="contenedor-favoritos"></div>
 
         <!-- Formulario para agregar una obra/libro/música favorita manualmente -->
         <section class="add-custom-panel">
@@ -627,6 +621,7 @@
               <option value="literatura">Literatura</option>
               <option value="cine">Cine</option>
               <option value="musica">Música</option>
+              <option value="pensamiento">Pensamiento</option>
               <option value="propio">Reflexión / Nota propia</option>
             </select>
             <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
@@ -684,13 +679,14 @@
           <li><a href="cine.html">Cine & Mirada</a></li>
           <li><a href="musica.html">Música & Resonancias</a></li>
           <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
         </ul>
       </nav>
       <div class="footer-nav">
         <h4>El Círculo</h4>
         <ul>
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
-          <li><a href="mailto:serabohe@gmail.com">Correspondencia Directa</a></li>
+          <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
         </ul>
       </div>
     </div>
@@ -714,36 +710,33 @@
       actualizarEstadisticas();
     }
 
-    function cambiarFiltro(cat) {
+    function cambiarFiltro(cat, botonElemento) {
       categoriaActiva = cat;
       document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-      if (event && event.target) {
-        event.target.classList.add("active");
+      if (botonElemento) {
+        botonElemento.classList.add("active");
       }
       renderizarFavoritos();
     }
 
-    // Limpia y normaliza el enlace guardado para que GitHub Pages nunca dé 404
     function normalizarEnlace(enlace) {
       if (!enlace) return "";
       let limpio = enlace.trim();
 
-      // Si viene con el texto literal roto "\${item.enlace}", se ignora
       if (limpio.includes("\${item.enlace}")) return "";
 
-      // Si es un enlace externo absoluto (http o https)
       if (limpio.startsWith("http://") || limpio.startsWith("https://")) {
         return limpio;
       }
 
-      // Si es un enlace relativo de la web (ej: literatura.html#borges-laberintos)
-      // Extrae únicamente el nombre de archivo y el hash (#id)
       const partes = limpio.split("/");
       return partes[partes.length - 1];
     }
 
     function renderizarFavoritos() {
       const cont = document.getElementById("contenedor-favoritos");
+      if (!cont) return;
+
       const lista = obtenerFavoritos();
 
       const filtrados = categoriaActiva === "todos" 
@@ -810,7 +803,6 @@
       lista.unshift(nuevo);
       guardarFavoritos(lista);
 
-      // Limpiar formulario
       document.getElementById("nuevo-titulo").value = "";
       document.getElementById("nuevo-autor").value = "";
       document.getElementById("nuevo-enlace").value = "";
@@ -824,9 +816,14 @@
 
     function actualizarEstadisticas() {
       const lista = obtenerFavoritos();
-      document.getElementById("conteo-total").textContent = lista.length;
-      const deEnsayos = lista.filter(item => item.enlace && item.enlace.includes(".html")).length;
-      document.getElementById("conteo-ensayos").textContent = deEnsayos;
+      const totalEl = document.getElementById("conteo-total");
+      const ensayosEl = document.getElementById("conteo-ensayos");
+
+      if (totalEl) totalEl.textContent = lista.length;
+      if (ensayosEl) {
+        const deEnsayos = lista.filter(item => item.enlace && item.enlace.includes(".html")).length;
+        ensayosEl.textContent = deEnsayos;
+      }
     }
 
     function guardarNombreLector() {
@@ -841,8 +838,10 @@
     function cargarNombreLector() {
       const guardado = localStorage.getItem(NAME_KEY);
       if (guardado) {
-        document.getElementById("nombre-lector").value = guardado;
-        document.getElementById("avatar-inicial").textContent = guardado.charAt(0).toUpperCase();
+        const input = document.getElementById("nombre-lector");
+        const avatar = document.getElementById("avatar-inicial");
+        if (input) input.value = guardado;
+        if (avatar) avatar.textContent = guardado.charAt(0).toUpperCase();
       }
     }
 
@@ -870,6 +869,5 @@
       actualizarEstadisticas();
     });
   </script>
-
 </body>
 </html>
