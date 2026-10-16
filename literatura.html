@@ -85,7 +85,6 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
       padding: 1rem 0 0.5rem;
@@ -105,7 +104,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -135,7 +133,6 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -408,7 +405,6 @@
       border-color: var(--accent);
     }
 
-    /* Paginador Automático */
     .pagination-bar {
       display: none;
       justify-content: center;
@@ -581,6 +577,7 @@
       .site-title { font-size: 2.2rem; }
       .section-heading-title { font-size: 2.2rem; }
       .article-headline { font-size: 1.85rem; }
+      .article-prose p { text-align: left; }
       .main-nav ul { gap: 1.2rem; }
     }
   </style>
@@ -599,16 +596,14 @@
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <!-- NAVEGACIÓN STICKY -->
   <nav class="main-nav" aria-label="Navegación principal">
     <ul>
       <li><a href="index.html">Inicio</a></li>
@@ -643,7 +638,7 @@
       <!-- COLUMNA PRINCIPAL DE ENSAYOS -->
       <section class="articles-stream" id="stream-ensayos" aria-label="Textos íntegros de literatura">
 
-        <!-- NUEVO ENSAYO LITERATURA: EL RELATO DE FANTASMAS VICTORIANO -->
+        <!-- ENSAYO VIII: FANTASMAS VICTORIANOS -->
         <article class="long-article" id="lit-fantasma-victoriano" data-titulo="VIII. El frío en la nuca (Fantasmas Victorianos)">
           <header class="article-header">
             <span class="article-topic">Gótico & Espectral · Ensayo VIII</span>
@@ -694,7 +689,7 @@
           </footer>
         </article>
 
-        <!-- NUEVO ENSAYO LITERATURA: HALLOWEEN Y LITERATURA ESPECTRAL -->
+        <!-- ENSAYO VII: HALLOWEEN Y LITERATURA ESPECTRAL -->
         <article class="long-article" id="halloween-literatura-espectral" data-titulo="VII. Entre el velo y la tinta (Halloween)">
           <header class="article-header">
             <span class="article-topic">Literatura Espectral · Ensayo VII</span>
@@ -719,68 +714,34 @@
 
             <p>En ese entorno agrario y vulnerable, la palabra era la primera línea de defensa y el principal instrumento de comunión. Alrededor del fuego comunitario, los druidas y los ancianos no se limitaban a realizar ofrendas; contaban historias. Relatar mitos sobre el Otro Mundo cumplía una función ritual: recordaba los pactos, establecía los límites morales de la comunidad y explicaba por qué no se debía caminar solo por los páramos tras la puesta del sol.</p>
 
-            <p>Aquellas narraciones orales fueron la semilla de la literatura espectral. Contenían ya los arquetipos que siglos después poblarían las páginas de la ficción moderna: el viajero que se extravía en el bosque, el banquete ofrecido por anfitriones fantasmales, el trueque peligroso con entidades sobrenaturales y la advertencia de que la curiosidad humana puede pagar un precio irreversible.</p>
-
             <hr>
 
             <h3>II. La domesticación de la sombra: El folklore y la balada</h3>
-            <p>Con la cristianización de las islas británicas y gran parte de Europa, Samhain se metamorfoseó en la víspera de Todos los Santos (<em>All Hallows' Eve</em>, origen etimológico de Halloween), mientras que las culturas latinas e hispanas consolidaban sus propias vigilias en torno al Día de Difuntos. La Iglesia intentó dotar a la fecha de un marco litúrgico y piadoso, pero el imaginario pagano se negó a desaparecer. Se refugió en el folklore campesino, en los cantares de ciego y en las baladas tradicionales.</p>
+            <p>Con la cristianización de las islas británicas y gran parte de Europa, Samhain se metamorfoseó en la víspera de Todos los Santos (<em>All Hallows' Eve</em>), mientras que las culturas latinas e hispanas consolidaban sus propias vigilias en torno al Día de Difuntos. La Iglesia intentó dotar a la fecha de un marco litúrgico y piadoso, pero el imaginario pagano se refugió en el folklore campesino, en los cantares de ciego y en las baladas tradicionales.</p>
 
-            <p>En Escocia e Irlanda, la literatura popular preservó los rituales adivinatorios asociados a la noche de difuntos. Las jóvenes arrojaban cáscaras de nuez al fuego para conocer la identidad de sus futuros cónyuges, o se asomaban a espejos a medianoche esperando vislumbrar un rostro detrás del suyo.</p>
-
-            <p>En 1785, el poeta escocés Robert Burns capturó esta atmósfera en su célebre poema <em>Halloween</em>. Lejos del horror cósmico, Burns retrató una noche de jolgorio campesino, superstición ingenua y cortejos amorosos:</p>
+            <p>En 1785, el poeta escocés Robert Burns capturó esta atmósfera en su célebre poema <em>Halloween</em>:</p>
 
             <blockquote>«Upon that night, when fairies light<br>On Cassilis Downans dance,<br>Or owre the lays, in splendid blaze,<br>On sprightly coursers prance...»<cite>— Robert Burns, Halloween (1785)</cite></blockquote>
-
-            <p>Burns demostró que la noche del 31 de octubre poseía una cadencia literaria propia. La fascinación por el límite ya no era solo pavor clerical o dogma religioso; se había convertido en material estético, en una celebración del ingenio popular frente al misterio del destino.</p>
 
             <hr>
 
             <h3>III. La arquitectura del espanto: Del gótico a la modernidad</h3>
-            <p>Si el folklore sembró la semilla, el siglo XIX construyó la catedral del horror. Con la consolidación de la novela gótica a finales del siglo XVIII —con autores como Horace Walpole, Ann Radcliffe o Matthew Lewis—, el miedo dejó de ser una advertencia moral para transformarse en un placer estético deliberado: lo sublime terrible.</p>
-
-            <p>La Revolución Industrial trajo consigo el auge de las ciudades iluminadas por gas y la supremacía de la razón positivista. Paradójicamente, cuanto más intentaba la ciencia desterrar las sombras, más voraz se volvía el público lector por historias que desafiaran esa certidumbre diurna. Los quioscos victorianos se llenaron de <em>penny dreadfuls</em> y las revistas literarias empezaron a publicar relatos breves de aparecidos para ser leídos en voz alta junto al fuego en las noches de otoño e invierno.</p>
-
-            <p>Es en esta tradición donde despuntan tres arquitecturas fundamentales del miedo:</p>
+            <p>Si el folklore sembró la semilla, el siglo XIX construyó la catedral del horror con la novela gótica y la literatura de quiosco. Tres arquitecturas fundamentales sostienen esta tradición:</p>
             <ul>
-              <li><strong>El horror psicológico y la descomposición interior:</strong> Edgar Allan Poe comprendió que los verdaderos fantasmas no habitaban en torreones medievales derruidos, sino en los rincones retorcidos de la culpa y la demencia humana. Cuentos como <em>El corazón delator</em> o <em>La caída de la Casa Usher</em> dotaron a lo macabro de una precisión quirúrgica.</li>
-              <li><strong>El fantasma como anomalía de la cotidianidad:</strong> M.R. James, rector del King's College y anticuario, perfeccionó la historia de fantasmas inglesa. Sus espectros no son figuras vaporosas con cadenas; son criaturas táctiles, viscosas o peludas que emergen de un manuscrito antiguo, de un relieve en una iglesia o del fondo de un armario. James instauró la costumbre de leer un nuevo relato de terror a sus colegas cada Nochebuena, emparentando de forma definitiva la estación fría con la ficción espectral.</li>
-              <li><strong>El abismo cósmico:</strong> A comienzos del siglo XX, H.P. Lovecraft y el círculo de <em>Weird Tales</em> expandieron el horizonte del terror. La amenaza ya no era el alma de un antepasado en pena, sino la insignificancia radical del ser humano ante fuerzas ancestrales e indiferentes que dormitan bajo los océanos o entre las estrellas.</li>
+              <li><strong>El horror psicológico y la descomposición interior:</strong> Edgar Allan Poe situó los fantasmas en los rincones de la culpa humana.</li>
+              <li><strong>El fantasma como anomalía de la cotidianidad:</strong> M.R. James perfeccionó el terror táctil y académico, convirtiendo la lectura de cuentos en un rito invernal.</li>
+              <li><strong>El abismo cósmico:</strong> H.P. Lovecraft expandió la amenaza hacia la insignificancia del ser humano ante fuerzas ancestrales.</li>
             </ul>
 
             <hr>
 
-            <h3>IV. The Halloween Tree y la nostalgia del otoño americano</h3>
-            <p>A mediados del siglo XX, la festividad de Halloween completó su trasplante a los Estados Unidos, donde absorbió tradiciones de inmigrantes irlandeses, rituales de cosecha norteamericanos y una creciente industria del entretenimiento. Sin embargo, corría el riesgo de perder su alma: de reducirse a un escaparate de cartón piedra, golosinas procesadas y disfraces de gomaespuma.</p>
-
-            <p>Fue un escritor, Ray Bradbury, quien rescató la dimensión mitológica y poética de la fiesta para las nuevas generaciones. En su novela corta de 1972, <em>El árbol de las brujas</em> (<em>The Halloween Tree</em>), Bradbury toma a un grupo de niños disfrazados y los embarca, guiados por el enigmático señor Mortajosario (Carapace Clavicle Moundshroud), en un viaje a través de cinco mil años de historia.</p>
-
-            <p>A través de Egipto, la Grecia clásica, los ritos druídicos de Samhain, la construcción de las gárgolas en Notre Dame y el Día de los Muertos en México, Bradbury articula la tesis central de la fiesta: el disfraz no es una farsa vacía, sino el eco milenario de una alianza con la muerte. Nos vestimos de aquello que tememos para poder mirarlo de frente; encendemos una vela dentro de una calabaza para recordarle a la noche que aún conservamos una chispa de calor.</p>
-
-            <p>En paralelo, autores contemporáneos como Stephen King (quien inmortalizó la decadencia otoñal de Nueva Inglaterra en obras como <em>El misterio de Salem's Lot</em> o <em>It</em>) o Neil Gaiman (con la ternura gótica de <em>El libro del cementerio</em> y <em>Coraline</em>) han mantenido viva esa frontera. Han demostrado que el miedo en la literatura no busca paralizar al lector, sino acompañarlo a través de sus propias sombras.</p>
+            <h3>IV. The Halloween Tree y el otoño americano</h3>
+            <p>Ray Bradbury, en su novela de 1972 <em>El árbol de las brujas</em> (<em>The Halloween Tree</em>), rescató la dimensión poética de la fiesta. Guiados por el enigmático Carapace Clavicle Moundshroud, un grupo de niños viaja por cinco mil años de historia demostrando que el disfraz es el eco de una alianza con la muerte: nos vestimos de lo que tememos para poder mirarlo de frente.</p>
 
             <hr>
 
-            <h3>V. Anatomía del miedo: Por qué buscamos la ficción espectral</h3>
-            <p>¿Por qué pagamos por ser asustados? ¿Qué extraño mecanismo nos lleva a buscar, en las noches de viento y hojas secas, historias que sabemos que turbarán nuestro sueño?</p>
-
-            <p>La respuesta reside en la función catártica de la ficción. Vivimos inmersos en miedos reales, informes y a menudo inasibles: la enfermedad, la pérdida, el fracaso económico, la soledad o el paso implacable del tiempo. Esos terrores carecen de estructura narrativa; nos golpean de manera caótica y silenciosa.</p>
-
-            <p>El cuento de horror, por el contrario, ofrece un pacto seguro:</p>
-            <ul>
-              <li><strong>Confinamiento del peligro:</strong> El monstruo, el fantasma o la maldición están contenidos entre la primera y la última página de un libro. Poseen reglas, orígenes y, en muchas ocasiones, un desenlace.</li>
-              <li><strong>Control sensorial:</strong> El lector decide la velocidad de su propia angustia. Puede cerrar el volumen, encender la lámpara de la mesilla de noche y respirar hondo. Ha rozado el abismo sin precipitarse en él.</li>
-              <li><strong>Hermandad en la vulnerabilidad:</strong> Saber que otros han sentido el mismo estremecimiento ante la oscuridad nos rescata del aislamiento. El miedo compartido se convierte en un vínculo de empatía.</li>
-            </ul>
-
-            <p>Halloween y la literatura comparten ese mismo propósito: son una escenificación ritual. Nos permiten jugar con la muerte, burlarnos de ella por unas horas, sentir el latido acelerado en la garganta y luego regresar, aliviados y transformados, a la calidez de nuestro mundo ordenado.</p>
-
-            <hr>
-
-            <h3>VI. La última vela</h3>
-            <p>Cuando las luces de las calles finalmente se apagan y los niños exhaustos regresan a casa con sus bolsas de dulces vacías, el artificio comercial de Halloween se desvanece con rapidez. Lo que queda, en la quietud de la madrugada de noviembre, es el rumor del viento contra los cristales, el frío que se cuela por las rendijas y esa persistente intuición humana de que el mundo no termina donde alcanzan nuestros ojos.</p>
-
-            <p>Ese residuo invisible es la verdadera materia prima de la literatura. Mientras exista una sombra inexplicable en el descansillo de la escalera o un recuerdo que se niegue a morir, habrá alguien dispuesto a tomar una pluma para dar testimonio de lo que vio o creyó ver. Leer en la noche de Halloween no es un pasatiempo circunstancial; es sentarse, una vez más, alrededor del fuego de Samhain para recordarnos que, frente a la inmensidad de la noche, las palabras siguen siendo nuestro escudo más antiguo y nuestra antorcha más fiel.</p>
+            <h3>V. Epílogo: La última vela</h3>
+            <p>Cuando las luces se apagan y los artificios comerciales cesan, lo que perdura es el rumor del viento contra los cristales y la intuición de que el mundo no concluye donde alcanzan nuestros ojos. Sentarse a leer en la noche de difuntos es colocarse de nuevo alrededor de la lumbre de Samhain.</p>
           </div>
 
           <footer class="article-bottom-actions">
@@ -789,7 +750,7 @@
           </footer>
         </article>
 
-        <!-- NUEVO ENSAYO LITERATURA: JORGE LUIS BORGES -->
+        <!-- ENSAYO VI: BORGES Y LABERINTOS -->
         <article class="long-article" id="borges-laberintos" data-titulo="VI. Laberintos del tiempo (Borges)">
           <header class="article-header">
             <span class="article-topic">Ficción Metafísica · Ensayo VI</span>
@@ -808,12 +769,12 @@
             <p class="dropcap">Jorge Luis Borges convirtió la metafísica en la más depurada de las literaturas fantásticas. Frente al realismo pedestre que se conforma con registrar las apariencias cotidianas, el maestro porteño comprendió que los viejos acertijos de los filósofos presocráticos —la flecha inmóvil de Zenón, la materia como sueño de un dios indiferente o la imposibilidad de abarcar lo infinito— eran tramas narrativas perfectas para desmontar la arrogancia de la mente lineal.</p>
 
             <h3>I. El laberinto que prescinde del espacio</h3>
-            <p>En <em>El jardín de los senderos que se bifurcan</em> (1941), el laberinto ideado por el mandarín Ts'ui Pên no es una construcción arquitectónica de muros de piedra ni un dédalo vegetal donde los viajeros extraviados mueren de sed. Es un libro invisible: una red temporal donde no se descartan las alternativas posibles, sino que todas acontecen simultáneamente en dimensiones divergentes y convergentes. Si en la novela convencional el protagonista elige un camino y anula los demás, en la urdimbre de Ts'ui Pên opta por todos a la vez, creando una proliferación de presentes que coexisten sin destruirse.</p>
+            <p>En <em>El jardín de los senderos que se bifurcan</em> (1941), el laberinto ideado por el mandarín Ts'ui Pên no es una construcción arquitectónica de muros de piedra ni un dédalo vegetal donde los viajeros extraviados mueren de sed. Es un libro invisible: una red temporal donde no se descartan las alternativas posibles, sino que todas acontecen simultáneamente en dimensiones divergentes y convergentes.</p>
 
             <blockquote>«El tiempo se bifurca perpetuamente hacia innumerables futuros. En uno de ellos soy su enemigo; en otro, soy su amigo; en otros, usted y yo somos meras hipótesis no formuladas.»<cite>— Jorge Luis Borges, Ficciones</cite></blockquote>
 
             <h3>II. La miniatura que devora al cosmos</h3>
-            <p>En ficciones como <em>El Aleph</em> o <em>La biblioteca de Babel</em>, Borges formula el drama esencial de la finitud: la mente humana puede concebir el absoluto, pero está encadenada a la sucesión sucesiva del lenguaje. Escribir sobre lo infinito exige la paradoja de nombrar una totalidad simultánea con palabras que marchan en fila india. La ironía borgeana reside en recordarnos que somos sombras en un espejo ajeno, lectores sonámbulos de un texto que fue escrito antes de nuestro nacimiento.</p>
+            <p>En ficciones como <em>El Aleph</em> o <em>La biblioteca de Babel</em>, Borges formula el drama esencial de la finitud: la mente humana puede concebir el absoluto, pero está encadenada a la sucesión del lenguaje. Escribir sobre lo infinito exige la paradoja de nombrar una totalidad simultánea con palabras que marchan en fila india.</p>
           </div>
 
           <footer class="article-bottom-actions">
@@ -841,24 +802,20 @@
             <p class="dropcap">La candente mañana de febrero en que Beatriz Viterbo murió, después de una imperiosa agonía que no se rebajó un solo instante al sentimentalismo ni al miedo, el narrador borgiano advirtió con desolada amargura que las carteleras de fierro de la Plaza Constitución habían renovado no sé qué aviso de cigarrillos rubios. El mundo físico continuaba su marcha insensible, ajeno a la catástrofe privada de una ausencia irrecuperable. Es en ese dolor lúcido, mezclado con la mezquindad cómica del mediocre poeta Carlos Argentino Daneri, donde se engendra la mayor cumbre de la literatura fantástica y metafísica hispanoamericana: <em>El Aleph</em>.</p>
 
             <h3>I. La tiranía de la memoria y el templo profanado de la calle Garay</h3>
-            <p>Para el Borges narrador, visitar cada año la casona decadente de la calle Garay el día del aniversario de Beatriz no es una muestra de cortesía mundana; es un rito litúrgico destinado a conjurar el olvido. La casa, con su patio ajedrezado, su piano desafinado y su galería de retratos en penumbra, constituye el último relicario tangible donde el fantasma de Beatriz sigue habitando los objetos que sus dedos rozaron.</p>
-            <p>Sin embargo, la memoria humana es un instrumento precario y corruptible. Conforme los meses transcurren, los rasgos del rostro amado comienzan a esfumarse, sustituidos por conjeturas, sombras y fotografías desvaídas. La tragedia de la pérdida no radica únicamente en la desaparición del ser querido, sino en la certeza culpable de que el tiempo lineal terminará por borrar incluso el dolor de recordarlo con nitidez.</p>
+            <p>Para el Borges narrador, visitar cada año la casona decadente de la calle Garay el día del aniversario de Beatriz no es una muestra de cortesía mundana; es un rito litúrgico destinado a conjurar el olvido. La casa constituye el último relicario tangible donde el fantasma de Beatriz sigue habitando los objetos que sus dedos rozaron.</p>
 
             <blockquote>«Cambiará el universo pero yo no, pensé con melancólica vanidad; alguna vez, lo sé, mi vana devoción la había exasperado; muerta, yo podía consagrarme a su memoria, sin esperanza, pero también sin humillación.»<cite>— Jorge Luis Borges, El Aleph</cite></blockquote>
 
             <h3>II. Carlos Argentino Daneri y el delirio del poema exhaustivo</h3>
-            <p>Frente a la devoción austera de Borges emerge la figura grotesca de Carlos Argentino Daneri, primo de Beatriz. Daneri es el arquetipo del intelectual ampuloso, pedante y desprovisto de talento real, empeñado en redactar un poema monumental titulado <em>La Tierra</em>, en el cual aspira a versificar la totalidad del planeta palmo a palmo: desde un conventillo de intramuros hasta las capas polares.</p>
-            <p>La sátira literaria borgiana alcanza aquí una precisión quirúrgica. Daneri representa la ilusión cientificista decimonónica que cree que el cosmos puede ser catalogado mediante una mera enumeración enciclopédica de adjetivos rimbombantes y sinónimos latinizantes. Pero la pretensión ridícula de Daneri encierra un secreto pavoroso: su poema no surge de una imaginación delirante, sino de una visión directa y sobrehumana oculta en las entrañas de su propia vivienda.</p>
+            <p>Frente a la devoción austera de Borges emerge la figura grotesca de Carlos Argentino Daneri, empeñado en redactar un poema monumental titulado <em>La Tierra</em>, en el cual aspira a versificar la totalidad del planeta palmo a palmo. Pero su pretensión encierra un secreto: su poema surge de una visión directa oculta en las entrañas de su vivienda.</p>
 
             <h3>III. El descenso al sótano y la revelación del punto universal</h3>
-            <p>Amenazado por la demolición de la casa para ensanchar una confitería moderna, Daneri confiesa el secreto: en el decimonoveno escalón de la escalera del sótano, tumbado en decúbito supino en la oscuridad más absoluta y fijando la mirada en un ángulo exacto, se encuentra un <em>Aleph</em>: uno de los puntos del espacio que contiene todos los puntos.</p>
-            <p>El descenso de Borges al sótano reproduce la estructura mística de la catábasis homérica o el descenso dantesco a los infiernos. Acostado sobre la tierra fría de la bodega, temiendo haber caído en una emboscada de un loco furioso, el narrador abre los ojos. Lo que sigue es la página más deslumbrante de la prosa en lengua castellana del siglo XX: el intento titánico y deliberadamente desesperado de volcar en el lenguaje sucesivo de las palabras una experiencia visual simultánea y absoluta.</p>
+            <p>En el decimonoveno escalón de la escalera del sótano, fijando la mirada en un ángulo exacto, se encuentra un <em>Aleph</em>: uno de los puntos del espacio que contiene todos los puntos simultáneamente.</p>
 
-            <blockquote>«Vi el populoso mar, vi el alba y la tarde, vi las muchedumbres de América, vi una plateada telaraña en el centro de una negra pirámide, vi un laberinto roto (era Londres), vi interminables ojos inmediatos mirándose en mí como en un espejo, vi todos los espejos del planeta y ninguno me reflejó... vi en un cajón del escritorio (y la letra me hizo temblar) cartas obscenas, increíbles, precisas, que Beatriz había dirigido a Carlos Argentino... vi el Aleph, desde todos los puntos, vi en el Aleph la tierra, y en la tierra otra vez el Aleph y en el Aleph la tierra... y lloré, porque mis ojos habían visto ese objeto secreto y conjetural, cuyo nombre usurpan los hombres, pero que ningún hombre ha mirado: el inconcebible universo.»<cite>— Jorge Luis Borges, El Aleph</cite></blockquote>
+            <blockquote>«Vi el populoso mar, vi el alba y la tarde, vi las muchedumbres de América, vi una plateada telaraña en el centro de una negra pirámide... vi el Aleph, desde todos los puntos, vi en el Aleph la tierra, y en la tierra otra vez el Aleph y en el Aleph la tierra... y lloré, porque mis ojos habían visto ese objeto secreto y conjetural, cuyo nombre usurpan los hombres, pero que ningún hombre ha mirado: el inconcebible universo.»<cite>— Jorge Luis Borges, El Aleph</cite></blockquote>
 
             <h3>IV. La paradoja del lenguaje y la piedad del olvido</h3>
-            <p>El clímax del cuento encierra una melancolía metafísica insuperable. Al contemplar la totalidad del cosmos en una esfera irisada de dos centímetros de diámetro, Borges no solo descubre la verdad sobre las infidelidades secretas de Beatriz, sino que experimenta el horror de la saturación visual. Nada puede asombrar ya a los ojos de un hombre que ha contemplado todos los rincones del universo simultáneamente; la vida se torna gris, reiterativa y vacía.</p>
-            <p>La salvación, paradójicamente, no reside en el infinito, sino en el olvido bienhechor de los mortales. Al salir a la calle y confundirse con los transeúntes de Constitución, el tiempo cronológico reinicia su labor erosiva. Borges olvida lentamente los detalles de la visión del sótano, y en ese desvanecimiento gradual recupera la condición humana: la belleza trágica de vivir en el tiempo fragmentario y buscar la eternidad únicamente a través de la memoria y la palabra escrita.</p>
+            <p>Al contemplar la totalidad del cosmos en una esfera irisada de dos centímetros, Borges experimenta el horror de la saturación visual. Nada puede asombrar ya; la salvación reside en el olvido bienhechor que restituye la condición humana de vivir en el tiempo fragmentario.</p>
           </div>
 
           <footer class="article-bottom-actions">
@@ -867,7 +824,7 @@
           </footer>
         </article>
 
-        <!-- ENSAYO 1 -->
+        <!-- ENSAYO 1: ENIGMA -->
         <article class="long-article" id="enigma" data-titulo="I. La arquitectura del enigma">
           <header class="article-header">
             <span class="article-topic">Teoría del Enigma · Ensayo I</span>
@@ -879,12 +836,12 @@
             <figcaption>La deducción como geometría moral: de Auguste Dupin a la edad dorada británica.</figcaption>
           </figure>
           <div class="article-prose">
-            <p class="dropcap">Toda gran narración de enigma obedece, en última instancia, a las leyes secretas y rigurosas de la relojería suiza. No basta con cometer un crimen en la penumbra ni con sembrar la escena de indicios equívocos; es indispensable que cada sombra proyectada sobre la alfombra, cada reloj detenido a las doce menos diez y cada billete de tren extraviado posean un valor funcional inequívoco dentro del engranaje deductivo. La novela policíaca de corte clásico no es un género sobre el horror del asesinato, sino sobre la restauración racional del cosmos frente al desorden del mal.</p>
-            <h3>I. El nacimiento del método: Edgar Allan Poe y el caballero Dupin</h3>
-            <p>Cuando Edgar Allan Poe publicó en la primavera de 1841 <em>Los crímenes de la calle Morgue</em> en las páginas de la <em>Graham's Magazine</em>, no inventó únicamente al detective analítico moderno; fundó una liturgia intelectual que perviviría durante siglos. El caballero C. Auguste Dupin no es un policía de a pie, ni un justiciero movido por la cólera social o la retribución económica. Dupin habita en una mansión ruinosa y aislada en el Faubourg Saint-Germain, vive con los postigos cerrados durante las horas del día encendiendo bujías aromáticas para preservar la penumbra del estudio, y solo sale a pasear a altas horas de la noche, cuando el tumulto urbano se aquieta y los contornos de las cosas se despojan de la distracción vulgar de los sentidos.</p>
+            <p class="dropcap">Toda gran narración de enigma obedece, en última instancia, a las leyes secretas y rigurosas de la relojería suiza. No basta con cometer un crimen en la penumbra ni con sembrar la escena de indicios equívocos; es indispensable que cada sombra proyectada sobre la alfombra, cada reloj detenido a las doce menos diez y cada billete de tren extraviado posean un valor funcional inequívoco dentro del engranaje deductivo. La novela policíaca clásica restaura el cosmos racional frente al desorden del mal.</p>
+            <h3>I. Edgar Allan Poe y el caballero Dupin</h3>
+            <p>Cuando Poe publicó en 1841 <em>Los crímenes de la calle Morgue</em>, fundó una liturgia intelectual: el caballero C. Auguste Dupin habita con los postigos cerrados de día y solo camina en la penumbra nocturna, cuando los contornos se despojan de la distracción vulgar de los sentidos.</p>
             <blockquote>«El verdadero intelecto analítico no busca lo extraordinario, sino lo insignificante que ha sido pasado por alto por la prisa cotidiana de los hombres que creen saberlo todo.»<cite>— Edgar Allan Poe, Los crímenes de la calle Morgue</cite></blockquote>
             <h3>II. La habitación cerrada como paradoja epistemológica</h3>
-            <p>El problema del cuarto cerrado (el célebre <em>locked-room mystery</em>) es, en su raíz, un problema filosófico: ¿cómo puede un efecto producirse en un espacio sellado donde ninguna causa ha podido entrar ni salir? John Dickson Carr, en su célebre conferencia del capítulo decimoséptimo de <em>El hombre hueco</em> (1935), desglosó la taxonomía de esta paradoja con la meticulosidad de un cirujano. No se trata de magia ni de fuerzas demoníacas; la habitación cerrada es el templo donde la ciencia y la imaginación lógica colisionan.</p>
+            <p>El problema del cuarto cerrado es un dilema de causalidad: ¿cómo se produce un efecto en un espacio sellado donde ninguna causa ha podido entrar ni salir? John Dickson Carr desglosó su taxonomía demostrando que la solución es siempre el triunfo del método lógico sobre el engaño de las apariencias.</p>
           </div>
           <footer class="article-bottom-actions">
             <span class="signature-note">— Círculo Kairós · Cuaderno de Teoría Narrativa</span>
@@ -892,7 +849,7 @@
           </footer>
         </article>
 
-        <!-- ENSAYO 2 -->
+        <!-- ENSAYO 2: DOSTOYEVSKI -->
         <article class="long-article" id="dostoyevski" data-titulo="II. Crimen y castigo (Dostoyevski)">
           <header class="article-header">
             <span class="article-topic">Realismo Trágico · Ensayo II</span>
@@ -904,12 +861,12 @@
             <figcaption>El hachazo de Raskólnikov y la quiebra ontológica del superhombre napoleónico.</figcaption>
           </figure>
           <div class="article-prose">
-            <p class="dropcap">A principios de julio, en una hora extraordinariamente calurosa del atardecer, un joven salía de su cuartucho en el callejón de S. y se dirigía lentamente, como indeciso, hacia el puente de K. Así arranca una de las mayores cumbres de la literatura universal: no en un palacio zarista ni en un salón noble, sino en los arrabales sofocantes de San Petersburgo, entre tabernas hediondas a aguardiente barato, mendigos y callejones polvorientos donde la miseria material engendra monstruos dialécticos.</p>
+            <p class="dropcap">A principios de julio, en una hora calurosa del atardecer, un joven salía de su cuartucho en el callejón de S. y se dirigía hacia el puente de K. Así arranca una de las mayores cumbres de la literatura: en los arrabales sofocantes de San Petersburgo, entre tabernas y callejones polvorientos donde la miseria material engendra monstruos dialécticos.</p>
             <h3>I. El armario de la buhardilla y el embrión de la soberbia</h3>
-            <p>Rodión Románovich Raskólnikov no comete un crimen por hambre ni por avaricia pedestre. Su cuartucho, situado bajo el tejado de un edificio de cinco plantas, recuerda más a un armario o a una tumba que a una vivienda humana; tiene apenas seis pasos de largo y el empapelado amarillento se desprende de las paredes como piel muerta. Es en esa claustrofobia física donde Raskólnikov pasa días enteros tumbado sobre un diván andrajoso, alimentándose de té rancio y rumiando una teoría abstracta que desafía el orden moral del universo.</p>
+            <p>Raskólnikov no comete un crimen por hambre. Su cuartucho, semejante a un armario, alimenta una teoría abstracta que divide a la humanidad entre seres ordinarios y hombres extraordinarios con derecho moral a transgredir la ley.</p>
             <blockquote>«No maté a un ser humano; maté un principio. Pero el principio permaneció de pie y fui yo quien cayó destrozado contra el suelo de mi propia miseria.»<cite>— Fiódor Dostoyevski, Crimen y castigo</cite></blockquote>
             <h3>II. Sonia Marmeládova y la resurrección de Lázaro</h3>
-            <p>El contrapunto luminoso de la novela lo encarna Sonia, la hija del desdichado Marmeládov, empujada a la prostitución por la hambruna de sus hermanastros. Para la mente racional de Raskólnikov, Sonia debería haberse arrojado al canal de Catalina hace meses para poner fin a una degradación insoportable; sin embargo, Sonia vive sostenida por una fe ciega, humilde y silenciosa en el perdón divino.</p>
+            <p>Frente al delirio racionalista de Rodión, Sonia encarna la fe humilde que no juzga. Su lectura compartida del pasaje evangélico de Lázaro sella el camino del arrepentimiento como única redención frente al abismo del yo aislado.</p>
           </div>
           <footer class="article-bottom-actions">
             <span class="signature-note">— Círculo Kairós · Clásicos del Realismo Ruso</span>
@@ -917,7 +874,7 @@
           </footer>
         </article>
 
-        <!-- ENSAYO 3 -->
+        <!-- ENSAYO 3: BASKERVILLE -->
         <article class="long-article" id="baskerville" data-titulo="III. El sabueso de los Baskerville">
           <header class="article-header">
             <span class="article-topic">Gótico Victoriano · Ensayo III</span>
@@ -929,9 +886,9 @@
             <figcaption>El fango de Grimpen: donde la leyenda demoníaca desafía a la química analítica.</figcaption>
           </figure>
           <div class="article-prose">
-            <p class="dropcap">En los páramos pantanosos de Devonshire la tierra tiembla y traga sin aviso a hombres y bestias. Allí, la leyenda de un sabueso infernal parece gobernar los destinos de una estirpe maldita. Sir Arthur Conan Doyle logra en esta novela su mayor triunfo atmosférico: empapar la novela detectivesca del terror gótico más sugerente.</p>
+            <p class="dropcap">En los páramos pantanosos de Devonshire la tierra tiembla y traga sin aviso a hombres y bestias. Allí, la leyenda de un sabueso infernal parece gobernar los destinos de una estirpe maldita. Sir Arthur Conan Doyle logra en esta novela su mayor triunfo atmosférico: empapar la investigación detectivesca del terror gótico más sugerente.</p>
             <h3>I. El choque entre la superstición y la deducción química</h3>
-            <p>Sherlock Holmes representa el estandarte del positivismo victoriano, armado con lupas, reactivos y la lógica despiadada de la inferencia. Pero al situar la acción en el fango de Grimpen, Doyle confronta a su héroe con el terror primitivo de la noche inglesa. Las pisadas de un sabueso gigante halladas junto al cadáver de Sir Charles Baskerville son un reto a la mismísima razón ilustrada.</p>
+            <p>Sherlock Holmes representa el estandarte del positivismo victoriano, armado con reactivos y lupas. Al situar la trama en el fango de Grimpen, Doyle confronta la razón ilustrada con el terror primitivo de la noche inglesa.</p>
             <blockquote>«El mundo está lleno de cosas evidentes que nadie por casualidad se detiene a observar jamás.»<cite>— Arthur Conan Doyle, El sabueso de los Baskerville</cite></blockquote>
           </div>
           <footer class="article-bottom-actions">
@@ -940,7 +897,7 @@
           </footer>
         </article>
 
-        <!-- ENSAYO 4 -->
+        <!-- ENSAYO 4: BULGAKOV -->
         <article class="long-article" id="bulgakov" data-titulo="IV. El maestro y Margarita (Bulgákov)">
           <header class="article-header">
             <span class="article-topic">Sátira Mística · Ensayo IV</span>
@@ -952,9 +909,9 @@
             <figcaption>El diablo en Moscú y el juicio eterno de Poncio Pilato.</figcaption>
           </figure>
           <div class="article-prose">
-            <p class="dropcap">Bajo la dictadura estalinista de los años treinta, cuando escribir libremente equivalía a firmar la propia condena de deportación a Siberia, Mijaíl Bulgákov redactó en secreto, en noches febriles antes de morir ciego y perseguido, la obra cumbre de la fantasía filosófica rusa: <em>El maestro y Margarita</em>.</p>
-            <h3>I. El diablo en el parque de los Estanques del Patriarca</h3>
-            <p>En una tarde calurosa de primavera en Moscú, dos intelectuales ateos debaten sobre la inexistencia de Jesús de Nazaret. De pronto, un caballero extranjero de mirada penetrante y acento equívoco se sienta a su lado: es Woland, el mismísimo Satán. No viene a tentar almas vulgares, sino a celebrar un baile y desenmascarar la codicia, la hipocresía y la delación de los burócratas literarios que han vendido su talento al régimen.</p>
+            <p class="dropcap">Bajo la censura estalinista de los años treinta, cuando escribir libremente equivalía a la condena, Mijaíl Bulgákov redactó en secreto, en noches febriles antes de morir, la obra cumbre de la fantasía filosófica rusa: <em>El maestro y Margarita</em>.</p>
+            <h3>I. El diablo en los Estanques del Patriarca</h3>
+            <p>Woland (Satán) irrumpe en Moscú para desenmascarar la codicia y la delación de los burócratas literarios. Su sentencia inmortal recuerda que la verdad artística no puede ser destruida por decretos humanos.</p>
             <blockquote>«La cobardía es, sin duda, uno de los defectos más terribles de la condición humana. Los manuscritos no arden.»<cite>— Mijaíl Bulgákov, El maestro y Margarita</cite></blockquote>
           </div>
           <footer class="article-bottom-actions">
@@ -963,7 +920,7 @@
           </footer>
         </article>
 
-        <!-- ENSAYO 5 -->
+        <!-- ENSAYO 5: ATMÓSFERA -->
         <article class="long-article" id="atmosfera" data-titulo="V. El arte de la atmósfera">
           <header class="article-header">
             <span class="article-topic">Teoría Narrativa · Ensayo V</span>
@@ -975,9 +932,9 @@
             <figcaption>La respiración sensitiva del escenario antes de la primera peripecia.</figcaption>
           </figure>
           <div class="article-prose">
-            <p class="dropcap">Las narraciones que perduran en la memoria de los siglos rara vez son recordadas por la sucesión lineal de sus peripecias, sino por la textura del aire que se respiraba en sus páginas. Nadie recuerda la lista exacta de acontecimientos de <em>Pedro Páramo</em>; recordamos el calor asfixiante de Comala, un pueblo donde los muertos susurran detrás de las paredes de adobe.</p>
+            <p class="dropcap">Las narraciones que perduran en la memoria rara vez son recordadas por la sucesión lineal de sus peripecias, sino por la textura del aire que se respiraba en sus páginas. Nadie recuerda la lista exacta de acontecimientos de <em>Pedro Páramo</em>; recordamos el calor asfixiante de Comala, un pueblo donde los muertos susurran detrás de las paredes de adobe.</p>
             <h3>I. La primacía de la atmósfera sobre el esquema</h3>
-            <p>Muchos escritores cometen el error de diseñar escaletas argumentales minuciosas antes de saber a qué huelen sus habitaciones. Si el escenario carece de densidad táctil, temperatura y sombra, los personajes se mueven como muñecos de cartón en un plató deshabitado. La atmósfera es el alma silenciosa de la novela: condiciona la velocidad del pensamiento y determina la gravedad moral de cada decisión.</p>
+            <p>Si el escenario carece de densidad táctil, temperatura y sombra, los personajes se mueven como muñecos de cartón. La atmósfera es el alma silenciosa de la novela: condiciona la velocidad del pensamiento y determina la gravedad moral de cada decisión.</p>
           </div>
           <footer class="article-bottom-actions">
             <span class="signature-note">— Círculo Kairós · Cuaderno de Creación</span>
@@ -990,7 +947,6 @@
       <!-- BARRA LATERAL PERMANENTE -->
       <aside class="sidebar-wrapper" aria-label="Complementos de lectura">
         
-        <!-- OBRA EN FOCO ACTUALIZADA -->
         <div class="sidebar-widget focus-book-card">
           <h3 class="widget-heading">Obra en Foco</h3>
           <div class="focus-book-cover">
@@ -1008,7 +964,6 @@
           <cite>— Arthur Conan Doyle</cite>
         </div>
 
-        <!-- Guía del Cuaderno -->
         <div class="sidebar-widget">
           <h3 class="widget-heading">Guía del Cuaderno</h3>
           <ul class="quick-reading-list">
@@ -1035,6 +990,7 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
         <p>Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.</p>
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
@@ -1047,6 +1003,7 @@
           <li><a href="cine.html">Cine & Mirada</a></li>
           <li><a href="musica.html">Música & Resonancias</a></li>
           <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
         </ul>
       </nav>
 
@@ -1055,6 +1012,7 @@
         <ul>
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
           <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
         </ul>
       </div>
     </div>
@@ -1062,13 +1020,12 @@
 
   <!-- SCRIPT DE PAGINACIÓN INTELIGENTE -->
   <script>
-    const ENSAYOS_POR_PAGINA = 2; // Cantidad de ensayos por página
+    const ENSAYOS_POR_PAGINA = 2;
 
     let paginaActual = 1;
     const articulos = Array.from(document.querySelectorAll(".long-article"));
     const totalPaginas = Math.ceil(articulos.length / ENSAYOS_POR_PAGINA);
 
-    // Salto inteligente a cualquier ensayo (cambia de página si es necesario)
     function irAEnsayo(idObjetivo) {
       const indice = articulos.findIndex(art => art.id === idObjetivo);
       if (indice === -1) return;
@@ -1094,44 +1051,37 @@
       const fin = inicio + ENSAYOS_POR_PAGINA;
 
       articulos.forEach((art, index) => {
-        if (index >= inicio && index < fin) {
-          art.style.display = "block";
-        } else {
-          art.style.display = "none";
-        }
+        art.style.display = (index >= inicio && index < fin) ? "block" : "none";
       });
 
-      // Sumario superior
       const tocContainer = document.getElementById("toc-container");
-      tocContainer.innerHTML = "";
-      articulos.slice(inicio, fin).forEach(art => {
-        const id = art.id;
-        const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
-        const li = document.createElement("li");
-        li.className = "toc-item";
-        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
-        tocContainer.appendChild(li);
-      });
+      if (tocContainer) {
+        tocContainer.innerHTML = "";
+        articulos.slice(inicio, fin).forEach(art => {
+          const id = art.id;
+          const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+          const li = document.createElement("li");
+          li.className = "toc-item";
+          li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+          tocContainer.appendChild(li);
+        });
+      }
 
-      // Botones activos
       const botones = document.querySelectorAll(".page-btn");
       botones.forEach(btn => {
-        if (parseInt(btn.getAttribute("data-page")) === numPagina) {
-          btn.classList.add("active");
-        } else {
-          btn.classList.remove("active");
-        }
+        btn.classList.toggle("active", parseInt(btn.getAttribute("data-page")) === numPagina);
       });
 
       if (hacerScroll) {
-        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+        const sumario = document.getElementById("sumario-box");
+        if (sumario) sumario.scrollIntoView({ behavior: "smooth" });
       }
     }
 
     function inicializarPaginacion() {
       const barraPaginas = document.getElementById("barra-paginas");
 
-      if (totalPaginas > 1) {
+      if (totalPaginas > 1 && barraPaginas) {
         barraPaginas.style.display = "flex";
         barraPaginas.innerHTML = "";
 
@@ -1168,34 +1118,11 @@
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
+      const bar = document.getElementById('progress-bar');
+      if (bar) bar.style.width = scrolled + '%';
     });
 
     document.addEventListener("DOMContentLoaded", inicializarPaginacion);
-  </script>
-
-  <script>
-    function guardarEnCuaderno(titulo, autor, categoria, enlace, nota) {
-      const STORAGE_KEY = "kairos_favoritos_v1";
-      const actual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      
-      if (actual.some(item => item.enlace === enlace)) {
-        alert("Ya tienes este texto guardado en tu Cuaderno.");
-        return;
-      }
-
-      actual.unshift({
-        id: Date.now(),
-        titulo: titulo,
-        autor: autor,
-        categoria: categoria,
-        enlace: enlace,
-        nota: nota
-      });
-
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(actual));
-      alert(`«${titulo}» se ha añadido a tu Cuaderno de Favoritos.`);
-    }
   </script>
 
   <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (CÍRCULO KAIRÓS) -->
@@ -1245,7 +1172,7 @@
     function inyectarBotonesFavoritos() {
       const articulos = document.querySelectorAll(".long-article");
       const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop();
+      const archivoActual = window.location.pathname.split("/").pop() || "literatura.html";
 
       articulos.forEach(art => {
         const pieAcciones = art.querySelector(".article-bottom-actions");
