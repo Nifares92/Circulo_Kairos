@@ -1116,80 +1116,108 @@
     document.addEventListener("DOMContentLoaded", inicializarPaginacion);
   </script>
 
-  <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (CÍRCULO KAIRÓS) -->
-  <script>
-    const STORAGE_KEY = "kairos_favoritos_v1";
+  <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (VINCULADO A CUENTAS DE USUARIO) -->
+<script>
+  const STORAGE_KEY = "kairos_favoritos_v1";
+  const SESSION_KEY = "kairos_sesion_activa_v1";
 
-    function conmutarFavorito(idArticulo, titulo, categoria, enlace) {
-      let lista = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      const existe = lista.some(item => item.enlace === enlace);
-
-      if (existe) {
-        lista = lista.filter(item => item.enlace !== enlace);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-        actualizarEstadoBoton(idArticulo, false);
-        alert(`«${titulo}» se ha eliminado de tu Cuaderno de Favoritos.`);
-      } else {
-        lista.unshift({
-          id: Date.now(),
-          titulo: titulo,
-          autor: "Círculo Kairós",
-          categoria: categoria,
-          enlace: enlace,
-          nota: "Guardado desde la lectura del ensayo."
-        });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-        actualizarEstadoBoton(idArticulo, true);
-        alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
+  // Detecta si hay una sesión iniciada para guardar en el perfil del usuario activo
+  function obtenerClaveFavoritosDestino() {
+    try {
+      const sesion = localStorage.getItem(SESSION_KEY);
+      if (sesion) {
+        const usuario = JSON.parse(sesion);
+        if (usuario && usuario.id) {
+          return `kairos_favoritos_user_${usuario.id}`;
+        }
       }
-    }
+    } catch (e) {}
+    return STORAGE_KEY;
+  }
 
-    function actualizarEstadoBoton(idArticulo, guardado) {
-      const btn = document.getElementById(`btn-fav-${idArticulo}`);
-      if (!btn) return;
-      if (guardado) {
-        btn.innerHTML = "&#9733; En tu Cuaderno";
-        btn.style.backgroundColor = "var(--accent)";
-        btn.style.color = "#ffffff";
-        btn.style.borderColor = "var(--accent)";
-      } else {
-        btn.innerHTML = "&#9734; Guardar en mi perfil";
-        btn.style.backgroundColor = "var(--bg-surface)";
-        btn.style.color = "var(--accent)";
-        btn.style.borderColor = "var(--border-soft)";
-      }
-    }
+  function conmutarFavorito(idArticulo, titulo, categoria, enlace) {
+    const claveDestino = obtenerClaveFavoritosDestino();
+    
+    // Leemos la lista del usuario activo (o la general si no hay sesión)
+    let lista = localStorage.getItem(claveDestino) ? JSON.parse(localStorage.getItem(claveDestino)) : [];
+    const existe = lista.some(item => item.enlace === enlace);
 
-    function inyectarBotonesFavoritos() {
-      const articulos = document.querySelectorAll(".long-article");
-      const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      const archivoActual = window.location.pathname.split("/").pop() || "musica.html";
-
-      articulos.forEach(art => {
-        const pieAcciones = art.querySelector(".article-bottom-actions");
-        if (!pieAcciones) return;
-
-        const id = art.id;
-        const titularEl = art.querySelector(".article-headline");
-        const titulo = titularEl ? titularEl.textContent.trim() : (art.getAttribute("data-titulo") || "Ensayo");
-
-        let categoria = "Música";
-        const enlaceCompleto = `${archivoActual}#${id}`;
-        const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
-
-        const btn = document.createElement("button");
-        btn.id = `btn-fav-${id}`;
-        btn.className = "back-to-toc-link";
-        btn.style.cursor = "pointer";
-        btn.style.marginRight = "auto";
-        btn.onclick = () => conmutarFavorito(id, titulo, categoria, enlaceCompleto);
-
-        pieAcciones.insertBefore(btn, pieAcciones.querySelector(".back-to-toc-link"));
-        actualizarEstadoBoton(id, yaGuardado);
+    if (existe) {
+      lista = lista.filter(item => item.enlace !== enlace);
+      localStorage.setItem(claveDestino, JSON.stringify(lista));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista)); // Copia espejo
+      actualizarEstadoBoton(idArticulo, false);
+      alert(`«${titulo}» se ha eliminado de tu Cuaderno de Favoritos.`);
+    } else {
+      lista.unshift({
+        id: Date.now(),
+        titulo: titulo,
+        autor: "Círculo Kairós",
+        categoria: categoria,
+        enlace: enlace,
+        nota: "Guardado desde la lectura del ensayo."
       });
+      localStorage.setItem(claveDestino, JSON.stringify(lista));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista)); // Copia espejo
+      actualizarEstadoBoton(idArticulo, true);
+      alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
     }
+  }
 
-    document.addEventListener("DOMContentLoaded", inyectarBotonesFavoritos);
-  </script>
+  function actualizarEstadoBoton(idArticulo, guardado) {
+    const btn = document.getElementById(`btn-fav-${idArticulo}`);
+    if (!btn) return;
+    if (guardado) {
+      btn.innerHTML = "&#9733; En tu Cuaderno";
+      btn.style.backgroundColor = "var(--accent)";
+      btn.style.color = "#ffffff";
+      btn.style.borderColor = "var(--accent)";
+    } else {
+      btn.innerHTML = "&#9734; Guardar en mi perfil";
+      btn.style.backgroundColor = "var(--bg-surface)";
+      btn.style.color = "var(--accent)";
+      btn.style.borderColor = "var(--border-soft)";
+    }
+  }
+
+  function inyectarBotonesFavoritos() {
+    const articulos = document.querySelectorAll(".long-article");
+    const claveDestino = obtenerClaveFavoritosDestino();
+    const listaActual = localStorage.getItem(claveDestino) ? JSON.parse(localStorage.getItem(claveDestino)) : [];
+    const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop().split("#")[0];
+
+    // Detectar categoría según el archivo actual
+    let catNombre = "Lectura";
+    if (archivoActual.includes("filosofia")) catNombre = "Filosofía";
+    else if (archivoActual.includes("literatura")) catNombre = "Literatura";
+    else if (archivoActual.includes("cine")) catNombre = "Cine";
+    else if (archivoActual.includes("musica")) catNombre = "Música";
+    else if (archivoActual.includes("pensamiento")) catNombre = "Pensamiento";
+
+    articulos.forEach(art => {
+      const pieAcciones = art.querySelector(".article-bottom-actions");
+      if (!pieAcciones) return;
+
+      const id = art.id;
+      const titularEl = art.querySelector(".article-headline");
+      const titulo = titularEl ? titularEl.textContent.trim() : (art.getAttribute("data-titulo") || "Ensayo");
+
+      const enlaceCompleto = `${archivoActual}#${id}`;
+      const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
+
+      const btn = document.createElement("button");
+      btn.id = `btn-fav-${id}`;
+      btn.className = "back-to-toc-link";
+      btn.style.cursor = "pointer";
+      btn.style.marginRight = "auto";
+      btn.onclick = () => conmutarFavorito(id, titulo, catNombre, enlaceCompleto);
+
+      pieAcciones.insertBefore(btn, pieAcciones.querySelector(".back-to-toc-link"));
+      actualizarEstadoBoton(id, yaGuardado);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", inyectarBotonesFavoritos);
+</script>
 </body>
 </html>
