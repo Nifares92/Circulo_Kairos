@@ -15,9 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       VARIABLES Y PALETA EDITORIAL CÁLIDA
-       ========================================================================== */
     :root {
       --bg-color: #fbf8f3;
       --bg-surface: #f4ede1;
@@ -26,7 +23,7 @@
       --text-main: #221f1d;
       --text-muted: #6d665f;
       --text-light: #8a8279;
-      --accent: #9e4734;          /* Terracota / lacre oficial */
+      --accent: #9e4734;
       --accent-dark: #783324;
       --border-soft: #e2d8c7;
       --border-dark: #221f1d;
@@ -1005,7 +1002,7 @@
     <!-- PORTADA DINÁMICA: ENSAYO MÁS RECIENTE + 2 LATERALES -->
     <section class="hero-editorial-grid" aria-labelledby="portada-principal-titulo">
 
-      <!-- 1. ENSAYO MÁS RECIENTE DE TODA LA WEB -->
+      <!-- 1. ENSAYO MÁS RECIENTE (PENSAMIENTO: TIGRE / LEOPARDO) -->
       <article class="hero-lead-card" id="portada-lead-article">
         <div class="hero-badge-row">
           <span class="discipline-badge" id="lead-badge">Pensamiento</span>
@@ -1018,10 +1015,11 @@
         <span class="lead-author-tag" id="lead-author">Tribuna de la Dirección</span>
 
         <div class="hero-lead-image">
+          <!-- Oñemoambuéma pe ta'anga jaguarete/leopardo rehegua ombojoaju hag̃ua pensamiento.html ndive -->
           <img id="lead-image" 
-               src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" 
-               alt="Llama de vela iluminando la penumbra entre ramas y niebla otoñal"
-               onerror="this.src='https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80'">
+               src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1200&q=80" 
+               alt="Leopardo en penumbra"
+               onerror="this.src='https://images.unsplash.com/photo-1517825738774-7de9363ef735?auto=format&fit=crop&w=1200&q=80'">
         </div>
 
         <p class="hero-lead-excerpt" id="lead-excerpt">
@@ -1051,9 +1049,10 @@
         <article class="side-story-card" id="side-card-2">
           <span class="discipline-badge" id="side-2-badge" style="align-self: flex-start;">Filosofía</span>
           <div class="side-story-media">
+            <!-- Oñemyatyrõma ani hag̃ua osẽ pe mando, oñemoĩ corredor gótico en niebla -->
             <img id="side-2-img" 
-                 src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80" 
-                 alt="Silueta espectral en penumbra">
+                 src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80" 
+                 alt="Silueta espectral en corredor gótico">
           </div>
           <h3><a href="filosofia.html#filosofia-espectrologia-fantasma" id="side-2-title">La mirada sin ojos: Espectrología y retorno ontológico</a></h3>
           <p id="side-2-excerpt">
@@ -1159,7 +1158,7 @@
           </div>
           <div class="feed-controls-row">
             <button class="feed-ctrl-btn" onclick="cambiarPaginaFeed(-1)" title="Página anterior">&larr;</button>
-            <span class="feed-page-indicator" id="indicador-pagina-noticias">1 / 2</span>
+            <span class="feed-page-indicator" id="indicador-pagina-noticias">1 / 3</span>
             <button class="feed-ctrl-btn" onclick="cambiarPaginaFeed(1)" title="Siguiente página">&rarr;</button>
           </div>
         </div>
@@ -1255,9 +1254,9 @@
   </footer>
 
   <script>
-   /* CATÁLOGO DE RELATOS Y POEMAS: EL RINCÓN DEL LECTOR */
+    /* CATÁLOGO DE RELATOS Y POEMAS: EL RINCÓN DEL LECTOR */
     const OBRAS_RINCON_LECTOR = [
-{
+      {
         id: "obra-censo-ausentes",
         titulo: "El censo de los nombres borrados",
         autor: "S. P. Paredes",
@@ -1319,9 +1318,7 @@
           <p>Al abrir la saca bajo la luz de la lámpara de carburo, Anselmo descubrió miles de sobres dirigidos a destinatarios que habitaban en avenidas y plazas de ciudades inexistentes: <em>Paseo de las Tres Columnas (Ciudad de la Concordia)</em>, <em>Calle del Olvido número 12 (Santa María del Silencio)</em>. Sin embargo, los remitentes eran personas reales que vivían en barrios obreros de la capital. Al leer algunas de las misivas, Anselmo comprendió el misterio: eran cartas que los remitentes se habían escrito a sí mismos en momentos de crisis existencial, imaginando la vida que habrían llevado si hubiesen tomado una decisión diferente en una encrucijada del pasado.</p>
           <p>El tren no transportaba correspondencia extraviada por negligencia del servicio postal; transportaba las vidas hipotéticas que los hombres habían descartado por miedo o resignación. Anselmo guardó la saca en el arcón de herramientas y no accionó la palanca de regreso. Supo que aquel desvío era el único lugar sobre la tierra donde los destinos no cumplidos aún conservaban el derecho de llegar a alguna parte.</p>
         `
-      }
-
-      
+      },
       {
         id: "obra-relojero-vidriera",
         titulo: "El relojero de la calle de los Cristales Rotos",
@@ -1406,7 +1403,7 @@
         genero: "Misterio Urbano",
         fecha: "Semana V · Octubre 2026",
         tiempo: "6 min de lectura",
-        resumen: "En el andén tercero de una estación de paso, un hombre espera un tren que fue retirado del itinerario oficial hace cuarenta años por orden gubernativa.",
+        resumen: "En el institutions andén tercero de una estación de paso, un hombre espera un tren que fue retirado del itinerario oficial hace cuarenta años por orden gubernativa.",
         imagen: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
         contenido: `
           <p>A las tres de la madrugada, la estación de término pierde su condición de edificio público y se convierte en una catedral de hierro donde resuena el goteo de las tuberías de vapor. El jefe de estación nocturno, don Emilio, sabía que ningún tren de pasajeros figuraba en el panel electromecánico a partir de la una y media.</p>
