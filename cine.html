@@ -85,7 +85,6 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
       padding: 1rem 0 0.5rem;
@@ -105,7 +104,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -135,7 +133,7 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
+    /* BARRA DE NAVEGACIÓN STICKY */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -175,7 +173,6 @@
       padding: 3rem 1.5rem 5rem;
     }
 
-    /* Encabezado de Sección */
     .section-header-box {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -415,7 +412,6 @@
       border-color: var(--accent);
     }
 
-    /* Paginador Automático */
     .pagination-bar {
       display: none;
       justify-content: center;
@@ -607,16 +603,14 @@
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <!-- NAVEGACIÓN STICKY -->
   <nav class="main-nav" aria-label="Navegación principal">
     <ul>
       <li><a href="index.html">Inicio</a></li>
@@ -640,7 +634,7 @@
       </p>
     </header>
 
-    <!-- SUMARIO DINÁMICO (AUTOMÁTICO VÍA JS) -->
+    <!-- SUMARIO DINÁMICO -->
     <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de críticas de cine de esta página">
       <span class="toc-title">Críticas visibles en esta página · Haz clic para ir al ensayo</span>
       <ul class="toc-links-grid" id="toc-container"></ul>
@@ -651,7 +645,7 @@
       <!-- COLUMNA PRINCIPAL DE ENSAYOS DE CINE -->
       <section class="articles-stream" id="stream-ensayos" aria-label="Críticas completas de cine">
 
-        <!-- NUEVO ENSAYO CINE: EXPRESIONISMO Y LA SOMBRA DE LA MUERTE -->
+        <!-- ENSAYO CINE: NOSFERATU (F.W. MURNAU) -->
         <article class="long-article" id="cine-nosferatu-murnau" data-titulo="VIII. La sombra del vampiro (F.W. Murnau)">
           <header class="article-header">
             <span class="article-topic">Expresionismo & Sombras · Ensayo VIII</span>
@@ -722,14 +716,14 @@
 
             <blockquote>«¿Por qué la presencia de Dios ha de ser tan cruelmente esquiva? ¿Por qué he de tener fe en la palabra ajena si quiero creer con certeza absoluta, no con esperanzas temblorosas? Quiero que Dios me tienda la mano, que se revele y me hable.»<cite>— Antonius Block, El séptimo sello</cite></blockquote>
 
-            <p>Frente a la zozobra metafísica del caballero, su escudero Jöns (Gunnar Björnstrand) personifica el escepticismo lúcido, terrenal y descreído de la modernidad incipiente. Jöns sabe que el cielo está mudo y que el hombre solo cuenta con el calor de su prójimo y el trago de vino agrio para resistir el hedor de las hogueras y la barbarie fanática de los cortejos de flagelantes que azotan sus carnes ensangrentadas invocando castigos divinos.</p>
+            <p>Frente a la zozobra metafísica del caballero, su escudero Jöns (Gunnar Björnstrand) personifica el escepticismo lúcido, terrenal y descreído de la modernidad incipiente. Jöns sabe que el cielo está mudo y que el hombre solo cuenta con el calor de su prójimo y el trago de vino agrio para resistir el hedor de las hogueras y la barbarie fanática de los cortejos de flagelantes.</p>
 
             <h3>II. Las fresas silvestres y el cuenco de leche: El sacramento cotidiano</h3>
             <p>La epifanía moral del largometraje no sobreviene en los templos de piedra ni bajo los sermones apocalípticos de los monjes fanáticos, sino en un claro de hierba mecía por la brisa estival, junto a la carreta de los titiriteros ambulantes Jof y Mia. En ese oasis de sencillez pacífica, los cómicos comparten con el guerrero exhausto un puñado de fresas silvestres recién recogidas y un cuenco de leche tibia de cabra.</p>
-            <p>Block contempla el rostro apacible del niño dormido y experimenta, en mitad de la peste y la desolación de Europa, el auténtico milagro terrenal. Sosteniendo el cuenco con ambas manos, pronuncia su declaración más lúcida: «Llevaré este recuerdo entre mis manos como un cuenco rebosante de leche fresca. Y será para mí una señal y una gran alegría». La trascendencia no reside en las abstracciones de la teología escolástica, sino en la comunión fraterna entre seres que se reconocen finitos.</p>
+            <p>Block contempla el rostro apacible del niño dormido y experimenta el auténtico milagro terrenal. Sosteniendo el cuenco con ambas manos, pronuncia su declaración más lúcida: «Llevaré este recuerdo entre mis manos como un cuenco rebosante de leche fresca. Y será para mí una señal y una gran alegría». La trascendencia reside en la comunión fraterna entre seres que se reconocen finitos.</p>
 
             <h3>III. La danza macabra sobre la colina</h3>
-            <p>En el desenlace, cuando la partida de ajedrez concluye y la Muerte reclama su tributo en el castillo ancestral, Bergman nos regala una de las composiciones visuales más imborrables de la historia del cine: la silueta recortada contra el cielo tormentoso del amanecer donde caballeros, escuderos, damas y bufones avanzan cogidos de la mano, precedidos por la guadaña implacable. En el cine de Bergman, la muerte no es una anulación del valor de la vida, sino la orilla severa que nos enseña a atesorar cada instante de vigilia con reverencia estremecida.</p>
+            <p>En el desenlace, cuando la partida de ajedrez concluye y la Muerte reclama su tributo en el castillo ancestral, Bergman nos regala una de las composiciones visuales más imborrables de la historia del cine: la silueta recortada contra el cielo tormentoso del amanecer donde caballeros, escuderos, damas y bufones avanzan cogidos de la mano, precedidos por la guadaña implacable. La muerte es la orilla severa que nos enseña a atesorar cada instante de vigilia con reverencia estremecida.</p>
           </div>
 
           <footer class="article-bottom-actions">
@@ -748,9 +742,9 @@
           </header>
 
           <figure class="article-featured-media">
-            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" 
-                 alt="Luces de neón reflejadas en el asfalto nocturno mojado"
-                 onerror="this.src='https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80'">
+            <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1200&q=80" 
+                 alt="Luces de neón reflejadas en un callejón nocturno y húmedo"
+                 onerror="this.src='https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80'">
             <figcaption>El pasillo estrecho de los apartamentos de Hong Kong y el roce de vestidos que jamás colisionan.</figcaption>
           </figure>
 
@@ -890,39 +884,18 @@
             <p class="dropcap">«Lo maté. Maté a un hombre por dinero y por una mujer. Y ni conseguí el dinero, ni conseguí a la mujer. Estupendo, ¿verdad?». Con esta confesión susurrada a un dictáfono por Walter Neff mientras sangra lentamente por una herida de bala en la penumbra de su despacho de la Pacific All-Risk arranca la obra maestra fundacional del cine negro estadounidense. En ese monólogo inicial no late el menor atisbo de arrepentimiento cristiano ni el anhelo de expiación moral; lo que se desliza por el surco de cera del cilindro fonográfico es la constatación lúcida, casi deportiva, de un fracaso de cálculo. Neff no se duele por haber transgredido el orden divino, sino por haber errado en la resolución de una ecuación que creía tener dominada en cada uno de sus decimales.</p>
 
             <h3>I. La fatalidad matemática y la máquina de calcular</h3>
-            <p>Cuando Billy Wilder y Raymond Chandler se encerraron a destazar y reconstruir la novela corta de James M. Cain —en una colaboración célebre por su hostilidad mutua, donde el novelista detestaba las órdenes del director austríaco y este se burlaba del ritmo etílico del creador de Philip Marlowe—, tomaron una decisión que distanciaría para siempre a <em>Double Indemnity</em> del mero melodrama criminal de la era de la Gran Depresión. Prescindieron de cualquier coartada sociológica y de cualquier atisbo de moralina redentora para levantar una arquitectura dramática regida por una fría exactitud actuarial.</p>
+            <p>Cuando Billy Wilder y Raymond Chandler se encerraron a destazar y reconstruir la novela corta de James M. Cain, tomaron una decisión que distanciaría para siempre a <em>Double Indemnity</em> del mero melodrama criminal. Prescindieron de cualquier coartada moralizante para levantar una arquitectura dramática regida por una fría exactitud actuarial.</p>
             
-            <p>El centro de gravedad ideológico de la película no reside en la pasión desbocada, sino en el peritaje de seguros. Barton Keyes (un colosal Edward G. Robinson) no es un policía ni un detective privado al uso; es el analista jefe de reclamaciones de la compañía, un burócrata del escepticismo armado con una máquina de calcular y las tablas de mortalidad de la institución. Keyes es el guardián de una verdad matemática que Walter Neff (Fred MacMurray) conoce de memoria tras años de tasar pólizas: la muerte violenta deja un rastro estadístico ineludible. Cada causa de fallecimiento tiene su porcentaje, su frecuencia y su curva de campana en el libro gordo de probabilidades.</p>
-
-            <p>La tragedia de Neff arranca del pecado más antiguo del funcionario competente: la soberbia técnica. Como vendedor estrella que ha recorrido durante una década los suburbios de California tasando automóviles y evaluando vidas humanas, Neff conoce el envés del tapiz; sabe de qué pie cojean los auditores, qué cláusulas despiertan sospechas y cómo se redacta un informe para que pase inadvertido en la mesa de un perito rutinario. Cuando conoce a Phyllis Dietrichson (Barbara Stanwyck), no sucumbe a un arrebato ciego, sino a la fantasía luciferina de voltear la ruleta del casino que él mismo administra: burlar la máquina de seguros desde dentro, ejecutar el homicidio perfecto y cobrar la cláusula de indemnización doble por accidente de tren.</p>
+            <p>Keyes (Edward G. Robinson) es el guardián de una verdad matemática que Walter Neff (Fred MacMurray) conoce de memoria: la muerte violenta deja un rastro estadístico ineludible. Neff sucumbe a la fantasía luciferina de burlar la maquinaria de seguros desde dentro, ejecutar el homicidio perfecto y cobrar la indemnización doble por accidente de tren.</p>
 
             <h3>II. El claroscuro veneciano y el polvo suspendido</h3>
-            <p>El director de fotografía John F. Seitz, junto al ojo implacable de Wilder, inventó en este metraje la gramática visual definitiva del <em>noir</em>. Frente al expresionismo alemán de entreguerras —cuyas sombras distorsionadas obedecían a pesadillas psíquicas o deformaciones subjetivas del alma—, el claroscuro de <em>Perdición</em> es claustrofóbicamente real y cotidiano. Es la luz implacable del mediodía de Los Ángeles tamizada por persianas venecianas que proyectan sobre los trajes de los personajes franjas regulares de sombra y claridad, barrotes invisibles que los enjaulan en su propia trampa mucho antes de que la ley cierre el cerco.</p>
-
-            <p>Wilder insistió en filmar los interiores con una densidad casi asfixiante. En la mansión española de los Dietrichson en Los Feliz —un caserón pretencioso, cargado de alfombras rancias, muebles macizos y un aire viciado que Neff describe oliendo a polvo y encierro—, el operador Seitz mezcló humo de tabaco con partículas de polvo mineral sopladas frente a los focos de arco para que la luz del sol tuviera peso corpóreo. La decadencia no es una metáfora abstracta: se respira en la atmósfera estancada de un matrimonio que ya era un cadáver antes de que nadie planeara el falso tropezón en el vagón de cola.</p>
-
-            <p>Incluso el vestuario desafió los códigos de la época. Barbara Stanwyck luce una peluca rubia barata y visiblemente artificial —una elección que enfureció al productor Buddy DeSylva, quien acusó a Wilder de afear a la estrella— y un brazalete de tobillo que actúa como detonante fetichista y condena. La falsedad de esa melena platino y el brillo metálico sobre la carne revelan de inmediato la naturaleza prefabricada de Phyllis: es una criatura voraz, desprovista de hondura emocional, modelada exclusivamente por el resentimiento hacia un marido tiránico y el apetito feroz por la póliza de cincuenta mil dólares.</p>
+            <p>El director de fotografía John F. Seitz, junto al ojo de Wilder, inventó la gramática visual definitiva del <em>noir</em>. Es la luz implacable del mediodía de Los Ángeles tamizada por persianas venecianas que proyectan sobre los trajes barrotes invisibles de sombra.</p>
 
             <h3>III. La dialéctica del supermercado: el amor como transacción</h3>
-            <p>Ninguna secuencia ilustra mejor la lucidez cínica de Wilder y Chandler que los encuentros clandestinos entre los amantes homicidas. El cine de Hollywood reservaba tradicionalmente las citas ilícitas para parques en sombras, muelles de niebla o rincones de cabarets a media luz. Wilder sitúa a Neff y a Phyllis en los pasillos hiperiluminados de un supermercado de autoservicio de Glendale.</p>
+            <p>Wilder sitúa los encuentros clandestinos entre los amantes homicidas en los pasillos hiperiluminados de un supermercado de autoservicio de Glendale. Entre latas de conservas y cajas de detergente se pacta el asesinato: no hay romance, sino una fría transacción mercantil donde la vida humana queda reducida a un cálculo de seguros.</p>
 
-            <p>Entre montañas de latas de conservas, tarros de café y torres de jabón, parapetados tras gafas oscuras y fingiendo examinar productos comestibles, los amantes ultiman los pormenores del estrangulamiento. El decorado subraya la desolación del pacto: no hay romance, no hay comunión lírica de dos almas extraviadas; hay un contrato mercantil de compraventa. La vida humana ha sido reducida a mercancía de consumo rápido, pesada y tasada en estanterías idénticas. Su diálogo, ametrallado con el ritmo sincopado característico de Chandler, prescinde del afecto y se articula en términos de distancias de frenado, horarios de transbordo ferroviario y pólizas de viaje.</p>
-
-            <p>La propia mecánica del asesinato confirma la vacuidad de su vínculo. En el momento en que Neff retuerce el cuello del señor Dietrichson en el asiento del copiloto, la cámara de Wilder no se recrea en la violencia del cuello quebrado; encuadra en primer plano el rostro de Barbara Stanwyck al volante. En sus ojos no asoma el terror ni la culpa, sino un destello de éxtasis frío y triunfal. En ese preciso instante, Neff comprende —como confiesa al dictáfono— que ya nunca podrá apartarse de ella, no por devoción, sino porque ambos están atados de pies y manos al mismo estribo del convoy.</p>
-
-            <h3>IV. El tranvía sin paradas y el lazo fraternal</h3>
-            <p>«Cuando te subes a un tranvía como este, ya no hay modo de bajarse hasta la última parada, el final de la línea: el cementerio». La célebre metáfora del transporte colectivo atraviesa toda la cinta como una sentencia ineludible. El crimen en <em>Double Indemnity</em> carece de romanticismo nietzscheano o de grandeza trágica; es un mecanismo de relojería que, una vez armado, despoja a sus artífices de todo libre albedrío.</p>
-
-            <p>El verdadero triángulo dramático de la película no está compuesto por marido, esposa y amante, sino por Walter Neff, Phyllis Dietrichson y Barton Keyes. Y es en la relación entre Neff y Keyes donde reside el único rescoldo de humanidad genuina del relato. Entre el perito veterano y el agente estrella existe una camaradería masculina tejida a base de fuego compartido: Keyes no lleva cerillas encima y Neff es siempre quien le enciende los puros en un ritual repetido que condensa admiración filial, complicidad y engaño.</p>
-
-            <p>Keyes escucha a su «duendecillo» interior —esa gastritis crónica que le arde en el estómago cada vez que una reclamación huele a fraude— y va desmontando la farsa paso a paso, no mediante revelaciones sobrenaturales, sino examinando la conducta humana con el escalpelo de la rutina estadística. El hombre que se rompe una pierna en una vía secundaria y cae desde la plataforma trasera de un tren que marcha a veinticinco millas por hora desafía las probabilidades universales; la farsa se derrumba por pura implausibilidad aritmética.</p>
-
-            <h3>V. La última cerilla en el pasillo</h3>
-            <p>El desenlace prescinde del enfrentamiento convencional con la policía en tiroteos callejeros. Tras liquidar a Phyllis en el salón en sombras de Los Feliz en un intercambio de disparos que tiene más de suicidio compartido que de ajuste de cuentas, Neff regresa tambaleándose a las oficinas de la aseguradora para terminar de grabar su memoria. El dictáfono es el confesionario laico del siglo XX: un cilindro giratorio que no otorga absolución ni promete el cielo, sino que archiva el testimonio para que la maquinaria administrativa liquide el expediente.</p>
-
-            <p>Cuando Keyes entra en el despacho alertado por el ruido y encuentra a su subordinado desangrándose, no hay rencor policial ni sermón justiciero. Solo el estupor desolado del mentor que descubre que el genio al que apreciaba era el culpable torpe que su estómago buscaba. En los compases finales, Walter intenta arrastrarse hacia la puerta buscando un imposible escape hacia la frontera mexicana, pero se desploma en la moqueta a unos metros del ascensor.</p>
-
-            <p>«Ni siquiera llegarás a la esquina», le advierte Keyes con voz apagada. «Apuesto a que sí», replica Walter en su último desafío baldío. Mientras aguardan la sirena de la ambulancia y el furgón fúnebre, el gesto se invierte: es Barton Keyes quien extrae una cerilla de su bolsillo, la raspa contra la pared de la oficina y se la acerca a los labios al agonizante Walter para encender su último cigarrillo. «Yo también te quiero», murmura Neff. En ese destello de azufre sobre el pasillo en penumbra, el cine negro fijó para siempre su moral de la desolación: la lucidez absoluta frente a la propia ruina como única dignidad posible ante el abismo.</p>
+            <h3>IV. La última cerilla en el pasillo</h3>
+            <p>En los compases finales, Walter se desploma a unos metros del ascensor. Es Barton Keyes quien extrae una cerilla de su bolsillo, la raspa contra la pared de la oficina y se la acerca a los labios al agonizante Walter para encender su último cigarrillo. En ese destello de azufre sobre el pasillo en penumbra, el cine negro fijó para siempre su moral de la desolación.</p>
           </div>
           <footer class="article-bottom-actions">
             <span class="signature-note">— Círculo Kairós · Cuaderno de Cinematografía Clásica</span>
@@ -989,6 +962,7 @@
           <li><a href="cine.html">Cine & Mirada</a></li>
           <li><a href="musica.html">Música & Resonancias</a></li>
           <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
         </ul>
       </nav>
 
@@ -997,6 +971,7 @@
         <ul>
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
           <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
         </ul>
       </div>
     </div>
@@ -1035,43 +1010,37 @@
       const fin = inicio + ENSAYOS_POR_PAGINA;
 
       articulos.forEach((art, index) => {
-        if (index >= inicio && index < fin) {
-          art.style.display = "block";
-        } else {
-          art.style.display = "none";
-        }
+        art.style.display = (index >= inicio && index < fin) ? "block" : "none";
       });
 
       const tocContainer = document.getElementById("toc-container");
-      tocContainer.innerHTML = "";
-      articulos.slice(inicio, fin).forEach(art => {
-        const id = art.id;
-        const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
-        const li = document.createElement("li");
-        li.className = "toc-item";
-        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
-        tocContainer.appendChild(li);
-      });
+      if (tocContainer) {
+        tocContainer.innerHTML = "";
+        articulos.slice(inicio, fin).forEach(art => {
+          const id = art.id;
+          const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+          const li = document.createElement("li");
+          li.className = "toc-item";
+          li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+          tocContainer.appendChild(li);
+        });
+      }
 
       const botones = document.querySelectorAll(".page-btn");
       botones.forEach(btn => {
-        if (parseInt(btn.getAttribute("data-page")) === numPagina) {
-          btn.classList.add("active");
-        } else {
-          btn.classList.remove("active");
-        }
+        btn.classList.toggle("active", parseInt(btn.getAttribute("data-page")) === numPagina);
       });
 
       if (hacerScroll) {
-        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+        const sumario = document.getElementById("sumario-box");
+        if (sumario) sumario.scrollIntoView({ behavior: "smooth" });
       }
     }
 
     function inicializarPaginacion() {
       const barraPaginas = document.getElementById("barra-paginas");
 
-      if (totalPaginas > 1) {
-        barraPaginas.style.display = "flex";
+      if (totalPaginas > 1 && barraPaginas) {barraPaginas.style.display = "flex";
         barraPaginas.innerHTML = "";
 
         const btnPrev = document.createElement("button");
@@ -1107,7 +1076,8 @@
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
+      const bar = document.getElementById('progress-bar');
+      if (bar) bar.style.width = scrolled + '%';
     });
 
     document.addEventListener("DOMContentLoaded", inicializarPaginacion);
@@ -1160,7 +1130,7 @@
     function inyectarBotonesFavoritos() {
       const articulos = document.querySelectorAll(".long-article");
       const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop();
+      const archivoActual = window.location.pathname.split("/").pop() || "cine.html";
 
       articulos.forEach(art => {
         const pieAcciones = art.querySelector(".article-bottom-actions");
