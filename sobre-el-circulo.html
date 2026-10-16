@@ -15,9 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       VARIABLES Y PALETA EDITORIAL KAIRÓS
-       ========================================================================== */
     :root {
       --bg-color: #fbf8f3;
       --bg-surface: #f4ede1;
@@ -55,7 +52,6 @@
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    /* Franja Superior de Metadatos */
     .top-bar-meta {
       border-bottom: 1px solid var(--border-soft);
       padding: 0.6rem 1.5rem;
@@ -70,7 +66,6 @@
     }
     .top-bar-meta span strong { color: var(--accent); }
 
-    /* Cabecera Principal */
     .site-header {
       border-bottom: 1px solid var(--border-soft);
       padding: 2.2rem 1.5rem 1.6rem;
@@ -79,7 +74,6 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
       padding: 1rem 0 0.5rem;
@@ -99,7 +93,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -129,7 +122,6 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -162,7 +154,6 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    /* Contenedor Principal */
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -202,7 +193,6 @@
       font-style: italic;
     }
 
-    /* Columnas */
     .layout-columns {
       display: grid;
       grid-template-columns: 2.3fr 1fr;
@@ -210,7 +200,6 @@
       align-items: start;
     }
 
-    /* Panel del Manifiesto */
     .manifesto-panel {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -290,7 +279,6 @@
       margin-bottom: 0.3rem;
     }
 
-    /* Módulo de Buzón de Correspondencia */
     .contact-panel {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -392,7 +380,6 @@
       border-color: var(--accent-dark);
     }
 
-    /* Barra Lateral */
     .sidebar-wrapper {
       position: sticky;
       top: 5rem;
@@ -414,7 +401,6 @@
       padding-bottom: 0.4rem;
     }
 
-    /* Emblema en la Barra Lateral */
     .emblem-focus-card { text-align: center; }
     .emblem-wrapper {
       width: 140px;
@@ -498,7 +484,6 @@
       font-size: 0.85rem;
     }
 
-    /* Pie de Página */
     .site-footer {
       background-color: var(--bg-surface);
       border-top: 3px double var(--border-dark);
@@ -557,27 +542,24 @@
 </head>
 <body id="top">
 
-  <!-- Franja Superior -->
   <aside class="top-bar-meta" aria-label="Información de publicación">
     <span>Círculo Kairós · Cuaderno Institucional</span>
     <span><strong>Ideario:</strong> Manifiesto, Correspondencia & Diálogo</span>
     <span>Año I · Edición Continua</span>
   </aside>
 
-  <!-- Cabecera Principal con Filigrana de Fondo -->
+  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
+  <!-- NAVEGACIÓN STICKY -->
   <nav class="main-nav" aria-label="Navegación principal">
     <ul>
       <li><a href="index.html">Inicio</a></li>
@@ -591,7 +573,6 @@
     </ul>
   </nav>
 
-  <!-- Contenedor Principal -->
   <main id="contenido-principal">
 
     <header class="section-hero-header">
@@ -648,7 +629,7 @@
           </div>
         </article>
 
-        <!-- Formulario de Correspondencia y Contacto con FormSubmit (Sin registro previo) -->
+        <!-- Buzón de Correspondencia y Contacto con FormSubmit -->
         <section class="contact-panel" id="buzon-correspondencia" aria-labelledby="titulo-contacto">
           <div class="contact-panel-header">
             <h3 id="titulo-contacto">Buzón de Correspondencia</h3>
@@ -656,10 +637,10 @@
           </div>
 
           <form class="contact-form" action="https://formsubmit.co/serabohe@gmail.com" method="POST">
-            <!-- Configuración FormSubmit -->
+            <!-- Configuración FormSubmit con retorno relativo -->
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" value="https://serabohe-rgb.github.io/circulo-kairos/sobre-el-circulo.html?enviado=1#buzon-correspondencia">
+            <input type="hidden" id="form-next-url" name="_next" value="sobre-el-circulo.html?enviado=1#buzon-correspondencia">
 
             <div class="form-group">
               <label for="nombre" class="form-label">Nombre o Seudónimo *</label>
@@ -699,10 +680,9 @@
 
       </section>
 
-      <!-- BARRA LATERAL (CON EL SÍMBOLO OFICIAL DE KAIRÓS) -->
+      <!-- BARRA LATERAL -->
       <aside class="sidebar-wrapper" aria-label="Información complementaria">
 
-        <!-- Widget 1: Símbolo oficial de Círculo Kairós -->
         <div class="sidebar-widget emblem-focus-card">
           <h3 class="widget-title">El Emblema</h3>
           <div class="emblem-wrapper" title="Emblema del Círculo Kairós">
@@ -715,7 +695,6 @@
           </p>
         </div>
 
-        <!-- Widget 2: Cita de Apertura -->
         <div class="sidebar-widget quote-widget">
           <h3 class="widget-title">Palabra de Entrada</h3>
           <blockquote>
@@ -724,21 +703,23 @@
           <cite>— Epistolario Clásico</cite>
         </div>
 
-        <!-- Widget 3: Información de Contacto Directo -->
         <div class="sidebar-widget">
-          <h3 class="widget-title">Datos del Cuaderno</h3>
+          <h3 class="widget-heading">Cuadernos Semanales</h3>
           <ul class="info-list">
             <li>
-              <strong>Edición</strong>
-              <span>Publicación cultural diaria & Ensayos continuos</span>
+              <a href="literatura.html"><strong>Lunes · Literatura</strong><span>Enigma y realismo trágico</span></a>
             </li>
             <li>
-              <strong>Distribución</strong>
-              <span>Acceso abierto independiente</span>
+              <a href="cine.html"><strong>Martes · Cine</strong><span>Claroscuro y poética visual</span></a>
             </li>
             <li>
-              <strong>Enfoque</strong>
-              <span>Literatura · Cine · Música · Filosofía · Pensamiento</span>
+              <a href="musica.html"><strong>Miércoles · Música</strong><span>Acústica sacra y modalismo</span></a>
+            </li>
+            <li>
+              <a href="filosofia.html"><strong>Jueves · Filosofía</strong><span>Fenomenología y dialéctica</span></a>
+            </li>
+            <li>
+              <a href="pensamiento.html"><strong>Viernes · Pensamiento</strong><span>Tribuna de la Dirección</span></a>
             </li>
           </ul>
         </div>
@@ -749,7 +730,6 @@
 
   </main>
 
-  <!-- Pie de Página Institucional -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-about">
@@ -774,17 +754,30 @@
         <h4>El Círculo</h4>
         <ul>
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
-          <li><a href="mailto:serabohe@gmail.com">Correspondencia Directa</a></li>
+          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
         </ul>
       </div>
     </div>
   </footer>
 
   <script>
-    // Aviso discreto si vuelve tras enviar el formulario con éxito
-    if (window.location.search.includes("enviado=1")) {
-      alert("Tu misiva ha sido enviada con éxito al buzón de Círculo Kairós. Gracias por tu correspondencia.");
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      // Configurar retorno dinámico absoluto para FormSubmit basado en la URL actual
+      const nextInput = document.getElementById("form-next-url");
+      if (nextInput) {
+        const urlBase = window.location.href.split("?")[0].split("#")[0];
+        nextInput.value = `${urlBase}?enviado=1#buzon-correspondencia`;
+      }
+
+      // Aviso y limpieza de parámetro en URL si viene tras enviar el formulario
+      if (window.location.search.includes("enviado=1")) {
+        alert("Tu misiva ha sido enviada con éxito al buzón de Círculo Kairós. Gracias por tu correspondencia.");
+        if (window.history && window.history.replaceState) {
+          const urlLimpia = window.location.pathname + window.location.hash;
+          window.history.replaceState(null, "", urlLimpia);
+        }
+      }
+    });
   </script>
 
 </body>
