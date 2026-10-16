@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Colecciones.">
+  <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Registro de Lectores.">
   <title>Mi Cuaderno & Perfil | Círculo Kairós</title>
 
   <!-- Favicon SVG oficial -->
@@ -51,7 +51,6 @@
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    /* Cabecera */
     .top-bar-meta {
       border-bottom: 1px solid var(--border-soft);
       padding: 0.6rem 1.5rem;
@@ -122,7 +121,6 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN STICKY */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -155,7 +153,6 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    /* Contenedor Principal */
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -195,7 +192,105 @@
       font-style: italic;
     }
 
-    /* Layout en 2 columnas */
+    /* MÓDULO DE AUTENTICACIÓN (LOGIN / REGISTRO) */
+    .auth-wrapper {
+      max-width: 520px;
+      margin: 0 auto 4rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 2.8rem 2.4rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+    }
+    .auth-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px solid rgba(226, 216, 199, 0.4);
+      pointer-events: none;
+    }
+    .auth-nav-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 2rem;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 0.8rem;
+      text-align: center;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: var(--font-classical);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .auth-tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .auth-input-group label {
+      font-family: var(--font-classical);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+    .auth-input-group input {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 0.8rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      outline: none;
+      border-radius: 2px;
+      transition: border-color var(--transition);
+    }
+    .auth-input-group input:focus {
+      border-color: var(--accent);
+      background-color: #ffffff;
+    }
+    .btn-auth-submit {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: 1px solid var(--accent);
+      padding: 0.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      transition: all var(--transition);
+    }
+    .btn-auth-submit:hover {
+      background-color: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    /* ZONA PRIVADA (PERFIL DE LECTOR LOGUEADO) */
+    #vista-perfil-activo {
+      display: none;
+    }
     .layout-columns {
       display: grid;
       grid-template-columns: 2.3fr 1fr;
@@ -203,7 +298,6 @@
       align-items: start;
     }
 
-    /* Tarjeta del Lector */
     .reader-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -224,7 +318,7 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.2rem;
       border-bottom: 1px solid var(--border-soft);
       padding-bottom: 1.5rem;
       margin-bottom: 1.5rem;
@@ -249,26 +343,19 @@
       font-weight: 700;
       flex-shrink: 0;
     }
-    .reader-name-input {
+    .reader-display-name {
       font-family: var(--font-serif);
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 700;
       color: var(--text-main);
-      background: transparent;
-      border: none;
-      border-bottom: 1px dashed var(--accent);
-      padding: 0.2rem 0.5rem;
-      outline: none;
-      max-width: 300px;
+      margin-bottom: 0.2rem;
     }
     .reader-status {
       font-size: 0.82rem;
       color: var(--text-muted);
       font-style: italic;
-      margin-top: 0.2rem;
     }
 
-    /* Pestañas de Colecciones */
     .tabs-bar {
       display: flex;
       gap: 0.5rem;
@@ -298,7 +385,6 @@
       background-color: var(--bg-card);
     }
 
-    /* Lista de Favoritos */
     .collection-stream {
       display: flex;
       flex-direction: column;
@@ -379,7 +465,6 @@
       color: var(--text-muted);
     }
 
-    /* Módulo de agregar manual */
     .add-custom-panel {
       margin-top: 3rem;
       background-color: var(--bg-surface);
@@ -430,7 +515,6 @@
     }
     .btn-add-item:hover { background-color: var(--accent-dark); }
 
-    /* Barra lateral */
     .sidebar-wrapper {
       position: sticky;
       top: 5rem;
@@ -527,6 +611,7 @@
       .section-main-title { font-size: 2.2rem; }
       .add-form-grid { grid-template-columns: 1fr; }
       .main-nav ul { gap: 1.2rem; }
+      .reader-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -538,7 +623,7 @@
     <span>Año I · Edición Continua</span>
   </aside>
 
-  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
+  <!-- CABECERA PRINCIPAL -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
@@ -565,101 +650,143 @@
 
   <main id="contenido-principal">
 
+    <!-- CABECERA DE SECCIÓN -->
     <header class="section-hero-header">
       <span class="section-category-label">Archivo Interior</span>
-      <h2 class="section-main-title">Mi Cuaderno de Favoritos</h2>
-      <p class="section-intro-text">
+      <h2 class="section-main-title" id="titulo-vista-principal">Mi Cuaderno de Favoritos</h2>
+      <p class="section-intro-text" id="intro-vista-principal">
         «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado para custodiar ensayos, citas, libros, películas y partituras que han merecido tu demora.
       </p>
     </header>
 
-    <div class="layout-columns">
+    <!-- 1. VISTA DE AUTENTICACIÓN (LOGIN / REGISTRO) CUANDO NO HAY SESIÓN -->
+    <section class="auth-wrapper" id="vista-auth">
+      <div class="auth-nav-tabs">
+        <button class="auth-tab-btn active" id="tab-login" onclick="conmutarAuthTab('login')">Entrar</button>
+        <button class="auth-tab-btn" id="tab-registro" onclick="conmutarAuthTab('registro')">Registrarse</button>
+      </div>
 
-      <!-- COLUMNA PRINCIPAL -->
-      <section>
+      <!-- Formulario de Iniciar Sesión -->
+      <form class="auth-form" id="form-login" onsubmit="procesarInicioSesion(event)">
+        <div class="auth-input-group">
+          <label for="login-email">Correo Electrónico</label>
+          <input type="email" id="login-email" placeholder="correo@ejemplo.com" required>
+        </div>
+        <div class="auth-input-group">
+          <label for="login-pass">Contraseña</label>
+          <input type="password" id="login-pass" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-auth-submit">Acceder a mi Cuaderno &rarr;</button>
+      </form>
 
-        <!-- Tarjeta del Lector -->
-        <article class="reader-card">
-          <div class="reader-header">
-            <div class="reader-avatar-row">
-              <div class="avatar-seal" id="avatar-inicial">K</div>
-              <div>
-                <input type="text" id="nombre-lector" class="reader-name-input" value="Lector de Kairós" title="Haz clic para cambiar tu nombre de lector">
-                <p class="reader-status">Guardián de textos · Almacenado localmente en este navegador</p>
+      <!-- Formulario de Registro -->
+      <form class="auth-form" id="form-registro" style="display: none;" onsubmit="procesarRegistro(event)">
+        <div class="auth-input-group">
+          <label for="reg-nombre">Nombre o Seudónimo de Lector</label>
+          <input type="text" id="reg-nombre" placeholder="Ej. Lector de Kairós" required>
+        </div>
+        <div class="auth-input-group">
+          <label for="reg-email">Correo Electrónico</label>
+          <input type="email" id="reg-email" placeholder="correo@ejemplo.com" required>
+        </div>
+        <div class="auth-input-group">
+          <label for="reg-pass">Contraseña de Acceso</label>
+          <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" minlength="6" required>
+        </div>
+        <button type="submit" class="btn-auth-submit">Fundar mi Cuaderno Personal &rarr;</button>
+      </form>
+    </section>
+
+    <!-- 2. VISTA PRIVADA DEL LECTOR CON SESIÓN ABIERTA -->
+    <div id="vista-perfil-activo">
+      <div class="layout-columns">
+
+        <!-- COLUMNA PRINCIPAL -->
+        <section>
+
+          <!-- Tarjeta del Lector Identificado -->
+          <article class="reader-card">
+            <div class="reader-header">
+              <div class="reader-avatar-row">
+                <div class="avatar-seal" id="avatar-inicial">K</div>
+                <div>
+                  <h3 class="reader-display-name" id="nombre-lector-activo">Lector</h3>
+                  <p class="reader-status" id="email-lector-activo">correo@ejemplo.com · Guardián de textos</p>
+                </div>
               </div>
+              <button onclick="cerrarSesionLector()" class="btn-goto" style="cursor: pointer; background-color: var(--accent); color: #fff;">Cerrar Cuaderno</button>
             </div>
-            <button onclick="guardarNombreLector()" class="btn-goto" style="cursor: pointer;">Guardar nombre</button>
-          </div>
-          <p style="font-family: var(--font-reader); font-size: 1.05rem; color: var(--text-muted); font-style: italic;">
-            Todos los elementos que guardes desde las diferentes secciones de Círculo Kairós o que agregues manualmente permanecerán aquí cada vez que regreses a este equipo.
-          </p>
-        </article>
+            <p style="font-family: var(--font-reader); font-size: 1.05rem; color: var(--text-muted); font-style: italic;">
+              Todas las obras que guardes desde las diferentes secciones de Círculo Kairós quedan vinculadas a tu cuenta y se mantendrán registradas en tu navegador.
+            </p>
+          </article>
 
-        <!-- Pestañas de Filtro -->
-        <nav class="tabs-bar" aria-label="Filtro de colecciones">
-          <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todos</button>
-          <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
-          <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">Literatura</button>
-          <button class="tab-btn" onclick="cambiarFiltro('cine', this)">Cine</button>
-          <button class="tab-btn" onclick="cambiarFiltro('musica', this)">Música</button>
-          <button class="tab-btn" onclick="cambiarFiltro('pensamiento', this)">Pensamiento</button>
-          <button class="tab-btn" onclick="cambiarFiltro('propio', this)">Mis Notas</button>
-        </nav>
+          <!-- Pestañas de Filtro -->
+          <nav class="tabs-bar" aria-label="Filtro de colecciones">
+            <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todos</button>
+            <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
+            <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">Literatura</button>
+            <button class="tab-btn" onclick="cambiarFiltro('cine', this)">Cine</button>
+            <button class="tab-btn" onclick="cambiarFiltro('musica', this)">Música</button>
+            <button class="tab-btn" onclick="cambiarFiltro('pensamiento', this)">Pensamiento</button>
+            <button class="tab-btn" onclick="cambiarFiltro('propio', this)">Mis Notas</button>
+          </nav>
 
-        <!-- Lista de Favoritos -->
-        <div class="collection-stream" id="contenedor-favoritos"></div>
+          <!-- Lista de Favoritos del Lector -->
+          <div class="collection-stream" id="contenedor-favoritos"></div>
 
-        <!-- Formulario para agregar una obra/libro/música favorita manualmente -->
-        <section class="add-custom-panel">
-          <h3>+ Anotar una obra o referencia en mi cuaderno</h3>
-          <p>Puedes anotar un libro pendiente, una película o una composición que desees asociar a tu memoria:</p>
-          <div class="add-form-grid">
-            <input type="text" id="nuevo-titulo" placeholder="Título de la obra o ensayo *" required>
-            <input type="text" id="nuevo-autor" placeholder="Autor / Director / Compositor">
-            <select id="nueva-categoria">
-              <option value="filosofia">Filosofía</option>
-              <option value="literatura">Literatura</option>
-              <option value="cine">Cine</option>
-              <option value="musica">Música</option>
-              <option value="pensamiento">Pensamiento</option>
-              <option value="propio">Reflexión / Nota propia</option>
-            </select>
-            <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
-            <input type="text" id="nueva-nota" placeholder="Nota o cita breve sobre la obra" style="grid-column: 1 / -1;">
-            <button class="btn-add-item" onclick="agregarItemManual()">Añadir a mi archivo &rarr;</button>
-          </div>
+          <!-- Formulario manual -->
+          <section class="add-custom-panel">
+            <h3>+ Anotar una obra o referencia en mi cuaderno</h3>
+            <p>Puedes anotar un libro pendiente, una película o una composición que desees asociar a tu memoria:</p>
+            <div class="add-form-grid">
+              <input type="text" id="nuevo-titulo" placeholder="Título de la obra o ensayo *" required>
+              <input type="text" id="nuevo-autor" placeholder="Autor / Director / Compositor">
+              <select id="nueva-categoria">
+                <option value="filosofia">Filosofía</option>
+                <option value="literatura">Literatura</option>
+                <option value="cine">Cine</option>
+                <option value="musica">Música</option>
+                <option value="pensamiento">Pensamiento</option>
+                <option value="propio">Reflexión / Nota propia</option>
+              </select>
+              <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
+              <input type="text" id="nueva-nota" placeholder="Nota o cita breve sobre la obra" style="grid-column: 1 / -1;">
+              <button class="btn-add-item" onclick="agregarItemManual()">Añadir a mi archivo &rarr;</button>
+            </div>
+          </section>
+
         </section>
 
-      </section>
-
-      <!-- BARRA LATERAL -->
-      <aside class="sidebar-wrapper" aria-label="Estadísticas de lectura">
-        
-        <div class="sidebar-widget">
-          <h3 class="widget-heading">Censo del Cuaderno</h3>
-          <div class="stats-counter">
-            <div class="stat-box">
-              <span class="stat-number" id="conteo-total">0</span>
-              <span class="stat-label">Obras Guardadas</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-number" id="conteo-ensayos">0</span>
-              <span class="stat-label">Ensayos Kairós</span>
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar-wrapper" aria-label="Estadísticas de lectura">
+          
+          <div class="sidebar-widget">
+            <h3 class="widget-heading">Censo del Cuaderno</h3>
+            <div class="stats-counter">
+              <div class="stat-box">
+                <span class="stat-number" id="conteo-total">0</span>
+                <span class="stat-label">Obras Guardadas</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number" id="conteo-ensayos">0</span>
+                <span class="stat-label">Ensayos Kairós</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sidebar-widget">
-          <h3 class="widget-heading">Acceso & Privacidad</h3>
-          <p style="font-family: var(--font-reader); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
-            Tus favoritos están almacenados de forma privada en el almacenamiento local de tu navegador (sin rastreo ni cookies externas).
-          </p>
-          <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
-          <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto;">Vaciar cuaderno completo</button>
-        </div>
+          <div class="sidebar-widget">
+            <h3 class="widget-heading">Acceso & Privacidad</h3>
+            <p style="font-family: var(--font-reader); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+              Tus obras permanecen asociadas de forma privada y segura a tu cuenta local en este equipo.
+            </p>
+            <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
+            <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto;">Vaciar cuaderno completo</button>
+          </div>
 
-      </aside>
+        </aside>
 
+      </div>
     </div>
 
   </main>
@@ -692,20 +819,165 @@
     </div>
   </footer>
 
-  <!-- MOTOR DE GESTIÓN LOCAL (LOCALSTORAGE) -->
+  <!-- MOTOR DE USUARIOS, SESIONES Y FAVORITOS -->
   <script>
-    const STORAGE_KEY = "kairos_favoritos_v1";
-    const NAME_KEY = "kairos_nombre_lector";
+    const USERS_KEY = "kairos_usuarios_v1";
+    const SESSION_KEY = "kairos_sesion_activa_v1";
+    const GLOBAL_FAVS_KEY = "kairos_favoritos_v1";
 
     let categoriaActiva = "todos";
 
+    // Encriptación nativa en navegador (SHA-256)
+    async function hashPassword(pass) {
+      const msgBuffer = new TextEncoder().encode(pass);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function conmutarAuthTab(tab) {
+      const loginForm = document.getElementById("form-login");
+      const regForm = document.getElementById("form-registro");
+      const tabLogin = document.getElementById("tab-login");
+      const tabReg = document.getElementById("tab-registro");
+
+      if (tab === "login") {
+        loginForm.style.display = "flex";
+        regForm.style.display = "none";
+        tabLogin.classList.add("active");
+        tabReg.classList.remove("active");
+      } else {
+        loginForm.style.display = "none";
+        regForm.style.display = "flex";
+        tabReg.classList.add("active");
+        tabLogin.classList.remove("active");
+      }
+    }
+
+    async function procesarRegistro(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("reg-nombre").value.trim();
+      const email = document.getElementById("reg-email").value.trim().toLowerCase();
+      const pass = document.getElementById("reg-pass").value;
+
+      let usuarios = localStorage.getItem(USERS_KEY) ? JSON.parse(localStorage.getItem(USERS_KEY)) : [];
+
+      if (usuarios.some(u => u.email === email)) {
+        alert("Ya existe una cuenta registrada con este correo electrónico.");
+        return;
+      }
+
+      const passHash = await hashPassword(pass);
+      const nuevoUsuario = {
+        id: Date.now(),
+        nombre,
+        email,
+        passHash,
+        creado: new Date().toLocaleDateString('es-ES')
+      };
+
+      usuarios.push(nuevoUsuario);
+      localStorage.setItem(USERS_KEY, JSON.stringify(usuarios));
+
+      // Iniciar sesión automáticamente
+      iniciarSesionUsuario(nuevoUsuario);
+      alert(`Bienvenido a Círculo Kairós, ${nombre}. Tu cuaderno ha sido creado.`);
+    }
+
+    async function procesarInicioSesion(e) {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim().toLowerCase();
+      const pass = document.getElementById("login-pass").value;
+
+      let usuarios = localStorage.getItem(USERS_KEY) ? JSON.parse(localStorage.getItem(USERS_KEY)) : [];
+      const passHash = await hashPassword(pass);
+
+      const usuario = usuarios.find(u => u.email === email && u.passHash === passHash);
+
+      if (!usuario) {
+        alert("Correo electrónico o contraseña incorrectos.");
+        return;
+      }
+
+      iniciarSesionUsuario(usuario);
+    }
+
+    function iniciarSesionUsuario(usuario) {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({
+        id: usuario.id,
+        nombre: usuario.nombre,
+        email: usuario.email
+      }));
+      verificarEstadoSesion();
+    }
+
+    function cerrarSesionLector() {
+      if (confirm("¿Deseas cerrar tu cuaderno personal?")) {
+        localStorage.removeItem(SESSION_KEY);
+        verificarEstadoSesion();
+      }
+    }
+
+    function obtenerUsuarioActivo() {
+      const data = localStorage.getItem(SESSION_KEY);
+      return data ? JSON.parse(data) : null;
+    }
+
+    function verificarEstadoSesion() {
+      const usuarioActivo = obtenerUsuarioActivo();
+      const vistaAuth = document.getElementById("vista-auth");
+      const vistaPerfil = document.getElementById("vista-perfil-activo");
+      const tituloPrincipal = document.getElementById("titulo-vista-principal");
+      const introPrincipal = document.getElementById("intro-vista-principal");
+
+      if (usuarioActivo) {
+        vistaAuth.style.display = "none";
+        vistaPerfil.style.display = "block";
+
+        document.getElementById("avatar-inicial").textContent = usuarioActivo.nombre.charAt(0).toUpperCase();
+        document.getElementById("nombre-lector-activo").textContent = usuarioActivo.nombre;
+        document.getElementById("email-lector-activo").textContent = `${usuarioActivo.email} · Sesión Abierta`;
+
+        tituloPrincipal.textContent = `Cuaderno de ${usuarioActivo.nombre}`;
+        introPrincipal.textContent = "«El lector que colecciona instantes rescata al tiempo de su disolución.» Aquí descansa tu archivo personal de obras y lecturas de fondo.";
+
+        renderizarFavoritos();
+        actualizarEstadisticas();
+      } else {
+        vistaAuth.style.display = "block";
+        vistaPerfil.style.display = "none";
+        tituloPrincipal.textContent = "Acceso al Cuaderno Personal";
+        introPrincipal.textContent = "Para consultar tus lecturas guardadas o realizar anotaciones, entra en tu cuenta o regístrate en el Círculo.";
+      }
+    }
+
+    // CLAVE DE FAVORITOS INDEPENDIENTE POR USUARIO
+    function getStorageKeyUsuario() {
+      const usuario = obtenerUsuarioActivo();
+      return usuario ? `kairos_favoritos_user_${usuario.id}` : GLOBAL_FAVS_KEY;
+    }
+
     function obtenerFavoritos() {
-      const data = localStorage.getItem(STORAGE_KEY);
+      const key = getStorageKeyUsuario();
+      let data = localStorage.getItem(key);
+
+      // Migración amigable: si el usuario recién registrado aún no tiene favoritos pero había guardados globales
+      if (!data && key !== GLOBAL_FAVS_KEY) {
+        const globalData = localStorage.getItem(GLOBAL_FAVS_KEY);
+        if (globalData) {
+          localStorage.setItem(key, globalData);
+          data = globalData;
+        }
+      }
+
       return data ? JSON.parse(data) : [];
     }
 
     function guardarFavoritos(lista) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+      const key = getStorageKeyUsuario();
+      localStorage.setItem(key, JSON.stringify(lista));
+      // Sincronizar clave global para que los botones de "Guardar" de los ensayos sigan funcionando
+      localStorage.setItem(GLOBAL_FAVS_KEY, JSON.stringify(lista));
       renderizarFavoritos();
       actualizarEstadisticas();
     }
@@ -722,13 +994,9 @@
     function normalizarEnlace(enlace) {
       if (!enlace) return "";
       let limpio = enlace.trim();
-
-      if (limpio.includes("\${item.enlace}")) return "";
-
       if (limpio.startsWith("http://") || limpio.startsWith("https://")) {
         return limpio;
       }
-
       const partes = limpio.split("/");
       return partes[partes.length - 1];
     }
@@ -738,7 +1006,6 @@
       if (!cont) return;
 
       const lista = obtenerFavoritos();
-
       const filtrados = categoriaActiva === "todos" 
         ? lista 
         : lista.filter(item => (item.categoria || "").toLowerCase() === categoriaActiva);
@@ -826,25 +1093,6 @@
       }
     }
 
-    function guardarNombreLector() {
-      const nom = document.getElementById("nombre-lector").value.trim();
-      if (nom) {
-        localStorage.setItem(NAME_KEY, nom);
-        document.getElementById("avatar-inicial").textContent = nom.charAt(0).toUpperCase();
-        alert("Nombre de lector guardado correctamente.");
-      }
-    }
-
-    function cargarNombreLector() {
-      const guardado = localStorage.getItem(NAME_KEY);
-      if (guardado) {
-        const input = document.getElementById("nombre-lector");
-        const avatar = document.getElementById("avatar-inicial");
-        if (input) input.value = guardado;
-        if (avatar) avatar.textContent = guardado.charAt(0).toUpperCase();
-      }
-    }
-
     function exportarColeccion() {
       const data = JSON.stringify(obtenerFavoritos(), null, 2);
       const blob = new Blob([data], { type: "application/json" });
@@ -857,16 +1105,16 @@
 
     function borrarTodo() {
       if (confirm("¿Seguro que deseas vaciar todas las obras guardadas en tu cuaderno?")) {
-        localStorage.removeItem(STORAGE_KEY);
+        const key = getStorageKeyUsuario();
+        localStorage.removeItem(key);
+        localStorage.removeItem(GLOBAL_FAVS_KEY);
         renderizarFavoritos();
         actualizarEstadisticas();
       }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      cargarNombreLector();
-      renderizarFavoritos();
-      actualizarEstadisticas();
+      verificarEstadoSesion();
     });
   </script>
 </body>
