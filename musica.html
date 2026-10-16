@@ -85,7 +85,6 @@
     }
     .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
     .brand {
       position: relative;
       padding: 1rem 0 0.5rem;
@@ -105,7 +104,6 @@
       mix-blend-mode: multiply;
     }
 
-    /* TITULAR EN COLOR NEGRO EDITORIAL */
     .site-title {
       font-family: var(--font-serif);
       font-size: 3.5rem;
@@ -135,7 +133,6 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN FIJA EN SCROLL (STICKY) */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -168,7 +165,6 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    /* Contenedor Principal */
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -208,7 +204,6 @@
       font-style: italic;
     }
 
-    /* Sumario de saltos */
     .table-of-contents-box {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-soft);
@@ -248,7 +243,6 @@
       font-weight: 700;
     }
 
-    /* Disposición Editorial */
     .layout-columns {
       display: grid;
       grid-template-columns: 2.3fr 1fr;
@@ -469,7 +463,6 @@
       border-color: var(--accent);
     }
 
-    /* Paginador Automático */
     .pagination-bar {
       display: none;
       justify-content: center;
@@ -502,7 +495,6 @@
       cursor: default;
     }
 
-    /* Sidebar */
     .sidebar-wrapper {
       position: sticky;
       top: 5rem;
@@ -659,20 +651,16 @@
     <span>Año I · Edición Continua</span>
   </aside>
 
-  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand">
-        <!-- MARCA DE AGUA EDITORIAL DIFUMINADA -->
         <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-
         <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
         <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
       </div>
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY QUE SE MANTIENE ARRIBA EN EL SCROLL -->
   <nav class="main-nav" aria-label="Navegación principal">
     <ul>
       <li><a href="index.html">Inicio</a></li>
@@ -696,7 +684,6 @@
       </p>
     </header>
 
-    <!-- SUMARIO DINÁMICO (AUTOMÁTICO VÍA JS) -->
     <nav class="table-of-contents-box" id="sumario-box" aria-label="Sumario de monografías musicales de esta página">
       <span class="toc-title">Monografías visibles en esta página · Haz clic para ir al texto</span>
       <ul class="toc-links-grid" id="toc-container"></ul>
@@ -707,7 +694,7 @@
       <!-- COLUMNA PRINCIPAL DE ENSAYOS DE MÚSICA -->
       <section class="articles-stream" id="stream-ensayos" aria-label="Monografías sonoras completas">
 
-        <!-- ENSAYO MÚSICA: EL RÉQUIEM Y LA LITURGIA DE DIFUNTOS -->
+        <!-- ENSAYO MÚSICA: EL RÉQUIEM Y LA LITURGIA DE DIFUNTOS (CORREGIDO CON IMAGEN OPERATIVA) -->
         <article class="long-article" id="mus-requiem-mozart" data-titulo="X. Lacrimosa dies illa (Réquiem de Mozart)">
           <header class="article-header">
             <span class="article-topic">Música Sacra & Liturgia · Ensayo X</span>
@@ -717,20 +704,20 @@
           </header>
 
           <figure class="article-featured-media">
-  <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1200&q=80" 
-       alt="Partitura clásica iluminada por luz tenue para el Réquiem de Mozart"
-       onerror="this.src='https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80'">
-  <figcaption>El corte abrupto tras el octavo compás del Lacrimosa: el silencio donde cesa la mano del compositor.</figcaption>
-</figure>
+            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" 
+                 alt="Partitura clásica iluminada por luz tenue para el Réquiem de Mozart"
+                 onerror="this.src='https://images.unsplash.com/photo-1520523839898-507127040409?auto=format&fit=crop&w=1200&q=80'">
+            <figcaption>El corte abrupto tras el octavo compás del Lacrimosa: el silencio donde cesa la mano del compositor.</figcaption>
+          </figure>
 
           <!-- Reproductor sugerido -->
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Mozart KV 626">
             <div class="player-label">
               <strong>Muestra sugerida: Mozart — Introitus & Lacrimosa (KV 626)</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">03:15 / 54:00</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 15%;"></div></div>
             </div>
           </div>
@@ -861,14 +848,13 @@
             <figcaption>El bajo continuo como fundamento cósmico: de la quietud del aria a los treinta cánones del firmamento.</figcaption>
           </figure>
 
-          <!-- Reproductor de la pieza -->
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Bach BWV 988">
             <div class="player-label">
               <strong>Muestra sugerida: Bach — Aria & Variatio 1 a 1 Clav.</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">03:45 / 38:20</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 25%;"></div></div>
             </div>
           </div>
@@ -905,14 +891,13 @@
             <figcaption>El tañido de dos voces: la melodía errante del hombre y la tríada inmóvil de las campanas.</figcaption>
           </figure>
 
-          <!-- Reproductor de la pieza -->
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Pärt Fratres">
             <div class="player-label">
               <strong>Muestra sugerida: Pärt — Fratres para violín y orquesta</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">04:12 / 10:48</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 38%;"></div></div>
             </div>
           </div>
@@ -947,13 +932,13 @@
             <figcaption>La sordina Harmon y los acordes suspendidos de Bill Evans: la noche como lienzo.</figcaption>
           </figure>
 
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Miles Davis Blue in Green">
             <div class="player-label">
               <strong>Muestra sugerida: Miles Davis — Blue in Green</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">05:37</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 50%;"></div></div>
             </div>
           </div>
@@ -981,17 +966,19 @@
           </header>
 
           <figure class="article-featured-media">
-            <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80" alt="Partituras sobre piano de cola">
+            <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80" 
+                 alt="Partituras sobre piano de cola"
+                 onerror="this.src='https://images.unsplash.com/photo-1520523839898-507127040409?auto=format&fit=crop&w=1200&q=80'">
             <figcaption>El tecleo de la máquina de escribir y la voz de Kafka en On the Nature of Daylight.</figcaption>
           </figure>
 
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Max Richter On the Nature of Daylight">
             <div class="player-label">
               <strong>Muestra sugerida: Richter — On the Nature of Daylight</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">06:11</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 60%;"></div></div>
             </div>
           </div>
@@ -1021,13 +1008,13 @@
             <figcaption>La modulación orgánica de las ondas y el saxofón solitario de Dick Morrissey.</figcaption>
           </figure>
 
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Vangelis Memories of Green">
             <div class="player-label">
               <strong>Muestra sugerida: Vangelis — Memories of Green</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">05:05</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 45%;"></div></div>
             </div>
           </div>
@@ -1057,13 +1044,13 @@
             <figcaption>El reflejo infinito del compás de 6/4 y la melodía que se aleja y regresa.</figcaption>
           </figure>
 
-          <div class="embedded-audio-player" aria-label="Reproductor de audio">
+          <div class="embedded-audio-player" aria-label="Reproductor de audio: Pärt Spiegel im Spiegel">
             <div class="player-label">
               <strong>Muestra sugerida: Pärt — Spiegel im Spiegel</strong>
               <span style="color: var(--text-muted); font-size: 0.8rem;">08:12</span>
             </div>
             <div class="player-ctrls">
-              <button class="play-audio-btn" title="Reproducir">&#9658;</button>
+              <button class="play-audio-btn" title="Reproducir" aria-label="Reproducir fragmento">&#9658;</button>
               <div class="audio-timeline-track"><div class="audio-timeline-fill" style="width: 70%;"></div></div>
             </div>
           </div>
@@ -1103,6 +1090,7 @@
         <div class="sidebar-widget">
           <h3 class="widget-heading">Guía del Cuaderno</h3>
           <ul class="quick-music-list">
+            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-requiem-mozart')"><strong>Réquiem de Mozart</strong><span>Lacrimosa & liturgia</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('musica-orden-tiempo-emocion')"><strong>La arquitectura del aire</strong><span>Música y Sentido</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-goldberg')"><strong>Variaciones Goldberg</strong><span>Bach y el insomnio</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-part')"><strong>Tabula Rasa (Arvo Pärt)</strong><span>Minimalismo sacro</span></a></li>
@@ -1110,7 +1098,6 @@
             <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-richter')"><strong>The Blue Notebooks</strong><span>Elegía para cuerdas</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-vangelis')"><strong>Blade Runner OST</strong><span>Sintetizadores CS-80</span></a></li>
             <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-spiegel')"><strong>Spiegel im Spiegel</strong><span>Geometría contemplativa</span></a></li>
-            <li><a href="javascript:void(0)" onclick="irAEnsayo('mus-spiegel')"><strong>Música Sacra & Liturgia</strong><span>Geometría contemplativa</span></a></li>
           </ul>
         </div>
       </aside>
@@ -1125,6 +1112,7 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
         <p>Publicación cultural independiente consagrada al análisis pausado de la acústica sacra, las partituras contemporáneas y la liturgia del silencio.</p>
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
@@ -1137,6 +1125,7 @@
           <li><a href="cine.html">Cine & Mirada</a></li>
           <li><a href="musica.html">Música & Resonancias</a></li>
           <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
         </ul>
       </nav>
 
@@ -1145,6 +1134,7 @@
         <ul>
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
           <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
         </ul>
       </div>
     </div>
@@ -1152,7 +1142,7 @@
 
   <!-- SCRIPT DE PAGINACIÓN INTELIGENTE -->
   <script>
-    const ENSAYOS_POR_PAGINA = 2; // Cantidad de monografías por página
+    const ENSAYOS_POR_PAGINA = 2;
 
     let paginaActual = 1;
     const articulos = Array.from(document.querySelectorAll(".long-article"));
@@ -1191,15 +1181,17 @@
       });
 
       const tocContainer = document.getElementById("toc-container");
-      tocContainer.innerHTML = "";
-      articulos.slice(inicio, fin).forEach(art => {
-        const id = art.id;
-        const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
-        const li = document.createElement("li");
-        li.className = "toc-item";
-        li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
-        tocContainer.appendChild(li);
-      });
+      if (tocContainer) {
+        tocContainer.innerHTML = "";
+        articulos.slice(inicio, fin).forEach(art => {
+          const id = art.id;
+          const titulo = art.getAttribute("data-titulo") || art.querySelector(".article-headline").textContent;
+          const li = document.createElement("li");
+          li.className = "toc-item";
+          li.innerHTML = `<a href="#${id}"><span class="num">&bull;</span> ${titulo}</a>`;
+          tocContainer.appendChild(li);
+        });
+      }
 
       const botones = document.querySelectorAll(".page-btn");
       botones.forEach(btn => {
@@ -1211,14 +1203,15 @@
       });
 
       if (hacerScroll) {
-        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+        const sumario = document.getElementById("sumario-box");
+        if (sumario) sumario.scrollIntoView({ behavior: "smooth" });
       }
     }
 
     function inicializarPaginacion() {
       const barraPaginas = document.getElementById("barra-paginas");
 
-      if (totalPaginas > 1) {
+      if (totalPaginas > 1 && barraPaginas) {
         barraPaginas.style.display = "flex";
         barraPaginas.innerHTML = "";
 
@@ -1255,7 +1248,8 @@
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
+      const bar = document.getElementById('progress-bar');
+      if (bar) bar.style.width = scrolled + '%';
     });
 
     document.addEventListener("DOMContentLoaded", inicializarPaginacion);
@@ -1308,7 +1302,7 @@
     function inyectarBotonesFavoritos() {
       const articulos = document.querySelectorAll(".long-article");
       const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop();
+      const archivoActual = window.location.pathname.split("/").pop() || "musica.html";
 
       articulos.forEach(art => {
         const pieAcciones = art.querySelector(".article-bottom-actions");
@@ -1337,4 +1331,4 @@
     document.addEventListener("DOMContentLoaded", inyectarBotonesFavoritos);
   </script>
 </body>
-</html> en este codigo de musica no me aparece la foto del primer ensayo, por que?
+</html>
