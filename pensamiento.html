@@ -642,7 +642,7 @@
           <figure class="article-featured-media">
             <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80" 
                  alt="Llama de vela iluminando la penumbra entre ramas y niebla otoñal" 
-                 onerror="this.src='https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80'">
+                 onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80'">
             <figcaption>La lumbre en la encrucijada: el fuego como baliza para los ausentes y amparo de los vivos en la noche de vigilia.</figcaption>
           </figure>
 
@@ -908,7 +908,6 @@
         art.style.display = (index >= inicio && index < fin) ? "block" : "none";
       });
 
-      // Sumario dinámico que muestra exactamente los tratados de la página activa
       const tocContainer = document.getElementById("toc-container");
       if (tocContainer) {
         tocContainer.innerHTML = "";
@@ -928,7 +927,8 @@
       });
 
       if (hacerScroll) {
-        document.getElementById("sumario-box").scrollIntoView({ behavior: "smooth" });
+        const sumario = document.getElementById("sumario-box");
+        if (sumario) sumario.scrollIntoView({ behavior: "smooth" });
       }
     }
 
@@ -966,7 +966,8 @@
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-      document.getElementById('progress-bar').style.width = scrolled + '%';
+      const bar = document.getElementById('progress-bar');
+      if (bar) bar.style.width = scrolled + '%';
     });
 
     document.addEventListener("DOMContentLoaded", inicializarPaginacion);
@@ -1019,7 +1020,7 @@
     function inyectarBotonesFavoritos() {
       const articulos = document.querySelectorAll(".long-article");
       const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-      const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop();
+      const archivoActual = window.location.pathname.split("/").pop() || "pensamiento.html";
 
       articulos.forEach(art => {
         const pieAcciones = art.querySelector(".article-bottom-actions");
