@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Círculo Kairós</title>
+    <link>https://nifares92.github.io/Circulo_Kairos/</link>
+    <description>Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</description>
+    <language>es-ES</language>
+    <lastBuildDate>Sun, 18 Oct 2026 20:00:00 +0200</lastBuildDate>
+    <atom:link href="https://nifares92.github.io/Circulo_Kairos/feed.xml" rel="self" type="application/rss+xml" />
+
+    <!-- Entrada: Tratado de Pensamiento -->
+    <item>
+      <title>El banquete de las sombras: Fenomenología de la vigilia fúnebre, el regreso de los ancestros y el deber sagrado de la memoria</title>
+      <link>https://nifares92.github.io/Circulo_Kairos/pensamiento.html#pensamiento-banquete-sombras</link>
+      <guid isPermaLink="true">https://nifares92.github.io/Circulo_Kairos/pensamiento.html#pensamiento-banquete-sombras</guid>
+      <pubDate>Thu, 15 Oct 2026 10:00:00 +0200</pubDate>
+      <author>serabohe@gmail.com (Tribuna de la Dirección)</author>
+      <category>Pensamiento</category>
+      <description><![CDATA[Hay una hora secreta a mediados de otoño en la que la tierra deja de exhalar el calor acumulado durante el estío y comienza a replegarse en una quietud mineral. Indagación sobre la vigilia fúnebre y el deber de la memoria.]]></description>
+    </item>
+
+    <!-- Entrada: Filosofía -->
+    <item>
+      <title>La mirada sin ojos: Espectrología y retorno ontológico</title>
+      <link>https://nifares92.github.io/Circulo_Kairos/filosofia.html#filosofia-espectrologia-fantasma</link>
+      <guid isPermaLink="true">https://nifares92.github.io/Circulo_Kairos/filosofia.html#filosofia-espectrologia-fantasma</guid>
+      <pubDate>Mon, 12 Oct 2026 18:30:00 +0200</pubDate>
+      <author>serabohe@gmail.com (Círculo Kairós)</author>
+      <category>Filosofía</category>
+      <description><![CDATA[El «efecto visera» de Derrida y la fractura de Cronos: el fantasma como escándalo ontológico que se niega al olvido.]]></description>
+    </item>
+
+    <!-- Entrada: Relato de El Rincón del Lector -->
+    <item>
+      <title>El testimonio del diván invertido</title>
+      <link>https://nifares92.github.io/Circulo_Kairos/index.html#obra-sala-observacion</link>
+      <guid isPermaLink="true">https://nifares92.github.io/Circulo_Kairos/index.html#obra-sala-observacion</guid>
+      <pubDate>Wed, 07 Oct 2026 09:00:00 +0200</pubDate>
+      <author>serabohe@gmail.com (S. P. Paredes)</author>
+      <category>Literatura / Relato</category>
+      <description><![CDATA[Un célebre analista atiende a un paciente que afirma recordar con exactitud milimétrica crímenes no consumados, hasta que los detalles de la consulta revelan una fractura clínica insospechada.]]></description>
+    </item>
+  </channel>
+</rss>
