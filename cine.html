@@ -111,16 +111,17 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 0.35rem;
-      color: var(--text-main);
+      color: #84382B;
       position: relative;
       z-index: 2;
     }
     .site-title a {
-      color: var(--text-main);
+      color: #84382B;
       transition: color var(--transition), opacity var(--transition);
     }
     .site-title a:hover {
-      color: var(--accent);
+      color: #6a2c21;
+      opacity: 0.95;
     }
 
     .site-tagline {
@@ -133,7 +134,7 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN STICKY */
+    /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -145,7 +146,21 @@
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
     }
-    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
+    .nav-toggle-btn {
+      display: none;
+    }
+    .main-nav > .nav-container > ul { 
+      list-style: none; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      gap: 3.5rem;
+    }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -165,6 +180,79 @@
     }
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
+
+    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
+    .has-dropdown {
+      position: relative;
+    }
+    .dropdown-trigger {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .arrow-indicator {
+      font-size: 0.65rem;
+      transition: transform var(--transition);
+      color: var(--accent);
+    }
+    .has-dropdown:hover .arrow-indicator {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      min-width: 230px;
+      padding: 0.8rem 0;
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      text-align: left;
+      border-radius: 2px;
+      z-index: 10000;
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid rgba(226, 216, 199, 0.4);
+      pointer-events: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      transition: all var(--transition);
+    }
+    .dropdown-menu a::after {
+      display: none;
+    }
+    .dropdown-menu a:hover {
+      background-color: var(--bg-surface);
+      color: var(--accent);
+      padding-left: 1.65rem;
+    }
+    .has-dropdown:hover .dropdown-menu {
+      display: flex;
+      animation: aparecerDropdown 0.25s ease forwards;
+    }
+    @keyframes aparecerDropdown {
+      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+    }
 
     /* Contenedor Principal */
     #contenido-principal {
@@ -573,6 +661,7 @@
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
     .footer-nav a:hover { color: var(--accent); }
 
+    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 992px) {
       .toc-links-grid { grid-template-columns: 1fr; }
       .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
@@ -580,12 +669,90 @@
       .sidebar-wrapper { position: static; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
     }
+
+    @media (max-width: 768px) {
+      .main-nav {
+        padding: 0.6rem 1rem;
+      }
+      .nav-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: 1px solid var(--border-soft);
+        padding: 0.45rem 1rem;
+        font-family: var(--font-classical);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-main);
+        cursor: pointer;
+        border-radius: 2px;
+        margin: 0 auto;
+        transition: all var(--transition);
+      }
+      .nav-toggle-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .main-nav > .nav-container > ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 1.2rem 0 0.5rem;
+        border-top: 1px solid var(--border-soft);
+        margin-top: 0.6rem;
+      }
+      .main-nav > .nav-container > ul.nav-abierto {
+        display: flex;
+        animation: desplegarMenu 0.25s ease-out;
+      }
+      @keyframes desplegarMenu {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .main-nav a {
+        font-size: 0.88rem;
+        padding: 0.35rem 0;
+      }
+
+      /* Acordeón del submenú en móvil */
+      .has-dropdown {
+        width: 100%;
+      }
+      .has-dropdown:hover .dropdown-menu {
+        display: none;
+      }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background-color: var(--bg-surface);
+        margin: 0.5rem auto 0;
+        width: 90%;
+        padding: 0.4rem 0;
+      }
+      .dropdown-menu::before {
+        display: none;
+      }
+      .dropdown-menu.sub-abierto {
+        display: flex !important;
+      }
+      .dropdown-menu a {
+        text-align: center;
+        padding: 0.5rem 0;
+      }
+    }
+
     @media (max-width: 600px) {
       .site-title { font-size: 2.2rem; }
       .section-heading-title { font-size: 2.2rem; }
       .article-headline { font-size: 1.85rem; }
       .article-prose p { text-align: left; }
-      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -610,18 +777,35 @@
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY -->
+  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI CUADERNO -->
   <nav class="main-nav" aria-label="Navegación principal">
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="literatura.html">Literatura</a></li>
-      <li><a href="cine.html" class="active">Cine</a></li>
-      <li><a href="musica.html">Música</a></li>
-      <li><a href="filosofia.html">Filosofía</a></li>
-      <li><a href="pensamiento.html">Pensamiento</a></li>
-      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-      <li><a href="perfil.html">Mi Cuaderno</a></li>
-    </ul>
+    <div class="nav-container">
+      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
+        <span id="icono-menu-movil">☰</span>
+        <span>Menú</span>
+      </button>
+
+      <ul id="lista-navegacion">
+        <li><a href="index.html">Inicio</a></li>
+        
+        <!-- Pestaña desplegable de Cuadernos con Cine activo -->
+        <li class="has-dropdown">
+          <a href="javascript:void(0)" class="dropdown-trigger active" id="dropdown-cuadernos">
+            Cuadernos <span class="arrow-indicator">▾</span>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
+            <li><a href="literatura.html">Literatura & Enigma</a></li>
+            <li><a href="cine.html" class="active">Cine & Mirada</a></li>
+            <li><a href="musica.html">Música & Acústica</a></li>
+            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+          </ul>
+        </li>
+
+        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        <li><a href="perfil.html">Mi Cuaderno</a></li>
+      </ul>
+    </div>
   </nav>
 
   <main id="contenido-principal">
@@ -766,180 +950,180 @@
           </footer>
         </article>
 
-       <!-- ENSAYO 1: FILM NOIR -->
-<article class="long-article" id="cine-noir" data-titulo="I. La sombra como destino (Film Noir)">
-  <header class="article-header">
-    <span class="article-topic">Film Noir Clásico · Ensayo Monográfico I</span>
-    <h2 class="article-headline">La sombra como destino: la geometría moral del cine negro y el claroscuro de posguerra</h2>
-    <p class="film-specs-header">De Fritz Lang a Billy Wilder · 1944-1958</p>
-    <div class="article-meta-line">Por Redacción · <time datetime="2026-10-08">08 de octubre de 2026</time> · <span>23 min de lectura de fondo</span></div>
-  </header>
-  
-  <figure class="article-featured-media">
-    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80" alt="Claroscuro cinematográfico en blanco y negro">
-    <figcaption>Las persianas venecianas como barrotes del alma: la iluminación expresionista en Hollywood.</figcaption>
-  </figure>
-  
-  <div class="article-prose">
-    <p class="dropcap">El cine negro no es un mero catálogo de gabardinas empapadas, pistolas snub-nosed del calibre 38 y humo espeso de cigarrillos en tugurios nocturnos: es la radiografía formal y estética del desencanto moral tras el final de la Segunda Guerra Mundial. Heredero directo de la desazón expresionista traída a Hollywood por cineastas centroeuropeos exiliados como Fritz Lang, Billy Wilder, Robert Siodmak y Otto Preminger, el <em>film noir</em> desterró para siempre la iluminación plana y complaciente de los grandes estudios para sustituirla por diagonales afiladas de claroscuro, angulaciones aberrantes y una atmósfera de alienación que demolió el optimismo canónico del sueño americano.</p>
+        <!-- ENSAYO 1: FILM NOIR -->
+        <article class="long-article" id="cine-noir" data-titulo="I. La sombra como destino (Film Noir)">
+          <header class="article-header">
+            <span class="article-topic">Film Noir Clásico · Ensayo Monográfico I</span>
+            <h2 class="article-headline">La sombra como destino: la geometría moral del cine negro y el claroscuro de posguerra</h2>
+            <p class="film-specs-header">De Fritz Lang a Billy Wilder · 1944-1958</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-08">08 de octubre de 2026</time> · <span>23 min de lectura de fondo</span></div>
+          </header>
+          
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80" alt="Claroscuro cinematográfico en blanco y negro">
+            <figcaption>Las persianas venecianas como barrotes del alma: la iluminación expresionista en Hollywood.</figcaption>
+          </figure>
+          
+          <div class="article-prose">
+            <p class="dropcap">El cine negro no es un mero catálogo de gabardinas empapadas, pistolas snub-nosed del calibre 38 y humo espeso de cigarrillos en tugurios nocturnos: es la radiografía formal y estética del desencanto moral tras el final de la Segunda Guerra Mundial. Heredero directo de la desazón expresionista traída a Hollywood por cineastas centroeuropeos exiliados como Fritz Lang, Billy Wilder, Robert Siodmak y Otto Preminger, el <em>film noir</em> desterró para siempre la iluminación plana y complaciente de los grandes estudios para sustituirla por diagonales afiladas de claroscuro, angulaciones aberrantes y una atmósfera de alienación que demolió el optimismo canónico del sueño americano.</p>
 
-    <p>Nacido en la intersección entre la literatura <em>hardboiled</em> de Dashiell Hammett, Raymond Chandler y James M. Cain, y las sombras angustiosas de la República de Weimar, el cine negro operó como un espejo turbio de la psique colectiva. No se trataba únicamente de ilustrar crímenes en callejones húmedos; era un movimiento que capturaba el trauma del veterano incapaz de readaptarse a la vida civil, la desconfianza hacia las instituciones corruptas y la certidumbre corrosiva de que la codicia, y no el heroísmo, constituía el verdadero motor de la sociedad moderna.</p>
+            <p>Nacido en la intersección entre la literatura <em>hardboiled</em> de Dashiell Hammett, Raymond Chandler y James M. Cain, y las sombras angustiosas de la República de Weimar, el cine negro operó como un espejo turbio de la psique colectiva. No se trataba únicamente de ilustrar crímenes en callejones húmedos; era un movimiento que capturaba el trauma del veterano incapaz de readaptarse a la vida civil, la desconfianza hacia las instituciones corruptas y la certidumbre corrosiva de que la codicia, y no el heroísmo, constituía el verdadero motor de la sociedad moderna.</p>
 
-    <h3>I. Las persianas venecianas como barrotes del alma</h3>
-    <p>En el cine negro clásico —desde <em>Perdición</em> (<em>Double Indemnity</em>, 1944) hasta <em>Retorno al pasado</em> (<em>Out of the Past</em>, 1947)—, los personajes no habitan un mundo libre: habitan una trampa geométrica. La luz de los proyectores que penetra a través de las persianas venecianas proyecta sobre el torso y el rostro de Walter Neff o de Jeff Bailey una serie de sombras paralelas que recuerdan inequívocamente a los barrotes de una celda carcelaria. Antes incluso de que cometan el crimen, cobren el cheque o firmen la póliza de indemnización fraudulenta, el lenguaje visual ya ha dictado sentencia: son reclusos de su propia codicia y de una fatalidad insalvable.</p>
+            <h3>I. Las persianas venecianas como barrotes del alma</h3>
+            <p>En el cine negro clásico —desde <em>Perdición</em> (<em>Double Indemnity</em>, 1944) hasta <em>Retorno al pasado</em> (<em>Out of the Past</em>, 1947)—, los personajes no habitan un mundo libre: habitan una trampa geométrica. La luz de los proyectores que penetra a través de las persianas venecianas proyecta sobre el torso y el rostro de Walter Neff o de Jeff Bailey una serie de sombras paralelas que recuerdan inequívocamente a los barrotes de una celda carcelaria. Antes incluso de que cometan el crimen, cobren el cheque o firmen la póliza de indemnización fraudulenta, el lenguaje visual ya ha dictado sentencia: son reclusos de su propia codicia y de una fatalidad insalvable.</p>
 
-    <p>Directores de fotografía como John Alton (apodado «el príncipe de las tinieblas»), Nicholas Musuraca o Woody Bredell revolucionaron el medio prescindiendo de la iluminación de relleno tradicional de tres puntos. Su cámara operaba en el filo de la penumbra: figuras silueteadas contra cristales empañados, charcos de lluvia sobre el asfalto reflejando letreros de neón parpadeantes y sombras gigantescas que trepan por las paredes para manifestar la culpa antes de que el revólver sea disparado. El espacio deja de ser neutro: el plano holandés o la cámara en contrapicado distorsionan las líneas de fuga, comunicando al espectador que el suelo moral bajo los pies de los protagonistas se ha quebrado de forma irreversible.</p>
+            <p>Directores de fotografía como John Alton (apodado «el príncipe de las tinieblas»), Nicholas Musuraca o Woody Bredell revolucionaron el medio prescindiendo de la iluminación de relleno tradicional de tres puntos. Su cámara operaba en el filo de la penumbra: figuras silueteadas contra cristales empañados, charcos de lluvia sobre el asfalto reflejando letreros de neón parpadeantes y sombras gigantescas que trepan por las paredes para manifestar la culpa antes de que el revólver sea disparado. El espacio deja de ser neutro: el plano holandés o la cámara en contrapicado distorsionan las líneas de fuga, comunicando al espectador que el suelo moral bajo los pies de los protagonistas se ha quebrado de forma irreversible.</p>
 
-    <blockquote>«En el noir no hay inocentes; solo grados diversos de culpabilidad y supervivientes que aprendieron a caminar por la cuerda floja con las manos en los bolsillos.»<cite>— Paul Schrader, Notes on Film Noir</cite></blockquote>
+            <blockquote>«En el noir no hay inocentes; solo grados diversos de culpabilidad y supervivientes que aprendieron a caminar por la cuerda floja con las manos en los bolsillos.»<cite>— Paul Schrader, Notes on Film Noir</cite></blockquote>
 
-    <h3>II. La femme fatale: la esfinge de la desmitificación doméstica</h3>
-    <p>La mujer fatal —encarnada con frialdad milimétrica por actrices como Barbara Stanwyck, Jane Greer, Rita Hayworth o Gene Tierney— emerge en un contexto histórico preciso e insoslayable: los soldados regresan del frente bélico europeo o del Pacífico para descubrir que las mujeres han ocupado los puestos en las fábricas, gestionan sus propias finanzas y no están dispuestas a someterse de nuevo al ideal de sumisión doméstica y confinamiento suburbano promovido por la propaganda previa.</p>
+            <h3>II. La femme fatale: la esfinge de la desmitificación doméstica</h3>
+            <p>La mujer fatal —encarnada con frialdad milimétrica por actrices como Barbara Stanwyck, Jane Greer, Rita Hayworth o Gene Tierney— emerge en un contexto histórico preciso e insoslayable: los soldados regresan del frente bélico europeo o del Pacífico para descubrir que las mujeres han ocupado los puestos en las fábricas, gestionan sus propias finanzas y no están dispuestas a someterse de nuevo al ideal de sumisión doméstica y confinamiento suburbano promovido por la propaganda previa.</p>
 
-    <p>La <em>femme fatale</em> no pide matrimonio, flores ni rescate caballeresco; maneja el dinero, conoce al dedillo las debilidades del deseo masculino y utiliza el sexo como una herramienta táctica para conquistar su autonomía patrimonial y social a cualquier precio. Frente al detective cansado o al agente de seguros arribista, la mujer fatal es una estratega que entiende que el orden patriarcal está podrido y decide utilizar sus propias armas contra él. Phyllis Dietrichson en <em>Perdición</em> o Kathie Moffat en <em>Retorno al pasado</em> no son monstruos gratuitos: son el síntoma desgarrador de un mundo donde el afecto ha sido sustituido por el contrato transaccional y la traición anticipada.</p>
+            <p>La <em>femme fatale</em> no pide matrimonio, flores ni rescate caballeresco; maneja el dinero, conoce al dedillo las debilidades del deseo masculino y utiliza el sexo como una herramienta táctica para conquistar su autonomía patrimonial y social a cualquier precio. Frente al detective cansado o al agente de seguros arribista, la mujer fatal es una estratega que entiende que el orden patriarcal está podrido y decide utilizar sus propias armas contra él. Phyllis Dietrichson en <em>Perdición</em> o Kathie Moffat en <em>Retorno al pasado</em> no son monstruos gratuitos: son el síntoma desgarrador de un mundo donde el afecto ha sido sustituido por el contrato transaccional y la traición anticipada.</p>
 
-    <h3>III. La voz en off y la estructura circular: el determinismo del flashback</h3>
-    <p>Desde el punto de vista narrativo, el cine negro desafió la linealidad aristotélica introduciendo de manera sistemática la voz en <em>off</em> y el <em>flashback</em> como dispositivos deterministas. En obras como <em>El crepúsculo de los dioses</em> (<em>Sunset Boulevard</em>, 1950) de Billy Wilder —donde el narrador, Joe Gillis, nos habla flotando boca abajo, ya cadáver, en la piscina de una mansión decadente— o <em>Forajidos</em> (<em>The Killers</em>, 1946) de Robert Siodmak, la trama comienza por el desenlace irrevocable.</p>
+            <h3>III. La voz en off y la estructura circular: el determinismo del flashback</h3>
+            <p>Desde el punto de vista narrativo, el cine negro desafió la linealidad aristotélica introduciendo de manera sistemática la voz en <em>off</em> y el <em>flashback</em> como dispositivos deterministas. En obras como <em>El crepúsculo de los dioses</em> (<em>Sunset Boulevard</em>, 1950) de Billy Wilder —donde el narrador, Joe Gillis, nos habla flotando boca abajo, ya cadáver, en la piscina de una mansión decadente— o <em>Forajidos</em> (<em>The Killers</em>, 1946) de Robert Siodmak, la trama comienza por el desenlace irrevocable.</p>
 
-    <p>El espectador sabe desde el primer minuto que el protagonista está herido de muerte, arrestado o moralmente aniquilado. La narración retrospectiva despoja al relato de la intriga convencional sobre el desenlace (<em>¿se salvará?</em>) para focalizar la tensión dramática en el mecanismo fatal de la caída (<em>¿cómo fue posible que cayera en la trampa?</em>). Esta estructura niega la posibilidad del libre albedrío: el protagonista camina hacia el matadero impulsado por una cadena de decisiones erróneas que, vistas retrospectivamente, tenían la precisión inexorable de un teorema matemático. La voz en off del antihéroe no busca justificarse ni implorar compasión; es el atestado desapasionado de quien reconoce su error con una mueca cínica.</p>
+            <p>El espectador sabe desde el primer minuto que el protagonista está herido de muerte, arrestado o moralmente aniquilado. La narración retrospectiva despoja al relato de la intriga convencional sobre el desenlace (<em>¿se salvará?</em>) para focalizar la tensión dramática en el mecanismo fatal de la caída (<em>¿cómo fue posible que cayera en la trampa?</em>). Esta estructura niega la posibilidad del libre albedrío: el protagonista camina hacia el matadero impulsado por una cadena de decisiones erróneas que, vistas retrospectivamente, tenían la precisión inexorable de un teorema matemático. La voz en off del antihéroe no busca justificarse ni implorar compasión; es el atestado desapasionado de quien reconoce su error con una mueca cínica.</p>
 
-    <h3>IV. La jungla de asfalto: corrupción sistémica y el ocaso del héroe clásico</h3>
-    <p>El territorio moral del <em>noir</em> es la metrópoli nocturna: Los Ángeles, Nueva York, Chicago o San Francisco retratadas no como símbolos del progreso industrial, sino como laberintos desalmados donde los comisarios de policía cenan con los capos del juego y los jueces obedecen a los magnates inmobiliarios. En películas como <em>Los sobornados</em> (<em>The Big Heat</em>, 1953) de Fritz Lang o <em>La jungla de asfalto</em> (<em>The Asphalt Jungle</em>, 1950) de John Huston, la frontera tradicional entre la ley y el hampa queda abolida.</p>
+            <h3>IV. La jungla de asfalto: corrupción sistémica y el ocaso del héroe clásico</h3>
+            <p>El territorio moral del <em>noir</em> es la metrópoli nocturna: Los Ángeles, Nueva York, Chicago o San Francisco retratadas no como símbolos del progreso industrial, sino como laberintos desalmados donde los comisarios de policía cenan con los capos del juego y los jueces obedecen a los magnates inmobiliarios. En películas como <em>Los sobornados</em> (<em>The Big Heat</em>, 1953) de Fritz Lang o <em>La jungla de asfalto</em> (<em>The Asphalt Jungle</em>, 1950) de John Huston, la frontera tradicional entre la ley y el hampa queda abolida.</p>
 
-    <p>El detective privado —el icónico Philip Marlowe o Sam Spade— no es un caballero andante incontaminado, sino un hombre marginal que cobra veinticinco dólares al día más gastos para escarbar en la inmundicia de familias acaudaladas. Su integridad no descansa en un código legal abstracto, sino en una obstinada y solitaria ética personal: negarse a venderse al mejor postor cuando todo a su alrededor está en subasta. Al final del camino no le espera ni la gloria ni la fortuna, sino una botella de whisky barata en un despacho desvencijado y la certeza amarga de que el verdadero poder siempre permanece impune.</p>
+            <p>El detective privado —el icónico Philip Marlowe o Sam Spade— no es un caballero andante incontaminado, sino un hombre marginal que cobra veinticinco dólares al día más gastos para escarbar en la inmundicia de familias acaudaladas. Su integridad no descansa en un código legal abstracto, sino en una obstinada y solitaria ética personal: negarse a venderse al mejor postor cuando todo a su alrededor está en subasta. Al final del camino no le espera ni la gloria ni la fortuna, sino una botella de whisky barata en un despacho desvencijado y la certeza amarga de que el verdadero poder siempre permanece impune.</p>
 
-    <h3>Epílogo: Sed de mal (1958) y el réquiem del clasicismo</h3>
-    <p>El ciclo clásico del cine negro se clausura simbólicamente en 1958 con <em>Sed de mal</em> (<em>Touch of Evil</em>) de Orson Welles. Rodada en una frontera desértica y decadente entre Estados Unidos y México, la película abre con uno de los planos secuencia más virtuosos de la historia del cine para certificar la descomposición terminal del género.</p>
+            <h3>Epílogo: Sed de mal (1958) y el réquiem del clasicismo</h3>
+            <p>El ciclo clásico del cine negro se clausura simbólicamente en 1958 con <em>Sed de mal</em> (<em>Touch of Evil</em>) de Orson Welles. Rodada en una frontera desértica y decadente entre Estados Unidos y México, la película abre con uno de los planos secuencia más virtuosos de la historia del cine para certificar la descomposición terminal del género.</p>
 
-    <p>La silueta monstruosa, coja y decadente del comisario Hank Quinlan —que fabrica pruebas falsas porque «sabe» intuitivamente quién es culpable— encarna la corrupción última de la justicia por el exceso de soberbia. Cuando Quinlan cae muerto sobre el lodo negro de un canal de aguas residuales, acompañado por la elegía fúnebre de Marlene Dietrich («¿Qué importa lo que digan de él? Después de todo, era una especie de hombre...»), el <em>film noir</em> despide su época dorada. Lo que vendría después sería el homenaje posmoderno o el <em>neo-noir</em> en color; pero la pureza trágica de aquel blanco y negro donde las sombras pesaban más que los hombres permanecería para siempre como el retrato visual más honesto y desolador del siglo XX.</p>
-  </div>
-  
-  <footer class="article-bottom-actions">
-    <span class="signature-note">— Círculo Kairós · Cuaderno de Cinematografía</span>
-    <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
-  </footer>
-</article>
+            <p>La silueta monstruosa, coja y decadente del comisario Hank Quinlan —que fabrica pruebas falsas porque «sabe» intuitivamente quién es culpable— encarna la corrupción última de la justicia por el exceso de soberbia. Cuando Quinlan cae muerto sobre el lodo negro de un canal de aguas residuales, acompañado por la elegía fúnebre de Marlene Dietrich («¿Qué importa lo que digan de él? Después de todo, era una especie de hombre...»), el <em>film noir</em> despide su época dorada. Lo que vendría después sería el homenaje posmoderno o el <em>neo-noir</em> en color; pero la pureza trágica de aquel blanco y negro donde las sombras pesaban más que los hombres permanecería para siempre como el retrato visual más honesto y desolador del siglo XX.</p>
+          </div>
+          
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Cuaderno de Cinematografía</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
 
         <!-- ENSAYO 2: STALKER (TARKOVSKI) -->
-<article class="long-article" id="cine-stalker" data-titulo="II. Stalker (Andrei Tarkovski)">
-  <header class="article-header">
-    <span class="article-topic">Cine de Autor · Ensayo Monográfico II</span>
-    <h2 class="article-headline">Stalker: Andrei Tarkovski y la Zona como espejo del alma humana</h2>
-    <p class="film-specs-header">Andrei Tarkovski · 1979 · Unión Soviética · Mosfilm</p>
-    <div class="article-meta-line">Por Redacción · <time datetime="2026-10-02">02 de octubre de 2026</time> · <span>26 min de lectura de fondo</span></div>
-  </header>
-  
-  <figure class="article-featured-media">
-    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" alt="Niebla sobre aguas pantanosas y ruinas industriales">
-    <figcaption>La poética del plano sostenido y el miedo a la verdad interior de la Habitación.</figcaption>
-  </figure>
-  
-  <div class="article-prose">
-    <p class="dropcap">En <em>Stalker</em> (1979), basada libremente en la novela corta <em>Pícnic extraterrestre</em> de los hermanos Arkadi y Borís Strugatski, tres hombres desprovistos de patronímico —el Escritor escéptico y hastiado, el Científico positivista ceñido a sus fórmulas y el Guía espiritual (el <em>Stalker</em>), un marginal marcado por el presidio— cruzan un cordón militar fuertemente electrificado y patrullado por carros de combate blindados para adentrarse en un territorio prohibido, mutante y desolado: la Zona. Corre la voz clandestina de que en su epicentro se alza una Habitación donde se consuman los anhelos más recónditos de quien logre franquear su umbral sin sucumbir a las trampas invisibles del camino.</p>
+        <article class="long-article" id="cine-stalker" data-titulo="II. Stalker (Andrei Tarkovski)">
+          <header class="article-header">
+            <span class="article-topic">Cine de Autor · Ensayo Monográfico II</span>
+            <h2 class="article-headline">Stalker: Andrei Tarkovski y la Zona como espejo del alma humana</h2>
+            <p class="film-specs-header">Andrei Tarkovski · 1979 · Unión Soviética · Mosfilm</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-10-02">02 de octubre de 2026</time> · <span>26 min de lectura de fondo</span></div>
+          </header>
+          
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" alt="Niebla sobre aguas pantanosas y ruinas industriales">
+            <figcaption>La poética del plano sostenido y el miedo a la verdad interior de la Habitación.</figcaption>
+          </figure>
+          
+          <div class="article-prose">
+            <p class="dropcap">En <em>Stalker</em> (1979), basada libremente en la novela corta <em>Pícnic extraterrestre</em> de los hermanos Arkadi y Borís Strugatski, tres hombres desprovistos de patronímico —el Escritor escéptico y hastiado, el Científico positivista ceñido a sus fórmulas y el Guía espiritual (el <em>Stalker</em>), un marginal marcado por el presidio— cruzan un cordón militar fuertemente electrificado y patrullado por carros de combate blindados para adentrarse en un territorio prohibido, mutante y desolado: la Zona. Corre la voz clandestina de que en su epicentro se alza una Habitación donde se consuman los anhelos más recónditos de quien logre franquear su umbral sin sucumbir a las trampas invisibles del camino.</p>
 
-    <p>Rodada en paisajes fluviales e industriales semiderruidos cerca de Tallin (Estonia) —en emplazamientos contaminados por vertidos químicos que, según afirman testimonios del equipo, acabarían precipitando años después la enfermedad fatal del propio cineasta y de varios de sus colaboradores directos—, la penúltima película soviética de Andrei Tarkovski trasciende la retórica genérica de la ciencia ficción para fundar una auténtica liturgia cinematográfica sobre el tiempo, la decadencia material y la desolación metafísica del hombre del siglo XX.</p>
+            <p>Rodada en paisajes fluviales e industriales semiderruidos cerca de Tallin (Estonia) —en emplazamientos contaminados por vertidos químicos que, según afirman testimonios del equipo, acabarían precipitando años después la enfermedad fatal del propio cineasta y de varios de sus colaboradores directos—, la penúltima película soviética de Andrei Tarkovski trasciende la retórica genérica de la ciencia ficción para fundar una auténtica liturgia cinematográfica sobre el tiempo, la decadencia material y la desolación metafísica del hombre del siglo XX.</p>
 
-    <h3>I. El rechazo a la pirotecnia tecnológica y la dialéctica de los colores</h3>
-    <p>Lo profundamente subversivo del filme radica en que Tarkovski desmantela de cuajo las convenciones visuales de la ciencia ficción hegemónica contemporánea. En la Zona no hay destellos láser, naves gravitatorias, artefactos alienígenas ni criaturas titánicas; es una llanura abandonada de hierba salvaje acariciada por el viento, hangares devorados por el musgo, túneles anegados y charcos de agua estancada donde reposan iconos ortodoxos sumergidos, restos de maquinaria oxidada, jeringuillas hipodérmicas, peces ciegos y monedas corrompidas. El prodigio no es técnico, sino ontológico: la Zona es un espacio vivo, un laberinto en perpetua metamorfosis que se reconfigura según el estado anímico y moral de quienes profanan su soledad.</p>
+            <h3>I. El rechazo a la pirotecnia tecnológica y la dialéctica de los colores</h3>
+            <p>Lo profundamente subversivo del filme radica en que Tarkovski desmantela de cuajo las convenciones visuales de la ciencia ficción hegemónica contemporánea. En la Zona no hay destellos láser, naves gravitatorias, artefactos alienígenas ni criaturas titánicas; es una llanura abandonada de hierba salvaje acariciada por el viento, hangares devorados por el musgo, túneles anegados y charcos de agua estancada donde reposan iconos ortodoxos sumergidos, restos de maquinaria oxidada, jeringuillas hipodérmicas, peces ciegos y monedas corrompidas. El prodigio no es técnico, sino ontológico: la Zona es un espacio vivo, un laberinto en perpetua metamorfosis que se reconfigura según el estado anímico y moral de quienes profanan su soledad.</p>
 
-    <p>Esta ruptura queda formalizada en el tránsito cromático de la cinta. El mundo civilizado del exterior —la periferia sórdida de la ciudad donde malvive el Stalker junto a su esposa agotada y su hija lisiada— se presenta teñido por un tono sepia monocromático, granuloso, metálico y sucio, representativo de una sociedad sofocada por el materialismo utilitarista y la opresión burocrática. En contraste deliberado, en cuanto la pequeña vagoneta motorizada sortea las ametralladoras del puesto de control y se interna en la espesura de la Zona tras un hipnótico plano sostenido al ritmo monocorde de las vías de tren, la película estalla en un color natural, húmedo y exhuberante. La vida y la sacralidad residen paradójicamente en el territorio clausurado por el poder político.</p>
+            <p>Esta ruptura queda formalizada en el tránsito cromático de la cinta. El mundo civilizado del exterior —la periferia sórdida de la ciudad donde malvive el Stalker junto a su esposa agotada y su hija lisiada— se presenta teñido por un tono sepia monocromático, granuloso, metálico y sucio, representativo de una sociedad sofocada por el materialismo utilitarista y la opresión burocrática. En contraste deliberado, en cuanto la pequeña vagoneta motorizada sortea las ametralladoras del puesto de control y se interna en la espesura de la Zona tras un hipnótico plano sostenido al ritmo monocorde de las vías de tren, la película estalla en un color natural, húmedo y exhuberante. La vida y la sacralidad residen paradójicamente en el territorio clausurado por el poder político.</p>
 
-    <blockquote>«La debilidad es algo sublime; la fuerza no es nada. Cuando un hombre nace, es suave y flexible; cuando muere, es duro y rígido. Lo duro y rígido no vencerá.»<cite>— Andrei Tarkovski, Stalker</cite></blockquote>
+            <blockquote>«La debilidad es algo sublime; la fuerza no es nada. Cuando un hombre nace, es suave y flexible; cuando muere, es duro y rígido. Lo duro y rígido no vencerá.»<cite>— Andrei Tarkovski, Stalker</cite></blockquote>
 
-    <h3>II. La trinidad arquetípica: el combate entre arte, ciencia y fe</h3>
-    <p>Los tres expedicionarios encarnan las tres grandes facultades en crisis de la conciencia europea moderna:</p>
+            <h3>II. La trinidad arquetípica: el combate entre arte, ciencia y fe</h3>
+            <p>Los tres expedicionarios encarnan las tres grandes facultades en crisis de la conciencia europea moderna:</p>
 
-    <ul>
-      <li><strong>El Escritor:</strong> Representa la crisis del humanismo y del arte. Es un creador cínico, adicto al coñac y devorado por el bloqueo creativo, que busca la Habitación creyendo que recobrará la inspiración perdida, solo para descubrir su propia vacuidad moral y su incapacidad para conmoverse ante lo trascendente.</li>
-      <li><strong>El Profesor (Científico):</strong> Encarna el positivismo tecnológico y la racionalidad instrumental. Acude al periplo ocultando en su mochila un artefacto nuclear de veinte kilotones con el propósito secreto de dinamitar la Habitación, temeroso de que caiga en manos de algún déspota o loco megalómano; es el hombre que prefiere aniquilar el misterio antes que aceptar los límites de su propio aparato analítico.</li>
-      <li><strong>El Stalker:</strong> Es el «santo idiota» (<em>iuródivy</em>) de la tradición espiritual eslava. Un ser desarmado, vulnerable, desprovisto de ambición terrenal, cuya única misión vital consiste en guiar a los desesperados que han perdido toda esperanza en el mundo exterior hasta el manantial de la gracia. Para él, la Zona no es un yacimiento de poder, sino su verdadero templo moral.</li>
-    </ul>
+            <ul>
+              <li><strong>El Escritor:</strong> Representa la crisis del humanismo y del arte. Es un creador cínico, adicto al coñac y devorado por el bloqueo creativo, que busca la Habitación creyendo que recobrará la inspiración perdida, solo para descubrir su propia vacuidad moral y su incapacidad para conmoverse ante lo trascendente.</li>
+              <li><strong>El Profesor (Científico):</strong> Encarna el positivismo tecnológico y la racionalidad instrumental. Acude al periplo ocultando en su mochila un artefacto nuclear de veinte kilotones con el propósito secreto de dinamitar la Habitación, temeroso de que caiga en manos de algún déspota o loco megalómano; es el hombre que prefiere aniquilar el misterio antes que aceptar los límites de su propio aparato analítico.</li>
+              <li><strong>El Stalker:</strong> Es el «santo idiota» (<em>iuródivy</em>) de la tradición espiritual eslava. Un ser desarmado, vulnerable, desprovisto de ambición terrenal, cuya única misión vital consiste en guiar a los desesperados que han perdido toda esperanza en el mundo exterior hasta el manantial de la gracia. Para él, la Zona no es un yacimiento de poder, sino su verdadero templo moral.</li>
+            </ul>
 
-    <p>El avance a través del terreno no se rige por la línea recta euclidiana: quien camina en línea recta perece triturado por fuerzas cinéticas invisibles. Para orientarse, el Stalker arroja metódicamente tuercas de hierro envueltas en gasas blancas, escuchando la respuesta del suelo antes de dar el siguiente paso. Este ritual revela la condición del camino: la verdad solo se desvela mediante el tanteo reverente, el rodeo humilde y el rechazo a la prisa instrumental del colonizador.</p>
+            <p>El avance a través del terreno no se rige por la línea recta euclidiana: quien camina en línea recta perece triturado por fuerzas cinéticas invisibles. Para orientarse, el Stalker arroja metódicamente tuercas de hierro envueltas en gasas blancas, escuchando la respuesta del suelo antes de dar el siguiente paso. Este ritual revela la condición del camino: la verdad solo se desvela mediante el tanteo reverente, el rodeo humilde y el rechazo a la prisa instrumental del colonizador.</p>
 
-    <h3>III. «La picadora de carne» y el tiempo esculpido</h3>
-    <p>Tarkovski materializa su conocida tesis sobre el cine como <em>«esculpir en el tiempo»</em> en secuencias de una dilatación hipnótica y agónica. En <em>Stalker</em> apenas encontramos ciento cuarenta y dos planos en casi tres horas de metraje. La cámara no registra la acción desde fuera: respira con el paisaje, avanza en lentos travellings a ras de agua y se posa sobre la nuca de los personajes hasta disolver la barrera temporal entre el espectador y la diégesis fílmica.</p>
+            <h3>III. «La picadora de carne» y el tiempo esculpido</h3>
+            <p>Tarkovski materializa su conocida tesis sobre el cine como <em>«esculpir en el tiempo»</em> en secuencias de una dilatación hipnótica y agónica. En <em>Stalker</em> apenas encontramos ciento cuarenta y dos planos en casi tres horas de metraje. La cámara no registra la acción desde fuera: respira con el paisaje, avanza en lentos travellings a ras de agua y se posa sobre la nuca de los personajes hasta disolver la barrera temporal entre el espectador y la diégesis fílmica.</p>
 
-    <p>El paso por el siniestro túnel apodado «la picadora de carne» —un conducto tubular inundado y sembrado de escombros donde el Stalker obliga a que el Escritor avance en solitario— no culmina en un estallido sonoro o una explosión de efectos, sino en una duna de arena moldeada por corrientes invisibles dentro de una nave fabril abandonada. La tensión brota de la incertidumbre pura: el silencio mineral, el goteo constante de las filtraciones subterráneas y la certeza de que cualquier movimiento imprudente alterará el equilibrio cósmico del lugar.</p>
+            <p>El paso por el siniestro túnel apodado «la picadora de carne» —un conducto tubular inundado y sembrado de escombros donde el Stalker obliga a que el Escritor avance en solitario— no culmina en un estallido sonoro o una explosión de efectos, sino en una duna de arena moldeada por corrientes invisibles dentro de una nave fabril abandonada. La tensión brota de la incertidumbre pura: el silencio mineral, el goteo constante de las filtraciones subterráneas y la certeza de que cualquier movimiento imprudente alterará el equilibrio cósmico del lugar.</p>
 
-    <h3>IV. El umbral del miedo a uno mismo: la paradoja de Puercoespín</h3>
-    <p>Cuando la comitiva sortea los peligros y alcanza por fin la antesala encharcada de la Habitación de los Deseos, se produce la quiebra definitiva del propósito heroico: ninguno de los tres hombres se atreve a franquear el umbral.</p>
+            <h3>IV. El umbral del miedo a uno mismo: la paradoja de Puercoespín</h3>
+            <p>Cuando la comitiva sortea los peligros y alcanza por fin la antesala encharcada de la Habitación de los Deseos, se produce la quiebra definitiva del propósito heroico: ninguno de los tres hombres se atreve a franquear el umbral.</p>
 
-    <p>El Stalker relata entonces la parábola reveladora de su mentor, apodado «Puercoespín». Tras perder a su hermano por un error de cálculo dentro de la Zona, Puercoespín entró en la Habitación pidiendo entre lágrimas la resurrección de su pariente; sin embargo, al regresar a la ciudad amaneció inmensamente rico: la Habitación no había atendido a las palabras de su oración consciente, sino al anhelo más secreto, oscuro e inconfesable de su subconsciente rapaz. Incapaz de convivir con el retrato despiadado de su propia naturaleza interior, Puercoespín se ahorcó a los pocos días.</p>
+            <p>El Stalker relata entonces la parábola reveladora de su mentor, apodado «Puercoespín». Tras perder a su hermano por un error de cálculo dentro de la Zona, Puercoespín entró en la Habitación pidiendo entre lágrimas la resurrección de su pariente; sin embargo, al regresar a la ciudad amaneció inmensamente rico: la Habitación no había atendido a las palabras de su oración consciente, sino al anhelo más secreto, oscuro e inconfesable de su subconsciente rapaz. Incapaz de convivir con el retrato despiadado de su propia naturaleza interior, Puercoespín se ahorcó a los pocos días.</p>
 
-    <p>El ser humano contemporáneo, capaz de desintegrar el átomo y sondear las galaxias con radiotelescopios, descubre horrorizado que el verdadero abismo reside en las galerías sumergidas de su corazón. Entrar en la Habitación supone desnudarse ante la verdad absoluta de los propios apetitos; ante tal perspectiva, el Profesor desarma su bomba y el Escritor arroja al cieno su corona de espinas improvisada. Prefieren la duda existencial antes que la condena de ver materializada su podredumbre secreta.</p>
+            <p>El ser humano contemporáneo, capaz de desintegrar el átomo y sondear las galaxias con radiotelescopios, descubre horrorizado que el verdadero abismo reside en las galerías sumergidas de su corazón. Entrar en la Habitación supone desnudarse ante la verdad absoluta de los propios apetitos; ante tal perspectiva, el Profesor desarma su bomba y el Escritor arroja al cieno su corona de espinas improvisada. Prefieren la duda existencial antes que la condena de ver materializada su podredumbre secreta.</p>
 
-    <h3>Epílogo: La fe en ruinas y el milagro cotidiano</h3>
-    <p>El desenlace devuelve al Stalker a la miseria de su alcoba doméstica, rendido a una amargura insondable. Llora amargamente ante su esposa porque nadie cree ya en la Zona, porque los intelectuales y los científicos se han vuelto incapaces de asombro y acuden al misterio únicamente como saqueadores o jueces cínicos. Sin embargo, su mujer —en un monólogo frontal desgarrador y lírico— abraza el sufrimiento voluntario de compartir la vida con un réprobo, demostrando que la piedad terrenal y el amor incondicional son más resistentes que la soberbia teórica.</p>
+            <h3>Epílogo: La fe en ruinas y el milagro cotidiano</h3>
+            <p>El desenlace devuelve al Stalker a la miseria de su alcoba doméstica, rendido a una amargura insondable. Llora amargamente ante su esposa porque nadie cree ya en la Zona, porque los intelectuales y los científicos se han vuelto incapaces de asombro y acuden al misterio únicamente como saqueadores o jueces cínicos. Sin embargo, su mujer —en un monólogo frontal desgarrador y lírico— abraza el sufrimiento voluntario de compartir la vida con un réprobo, demostrando que la piedad terrenal y el amor incondicional son más resistentes que la soberbia teórica.</p>
 
-    <p>El plano final de la película consuma el misterio: mientras por megafonía resuenan los compases ahogados del <em>Himno a la alegría</em> de Beethoven y el estruendo de un tren sacude la mesa de madera de la vivienda, la pequeña «Mona» (la hija mutante nacida de la herencia radiactiva de la Zona) posa su mirada sobre tres vasos de cristal y, mediante un movimiento telequinético tan suave como inexplicable, los desplaza uno a uno hasta hacer que caigan sobre el suelo. El milagro que la civilización buscó infructuosamente en las profundidades de la Zona no se hallaba en templos herméticos ni en cataclismos cósmicos, sino vivo, latente y herido en la pureza inocente de la fragilidad humana.</p>
-  </div>
-  
-  <footer class="article-bottom-actions">
-    <span class="signature-note">— Círculo Kairós · Poética del Plano Secuencia</span>
-    <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
-  </footer>
-</article>
+            <p>El plano final de la película consuma el misterio: mientras por megafonía resuenan los compases ahogados del <em>Himno a la alegría</em> de Beethoven y el estruendo de un tren sacude la mesa de madera de la vivienda, la pequeña «Mona» (la hija mutante nacida de la herencia radiactiva de la Zona) posa su mirada sobre tres vasos de cristal y, mediante un movimiento telequinético tan suave como inexplicable, los desplaza uno a uno hasta hacer que caigan sobre el suelo. El milagro que la civilización buscó infructuosamente en las profundidades de la Zona no se hallaba en templos herméticos ni en cataclismos cósmicos, sino vivo, latente y herido en la pureza inocente de la fragilidad humana.</p>
+          </div>
+          
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Poética del Plano Secuencia</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
 
         <!-- ENSAYO 3: LA VENTANA INDISCRETA (HITCHCOCK) -->
-<article class="long-article" id="cine-hitchcock" data-titulo="III. La ventana indiscreta (Alfred Hitchcock)">
-  <header class="article-header">
-    <span class="article-topic">Suspense Clásico · Ensayo Monográfico III</span>
-    <h2 class="article-headline">La ventana indiscreta: Alfred Hitchcock y el ojo culpable del espectador</h2>
-    <p class="film-specs-header">Alfred Hitchcock · 1954 · Paramount Pictures · Technicolor</p>
-    <div class="article-meta-line">Por Redacción · <time datetime="2026-09-22">22 de septiembre de 2026</time> · <span>20 min de lectura de fondo</span></div>
-  </header>
-  
-  <figure class="article-featured-media">
-    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80" alt="Sala de cine con haz de luz de proyector">
-    <figcaption>El patio de vecinos de Greenwich Village como metáfora del voyeurismo cinematográfico.</figcaption>
-  </figure>
-  
-  <div class="article-prose">
-    <p class="dropcap">Sentado en su silla de ruedas con una pierna enyesada de arriba abajo, inmovilizado por un accidente laboral en una pista de carreras y asediado por una ola de calor estival que derrite el asfalto de Manhattan, el reportero gráfico L. B. «Jeff» Jefferies (James Stewart) contempla el patio comunitario de su bloque en Greenwich Village como quien asiste a varias pantallas cinematográficas proyectadas en paralelo. En <em>La ventana indiscreta</em> (<em>Rear Window</em>, 1954), basada en el relato breve de Cornell Woolrich, Alfred Hitchcock no se conforma con edificar un ejercicio milimétrico de suspense criminal: rueda una de las reflexiones metalingüísticas más lúcidas, perversas y demoledoras sobre el acto mismo de contemplar imágenes en movimiento.</p>
+        <article class="long-article" id="cine-hitchcock" data-titulo="III. La ventana indiscreta (Alfred Hitchcock)">
+          <header class="article-header">
+            <span class="article-topic">Suspense Clásico · Ensayo Monográfico III</span>
+            <h2 class="article-headline">La ventana indiscreta: Alfred Hitchcock y el ojo culpable del espectador</h2>
+            <p class="film-specs-header">Alfred Hitchcock · 1954 · Paramount Pictures · Technicolor</p>
+            <div class="article-meta-line">Por Redacción · <time datetime="2026-09-22">22 de septiembre de 2026</time> · <span>20 min de lectura de fondo</span></div>
+          </header>
+          
+          <figure class="article-featured-media">
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80" alt="Sala de cine con haz de luz de proyector">
+            <figcaption>El patio de vecinos de Greenwich Village como metáfora del voyeurismo cinematográfico.</figcaption>
+          </figure>
+          
+          <div class="article-prose">
+            <p class="dropcap">Sentado en su silla de ruedas con una pierna enyesada de arriba abajo, inmovilizado por un accidente laboral en una pista de carreras y asediado por una ola de calor estival que derrite el asfalto de Manhattan, el reportero gráfico L. B. «Jeff» Jefferies (James Stewart) contempla el patio comunitario de su bloque en Greenwich Village como quien asiste a varias pantallas cinematográficas proyectadas en paralelo. En <em>La ventana indiscreta</em> (<em>Rear Window</em>, 1954), basada en el relato breve de Cornell Woolrich, Alfred Hitchcock no se conforma con edificar un ejercicio milimétrico de suspense criminal: rueda una de las reflexiones metalingüísticas más lúcidas, perversas y demoledoras sobre el acto mismo de contemplar imágenes en movimiento.</p>
 
-    <p>El filme constituye una radiografía quirúrgica del dispositivo cinematográfico tradicional. Jefferies, inmovilizado en la penumbra de su apartamento, representa la posición exacta del espectador en la sala de proyección: un sujeto pasivo, recluido en la sombra, incapaz de intervenir físicamente en la acción pero devorado por una pulsión escópica inagotable. A través del marco de su ventanal, la mirada humana deja de ser una función biológica inocente para transformarse en una transgresión moral: el voyeurismo elevado a categoría de vicio burgués consentido.</p>
+            <p>El filme constituye una radiografía quirúrgica del dispositivo cinematográfico tradicional. Jefferies, inmovilizado en la penumbra de su apartamento, representa la posición exacta del espectador en la sala de proyección: un sujeto pasivo, recluido en la sombra, incapaz de intervenir físicamente en la acción pero devorado por una pulsión escópica inagotable. A través del marco de su ventanal, la mirada humana deja de ser una función biológica inocente para transformarse en una transgresión moral: el voyeurismo elevado a categoría de vicio burgués consentido.</p>
 
-    <h3>I. La sala de cine como patio de vecinos y mosaico genérico</h3>
-    <p>Hitchcock orquesta un tratado teórico perfecto sobre la esencia del cine: mirar impunemente desde la distancia sin asumir la responsabilidad ética de lo contemplado. El imponente decorado construido en los platós de Paramount —en su momento el set interior más grande jamás levantado en un estudio, con un sistema de drenaje para la lluvia y una iluminación cenital capaz de simular todas las fases solares— no es un simple vecindario neoyorquino: es una parrilla de programación audiovisual continua.</p>
+            <h3>I. La sala de cine como patio de vecinos y mosaico genérico</h3>
+            <p>Hitchcock orquesta un tratado teórico perfecto sobre la esencia del cine: mirar impunemente desde la distancia sin asumir la responsabilidad ética de lo contemplado. El imponente decorado construido en los platós de Paramount —en su momento el set interior más grande jamás levantado en un estudio, con un sistema de drenaje para la lluvia y una iluminación cenital capaz de simular todas las fases solares— no es un simple vecindario neoyorquino: es una parrilla de programación audiovisual continua.</p>
 
-    <p>Cada una de las ventanas rectangulares que rodean el patio funciona como una pantalla independiente que parodia o sintetiza los grandes géneros clásicos de Hollywood:</p>
+            <p>Cada una de las ventanas rectangulares que rodean el patio funciona como una pantalla independiente que parodia o sintetiza los grandes géneros clásicos de Hollywood:</p>
 
-    <ul>
-      <li><strong>El melodrama sentimental:</strong> Representado por Miss Lonelyhearts (Corazones Solitarios), la mujer de mediana edad que finge cenas con amantes imaginarios en un ritual desgarrador de soledad urbana.</li>
-      <li><strong>La comedia musical y erótica:</strong> Encarnada por la vivaz bailarina «Miss Torso», que ensaya coreografías ligeras de ropa mientras esquiva a pretendientes indeseados.</li>
-      <li><strong>La comedia costumbrista:</strong> El matrimonio maduro que duerme en la escalera de incendios huyendo del bochorno junto a su perro en un canasto, o los recién casados que bajan las persianas para inaugurar su luna de miel.</li>
-      <li><strong>El drama trágico:</strong> El compositor frustrado que ahoga su talento en alcohol mientras lucha por rematar una sonata al piano.</li>
-      <li><strong>El crimen negro (<em>noir</em>):</strong> El sórdido apartamento del viajante de comercio Lars Thorwald (Raymond Burr), atrapado en un matrimonio amargo con una esposa inválida que desaparecerá entre la niebla nocturna.</li>
-    </ul>
+            <ul>
+              <li><strong>El melodrama sentimental:</strong> Representado por Miss Lonelyhearts (Corazones Solitarios), la mujer de mediana edad que finge cenas con amantes imaginarios en un ritual desgarrador de soledad urbana.</li>
+              <li><strong>La comedia musical y erótica:</strong> Encarnada por la vivaz bailarina «Miss Torso», que ensaya coreografías ligeras de ropa mientras esquiva a pretendientes indeseados.</li>
+              <li><strong>La comedia costumbrista:</strong> El matrimonio maduro que duerme en la escalera de incendios huyendo del bochorno junto a su perro en un canasto, o los recién casados que bajan las persianas para inaugurar su luna de miel.</li>
+              <li><strong>El drama trágico:</strong> El compositor frustrado que ahoga su talento en alcohol mientras lucha por rematar una sonata al piano.</li>
+              <li><strong>El crimen negro (<em>noir</em>):</strong> El sórdido apartamento del viajante de comercio Lars Thorwald (Raymond Burr), atrapado en un matrimonio amargo con una esposa inválida que desaparecerá entre la niebla nocturna.</li>
+            </ul>
 
-    <blockquote>«Nos hemos convertido en una civilización de mirones. La gente debería sentarse en su casa y mirarse a sí misma antes de juzgar lo que pasa al otro lado de la calle.»<cite>— Alfred Hitchcock, La ventana indiscreta</cite></blockquote>
+            <blockquote>«Nos hemos convertido en una civilización de mirones. La gente debería sentarse en su casa y mirarse a sí misma antes de juzgar lo que pasa al otro lado de la calle.»<cite>— Alfred Hitchcock, La ventana indiscreta</cite></blockquote>
 
-    <h3>II. La gramática del deseo: el efecto Kuleshov y las prótesis visuales</h3>
-    <p>En sus célebres conversaciones con François Truffaut, Hitchcock desgranó cómo la arquitectura narrativa de esta obra descansa en la aplicación más pura del «efecto Kuleshov». El cineasta yuxtapone tres elementos constantes: el rostro de James Stewart mirando algo fuera de cuadro, el plano objetivo de lo que ve en el patio (un perrito escarbando o una mujer desnuda estirándose) y el contraplano de su reacción facial. Si Stewart sonríe ante la mujer desnuda, es tachado de viejo verde; si sonríe ante el perro, el espectador lo juzga como un hombre bondadoso. El significado no reside en la imagen fija, sino en el montaje intelectual que conecta la mirada con el objeto observado.</p>
+            <h3>II. La gramática del deseo: el efecto Kuleshov y las prótesis visuales</h3>
+            <p>En sus célebres conversaciones con François Truffaut, Hitchcock desgranó cómo la arquitectura narrativa de esta obra descansa en la aplicación más pura del «efecto Kuleshov». El cineasta yuxtapone tres elementos constantes: el rostro de James Stewart mirando algo fuera de cuadro, el plano objetivo de lo que ve en el patio (un perrito escarbando o una mujer desnuda estirándose) y el contraplano de su reacción facial. Si Stewart sonríe ante la mujer desnuda, es tachado de viejo verde; si sonríe ante el perro, el espectador lo juzga como un hombre bondadoso. El significado no reside en la imagen fija, sino en el montaje intelectual que conecta la mirada con el objeto observado.</p>
 
-    <p>A medida que la sospecha criminal germina en el ánimo de Jefferies, su ojo natural resulta insuficiente. Entran entonces en juego las prótesis ópticas: primero los gemelos de ópera y después el gigantesco teleobjetivo de su cámara réflex, empuñado entre sus muslos como un apéndice de poder invasivo. La cámara ya no se emplea para dar testimonio del mundo exterior o documentar guerras lejanas, sino para violentar la intimidad ajena, rasgar las cortinas de tul y despojar a los vecinos de su derecho al secreto.</p>
+            <p>A medida que la sospecha criminal germina en el ánimo de Jefferies, su ojo natural resulta insuficiente. Entran entonces en juego las prótesis ópticas: primero los gemelos de ópera y después el gigantesco teleobjetivo de su cámara réflex, empuñado entre sus muslos como un apéndice de poder invasivo. La cámara ya no se emplea para dar testimonio del mundo exterior o documentar guerras lejanas, sino para violentar la intimidad ajena, rasgar las cortinas de tul y despojar a los vecinos de su derecho al secreto.</p>
 
-    <h3>III. El conflicto de alcoba y la proyección psicológica</h3>
-    <p>El misterio criminal del señor Thorwald no opera de forma aislada: es un espejo deformante del propio conflicto neurótico de Jefferies frente al matrimonio y el compromiso afectivo. En el interior del apartamento se libra una batalla psicológica de seducción protagonizada por Lisa Carol Fremont (Grace Kelly), editora de moda de la alta sociedad que representa la sofisticación, el lujo y la exigencia de una vida conyugal estable.</p>
+            <h3>III. El conflicto de alcoba y la proyección psicológica</h3>
+            <p>El misterio criminal del señor Thorwald no opera de forma aislada: es un espejo deformante del propio conflicto neurótico de Jefferies frente al matrimonio y el compromiso afectivo. En el interior del apartamento se libra una batalla psicológica de seducción protagonizada por Lisa Carol Fremont (Grace Kelly), editora de moda de la alta sociedad que representa la sofisticación, el lujo y la exigencia de una vida conyugal estable.</p>
 
-    <p>Jefferies rechaza a Lisa alegando la incompatibilidad de sus mundos: él viaja por selvas y trincheras cubierto de polvo y ella viste modelos exclusivos de París valorados en más de mil dólares. Sin embargo, su resistencia esconde un terror profundo a la castración simbólica y al encierro doméstico. La figura de Thorwald —un marido exhausto que termina despedazando a su cónyuge enferma para liberarse de sus quejas constantes— encarna la fantasía inconsciente y culpable del propio Jefferies: el asesinato como salida extrema al cautiverio matrimonial. Solo cuando Lisa demuestra su utilidad dentro de la intriga detectivesca, arriesgando su vida en el patio, el fotógrafo logra verla con una fascinación erótica renovada.</p>
+            <p>Jefferies rechaza a Lisa alegando la incompatibilidad de sus mundos: él viaja por selvas y trincheras cubierto de polvo y ella viste modelos exclusivos de París valorados en más de mil dólares. Sin embargo, su resistencia esconde un terror profundo a la castración simbólica y al encierro doméstico. La figura de Thorwald —un marido exhausto que termina despedazando a su cónyuge enferma para liberarse de sus quejas constantes— encarna la fantasía inconsciente y culpable del propio Jefferies: el asesinato como salida extrema al cautiverio matrimonial. Solo cuando Lisa demuestra su utilidad dentro de la intriga detectivesca, arriesgando su vida en el patio, el fotógrafo logra verla con una fascinación erótica renovada.</p>
 
-    <h3>IV. La invasión del espacio: el colapso de la distancia de seguridad</h3>
-    <p>El suspense hitchcockiano estalla cuando se vulnera el pacto de impunidad del observador. Durante la mayor parte del metraje, Jefferies y el espectador gozan de un palco seguro: juzgan, sospechan y disfrutan con la posibilidad del asesinato sabiendo que una franja de aire infranqueable los separa del drama.</p>
+            <h3>IV. La invasión del espacio: el colapso de la distancia de seguridad</h3>
+            <p>El suspense hitchcockiano estalla cuando se vulnera el pacto de impunidad del observador. Durante la mayor parte del metraje, Jefferies y el espectador gozan de un palco seguro: juzgan, sospechan y disfrutan con la posibilidad del asesinato sabiendo que una franja de aire infranqueable los separa del drama.</p>
 
-    <p>Esa barrera salta por los aires cuando Lisa Fremont cruza físicamente el patio, escala por la barandilla e irrumpe en el apartamento de Thorwald en busca del anillo de bodas de la víctima. Por primera vez, el voyeur pierde el control: Jefferies asiste horrorizado a través de su lente telescópica a la llegada repentina del asesino sin poder auxiliar físicamente a su prometida. La mirada se transmuta en agonía pura. Y el momento de mayor quiebre sobreviene cuando Thorwald levanta la vista, descubre a Lisa gesticulando hacia la ventana de enfrente y clava sus pupilas directamente en el objetivo de Jefferies. El cazador ha sido descubierto; el espejo del patio se hace añicos y el peligro camina ahora hacia la puerta del observador.</p>
+            <p>Esa barrera salta por los aires cuando Lisa Fremont cruza físicamente el patio, escala por la barandilla e irrumpe en el apartamento de Thorwald en busca del anillo de bodas de la víctima. Por primera vez, el voyeur pierde el control: Jefferies asiste horrorizado a través de su lente telescópica a la llegada repentina del asesino sin poder auxiliar físicamente a su prometida. La mirada se transmuta en agonía pura. Y el momento de mayor quiebre sobreviene cuando Thorwald levanta la vista, descubre a Lisa gesticulando hacia la ventana de enfrente y clava sus pupilas directamente en el objetivo de Jefferies. El cazador ha sido descubierto; el espejo del patio se hace añicos y el peligro camina ahora hacia la puerta del observador.</p>
 
-    <h3>Epílogo: El destello del magnesio y el doble escarmiento</h3>
-    <p>La confrontación climática entre Thorwald y Jefferies en el apartamento a oscuras resume la poética de la imagen técnica. Incapaz de defenderse a golpes con su pierna enyesada, el fotógrafo solo cuenta con su herramienta de trabajo: las bombillas de magnesio de su flash. Cada detonación lumínica ciega temporalmente al atacante, tiñendo la pantalla de un rojo incandescente que suspende al monstruo en la oscuridad, pero no logra detener su avance corporal implacable.</p>
+            <h3>Epílogo: El destello del magnesio y el doble escarmiento</h3>
+            <p>La confrontación climática entre Thorwald y Jefferies en el apartamento a oscuras resume la poética de la imagen técnica. Incapaz de defenderse a golpes con su pierna enyesada, el fotógrafo solo cuenta con su herramienta de trabajo: las bombillas de magnesio de su flash. Cada detonación lumínica ciega temporalmente al atacante, tiñendo la pantalla de un rojo incandescente que suspende al monstruo en la oscuridad, pero no logra detener su avance corporal implacable.</p>
 
-    <p>Arrojado por el ventanal hacia el asfalto del patio que tanto vigiló, Jefferies sobrevive a la caída gracias al auxilio colectivo del vecindario, pero paga el peaje de su imprudencia: el epílogo lo muestra en la misma habitación, esta vez con las dos piernas enyesadas de pies a cabeza, mientras Lisa reposa a su lado vistiendo pantalones vaqueros y fingiendo leer un libro de viajes antes de abrir disimuladamente una revista de alta costura. El orden social se ha restablecido, el criminal ha confesado su pecado, pero la advertencia de Hitchcock queda grabada en la retina del público: nadie contempla el dolor o la intimidad del prójimo desde la barrera sin salir moralmente mutilado por su propia indiscreción.</p>
-  </div>
-  
-  <footer class="article-bottom-actions">
-    <span class="signature-note">— Círculo Kairós · Estudio de Puesta en Escena</span>
-    <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
-  </footer>
-</article>
+            <p>Arrojado por el ventanal hacia el asfalto del patio que tanto vigiló, Jefferies sobrevive a la caída gracias al auxilio colectivo del vecindario, pero paga el peaje de su imprudencia: el epílogo lo muestra en la misma habitación, esta vez con las dos piernas enyesadas de pies a cabeza, mientras Lisa reposa a su lado vistiendo pantalones vaqueros y fingiendo leer un libro de viajes antes de abrir disimuladamente una revista de alta costura. El orden social se ha restablecido, el criminal ha confesado su pecado, pero la advertencia de Hitchcock queda grabada en la retina del público: nadie contempla el dolor o la intimidad del prójimo desde la barrera sin salir moralmente mutilado por su propia indiscreción.</p>
+          </div>
+          
+          <footer class="article-bottom-actions">
+            <span class="signature-note">— Círculo Kairós · Estudio de Puesta en Escena</span>
+            <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
+          </footer>
+        </article>
         
         <!-- ENSAYO 4: BLADE RUNNER (RIDLEY SCOTT) -->
         <article class="long-article" id="cine-bladerunner" data-titulo="IV. Blade Runner (Ridley Scott)">
@@ -997,7 +1181,7 @@
             <figcaption>El asfalto recalentado de Los Ángeles, el humo del cigarrillo y la estadística implacable del homicidio.</figcaption>
           </figure>
           <div class="article-prose">
-            <p class="dropcap">«Lo maté. Maté a un hombre por dinero y por una mujer. Y ni conseguí el dinero, ni conseguí a la mujer. Estupendo, ¿verdad?». Con esta confesión susurrada a un dictáfono por Walter Neff mientras sangra lentamente por una herida de bala en la penumbra de su despacho de la Pacific All-Risk arranca la obra maestra fundacional del cine negro estadounidense. En ese monólogo inicial no late el menor atisbo de arrepentimiento cristiano ni el anhelo de expiación moral; lo que se desliza por el surco de cera del cilindro fonográfico es la constatación lúcida, casi deportiva, de un fracaso de cálculo. Neff no se duele por haber transgredido el orden divino, sino por haber errado en la resolución de una ecuación que creía tener dominada en cada uno de sus decimales.</p>
+            <p class="dropcap">«Lo maté. Maté a un hombre por dinero y por una mujer. Y ni conseguí el dinero, ni conseguí a la mujer. Estupendo, ¿verdad?». Con esta confesión susurrada a un dictáfono por Walter Neff mientras sangra lentamente por una herida de bala en la penumbra de su despacho de la Pacific All-Risk arranca la obra maestra fundacional del cine negro estadounidense.</p>
 
             <p>Con <em>Double Indemnity</em>, estrenada en 1944, Billy Wilder dinamitó la complacencia moralista del Hollywood bélico. El mal aquí no viste uniforme nazi ni procede de los bajos fondos de la delincuencia marginal: brota de los salones alfombrados de la clase media de Los Feliz, de la desidia conyugal de una villa de estilo español y de la voracidad de un agente de seguros impecablemente trajeado que conoce las debilidades del sistema porque vive de redactar sus contratos. Es la perversión del capitalismo financiero en su máxima pureza: el asesinato convertido en una lucrativa inversión sobre pólizas actuariales.</p>
 
@@ -1166,7 +1350,8 @@
     function inicializarPaginacion() {
       const barraPaginas = document.getElementById("barra-paginas");
 
-      if (totalPaginas > 1 && barraPaginas) {barraPaginas.style.display = "flex";
+      if (totalPaginas > 1 && barraPaginas) {
+        barraPaginas.style.display = "flex";
         barraPaginas.innerHTML = "";
 
         const btnPrev = document.createElement("button");
@@ -1198,6 +1383,46 @@
       mostrarPagina(1, false);
     }
 
+    /* CONTROL DEL MENÚ: ACORDEÓN EN MÓVIL Y DESPLEGABLE EN ORDENADOR */
+    function configurarMenu() {
+      const botonMenu = document.getElementById("btn-menu-movil");
+      const listaNav = document.getElementById("lista-navegacion");
+      const iconoMenu = document.getElementById("icono-menu-movil");
+      const triggerCuadernos = document.getElementById("dropdown-cuadernos");
+      const submenuCuadernos = document.querySelector(".dropdown-menu");
+
+      if (!botonMenu || !listaNav) return;
+
+      botonMenu.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const abierto = listaNav.classList.toggle("nav-abierto");
+        botonMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
+        if (iconoMenu) {
+          iconoMenu.textContent = abierto ? "✕" : "☰";
+        }
+      });
+
+      if (triggerCuadernos && submenuCuadernos) {
+        triggerCuadernos.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            submenuCuadernos.classList.toggle("sub-abierto");
+          }
+        });
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".main-nav")) {
+          listaNav.classList.remove("nav-abierto");
+          if (submenuCuadernos) submenuCuadernos.classList.remove("sub-abierto");
+          botonMenu.setAttribute("aria-expanded", "false");
+          if (iconoMenu) {
+            iconoMenu.textContent = "☰";
+          }
+        }
+      });
+    }
+
     window.addEventListener('scroll', () => {
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1206,9 +1431,12 @@
       if (bar) bar.style.width = scrolled + '%';
     });
 
-    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
+    document.addEventListener("DOMContentLoaded", () => {
+      inicializarPaginacion();
+      configurarMenu();
+    });
   </script>
-
+  
   <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (VINCULADO A CUENTAS DE USUARIO) -->
 <script>
   const STORAGE_KEY = "kairos_favoritos_v1";
