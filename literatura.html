@@ -111,16 +111,17 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 0.35rem;
-      color: var(--text-main);
+      color: #84382B;
       position: relative;
       z-index: 2;
     }
     .site-title a {
-      color: var(--text-main);
+      color: #84382B;
       transition: color var(--transition), opacity var(--transition);
     }
     .site-title a:hover {
-      color: var(--accent);
+      color: #6a2c21;
+      opacity: 0.95;
     }
 
     .site-tagline {
@@ -133,6 +134,7 @@
       z-index: 2;
     }
 
+    /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -144,7 +146,21 @@
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
     }
-    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.5rem; }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
+    .nav-toggle-btn {
+      display: none;
+    }
+    .main-nav > .nav-container > ul { 
+      list-style: none; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      gap: 3.5rem;
+    }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -164,6 +180,79 @@
     }
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
+
+    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
+    .has-dropdown {
+      position: relative;
+    }
+    .dropdown-trigger {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .arrow-indicator {
+      font-size: 0.65rem;
+      transition: transform var(--transition);
+      color: var(--accent);
+    }
+    .has-dropdown:hover .arrow-indicator {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      min-width: 230px;
+      padding: 0.8rem 0;
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      text-align: left;
+      border-radius: 2px;
+      z-index: 10000;
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid rgba(226, 216, 199, 0.4);
+      pointer-events: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      transition: all var(--transition);
+    }
+    .dropdown-menu a::after {
+      display: none;
+    }
+    .dropdown-menu a:hover {
+      background-color: var(--bg-surface);
+      color: var(--accent);
+      padding-left: 1.65rem;
+    }
+    .has-dropdown:hover .dropdown-menu {
+      display: flex;
+      animation: aparecerDropdown 0.25s ease forwards;
+    }
+    @keyframes aparecerDropdown {
+      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+    }
 
     /* Contenedor Principal */
     #contenido-principal {
@@ -566,6 +655,7 @@
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
     .footer-nav a:hover { color: var(--accent); }
 
+    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 992px) {
       .toc-links-grid { grid-template-columns: 1fr; }
       .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
@@ -573,12 +663,90 @@
       .sidebar-wrapper { position: static; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
     }
+
+    @media (max-width: 768px) {
+      .main-nav {
+        padding: 0.6rem 1rem;
+      }
+      .nav-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: 1px solid var(--border-soft);
+        padding: 0.45rem 1rem;
+        font-family: var(--font-classical);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-main);
+        cursor: pointer;
+        border-radius: 2px;
+        margin: 0 auto;
+        transition: all var(--transition);
+      }
+      .nav-toggle-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .main-nav > .nav-container > ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 1.2rem 0 0.5rem;
+        border-top: 1px solid var(--border-soft);
+        margin-top: 0.6rem;
+      }
+      .main-nav > .nav-container > ul.nav-abierto {
+        display: flex;
+        animation: desplegarMenu 0.25s ease-out;
+      }
+      @keyframes desplegarMenu {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .main-nav a {
+        font-size: 0.88rem;
+        padding: 0.35rem 0;
+      }
+
+      /* Acordeón del submenú en móvil */
+      .has-dropdown {
+        width: 100%;
+      }
+      .has-dropdown:hover .dropdown-menu {
+        display: none;
+      }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background-color: var(--bg-surface);
+        margin: 0.5rem auto 0;
+        width: 90%;
+        padding: 0.4rem 0;
+      }
+      .dropdown-menu::before {
+        display: none;
+      }
+      .dropdown-menu.sub-abierto {
+        display: flex !important;
+      }
+      .dropdown-menu a {
+        text-align: center;
+        padding: 0.5rem 0;
+      }
+    }
+
     @media (max-width: 600px) {
       .site-title { font-size: 2.2rem; }
       .section-heading-title { font-size: 2.2rem; }
       .article-headline { font-size: 1.85rem; }
       .article-prose p { text-align: left; }
-      .main-nav ul { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -603,18 +771,35 @@
     </div>
   </header>
 
-  <!-- NAVEGACIÓN STICKY -->
+  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI CUADERNO -->
   <nav class="main-nav" aria-label="Navegación principal">
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="literatura.html" class="active">Literatura</a></li>
-      <li><a href="cine.html">Cine</a></li>
-      <li><a href="musica.html">Música</a></li>
-      <li><a href="filosofia.html">Filosofía</a></li>
-      <li><a href="pensamiento.html">Pensamiento</a></li>
-      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-      <li><a href="perfil.html">Mi Cuaderno</a></li>
-    </ul>
+    <div class="nav-container">
+      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
+        <span id="icono-menu-movil">☰</span>
+        <span>Menú</span>
+      </button>
+
+      <ul id="lista-navegacion">
+        <li><a href="index.html">Inicio</a></li>
+        
+        <!-- Pestaña desplegable de Cuadernos con Literatura activa -->
+        <li class="has-dropdown">
+          <a href="javascript:void(0)" class="dropdown-trigger active" id="dropdown-cuadernos">
+            Cuadernos <span class="arrow-indicator">▾</span>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
+            <li><a href="literatura.html" class="active">Literatura & Enigma</a></li>
+            <li><a href="cine.html">Cine & Mirada</a></li>
+            <li><a href="musica.html">Música & Acústica</a></li>
+            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+          </ul>
+        </li>
+
+        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        <li><a href="perfil.html">Mi Cuaderno</a></li>
+      </ul>
+    </div>
   </nav>
 
   <main id="contenido-principal">
