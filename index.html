@@ -130,7 +130,7 @@
       transition: color var(--transition), opacity var(--transition);
     }
     .site-title a:hover {
-      color: #6a2c21; /* Variante más oscura al pasar el cursor */
+      color: #6a2c21;
       opacity: 0.95;
     }
 
@@ -144,6 +144,7 @@
       z-index: 2;
     }
 
+    /* BARRA DE NAVEGACIÓN */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -155,7 +156,20 @@
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
     }
-    .main-nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2.2rem; }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .nav-toggle-btn {
+      display: none; /* En ordenador permanece oculto */
+    }
+    .main-nav ul { 
+      list-style: none; 
+      display: flex; 
+      justify-content: center; 
+      flex-wrap: wrap; 
+      gap: 2.2rem; 
+    }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -936,6 +950,8 @@
       .news-card-feed { grid-template-columns: repeat(2, 1fr); min-height: auto; }
       .sidebar-ephemeris-column { position: static; }
     }
+    
+    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO */
     @media (max-width: 768px) {
       .hero-editorial-grid { grid-template-columns: 1fr; }
       .penta-grid { grid-template-columns: repeat(2, 1fr); }
@@ -947,13 +963,62 @@
       .monthly-theme-monograph h2 { font-size: 1.75rem; }
       .reader-modal-sheet { padding: 2.2rem 1.6rem; }
       .modal-story-title { font-size: 1.7rem; }
+
+      /* Ajuste de navegación en móvil */
+      .main-nav {
+        padding: 0.6rem 1rem;
+      }
+      .nav-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: none;
+        border: 1px solid var(--border-soft);
+        padding: 0.45rem 1rem;
+        font-family: var(--font-classical);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-main);
+        cursor: pointer;
+        border-radius: 2px;
+        margin: 0 auto;
+        transition: all var(--transition);
+      }
+      .nav-toggle-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .main-nav ul {
+        display: none; /* Oculto por defecto en móvil */
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        width: 100%;
+        padding: 1.2rem 0 0.5rem;
+        border-top: 1px solid var(--border-soft);
+        margin-top: 0.6rem;
+      }
+      .main-nav ul.nav-abierto {
+        display: flex;
+        animation: desplegarMenu 0.25s ease-out;
+      }
+      @keyframes desplegarMenu {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .main-nav a {
+        font-size: 0.88rem;
+        padding: 0.35rem 0;
+      }
     }
+
     @media (max-width: 500px) {
       .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
       .penta-grid { grid-template-columns: 1fr; }
       .hero-lead-card { padding: 1.5rem; }
       .brand-watermark { width: 160px; height: 160px; }
-      .main-nav ul { gap: 1rem; }
     }
   </style>
 </head>
@@ -978,17 +1043,25 @@
     </div>
   </header>
 
+  <!-- NAVEGACIÓN ADAPTATIVA (EN ORDENADOR PERMANECE HORIZONTAL; EN MÓVIL SE COMPACTA CON BOTÓN) -->
   <nav class="main-nav" aria-label="Navegación principal">
-    <ul>
-      <li><a href="index.html" class="active">Inicio</a></li>
-      <li><a href="literatura.html">Literatura</a></li>
-      <li><a href="cine.html">Cine</a></li>
-      <li><a href="musica.html">Música</a></li>
-      <li><a href="filosofia.html">Filosofía</a></li>
-      <li><a href="pensamiento.html">Pensamiento</a></li>
-      <li><a href="sobre-el-circulo.html">El Círculo</a></li>
-      <li><a href="perfil.html">Mi Cuaderno</a></li>
-    </ul>
+    <div class="nav-container" style="text-align: center;">
+      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú de cuadernos" aria-expanded="false">
+        <span id="icono-menu-movil">☰</span>
+        <span>Cuadernos</span>
+      </button>
+
+      <ul id="lista-navegacion">
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="literatura.html">Literatura</a></li>
+        <li><a href="cine.html">Cine</a></li>
+        <li><a href="musica.html">Música</a></li>
+        <li><a href="filosofia.html">Filosofía</a></li>
+        <li><a href="pensamiento.html">Pensamiento</a></li>
+        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        <li><a href="perfil.html">Mi Cuaderno</a></li>
+      </ul>
+    </div>
   </nav>
 
   <main id="contenido-principal">
@@ -1781,6 +1854,35 @@
       }
     }
 
+    /* CONTROL DEL MENÚ EN DISPOSITIVOS MÓVILES */
+    function configurarMenuMovil() {
+      const botonMenu = document.getElementById("btn-menu-movil");
+      const listaNav = document.getElementById("lista-navegacion");
+      const iconoMenu = document.getElementById("icono-menu-movil");
+
+      if (!botonMenu || !listaNav) return;
+
+      botonMenu.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const abierto = listaNav.classList.toggle("nav-abierto");
+        botonMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
+        if (iconoMenu) {
+          iconoMenu.textContent = abierto ? "✕" : "☰";
+        }
+      });
+
+      // Cerrar al tocar fuera del menú
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".main-nav")) {
+          listaNav.classList.remove("nav-abierto");
+          botonMenu.setAttribute("aria-expanded", "false");
+          if (iconoMenu) {
+            iconoMenu.textContent = "☰";
+          }
+        }
+      });
+    }
+
     function cargarDinamicos() {
       const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const hoy = new Date();
@@ -1812,6 +1914,7 @@
       }
 
       actualizarCascadaEnsayos();
+      configurarMenuMovil();
     }
 
     document.addEventListener("DOMContentLoaded", cargarDinamicos);
