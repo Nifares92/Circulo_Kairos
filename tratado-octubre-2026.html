@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Círculo Kairós · Tratado Extraordinario de Octubre 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 2.5cm 2cm;
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Cinzel', serif;
+        font-size: 8.5pt;
+        color: #6d665f;
+      }
+    }
+    body {
+      font-family: 'Newsreader', Garamond, serif;
+      font-size: 11pt;
+      line-height: 1.8;
+      color: #221f1d;
+      background: #ffffff;
+      margin: 0;
+    }
+    /* Portada de libro */
+    .cover {
+      page-break-after: always;
+      height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .cover-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 9pt;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #9e4734;
+      margin-bottom: 2rem;
+    }
+    .cover-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32pt;
+      color: #84382B;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .cover-sub {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 13pt;
+      color: #6d665f;
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+    }
+    .cover-seal {
+      font-family: 'Cinzel', serif;
+      font-size: 8.5pt;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #8a8279;
+    }
+    /* Capítulos */
+    .chapter { page-break-before: always; }
+    .chapter-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 8.5pt;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9e4734;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .chapter h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19pt;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+    .chapter-meta {
+      font-family: 'Cinzel', serif;
+      font-size: 8pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6d665f;
+      margin-bottom: 2rem;
+      display: block;
+      border-bottom: 1px solid #e2d8c7;
+      padding-bottom: 0.5rem;
+    }
+    .chapter p {
+      text-align: justify;
+      hyphens: auto;
+      text-indent: 1.4rem;
+      margin: 0 0 0.8rem;
+    }
+    .chapter p:first-of-type { text-indent: 0; }
+    .chapter blockquote {
+      border-left: 3px solid #9e4734;
+      padding: 0.8rem 1.4rem;
+      margin: 1.8rem 0;
+      font-style: italic;
+      color: #332f2c;
+      background: #fbf8f3;
+    }
+    .chapter blockquote cite {
+      display: block;
+      margin-top: 0.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 7.5pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9e4734;
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PORTADA -->
+  <section class="cover">
+    <span class="cover-badge">Círculo Kairós · Monografía I</span>
+    <h1 class="cover-title">El Umbral de las Sombras</h1>
+    <p class="cover-sub">Fenomenología de la vigilia fúnebre, el regreso de las sombras y el coraje de mirar de frente al no-ser.</p>
+    <div class="cover-seal">Octubre 2026 · Edición Continua</div>
+  </section>
+
+  <!-- I. PENSAMIENTO: EL BANQUETE DE LAS SOMBRAS -->
+  <article class="chapter">
+    <span class="chapter-tag">I. Tribuna de la Dirección · Pensamiento</span>
+    <h2>El banquete de las sombras</h2>
+    <span class="chapter-meta">Por Dirección Editorial · Octubre 2026</span>
+    <!-- Copias aquí los <p> y <blockquote> de #pensamiento-banquete-sombras en pensamiento.html -->
+  </article>
+
+  <!-- II. FILOSOFÍA: LA MIRADA SIN OJOS -->
+  <article class="chapter">
+    <span class="chapter-tag">II. Filosofía & Ontología</span>
+    <h2>La mirada sin ojos: Espectrología y retorno ontológico</h2>
+    <span class="chapter-meta">Por Círculo Kairós · Octubre 2026</span>
+    <!-- Copias aquí el contenido de #filosofia-espectrologia-fantasma en filosofia.html -->
+  </article>
+
+  <!-- III. LITERATURA: LA MANSIÓN QUE RECUERDA -->
+  <article class="chapter">
+    <span class="chapter-tag">III. Literatura & Espacio Gótico</span>
+    <h2>La mansión que recuerda: Anatomía de la casa encantada</h2>
+    <span class="chapter-meta">Por Redacción · Octubre 2026</span>
+    <!-- Copias aquí el contenido de #lit-casas-encantadas-arquitectura en literatura.html -->
+  </article>
+
+  <!-- IV. CINE: NOSFERATU -->
+  <article class="chapter">
+    <span class="chapter-tag">IV. Cinematografía & Poética Visual</span>
+    <h2>La sinfonía del espanto: F.W. Murnau y Nosferatu</h2>
+    <span class="chapter-meta">Por Redacción · Octubre 2026</span>
+    <!-- Copias aquí el contenido de #cine-nosferatu-murnau en cine.html -->
+  </article>
+
+  <!-- V. MÚSICA: EL RÉQUIEM DE MOZART -->
+  <article class="chapter">
+    <span class="chapter-tag">V. Acústica Sacra & Liturgia</span>
+    <h2>Lacrimosa dies illa: El Réquiem de Mozart</h2>
+    <span class="chapter-meta">Por Redacción · Octubre 2026</span>
+    <!-- Copias aquí el contenido de #mus-requiem-mozart en musica.html -->
+  </article>
+
+</body>
+</html>
