@@ -144,7 +144,7 @@
       z-index: 2;
     }
 
-    /* BARRA DE NAVEGACIÓN */
+    /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
       border-bottom: 3px double var(--border-dark);
       padding: 0.9rem 1rem;
@@ -159,16 +159,17 @@
     .nav-container {
       max-width: var(--max-width);
       margin: 0 auto;
+      text-align: center;
     }
     .nav-toggle-btn {
-      display: none; /* En ordenador permanece oculto */
+      display: none;
     }
-    .main-nav ul { 
+    .main-nav > .nav-container > ul { 
       list-style: none; 
       display: flex; 
       justify-content: center; 
-      flex-wrap: wrap; 
-      gap: 2.2rem; 
+      align-items: center;
+      gap: 3.5rem; /* Separación amplia y limpia */
     }
     .main-nav a {
       font-size: 0.82rem;
@@ -189,6 +190,79 @@
     }
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
+
+    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
+    .has-dropdown {
+      position: relative;
+    }
+    .dropdown-trigger {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .arrow-indicator {
+      font-size: 0.65rem;
+      transition: transform var(--transition);
+      color: var(--accent);
+    }
+    .has-dropdown:hover .arrow-indicator {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      min-width: 230px;
+      padding: 0.8rem 0;
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      text-align: left;
+      border-radius: 2px;
+      z-index: 10000;
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid rgba(226, 216, 199, 0.4);
+      pointer-events: none;
+    }
+    .dropdown-menu li {
+      width: 100%;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      transition: all var(--transition);
+    }
+    .dropdown-menu a::after {
+      display: none;
+    }
+    .dropdown-menu a:hover {
+      background-color: var(--bg-surface);
+      color: var(--accent);
+      padding-left: 1.65rem;
+    }
+    .has-dropdown:hover .dropdown-menu {
+      display: flex;
+      animation: aparecerDropdown 0.25s ease forwards;
+    }
+    @keyframes aparecerDropdown {
+      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+    }
 
     #contenido-principal {
       max-width: var(--max-width);
@@ -951,7 +1025,7 @@
       .sidebar-ephemeris-column { position: static; }
     }
     
-    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO */
+    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 768px) {
       .hero-editorial-grid { grid-template-columns: 1fr; }
       .penta-grid { grid-template-columns: repeat(2, 1fr); }
@@ -964,7 +1038,6 @@
       .reader-modal-sheet { padding: 2.2rem 1.6rem; }
       .modal-story-title { font-size: 1.7rem; }
 
-      /* Ajuste de navegación en móvil */
       .main-nav {
         padding: 0.6rem 1rem;
       }
@@ -990,17 +1063,17 @@
         border-color: var(--accent);
         color: var(--accent);
       }
-      .main-nav ul {
-        display: none; /* Oculto por defecto en móvil */
+      .main-nav > .nav-container > ul {
+        display: none;
         flex-direction: column;
         align-items: center;
-        gap: 0.8rem;
+        gap: 1rem;
         width: 100%;
         padding: 1.2rem 0 0.5rem;
         border-top: 1px solid var(--border-soft);
         margin-top: 0.6rem;
       }
-      .main-nav ul.nav-abierto {
+      .main-nav > .nav-container > ul.nav-abierto {
         display: flex;
         animation: desplegarMenu 0.25s ease-out;
       }
@@ -1011,6 +1084,34 @@
       .main-nav a {
         font-size: 0.88rem;
         padding: 0.35rem 0;
+      }
+
+      /* Acordeón del submenú en móvil */
+      .has-dropdown {
+        width: 100%;
+      }
+      .has-dropdown:hover .dropdown-menu {
+        display: none; /* Desactiva el hover en táctil */
+      }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background-color: var(--bg-surface);
+        margin: 0.5rem auto 0;
+        width: 90%;
+        padding: 0.4rem 0;
+      }
+      .dropdown-menu::before {
+        display: none;
+      }
+      .dropdown-menu.sub-abierto {
+        display: flex !important;
+      }
+      .dropdown-menu a {
+        text-align: center;
+        padding: 0.5rem 0;
       }
     }
 
@@ -1043,21 +1144,31 @@
     </div>
   </header>
 
-  <!-- NAVEGACIÓN ADAPTATIVA (EN ORDENADOR PERMANECE HORIZONTAL; EN MÓVIL SE COMPACTA CON BOTÓN) -->
+  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI CUADERNO -->
   <nav class="main-nav" aria-label="Navegación principal">
-    <div class="nav-container" style="text-align: center;">
-      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú de cuadernos" aria-expanded="false">
+    <div class="nav-container">
+      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
         <span id="icono-menu-movil">☰</span>
-        <span>Cuadernos</span>
+        <span>Menú</span>
       </button>
 
       <ul id="lista-navegacion">
         <li><a href="index.html" class="active">Inicio</a></li>
-        <li><a href="literatura.html">Literatura</a></li>
-        <li><a href="cine.html">Cine</a></li>
-        <li><a href="musica.html">Música</a></li>
-        <li><a href="filosofia.html">Filosofía</a></li>
-        <li><a href="pensamiento.html">Pensamiento</a></li>
+        
+        <!-- Pestaña desplegable de Cuadernos -->
+        <li class="has-dropdown">
+          <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
+            Cuadernos <span class="arrow-indicator">▾</span>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
+            <li><a href="literatura.html">Literatura & Enigma</a></li>
+            <li><a href="cine.html">Cine & Mirada</a></li>
+            <li><a href="musica.html">Música & Acústica</a></li>
+            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+          </ul>
+        </li>
+
         <li><a href="sobre-el-circulo.html">El Círculo</a></li>
         <li><a href="perfil.html">Mi Cuaderno</a></li>
       </ul>
@@ -1854,11 +1965,13 @@
       }
     }
 
-    /* CONTROL DEL MENÚ EN DISPOSITIVOS MÓVILES */
-    function configurarMenuMovil() {
+    /* CONTROL DEL MENÚ: ACORDEÓN EN MÓVIL Y DESPLEGABLE EN ORDENADOR */
+    function configurarMenu() {
       const botonMenu = document.getElementById("btn-menu-movil");
       const listaNav = document.getElementById("lista-navegacion");
       const iconoMenu = document.getElementById("icono-menu-movil");
+      const triggerCuadernos = document.getElementById("dropdown-cuadernos");
+      const submenuCuadernos = document.querySelector(".dropdown-menu");
 
       if (!botonMenu || !listaNav) return;
 
@@ -1871,10 +1984,21 @@
         }
       });
 
-      // Cerrar al tocar fuera del menú
+      // En pantallas táctiles o móviles, alternar acordeón de Cuadernos
+      if (triggerCuadernos && submenuCuadernos) {
+        triggerCuadernos.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            submenuCuadernos.classList.toggle("sub-abierto");
+          }
+        });
+      }
+
+      // Cerrar al pulsar fuera del menú
       document.addEventListener("click", (e) => {
         if (!e.target.closest(".main-nav")) {
           listaNav.classList.remove("nav-abierto");
+          if (submenuCuadernos) submenuCuadernos.classList.remove("sub-abierto");
           botonMenu.setAttribute("aria-expanded", "false");
           if (iconoMenu) {
             iconoMenu.textContent = "☰";
@@ -1914,7 +2038,7 @@
       }
 
       actualizarCascadaEnsayos();
-      configurarMenuMovil();
+      configurarMenu();
     }
 
     document.addEventListener("DOMContentLoaded", cargarDinamicos);
