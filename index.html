@@ -1405,6 +1405,7 @@
   </main>
 
   <!-- GABINETE DE LECTURA (MODAL INTERNO) -->
+  
   <div class="reader-modal-overlay" id="lector-intrapagina" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-hidden="true">
     <div class="reader-modal-sheet">
       <button class="btn-close-modal" onclick="cerrarLectorIntrapagina()" aria-label="Cerrar lectura">✕ Cerrar cuaderno</button>
@@ -1467,7 +1468,91 @@
     
     /* CATÁLOGO DE RELATOS Y POEMAS: EL RINCÓN DEL LECTOR */
     const OBRAS_RINCON_LECTOR = [
-      
+      {
+        id: "obra-cripta-alquimista",
+        titulo: "El testamento de los metales mudos",
+        autor: "S. P. Paredes",
+        genero: "Misterio Gótico & Suspense",
+        fecha: "Semana XV · Octubre 2026",
+        tiempo: "24 min de lectura",
+        resumen: "Un perito en manuscritos antiguos es convocado a una abadía alpina para descifrar el diario de un alquimista, sin sospechar que las páginas describen con exactitud la autopsia del propio investigador.",
+        imagen: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>El monje que aguardaba al doctor Hilario Montero al pie del desfiladero no vestía el hábito blanco de los cartujos, sino una pelliza de lana burda que olía a resina de pino y humedad de cripta. La abadía de Santa María de la Peña se erigía sobre un espolón de roca basáltica que cortaba los vientos del norte, un bastión de piedra ciega donde los relojes mecánicos parecían ralentizarse por el peso del silencio. Hilario, paleógrafo de prestigio internacional y perito en falsificaciones documentales del siglo XVII, había acudido requerido por el prior para autenticar un manuscrito hallado accidentalmente tras el derribo de un muro medianero en la biblioteca conventual.</p>
+          <p>Durante las tres primeras jornadas, encerrado en el scriptorium bajo una claraboya gélida que dejaba pasar el chispear de la llovizna, Hilario examinó los pliegos de pergamino con su lupa de aumento y sus reactivos químicos de yoduro potásico. La caligrafía era la de un tal fray Ambrosio de Veruela, un monje erudito y enigmático que había habitado el monasterio en 1642. Lo desconcertante no era la perfección de la grafía —una escritura humanista cursiva de trazos firmes y limpios—, sino el carácter clínico y obsesivo de las descripciones anatómicas que colmaban los márgenes de los folios monásticos.</p>
+          <p>Fray Ambrosio no consignaba oraciones ni tratados de teología mística, sino el proceso de una enfermedad degenerativa y extraña: el desvanecimiento progresivo de las terminales nerviosas en las yemas de los dedos, la pérdida de sensibilidad térmica en el antebrazo izquierdo, y una rigidez articular específica en la tercera vértebra cervical que obligaba al enfermo a inclinar el cráneo exactamente cuarenta y cinco grados hacia el hombro derecho al sostener la pluma. Hilario recorrió con los dedos su propia nuca; llevaba semanas sufriendo una contractura idéntica, atribuida por su médico en la capital a las largas horas de lectura sobre atriles mal iluminados.</p>
+          <p>Conforme avanzaba en la lectura de los folios centrales, la prosa abandonaba la monografía médica para adoptar el tono de una crónica de inminencia. El monje relataba cómo, en la madrugada del cuarto día de su aislamiento, recibió la visita de un perito secular enviado desde la metrópoli para examinar sus escritos —un hombre maduro, de gafas redondas, con una pequeña cicatriz en forma de media luna sobre el pómulo izquierdo y una predilección incurable por el tabaco de pipa aromático—. Hilario soltó la pluma con un sobresalto que hizo tintinear los tinteros de peltre sobre la tabla. Se llevó los dedos temblorosos al rostro: la cicatriz en la media luna era la suya, fruto de una caída infantil en el huerto de sus abuelos en Lorca.</p>
+          <p>La luz de los quinqués comenzó a parpadear cuando Hilario, con el corazón galopándole en las sienes, devoró las líneas finales del manuscrito. Las últimas entradas no estaban fechadas en 1642, sino con espacios en blanco que el autor había rellenado con tinta fresca, como si el tiempo se hubiera plegado sobre sí mismo. El texto describía el terrorífico descubrimiento del investigador al comprender que el monasterio no albergaba una abadía activa, sino un cenobio abandonado dos siglos atrás tras una peste bubónica. En el último párrafo, redactado con una caligrafía que imitaba a la perfección la suya propia, fray Ambrosio sentenciaba: <em>«Y al advertir que la puerta de roble del scriptorium ha quedado atrancada por el hielo exterior, el doctor comprenderá que la tinta con la que escribe estas líneas no es la de la tintero, sino el frío desprendido de sus propias venas al agotarse el oxígeno de la cripta»</em>. Un golpe sordo y metálico resonó a su espalda: los pestillos de hierro de la única puerta del recinto acababan de caer impulsados por un mecanismo invisible.</p>
+        `
+      },
+      {
+        id: "obra-poema-nocturno",
+        titulo: "Elegía del navegante ciego",
+        autor: "Cuaderno de Letras",
+        genero: "Poesía Simbolista & Misterio",
+        fecha: "Semana XVI · Octubre 2026",
+        tiempo: "5 min de lectura",
+        resumen: "Versos oscuros consagrados a un farero que encendía la baliza cada medianoche, ignorando que el mar había retrocedido diez leguas hacia el abismo hacía medio siglo.",
+        imagen: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <div class="poem-stanza">
+            <p class="poem-line">Subo la torre de basalto con la lámpara encendida,</p>
+            <p class="poem-line">buscando en el abismo el lomo verde de las olas.</p>
+            <p class="poem-line">Mis dedos ciegos palpan la lente de cristal pulido</p>
+            <p class="poem-line">mientras el aceite arde con furia en el depósito de zinc.</p>
+          </div>
+          <div class="poem-stanza">
+            <p class="poem-line">Afuera, la marea canta su promesa de naufragio,</p>
+            <p class="poem-line">el choque de la quilla contra el arrecife sumergido,</p>
+            <p class="poem-line">el grito de los hombres que se ahogan en la espuma</p>
+            <p class="poem-line">cuando el haz blanco corta la negrura del confín.</p>
+          </div>
+          <div class="poem-stanza">
+            <p class="poem-line">Mas hoy el viento trae un olor extraño a salitre seco,</p>
+            <p class="poem-line">a cardos amarillos que crecen sobre el lecho yermo,</p>
+            <p class="poem-line">y al asomar el rostro por la ventana del torreón</p>
+            <p class="poem-line">comprendo la verdad terrible que guardaba el confín:</p>
+          </div>
+          <div class="poem-stanza">
+            <p class="poem-line">No hay mar debajo del faro, ni barcos, ni sirenas,</p>
+            <p class="poem-line">sino un desierto de dunas blancas y silencio eterno;</p>
+            <p class="poem-line">el agua huyó hace siglos buscando otra clemencia</p>
+            <p class="poem-line">y yo sigo alumbrando el fantasma de un océano muerto.</p>
+          </div>
+        `
+      },
+      {
+        id: "obra-orquesta-autmatas",
+        titulo: "La sinfonía de los resortes vencidos",
+        autor: "Clara M. Soler",
+        genero: "Suspense Fantástico",
+        fecha: "Semana XVII · Octubre 2026",
+        tiempo: "22 min de lectura",
+        resumen: "Un célebre director de orquesta acepta rehabilitar los autómatas musicales de un teatro abandonado, descubriendo que las piezas interpretan una partitura que predice las muertes exactas del público.",
+        imagen: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>Para el maestro Leonor Gadea, la música había sido siempre una cuestión de rigor métrico y disciplina respiratoria. Por ello, cuando el ayuntamiento de la ciudad portuaria le encomendó la restauración del Gran Teatro Mecánico —un coliseo abandonado desde 1910 donde una orquesta entera de autómatas de tamaño natural aguardaba en la oscuridad bajo lonas de lino polvoriento—, aceptó el encargo como un mero divertimento técnico de relojería y engranajes de latón. Creía conocer los secretos de todas las partituras europeas; ignoraba que los cilindros de espinas de acero que gobernaban a aquellos músicos mecánicos no respondían a la ley de Mozart ni a la de Beethoven, sino a un cálculo matemático milimétrico sobre la fragilidad del sistema nervioso humano.</p>
+          <p>Durante tres semanas, trabajando a la luz de una lámpara de carburo en el foso de la orquesta, Leonor engrasó los rodamientos de bronce del flautista, tensó los resortes de acero del violonchelista y restituyó las cuerdas de tripa en el arpa del autómata central —una figura femenina con rostro de porcelana esmaltada y un vestido de brocado granate—. Cada vez que giraba la manivela maestra, las máquinas cobraban vida con un zumbido sordo de poleas y contrapesos, ejecutando valses y minuetos de una perfección melancólica y desasosegante.</p>
+          <p>El punto de fractura sobrevino la noche en que decidió ensamblar el mecanismo completo y activar la sinfonía número siete en re menor, una obra anónima hallada en el fondo de un arcón de roble con el sello de un gremio de orfebres disuelto en 1795. Al dar cuerda al eje principal, los autómatas alzaron los brazos al unísono con una rigidez espasmódica. Las notas del violín comenzaron a flotar en la sala vacía, pero Leonor advirtió de inmediato una anomalía acústica insoportable: los intervalos musicales no seguían la escala temperada occidental; producían microtonos disonantes que hacían vibrar los tímpanos y provocaban un vértigo repentino en el estómago.</p>
+          <p>Intentó correr hacia la palanca de emergencia situada junto al telón, pero las rodillas le fallaron. Sentada en la butaca central de la platea, presa de una parálisis motora que le impedía articular los párpados, comprendió la verdadera función de la orquesta mecánica. Las notas emitidas por el flautista no eran sonidos estéticos, sino frecuencias ultrasónicas calibradas para entrar en resonancia con la frecuencia cardíaca de quien las escuchara. En el compás ciento cuatro, coincidiendo con un solo estridente de violonchelo, el corazón del propio maestro de obras, que aguardaba con una caja de herramientas en el vestíbulo, estalló en un infarto fulminante. Y mientras los autómatas continuaban tocando impertérritos en la penumbra del escenario, los ojos de porcelana de la arpista giraron lentamente hacia la butaca de Leonor, marcando el compás exacto de su propio pulso, que comenzaba a desacelerarse compás a compás hasta quedar reducido a un único y definitivo acorde suspendido en el silencio del teatro.</p>
+        `
+      },
+      {
+        id: "obra-cartas-futuro-roto",
+        titulo: "El buzón de las respuestas anticipadas",
+        autor: "Ignacio de la Hoz",
+        genero: "Misterio & Paradoja Temporal",
+        fecha: "Semana XVIII · Octubre 2026",
+        tiempo: "25 min de lectura",
+        resumen: "Un cartero rural descubre que en una estafeta aislada las cartas llegan siempre tres días antes de que los remitentes decidan escribirlas, hasta que recibe una misiva fechada el día de su propio entierro.",
+        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+        contenido: `
+          <p>En la estafeta de correos de Valdehermoso —un caserón de piedra gris encajonado entre desfiladeros donde el correo postal sólo llegaba dos veces por semana a lomos de mula—, el tiempo nunca había marchado al unísono con el del resto del reino. Don Anselmo, que había despachado correspondencia durante cuarenta años bajo los retratos al carbón de los sucesivos reyes, consideraba que el correo era el pulso exacto de la melancolía humana: esquelas de pésame con bordes negros, giros postales de emigrantes desde ultramar y cartas de amor ajadas por el roce de los bolsillos. Sin embargo, el fenómeno que comenzó a registrarse en el otoño de aquel año desafiaba cualquier ordenanza del ministerio de Comunicaciones.</p>
+          <p>Todo empezó un martes de niebla cerrada. Al vaciar la saca depositada en el dintel por el arriero, Anselmo halló un sobre de papel verjurado con su propio nombre y dirección caligrafiados con tinta ferrogálica de color violeta. Al abrirlo con la uña, extrajo una nota donde el boticario del pueblo le agradecía el pronto aviso sobre la llegada del cargamento de quinina y le rogaba que reservara dos frascos para el jueves siguiente. Lo perturbador del asunto era que el boticario aún no había realizado tal pedido; de hecho, el propio boticario entró en la estafeta veinticuatro horas más tarde para encargar formalmente los medicamentos utilizando exactamente las mismas palabras impresas en el papel que Anselmo guardaba ya en su cajón.</p>
+          <p>Durante las semanas sucesivas, la anomalía se convirtió en la norma de la estafeta. Las cartas que los vecinos acudían a redactar y depositar en el buzón de hierro forjado aparecían clasificadas en los casilleros con setenta y dos horas de antelación respecto al momento en que sus autores decidían redactarlas. Los pleitos por herencias se resolvían antes de que los testamentos fueran abiertos en el juzgado, y las declaraciones de hacienda se liquidaban antes de que los contribuyentes sufrieran el apuro de las cuentas. Lejos de inquietarse, el pueblo adoptó la rutina con la pasividad gregaria de quienes aceptan un milagro administrativo: la estafeta de Valdehermoso se había convertido en un espejo anticipado donde el porvenir inmediato quedaba archivado en sobres con sello de medio penique.</p>
+          <p>Anselmo, convertido en el fiel notario de aquella maquinaria temporal, clasificaba los sobres con la punta de los dedos fríos, observando cómo su propia vida discurría sin sorpresas, protegida por el conocimiento previo de cada contratiempo doméstico. Hasta que llegó la tarde del último viernes de noviembre. En el casillero reservado a su apellido asomaba un sobre grueso, lacrado con cera negra y matasellos fechado tres días en el futuro. Al rasgar el papel con un temblor que le sacudía los nudillos, leyó el parte de defunción emitido por el juez de paz, acompañado por la factura de la funeraria municipal y una esquela donde se detallaba con precisión notarial la hora exacta de su ataque al corazón en el zaguán de la estafeta, a causa de la impresión recibida al leer la carta que ahora sostenía en sus manos trémulas. Un silencio absoluto, desprovisto incluso del zumbido de las moscas, se abatió sobre el despacho; mientras el reloj de pared marcaba las seis en punto de la tarde, Anselmo escuchó con claridad meridiana los pasos pausados y firmes de alguien que ascendía los escalones de piedra de la entrada para depositar en el buzón exterior el primer ejemplar de su propio certificado de defunción.</p>
+        `
+      },
       {
         id: "obra-sala-observacion",
         titulo: "El testimonio del diván invertido",
