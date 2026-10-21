@@ -1405,134 +1405,773 @@
   </main>
 
   <!-- GABINETE DE LECTURA (MODAL INTERNO) -->
+
+  
+
   <div class="reader-modal-overlay" id="lector-intrapagina" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-hidden="true">
+
     <div class="reader-modal-sheet">
+
       <button class="btn-close-modal" onclick="cerrarLectorIntrapagina()" aria-label="Cerrar lectura">✕ Cerrar cuaderno</button>
+
       
+
       <div class="modal-reading-header">
+
         <span class="modal-genre-badge" id="modal-genero">Relato</span>
+
         <h2 class="modal-story-title" id="modal-titulo">Título del Relato</h2>
+
         <div class="modal-story-meta" id="modal-meta">Por Autor · Entrega Semanal</div>
+
       </div>
 
+
+
       <div class="modal-featured-image" id="modal-image-container">
+
         <img id="modal-img" src="" alt="Ilustración de la obra">
+
       </div>
+
+
 
       <div class="modal-story-prose" id="modal-contenido"></div>
 
+
+
       <div class="modal-closing-seal">
+
         ✦ Círculo Kairós · Fin de la Pieza Literaria ✦
+
       </div>
+
     </div>
+
   </div>
 
+
+
   <footer class="site-footer">
+
     <div class="footer-container">
+
       
+
       <div class="footer-brand">
+
         <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
+
         <h3>CÍRCULO KAIRÓS</h3>
+
         <p>
+
           Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.
+
         </p>
+
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+
       </div>
+
+
 
       <nav class="footer-nav" aria-label="Navegación del pie">
+
         <h4>Cuadernos</h4>
+
         <ul>
+
           <li><a href="literatura.html">Literatura & Enigma</a></li>
+
           <li><a href="cine.html">Cine & Mirada</a></li>
+
           <li><a href="musica.html">Música & Acústica</a></li>
+
           <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+
           <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+
         </ul>
+
       </nav>
 
+
+
       <div class="footer-nav">
+
         <h4>El Círculo</h4>
+
         <ul>
+
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+
           <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
+
           <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
+
           <li><a href="feed.xml" target="_blank">Canal RSS (Cuadernos)</a></li>
+
         </ul>
+
       </div>
 
+
+
     </div>
+
   </footer>
 
+
+
   <script>
+
     
+
     /* CATÁLOGO DE RELATOS Y POEMAS: EL RINCÓN DEL LECTOR */
+
     const OBRAS_RINCON_LECTOR = [
+
       {
-        id: "obra-sala-observacion",
-        titulo: "El testimonio del diván invertido",
+
+        id: "obra-cripta-alquimista",
+
+        titulo: "El testamento de los metales mudos",
+
         autor: "S. P. Paredes",
-        genero: "Suspense Psicológico",
-        fecha: "Semana XI · Octubre 2026",
-        tiempo: "18 min de lectura",
-        resumen: "Un célebre analista atiende a un paciente que afirma recordar con exactitud milimétrica crímenes no consumados, hasta que los detalles de la consulta revelan una fractura clínica insospechada.",
-        imagen: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+
+        genero: "Misterio Gótico & Suspense",
+
+        fecha: "Semana XV · Octubre 2026",
+
+        tiempo: "24 min de lectura",
+
+        resumen: "Un perito en manuscritos antiguos es convocado a una abadía alpina para descifrar el diario de un alquimista, sin sospechar que las páginas describen con exactitud la autopsia del propio investigador.",
+
+        imagen: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80",
+
         contenido: `
-          <p>El doctor Víctor Almansa creía haber cartografiado todos los meandros de la neurosis obsesiva tras tres décadas de práctica privada en el entresuelo del paseo de la Explanada. Sus pacientes no eran enigmas médicos, sino partituras ligeramente disonantes que un oído adiestrado podía recomponer tras media docena de sesiones. Sin embargo, el hombre que acudía cada martes a las siete en punto —quien se hacía llamar Julián Beltrán— presentaba una resistencia que escapaba a la tipología convencional: no exhibía delirios persecutorios ni la elocuencia teatral del histriónico; se limitaba a relatar, con la frialdad de un perito judicial, homicidios que juraba haber perpetrado en una vigilia lúcida, aunque los rotativos de la ciudad jamás hubieran registrado tales desdichas.</p>
-          <p>«Usted se obstina en buscar el cadáver en el registro civil, doctor», decía Beltrán sin acomodar la espalda en el respaldo de terciopelo verde botella, con las manos entrelazadas sobre las rodillas en una postura de rigidez castrense. «La materia es perezosa y tarda semanas en obedecer a la intención. Lo que yo vengo a vaciar sobre su alfombra no es el hecho consumado, sino la premonición ejecutiva: sé el peso del martillo en la palma, huelo el sulfato de cobre antes de verterlo en el decantador y experimento la saciedad atroz de quien ya ha cerrado el féretro. Lo único que me falta es el permiso del calendario».</p>
-          <p>Almansa tomaba notas mecánicas con su estilográfica de émbolo sobre un cuaderno de papel satinado. Su hipótesis preliminar descansaba en un trastorno esquizoafectivo con rumiación culposa: una mente que castiga un deseo inconfesable revistiéndolo de recuerdo certero. Para desarticular la ficción, el facultativo optó durante la quinta sesión por una confrontación analítica: le solicitó a Beltrán que reconstruyera el espacio exacto del último episodio, convencido de que la incoherencia en las medidas arquitectónicas quebraría la armadura de la fabulación.</p>
-          <p>Beltrán no vaciló un instante. Describió una sala oblonga con paredes forradas de zócalos de caoba barnizada, una librería con volúmenes de lomo dorado donde destacaban tratados de psicopatología forense de 1912, un bargueño castellano en el que una figurilla de bronce de Hipócrates mostraba una soldadura torpe en el brazo derecho, y un ventanal con postigos que amortiguaba el rumor de las gaviotas sobre la dársena. Cada pormenor coincidía con una exactitud quirúrgica, casi obscena, con el propio despacho donde ambos se encontraban.</p>
-          <p>«Y en ese salón», prosiguió Beltrán bajando la voz hasta un tono metálico, «un anciano alienista pretendía curarme redactando informes clínicos sobre un expediente ficticio, ignorando que el paciente real nunca fue admitido en el sanatorio, sino que tomó el carné, las llaves y el abrigo del médico en la guardia del domingo». El doctor Almansa sintió un sudor gélido en las sienes. Bajó la mirada hacia la libreta: sus propios trazos sobre el folio no contenían diagnósticos ni observaciones clínicas, sino el mismo nombre repetido cuatrocientas veces con caligrafía infantil y crispada, mientras al otro lado del escritorio, el hombre del traje impecable sacaba del bolsillo un reloj de oro con las iniciales <em>V. A.</em> grabadas en la tapa.</p>
+
+          <p>El monje que aguardaba al doctor Hilario Montero al pie del desfiladero no vestía el hábito blanco de los cartujos, sino una pelliza de lana burda que olía a resina de pino y humedad de cripta. La abadía de Santa María de la Peña se erigía sobre un espolón de roca basáltica que cortaba los vientos del norte, un bastión de piedra ciega donde los relojes mecánicos parecían ralentizarse por el peso del silencio. Hilario, paleógrafo de prestigio internacional y perito en falsificaciones documentales del siglo XVII, había acudido requerido por el prior para autenticar un manuscrito hallado accidentalmente tras el derribo de un muro medianero en la biblioteca conventual.</p>
+
+          <p>Durante las tres primeras jornadas, encerrado en el scriptorium bajo una claraboya gélida que dejaba pasar el chispear de la llovizna, Hilario examinó los pliegos de pergamino con su lupa de aumento y sus reactivos químicos de yoduro potásico. La caligrafía era la de un tal fray Ambrosio de Veruela, un monje erudito y enigmático que había habitado el monasterio en 1642. Lo desconcertante no era la perfección de la grafía —una escritura humanista cursiva de trazos firmes y limpios—, sino el carácter clínico y obsesivo de las descripciones anatómicas que colmaban los márgenes de los folios monásticos.</p>
+
+          <p>Fray Ambrosio no consignaba oraciones ni tratados de teología mística, sino el proceso de una enfermedad degenerativa y extraña: el desvanecimiento progresivo de las terminales nerviosas en las yemas de los dedos, la pérdida de sensibilidad térmica en el antebrazo izquierdo, y una rigidez articular específica en la tercera vértebra cervical que obligaba al enfermo a inclinar el cráneo exactamente cuarenta y cinco grados hacia el hombro derecho al sostener la pluma. Hilario recorrió con los dedos su propia nuca; llevaba semanas sufriendo una contractura idéntica, atribuida por su médico en la capital a las largas horas de lectura sobre atriles mal iluminados.</p>
+
+          <p>Conforme avanzaba en la lectura de los folios centrales, la prosa abandonaba la monografía médica para adoptar el tono de una crónica de inminencia. El monje relataba cómo, en la madrugada del cuarto día de su aislamiento, recibió la visita de un perito secular enviado desde la metrópoli para examinar sus escritos —un hombre maduro, de gafas redondas, con una pequeña cicatriz en forma de media luna sobre el pómulo izquierdo y una predilección incurable por el tabaco de pipa aromático—. Hilario soltó la pluma con un sobresalto que hizo tintinear los tinteros de peltre sobre la tabla. Se llevó los dedos temblorosos al rostro: la cicatriz en la media luna era la suya, fruto de una caída infantil en el huerto de sus abuelos en Lorca.</p>
+
+          <p>La luz de los quinqués comenzó a parpadear cuando Hilario, con el corazón galopándole en las sienes, devoró las líneas finales del manuscrito. Las últimas entradas no estaban fechadas en 1642, sino con espacios en blanco que el autor había rellenado con tinta fresca, como si el tiempo se hubiera plegado sobre sí mismo. El texto describía el terrorífico descubrimiento del investigador al comprender que el monasterio no albergaba una abadía activa, sino un cenobio abandonado dos siglos atrás tras una peste bubónica. En el último párrafo, redactado con una caligrafía que imitaba a la perfección la suya propia, fray Ambrosio sentenciaba: <em>«Y al advertir que la puerta de roble del scriptorium ha quedado atrancada por el hielo exterior, el doctor comprenderá que la tinta con la que escribe estas líneas no es la de la tintero, sino el frío desprendido de sus propias venas al agotarse el oxígeno de la cripta»</em>. Un golpe sordo y metálico resonó a su espalda: los pestillos de hierro de la única puerta del recinto acababan de caer impulsados por un mecanismo invisible.</p>
+
         `
+
       },
+
       {
-        id: "obra-manuscrito-bicéfalo",
-        titulo: "El corrector de galeradas ajenas",
+
+        id: "obra-poema-nocturno",
+
+        titulo: "Elegía del navegante ciego",
+
+        autor: "Cuaderno de Letras",
+
+        genero: "Poesía Simbolista & Misterio",
+
+        fecha: "Semana XVI · Octubre 2026",
+
+        tiempo: "5 min de lectura",
+
+        resumen: "Versos oscuros consagrados a un farero que encendía la baliza cada medianoche, ignorando que el mar había retrocedido diez leguas hacia el abismo hacía medio siglo.",
+
+        imagen: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">Subo la torre de basalto con la lámpara encendida,</p>
+
+            <p class="poem-line">buscando en el abismo el lomo verde de las olas.</p>
+
+            <p class="poem-line">Mis dedos ciegos palpan la lente de cristal pulido</p>
+
+            <p class="poem-line">mientras el aceite arde con furia en el depósito de zinc.</p>
+
+          </div>
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">Afuera, la marea canta su promesa de naufragio,</p>
+
+            <p class="poem-line">el choque de la quilla contra el arrecife sumergido,</p>
+
+            <p class="poem-line">el grito de los hombres que se ahogan en la espuma</p>
+
+            <p class="poem-line">cuando el haz blanco corta la negrura del confín.</p>
+
+          </div>
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">Mas hoy el viento trae un olor extraño a salitre seco,</p>
+
+            <p class="poem-line">a cardos amarillos que crecen sobre el lecho yermo,</p>
+
+            <p class="poem-line">y al asomar el rostro por la ventana del torreón</p>
+
+            <p class="poem-line">comprendo la verdad terrible que guardaba el confín:</p>
+
+          </div>
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">No hay mar debajo del faro, ni barcos, ni sirenas,</p>
+
+            <p class="poem-line">sino un desierto de dunas blancas y silencio eterno;</p>
+
+            <p class="poem-line">el agua huyó hace siglos buscando otra clemencia</p>
+
+            <p class="poem-line">y yo sigo alumbrando el fantasma de un océano muerto.</p>
+
+          </div>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-orquesta-autmatas",
+
+        titulo: "La sinfonía de los resortes vencidos",
+
         autor: "Clara M. Soler",
-        genero: "Misterio Psicológico",
-        fecha: "Semana XII · Octubre 2026",
-        tiempo: "16 min de lectura",
-        resumen: "Un corrector de imprenta recibe una novela autobiográfica donde los pasajes inéditos predicen sus propios errores domésticos y sus memorias de infancia más celosamente guardadas.",
-        imagen: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80",
+
+        genero: "Suspense Fantástico",
+
+        fecha: "Semana XVII · Octubre 2026",
+
+        tiempo: "22 min de lectura",
+
+        resumen: "Un célebre director de orquesta acepta rehabilitar los autómatas musicales de un teatro abandonado, descubriendo que las piezas interpretan una partitura que predice las muertes exactas del público.",
+
+        imagen: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+
         contenido: `
-          <p>Para Fernando Valls, el oficio de corrector de estilo era un escudo de plomo contra la tiranía del mundo exterior. En su cubículo del tercer piso de la editorial Marítima, la vida quedaba reducida a una cuestión de erratas tipográficas, concordancias de tiempos verbales y comas maliciosas que alteraban el sentido de una cláusula. No le interesaban las tramas; apreciaba los textos por la densidad de su tipografía y la limpieza de su sangrado. Por ello, cuando el editor en jefe arrojó sobre su mesa un fajo de cuatrocientas cuartillas mecanografiadas sin nombre de autor, titulado provisionalmente <em>La penumbra del claustro</em>, Fernando sólo advirtió el pésimo entintado de la cinta de la máquina.</p>
-          <p>El manuscrito narraba la historia de un niño solitario que crecía en un caserón destartalado de la huerta levantina, coleccionando insectos muertos en cajas de fósforos y ocultando bajo una losa suelta del zaguán una medalla de plata de la Virgen del Carmen arrancada a su nodriza tras una riña escolar. Fernando se detuvo en seco con el bolígrafo rojo suspendido sobre la página setenta y cuatro. Aquel suceso nunca había salido de sus labios: era el secreto avergonzado que había sepultado hacía más de cuarenta años, un acto de mezquindad pueril que jamás confió a sus padres ni a sus amantes.</p>
-          <p>Convencido de que algún pariente lejano o un antiguo condiscípulo pretendía someterlo a un retorcido chantaje emocional, continuó leyendo con una respiración que se volvía cada vez más corta y sibilante. En los capítulos siguientes, la prosa abandonaba la infancia y se adentraba en los años de madurez del protagonista, describiendo con minucia los horarios exactos de sus trayectos en tranvía, la marca de cigarrillos que fumaba a escondidas en el descansillo de la escalera y la taza de peltre con el borde mellado que utilizaba para hervir el café.</p>
-          <p>Al llegar al penúltimo pliego, la trama alcanzó el tiempo presente. La cuartilla trescientos noventa relataba la tarde del 18 de octubre: un hombre de espaldas al ventanal, con una camisa de hilo arrugada y una lupa de relojero en el ojo izquierdo, leía febrilmente una obra donde se advertía que el autor del texto no era un testigo oculto ni un impostor, sino la única faceta de su mente que conservaba la lucidez mientras el resto de su cerebro se degradaba en una sala de cuidados paliativos. Fernando levantó la mirada hacia el cristal del ventanal; en lugar de la redacción bulliciosa y el rumor de las rotativas, el reflejo le devolvió una estancia encalada de hospital, el zumbido monocorde de un monitor cardíaco y un médico de guardia que guardaba en una carpeta marrón las páginas inconexas que el paciente agonizante garabateaba con dedos temblorosos sobre las sábanas.</p>
+
+          <p>Para el maestro Leonor Gadea, la música había sido siempre una cuestión de rigor métrico y disciplina respiratoria. Por ello, cuando el ayuntamiento de la ciudad portuaria le encomendó la restauración del Gran Teatro Mecánico —un coliseo abandonado desde 1910 donde una orquesta entera de autómatas de tamaño natural aguardaba en la oscuridad bajo lonas de lino polvoriento—, aceptó el encargo como un mero divertimento técnico de relojería y engranajes de latón. Creía conocer los secretos de todas las partituras europeas; ignoraba que los cilindros de espinas de acero que gobernaban a aquellos músicos mecánicos no respondían a la ley de Mozart ni a la de Beethoven, sino a un cálculo matemático milimétrico sobre la fragilidad del sistema nervioso humano.</p>
+
+          <p>Durante tres semanas, trabajando a la luz de una lámpara de carburo en el foso de la orquesta, Leonor engrasó los rodamientos de bronce del flautista, tensó los resortes de acero del violonchelista y restituyó las cuerdas de tripa en el arpa del autómata central —una figura femenina con rostro de porcelana esmaltada y un vestido de brocado granate—. Cada vez que giraba la manivela maestra, las máquinas cobraban vida con un zumbido sordo de poleas y contrapesos, ejecutando valses y minuetos de una perfección melancólica y desasosegante.</p>
+
+          <p>El punto de fractura sobrevino la noche en que decidió ensamblar el mecanismo completo y activar la sinfonía número siete en re menor, una obra anónima hallada en el fondo de un arcón de roble con el sello de un gremio de orfebres disuelto en 1795. Al dar cuerda al eje principal, los autómatas alzaron los brazos al unísono con una rigidez espasmódica. Las notas del violín comenzaron a flotar en la sala vacía, pero Leonor advirtió de inmediato una anomalía acústica insoportable: los intervalos musicales no seguían la escala temperada occidental; producían microtonos disonantes que hacían vibrar los tímpanos y provocaban un vértigo repentino en el estómago.</p>
+
+          <p>Intentó correr hacia la palanca de emergencia situada junto al telón, pero las rodillas le fallaron. Sentada en la butaca central de la platea, presa de una parálisis motora que le impedía articular los párpados, comprendió la verdadera función de la orquesta mecánica. Las notas emitidas por el flautista no eran sonidos estéticos, sino frecuencias ultrasónicas calibradas para entrar en resonancia con la frecuencia cardíaca de quien las escuchara. En el compás ciento cuatro, coincidiendo con un solo estridente de violonchelo, el corazón del propio maestro de obras, que aguardaba con una caja de herramientas en el vestíbulo, estalló en un infarto fulminante. Y mientras los autómatas continuaban tocando impertérritos en la penumbra del escenario, los ojos de porcelana de la arpista giraron lentamente hacia la butaca de Leonor, marcando el compás exacto de su propio pulso, que comenzaba a desacelerarse compás a compás hasta quedar reducido a un único y definitivo acorde suspendido en el silencio del teatro.</p>
+
         `
+
       },
+
       {
-        id: "obra-doble-artesano",
-        titulo: "La paradoja del tasador de alhajas",
+
+        id: "obra-cartas-futuro-roto",
+
+        titulo: "El buzón de las respuestas anticipadas",
+
         autor: "Ignacio de la Hoz",
-        genero: "Intriga Psicológica",
-        fecha: "Semana XIII · Octubre 2026",
-        tiempo: "15 min de lectura",
-        resumen: "Un perito gemólogo obsesionado con la autenticidad es contratado para certificar que una colección de joyas familiares es falsa, descubriendo que la falsificación incluye su propia identidad.",
-        imagen: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+
+        genero: "Misterio & Paradoja Temporal",
+
+        fecha: "Semana XVIII · Octubre 2026",
+
+        tiempo: "25 min de lectura",
+
+        resumen: "Un cartero rural descubre que en una estafeta aislada las cartas llegan siempre tres días antes de que los remitentes decidan escribirlas, hasta que recibe una misiva fechada el día de su propio entierro.",
+
+        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+
         contenido: `
-          <p>Ernesto Soldevila afirmaba que el ojo humano era un instrumento cobarde, siempre dispuesto a dejarse seducir por el brillo y la simetría; la lente de diez aumentos, en cambio, era un tribunal implacable donde ningún engaño salía con vida. Durante más de cuarenta años como tasador oficial del Monte de Piedad, Ernesto había desenmascarado perlas cultivadas vendidas como naturales, diamantes tratados con radiación y monturas de platino que no eran más que aleaciones miserables de níquel y plata. Su orgullo profesional residía en una máxima intransigente: «La copia puede engañar al afecto, pero nunca a la refracción lumínica».</p>
-          <p>Cierto atardecer de lluvia cerrada, un aristócrata en decadencia, el marqués de Valverde, solicitó sus servicios en su palacete de la calle Mayor. El encargo era insólito: no se trataba de certificar la autenticidad de un lote de camafeos y sortijas del siglo XVIII para asegurarlas, sino de emitir un dictamen judicial que demostrara formalmente que todas y cada una de las piezas eran burdas reproducciones modernas sin valor patrimonial alguno. «Necesito arruinar la codicia de mis herederos antes de que me entierren, don Ernesto», explicó el aristócrata sirviendo dos copas de oporto rancio. «Demuestre que nada de lo que hay en este cofre es genuino y le abonaré el triple de su tarifa habitual».</p>
-          <p>Ernesto abrió su maletín de cuero gastado y dispuso sobre el tapete de fieltro los frascos de ácido nítrico, la balanza de precisión y el refractómetro. Examinó primero una gargantilla de esmeraldas colombianas: las inclusiones en ala de libélula y las fisuras de cristalización revelaban, sin género de duda, la nobleza mineral de una gema extraída hacía doscientos años de las minas de Muzo. Analizó después un anillo con un zafiro de Ceilán de talla cojín: el azul aterciopelado era inconfundible, refractando la luz con la pureza que sólo confieren los milenios de presión geológica. Las piezas eran legítimas, excepcionales y de un valor incalculable.</p>
-          <p>Indignado ante lo que consideraba una blasfemia contra el arte de la orfebrería, Ernesto encaró al marqués: «Mi firma no avalará una calumnia técnica. Estas joyas salieron del taller de los mejores maestros plateros de Carlos IV; pretender que son vidrio coloreado es una felonía». El anciano sonrió con una pesadumbre infinita y deslizó sobre la mesa un documento amarillento con sello notarial fechado treinta años atrás. «Usted tiene toda la razón, don Ernesto. Las alhajas son auténticas. Lo que es falso es el perito: Ernesto Soldevila falleció de tifus en 1898 en un convento de clausura. Usted no es más que el orfebre que las copió en secreto, condenado en su delirio senil a revisar una y otra vez el único trabajo que jamás se atrevió a firmar para no ingresar en el penal de San Antón».</p>
+
+          <p>En la estafeta de correos de Valdehermoso —un caserón de piedra gris encajonado entre desfiladeros donde el correo postal sólo llegaba dos veces por semana a lomos de mula—, el tiempo nunca había marchado al unísono con el del resto del reino. Don Anselmo, que había despachado correspondencia durante cuarenta años bajo los retratos al carbón de los sucesivos reyes, consideraba que el correo era el pulso exacto de la melancolía humana: esquelas de pésame con bordes negros, giros postales de emigrantes desde ultramar y cartas de amor ajadas por el roce de los bolsillos. Sin embargo, el fenómeno que comenzó a registrarse en el otoño de aquel año desafiaba cualquier ordenanza del ministerio de Comunicaciones.</p>
+
+          <p>Todo empezó un martes de niebla cerrada. Al vaciar la saca depositada en el dintel por el arriero, Anselmo halló un sobre de papel verjurado con su propio nombre y dirección caligrafiados con tinta ferrogálica de color violeta. Al abrirlo con la uña, extrajo una nota donde el boticario del pueblo le agradecía el pronto aviso sobre la llegada del cargamento de quinina y le rogaba que reservara dos frascos para el jueves siguiente. Lo perturbador del asunto era que el boticario aún no había realizado tal pedido; de hecho, el propio boticario entró en la estafeta veinticuatro horas más tarde para encargar formalmente los medicamentos utilizando exactamente las mismas palabras impresas en el papel que Anselmo guardaba ya en su cajón.</p>
+
+          <p>Durante las semanas sucesivas, la anomalía se convirtió en la norma de la estafeta. Las cartas que los vecinos acudían a redactar y depositar en el buzón de hierro forjado aparecían clasificadas en los casilleros con setenta y dos horas de antelación respecto al momento en que sus autores decidían redactarlas. Los pleitos por herencias se resolvían antes de que los testamentos fueran abiertos en el juzgado, y las declaraciones de hacienda se liquidaban antes de que los contribuyentes sufrieran el apuro de las cuentas. Lejos de inquietarse, el pueblo adoptó la rutina con la pasividad gregaria de quienes aceptan un milagro administrativo: la estafeta de Valdehermoso se había convertido en un espejo anticipado donde el porvenir inmediato quedaba archivado en sobres con sello de medio penique.</p>
+
+          <p>Anselmo, convertido en el fiel notario de aquella maquinaria temporal, clasificaba los sobres con la punta de los dedos fríos, observando cómo su propia vida discurría sin sorpresas, protegida por el conocimiento previo de cada contratiempo doméstico. Hasta que llegó la tarde del último viernes de noviembre. En el casillero reservado a su apellido asomaba un sobre grueso, lacrado con cera negra y matasellos fechado tres días en el futuro. Al rasgar el papel con un temblor que le sacudía los nudillos, leyó el parte de defunción emitido por el juez de paz, acompañado por la factura de la funeraria municipal y una esquela donde se detallaba con precisión notarial la hora exacta de su ataque al corazón en el zaguán de la estafeta, a causa de la impresión recibida al leer la carta que ahora sostenía en sus manos trémulas. Un silencio absoluto, desprovisto incluso del zumbido de las moscas, se abatió sobre el despacho; mientras el reloj de pared marcaba las seis en punto de la tarde, Anselmo escuchó con claridad meridiana los pasos pausados y firmes de alguien que ascendía los escalones de piedra de la entrada para depositar en el buzón exterior el primer ejemplar de su propio certificado de defunción.</p>
+
         `
+
       },
+
       {
-        id: "obra-camara-vacia",
-        titulo: "El protocolo de la tercera butaca",
+
+        id: "obra-sala-observacion",
+
+        titulo: "El testimonio del diván invertido",
+
         autor: "S. P. Paredes",
-        genero: "Drama & Psicología Oscura",
-        fecha: "Semana XIV · Octubre 2026",
-        tiempo: "17 min de lectura",
-        resumen: "El proyeccionista de una sala de cineclub clausurada proyecta la misma cinta muda todas las madrugadas para un espectador que nunca compra entrada ni abandona la sala.",
-        imagen: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80",
+
+        genero: "Suspense Psicológico",
+
+        fecha: "Semana XI · Octubre 2026",
+
+        tiempo: "18 min de lectura",
+
+        resumen: "Un célebre analista atiende a un paciente que afirma recordar con exactitud milimétrica crímenes no consumados, hasta que los detalles de la consulta revelan una fractura clínica insospechada.",
+
+        imagen: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+
         contenido: `
-          <p>El Cine Rialto llevaba seis inviernos clausurado por ruina inminente y litigio de testamentaría, pero en la cabina del entresuelo el proyector de arco de carbón seguía rugiendo con puntualidad monacal. Tomás, que había sido el proyeccionista titular desde los tiempos del celuloide inflamable de nitrato, se negaba a abandonar las bobinas metálicas al polvo y a las ratas. Por orden de una comisión judicial que tardaba una eternidad en liquidar los bienes de la empresa, Tomás ejercía de vigilante nocturno; sin embargo, él prefería considerarse el custodio de una liturgia extinta.</p>
-          <p>Todas las noches, al filo de la una, enhebraba en los rodillos la copia única de una película alemana muda de 1927 cuyo argumento conocía fotograma a fotograma: una mujer vestida con abrigo de piel esperaba en la sala de espera de un balneario alpino mientras un reloj de péndulo marcaba las horas sin que nadie acudiera a recogerla. Tomás encendía los electrodos de carbón, accionaba el motor eléctrico y contemplaba a través de la mirilla rectangular cómo el haz de luz blanquecina atravesaba la penumbra de la platea, colmada de butacas desfondadas y lienzos de plástico que cubrían las molduras doradas.</p>
-          <p>El motivo de su perseverancia no era la nostalgia por el cine mudo, sino la presencia insólita que ocupaba la fila siete, butaca tres. Allí, sentado en el centro exacto del patio, un hombre de hombros anchos y sombrero de fieltro permanecía inmóvil durante los noventa minutos de la proyección. Tomás nunca lo había visto entrar por el vestíbulo cerrado con cadenas de forja ni descender por la escalinata de mármol al encenderse las luces de limpieza. El desconocido simplemente aparecía en cuanto el rayo de luz cortaba la oscuridad de la sala.</p>
-          <p>Durante meses, Tomás intentó descifrar la razón de aquella devoción espectral. Decidió someter al espectador a una prueba: en una secuencia decisiva, tapó deliberadamente el objetivo con una cartulina negra para simular un salto de proyección o una avería en el obturador. Esperaba que el hombre se revolviera en su asiento, protestara o volviera la mirada hacia la cabina. Nada ocurrió; la figura continuó mirando hacia la pantalla en blanco con una devoción imperturbable.</p>
-          <p>Vencido por el vértigo de aquel silencio, Tomás descendió por fin la empinada caracol de hierro que comunicaba la cabina con la platea. Caminó despacio por la alfombra carcomida entre el olor a humedad y polvo fósil hasta situarse junto a la butaca tres. Al posar la mano sobre el hombro de paño del desconocido, sus dedos tocaron únicamente el terciopelo desgastado del respaldo vacío. Al girar la cabeza hacia el haz de luz que descendía desde lo alto de la pared, vio con espanto que la silueta que proyectaba la sombra sobre la pantalla no estaba en la butaca, sino recortada en la ventanilla de la cabina: un hombre anciano y solo, de pie tras el vidrio de proyección, atrapado para siempre en el bucle mecánico de proyectar una película para nadie.</p>
+
+          <p>El doctor Víctor Almansa creía haber cartografiado todos los meandros de la neurosis obsesiva tras tres décadas de práctica privada en el entresuelo del paseo de la Explanada. Sus pacientes no eran enigmas médicos, sino partituras ligeramente disonantes que un oído adiestrado podía recomponer tras media docena de sesiones. Sin embargo, el hombre que acudía cada martes a las siete en punto —quien se hacía llamar Julián Beltrán— presentaba una resistencia que escapaba a la tipología convencional: no exhibía delirios persecutorios ni la elocuencia teatral del histriónico; se limitaba a relatar, con la frialdad de un perito judicial, homicidios que juraba haber perpetrado en una vigilia lúcida, aunque los rotativos de la ciudad jamás hubieran registrado tales desdichas.</p>
+
+          <p>«Usted se obstina en buscar el cadáver en el registro civil, doctor», decía Beltrán sin acomodar la espalda en el respaldo de terciopelo verde botella, con las manos entrelazadas sobre las rodillas en una postura de rigidez castrense. «La materia es perezosa y tarda semanas en obedecer a la intención. Lo que yo vengo a vaciar sobre su alfombra no es el hecho consumado, sino la premonición ejecutiva: sé el peso del martillo en la palma, huelo el sulfato de cobre antes de verterlo en el decantador y experimento la saciedad atroz de quien ya ha cerrado el féretro. Lo único que me falta es el permiso del calendario».</p>
+
+          <p>Almansa tomaba notas mecánicas con su estilográfica de émbolo sobre un cuaderno de papel satinado. Su hipótesis preliminar descansaba en un trastorno esquizoafectivo con rumiación culposa: una mente que castiga un deseo inconfesable revistiéndolo de recuerdo certero. Para desarticular la ficción, el facultativo optó durante la quinta sesión por una confrontación analítica: le solicitó a Beltrán que reconstruyera el espacio exacto del último episodio, convencido de que la incoherencia en las medidas arquitectónicas quebraría la armadura de la fabulación.</p>
+
+          <p>Beltrán no vaciló un instante. Describió una sala oblonga con paredes forradas de zócalos de caoba barnizada, una librería con volúmenes de lomo dorado donde destacaban tratados de psicopatología forense de 1912, un bargueño castellano en el que una figurilla de bronce de Hipócrates mostraba una soldadura torpe en el brazo derecho, y un ventanal con postigos que amortiguaba el rumor de las gaviotas sobre la dársena. Cada pormenor coincidía con una exactitud quirúrgica, casi obscena, con el propio despacho donde ambos se encontraban.</p>
+
+          <p>«Y en ese salón», prosiguió Beltrán bajando la voz hasta un tono metálico, «un anciano alienista pretendía curarme redactando informes clínicos sobre un expediente ficticio, ignorando que el paciente real nunca fue admitido en el sanatorio, sino que tomó el carné, las llaves y el abrigo del médico en la guardia del domingo». El doctor Almansa sintió un sudor gélido en las sienes. Bajó la mirada hacia su libreta: sus propios trazos sobre el folio no contenían diagnósticos ni observaciones clínicas, sino el mismo nombre repetido cuatrocientas veces con caligrafía infantil y crispada, mientras al otro lado del escritorio, el hombre del traje impecable sacaba del bolsillo un reloj de oro con las iniciales <em>V. A.</em> grabadas en la tapa.</p>
+
         `
+
+      },
+
+      {
+
+        id: "obra-manuscrito-bicéfalo",
+
+        titulo: "El corrector de galeradas ajenas",
+
+        autor: "Clara M. Soler",
+
+        genero: "Misterio Psicológico",
+
+        fecha: "Semana XII · Octubre 2026",
+
+        tiempo: "16 min de lectura",
+
+        resumen: "Un corrector de imprenta recibe una novela autobiográfica donde los pasajes inéditos predicen sus propios errores domésticos y sus memorias de infancia más celosamente guardadas.",
+
+        imagen: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Para Fernando Valls, el oficio de corrector de estilo era un escudo de plomo contra la tiranía del mundo exterior. En su cubículo del tercer piso de la editorial Marítima, la vida quedaba reducida a una cuestión de erratas tipográficas, concordancias de tiempos verbales y comas maliciosas que alteraban el sentido de una cláusula. No le interesaban las tramas; apreciaba los textos por la densidad de su tipografía y la limpieza de su sangrado. Por ello, cuando el editor en jefe arrojó sobre su mesa un fajo de cuatrocientas cuartillas mecanografiadas sin nombre de autor, titulado provisionalmente <em>La penumbra del claustro</em>, Fernando sólo advirtió el pésimo entintado de la cinta de la máquina.</p>
+
+          <p>El manuscrito narraba la historia de un niño solitario que crecía en un caserón destartalado de la huerta levantina, coleccionando insectos muertos en cajas de fósforos y ocultando bajo una losa suelta del zaguán una medalla de plata de la Virgen del Carmen arrancada a su nodriza tras una riña escolar. Fernando se detuvo en seco con el bolígrafo rojo suspendido sobre la página setenta y cuatro. Aquel suceso nunca había salido de sus labios: era el secreto avergonzado que había sepultado hacía más de cuarenta años, un acto de mezquindad pueril que jamás confió a sus padres ni a sus amantes.</p>
+
+          <p>Convencido de que algún pariente lejano o un antiguo condiscípulo pretendía someterlo a un retorcido chantaje emocional, continuó leyendo con una respiración que se volvía cada vez más corta y sibilante. En los capítulos siguientes, la prosa abandonaba la infancia y se adentraba en los años de madurez del protagonista, describiendo con minucia los horarios exactos de sus trayectos en tranvía, la marca de cigarrillos que fumaba a escondidas en el descansillo de la escalera y la taza de peltre con el borde mellado que utilizaba para hervir el café.</p>
+
+          <p>Al llegar al penúltimo pliego, la trama alcanzó el tiempo presente. La cuartilla trescientos noventa relataba la tarde del 18 de octubre: un hombre de espaldas al ventanal, con una camisa de hilo arrugada y una lupa de relojero en el ojo izquierdo, leía febrilmente una obra donde se advertía que el autor del texto no era un testigo oculto ni un impostor, sino la única faceta de su mente que conservaba la lucidez mientras el resto de su cerebro se degradaba en una sala de cuidados paliativos. Fernando levantó la mirada hacia el cristal del ventanal; en lugar de la redacción bulliciosa y el rumor de las rotativas, el reflejo le devolvió una estancia encalada de hospital, el zumbido monocorde de un monitor cardíaco y un médico de guardia que guardaba en una carpeta marrón las páginas inconexas que el paciente agonizante garabateaba con dedos temblorosos sobre las sábanas.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-doble-artesano",
+
+        titulo: "La paradoja del tasador de alhajas",
+
+        autor: "Ignacio de la Hoz",
+
+        genero: "Intriga Psicológica",
+
+        fecha: "Semana XIII · Octubre 2026",
+
+        tiempo: "15 min de lectura",
+
+        resumen: "Un perito gemólogo obsesionado con la autenticidad es contratado para certificar que una colección de joyas familiares es falsa, descubriendo que la falsificación incluye su propia identidad.",
+
+        imagen: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Ernesto Soldevila afirmaba que el ojo humano era un instrumento cobarde, siempre dispuesto a dejarse seducir por el brillo y la simetría; la lente de diez aumentos, en cambio, era un tribunal implacable donde ningún engaño salía con vida. Durante más de cuarenta años como tasador oficial del Monte de Piedad, Ernesto había desenmascarado perlas cultivadas vendidas como naturales, diamantes tratados con radiación y monturas de platino que no eran más que aleaciones miserables de níquel y plata. Su orgullo profesional residía en una máxima intransigente: «La copia puede engañar al afecto, pero nunca a la refracción lumínica».</p>
+
+          <p>Cierto atardecer de lluvia cerrada, un aristócrata en decadencia, el marqués de Valverde, solicitó sus servicios en su palacete de la calle Mayor. El encargo era insólito: no se trataba de certificar la autenticidad de un lote de camafeos y sortijas del siglo XVIII para asegurarlas, sino de emitir un dictamen judicial que demostrara formalmente que todas y cada una de las piezas eran burdas reproducciones modernas sin valor patrimonial alguno. «Necesito arruinar la codicia de mis herederos antes de que me entierren, don Ernesto», explicó el aristócrata sirviendo dos copas de oporto rancio. «Demuestre que nada de lo que hay en este cofre es genuino y le abonaré el triple de su tarifa habitual».</p>
+
+          <p>Ernesto abrió su maletín de cuero gastado y dispuso sobre el tapete de fieltro los frascos de ácido nítrico, la balanza de precisión y el refractómetro. Examinó primero una gargantilla de esmeraldas colombianas: las inclusiones en ala de libélula y las fisuras de cristalización revelaban, sin género de duda, la nobleza mineral de una gema extraída hacía doscientos años de las minas de Muzo. Analizó después un anillo con un zafiro de Ceilán de talla cojín: el azul aterciopelado era inconfundible, refractando la luz con la pureza que sólo confieren los milenios de presión geológica. Las piezas eran legítimas, excepcionales y de un valor incalculable.</p>
+
+          <p>Indignado ante lo que consideraba una blasfemia contra el arte de la orfebrería, Ernesto encaró al marqués: «Mi firma no avalará una calumnia técnica. Estas joyas salieron del taller de los mejores maestros plateros de Carlos IV; pretender que son vidrio coloreado es una felonía». El anciano sonrió con una pesadumbre infinita y deslizó sobre la mesa un documento amarillento con sello notarial fechado treinta años atrás. «Usted tiene toda la razón, don Ernesto. Las alhajas son auténticas. Lo que es falso es el perito: Ernesto Soldevila falleció de tifus en 1898 en un convento de clausura. Usted no es más que el orfebre que las copió en secreto, condenado en su delirio senil a revisar una y otra vez el único trabajo que jamás se atrevió a firmar para no ingresar en el penal de San Antón».</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-camara-vacia",
+
+        titulo: "El protocolo de la tercera butaca",
+
+        autor: "S. P. Paredes",
+
+        genero: "Drama & Psicología Oscura",
+
+        fecha: "Semana XIV · Octubre 2026",
+
+        tiempo: "17 min de lectura",
+
+        resumen: "El proyeccionista de una sala de cineclub clausurada proyecta la misma cinta muda todas las madrugadas para un espectador que nunca compra entrada ni abandona la sala.",
+
+        imagen: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>El Cine Rialto llevaba seis inviernos clausurado por ruina inminente y litigio de testamentaría, pero en la cabina del entresuelo el proyector de arco de carbón seguía rugiendo con puntualidad monacal. Tomás, que había sido el proyeccionista titular desde los tiempos del celuloide inflamable de nitrato, se negaba a abandonar las bobinas metálicas al polvo y a las ratas. Por orden de una comisión judicial que tardaba una eternidad en liquidar los bienes de la empresa, Tomás ejercía de vigilante nocturno; sin embargo, él prefería considerarse el custodio de una liturgia extinta.</p>
+
+          <p>Todas las noches, al filo de la una, enhebraba en los rodillos la copia única de una película alemana muda de 1927 cuyo argumento conocía fotograma a fotograma: una mujer vestida con abrigo de piel esperaba en la sala de espera de un balneario alpino mientras un reloj de péndulo marcaba las horas sin que nadie acudiera a recogerla. Tomás encendía los electrodos de carbón, accionaba el motor eléctrico y contemplaba a través de la mirilla rectangular cómo el haz de luz blanquecina atravesaba la penumbra de la platea, colmada de butacas desfondadas y lienzos de plástico que cubrían las molduras doradas.</p>
+
+          <p>El motivo de su perseverancia no era la nostalgia por el cine mudo, sino la presencia insólita que ocupaba la fila siete, butaca tres. Allí, sentado en el centro exacto del patio, un hombre de hombros anchos y sombrero de fieltro permanecía inmóvil durante los noventa minutos de la proyección. Tomás nunca lo había visto entrar por el vestíbulo cerrado con cadenas de forja ni descender por la escalinata de mármol al encenderse las luces de limpieza. El desconocido simplemente aparecía en cuanto el rayo de luz cortaba la oscuridad de la sala.</p>
+
+          <p>Durante meses, Tomás intentó descifrar la razón de aquella devoción espectral. Decidió someter al espectador a una prueba: en una secuencia decisiva, tapó deliberadamente el objetivo con una cartulina negra para simular un salto de proyección o una avería en el obturador. Esperaba que el hombre se revolviera en su asiento, protestara o volviera la mirada hacia la cabina. Nada ocurrió; la figura continuó mirando hacia la pantalla en blanco con una devoción imperturbable.</p>
+
+          <p>Vencido por el vértigo de aquel silencio, Tomás descendió por fin la empinada caracol de hierro que comunicaba la cabina con la platea. Caminó despacio por la alfombra carcomida entre el olor a humedad y polvo fósil hasta situarse junto a la butaca tres. Al posar la mano sobre el hombro de paño del desconocido, sus dedos tocaron únicamente el terciopelo desgastado del respaldo vacío. Al girar la cabeza hacia el haz de luz que descendía desde lo alto de la pared, vio con espanto que la silueta que proyectaba la sombra sobre la pantalla no estaba en la butaca, sino recortada en la ventanilla de la cabina: un hombre anciano y solo, de pie tras el vidrio de proyección, atrapado para siempre en el bucle mecánico de proyectar una película para nadie.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-censo-ausentes",
+
+        titulo: "El censo de los nombres borrados",
+
+        autor: "S. P. Paredes",
+
+        genero: "Misterio & Memoria",
+
+        fecha: "Semana VII · Octubre 2026",
+
+        tiempo: "12 min de lectura",
+
+        resumen: "En el sótano del negociado municipal de defunciones, un escribano descubre que ciertos nombres desaparecen de los libros sólo después de que la última persona viva los olvida por completo.",
+
+        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Don Mateo cumplió cuatro décadas como auxiliar mayor de la Sección de Bajas sin haber concurrido jamás a un entierro ajeno. Sostenía que la muerte biológica —aquella que certificaban los facultativos con un trazo tembloroso de tinta sepia— no era más que un trámite mecánico de intendencia urbana: el cuerpo se entregaba a la cal o al nicho del cementerio municipal, pero el nombre continuaba respirando en los anaqueles del negociado, encuadernado en piel de novillo bajo el rótulo de <em>Expedientes en Tránsito</em>.</p>
+
+          <p>La liturgia del archivo era severa: cada amanecer, antes de que el conserje encendiera los quinqués de petróleo, Mateo repasaba los asientos del libro de 1888. Era un volumen inmenso, de lomo cóncavo y hojas de estraza satinada. Sin embargo, en el invierno de aquel año comenzó a advertir una anomalía que desafiaba la química documental. Ciertas partidas no amarilleaban ni sufrían la voracidad de la polilla; sencillamente, la tinta ferrogálica se iba desvaneciendo hasta dejar en la superficie del papel una hendidura seca, como si la pluma hubiese presionado sobre la cuartilla sin mancharla.</p>
+
+          <p>Al cotejar las fechas con los libros parroquiales de San Nicolás, Mateo desentrañó la regla secreta que ningún reglamento civil contemplaba: el asiento no se borraba cuando el sujeto moría, sino en el instante exacto en que fallecía el último ser humano sobre la tierra que aún conservaba un recuerdo directo de su rostro o el eco de su voz. Cuando la partida de una bordadora llamada Leonor Ribelles se volvió transparente un martes a las cuatro de la tarde, Mateo consultó las esquelas del diario local del día siguiente: a esa misma hora, en el asilo de las Hermanas de los Pobres, había expirado su bisnieto, un anciano de noventa y dos años que había pasado sus últimos meses murmurando letanías inconexas.</p>
+
+          <p>Desde aquella revelación, Mateo no volvió a mirar las carpetas con la frialdad del burócrata. Cada nombre registrado era un rehén de la memoria ajena, suspendido en una frágil tregua contra la nada. Por las noches, en la soledad de su alcoba, comenzó a escribir en un cuaderno privado los nombres de desconocidos cuyos expedientes estaban a punto de desaparecer. Sabía que mientras él repitiera aquellas sílabas antes de dormir, aquellas sombras continuarían teniendo un ancla secreta en el mundo de los vivos.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-espejo-reverso",
+
+        titulo: "El azogue de la casa deshabitada",
+
+        autor: "Clara M. Soler",
+
+        genero: "Ficción Metafísica",
+
+        fecha: "Semana VIII · Octubre 2026",
+
+        tiempo: "11 min de lectura",
+
+        resumen: "Un restaurador de muebles antiguos recibe un espejo veneciano que no refleja la habitación en la que se encuentra, sino los instantes en que la sala permaneció vacía.",
+
+        imagen: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Julián aprendió de su abuelo que los espejos viejos padecen de cansancio. «El azogue no es un metal inerte», solía advertirle el viejo dorador en el taller de la calle de las Cruces; «es una emulsión de mercurio y estaño que retiene la temperatura de las miradas que ha tenido que devolver durante siglos». Por eso, cuando le entregaron la luna biselada de un tocador barroco rescatado del derribo de un palacete en la ribera del río, Julián no se sorprendió al encontrar manchas violáceas en los márgenes del cristal.</p>
+
+          <p>Lo desconcertante ocurrió al anochecer, cuando colocó el espejo sobre el caballete de restauración frente a su propio banco de trabajo. Al levantar la vista esperando encontrar su torso encorvado y la manga deshilachada de su mandil, el cristal le devolvió una estancia idéntica a su taller, con la misma lámpara de latón y las mismas herramientas de hueso, pero rigurosamente desierta. Julián agitó la mano frente a la superficie: nada cruzó el reflejo. La imagen no estaba retrasada ni congelada; el espejo reproducía el taller en ausencia de cualquier observador.</p>
+
+          <p>Durante tres semanas, Julián postergó la entrega de la pieza. Pasaba las madrugadas sentado en penumbra frente al cristal, fascinado por la revelación de una verdad intolerable: las cosas del mundo no nos necesitan para existir. En el espejo, la madera de su mesa reposaba con una calma monumental, el polvo danzaba en la penumbra sin el sobresalto de los pasos humanos y el tiempo transcurría con una serenidad mineral despojada de urgencias biológicas. Descubrió que la mirada del hombre contamina la quietud de los objetos, obligándolos a representar el papel de utensilios.</p>
+
+          <p>La noche antes de entregar el encargo, Julián apagó el candil y se sentó en el suelo, cerrando los ojos hasta que su respiración se volvió casi imperceptible. Al abrirlos lentamente en la oscuridad, creyó ver en el fondo del espejo que una de las herramientas de su banco se movía una fracción de milímetro por su propia voluntad, disfrutando por fin de su libertad secreta.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-cartografo-costa",
+
+        titulo: "La marea de las palabras no pronunciadas",
+
+        autor: "Ignacio de la Hoz",
+
+        genero: "Prosa Contemplativa",
+
+        fecha: "Semana IX · Octubre 2026",
+
+        tiempo: "10 min de lectura",
+
+        resumen: "Un guardafaros jubilado compila en una libreta de hule todas las confesiones que los náufragos callaron por decoro antes de que el mar reclamara sus maderos.",
+
+        imagen: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Durante treinta y seis inviernos en el saliente de Punta Entinas, don Roque aprendió a distinguir los diferentes registros con que el mar devuelve los restos de una tragedia. Las maderas de pino astilladas hablaban de una colisión violenta contra el arrecife; los cabos deshilachados con limpieza delataban la fatiga lenta del cáñamo; pero las cajas de caudales y los cofres de efectos personales llegaban a la orilla con un silencio particular, como si custodiaran un peso que nada tenía que ver con la densidad del agua salada.</p>
+
+          <p>Roque no recogía medallas ni monedas de níquel. Su obsesión consistía en buscar cartas guardadas en frascos de botica con tapón de cera y diarios de navegación empapados cuyas tintas aún toleraban el secado con papel secante. Con los años, advirtió un patrón recurrente en los escritos redactados durante las horas previas al naufragio: los hombres al borde de la extinción prescindían de las declaraciones grandilocuentes y de los juramentos de posteridad. Escribían, con caligrafía apretada, listas de agravios diminutos que nunca se habían atrevido a resolver: el préstamo no devuelto a un hermano, la carta de despedida arrugada que nunca llegó al correo, o la confesión de una fatiga moral que habían ocultado bajo una fachada de rectitud gremial.</p>
+
+          <p>En su retiro en la lonja vieja, Roque dedicó sus últimos años a una tarea singular: no transcribía las cartas, sino que completaba las frases que habían quedado truncadas por el golpe del agua. Imaginaba las respuestas que los destinatarios jamás recibirían y las pronunciaba en voz alta frente a los rompeolas al caer la tarde. Estaba convencido de que las palabras no pronunciadas ejercen una presión hidrostática sobre el mundo, y que su deber consistía en aliviar esa carga antes de que el salitre disolviera la memoria de los desdichados.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-estacion-olvidados",
+
+        titulo: "El desvío de las causas fenecidas",
+
+        autor: "S. P. Paredes",
+
+        genero: "Misterio Filosófico",
+
+        fecha: "Semana X · Octubre 2026",
+
+        tiempo: "13 min de lectura",
+
+        resumen: "En una bifurcación ferroviaria en desuso, un guardagujas descubre un convoy postal que transporta cartas devueltas con sellos de ciudades que nunca llegaron a fundarse.",
+
+        imagen: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>La casilla del desvío número siete se alzaba en una paramera donde los trenes de línea principal reducían la marcha por pura precaución ante los bancos de niebla. Anselmo era el encargado de accionar la palanca de cambio de vías dos veces al día: a las once de la mañana, para permitir el paso del correo de mercancías, y a las ocho de la tarde, para desviar al apartadero los vagones de carbón que aguardaban reparación de ejes. Era un trabajo sedentario que se medía por el zumbido de los cables telegráficos y el humo denso de las pipas de cerezo.</p>
+
+          <p>Una noche de escarcha tardía, el telégrafo de aguja comenzó a emitir impulsos que no correspondían a la clave Morse de la compañía ferroviaria. Minutos después, un furgón automotor sin luces de posición frenó frente a la caseta con un chirrido de zapatas metálicas. Del interior descendió un cartero postal con uniforme de paño gris plomo y una saca precintada con marchamos de plomo. «Correspondencia rechazada por falta de radicación geográfica», anunció el funcionario con la indiferencia burocrática de quien entrega un recibo municipal.</p>
+
+          <p>Al abrir la saca bajo la luz de la lámpara de carburo, Anselmo descubrió miles de sobres dirigidos a destinatarios que habitaban en avenidas y plazas de ciudades inexistentes: <em>Paseo de las Tres Columnas (Ciudad de la Concordia)</em>, <em>Calle del Olvido número 12 (Santa María del Silencio)</em>. Sin embargo, los remitentes eran personas reales que vivían en barrios obreros de la capital. Al leer algunas de las misivas, Anselmo comprendió el misterio: eran cartas que los remitentes se habían escrito a sí mismos en momentos de crisis existencial, imaginando la vida que habrían llevado si hubiesen tomado una decisión diferente en una encrucijada del pasado.</p>
+
+          <p>El tren no transportaba correspondencia extraviada por negligencia del servicio postal; transportaba las vidas hipotéticas que los hombres habían descartado por miedo o resignación. Anselmo guardó la saca en el arcón de herramientas y no accionó la palanca de regreso. Supo que aquel desvío era el único lugar sobre la tierra donde los destinos no cumplidos aún conservaban el derecho de llegar a alguna parte.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-relojero-vidriera",
+
+        titulo: "El relojero de la calle de los Cristales Rotos",
+
+        autor: "S. P. Paredes",
+
+        genero: "Misterio & Atmósfera",
+
+        fecha: "Semana I · Octubre 2026",
+
+        tiempo: "7 min de lectura",
+
+        resumen: "Hermann sostenía que los relojes de cuerda no marcaban el paso de las horas, sino el ritmo con el que los inquilinos de la casa iban olvidando sus propias promesas.",
+
+        imagen: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Hermann sostenía que los relojes de péndulo no miden el paso del tiempo exterior, sino la velocidad con que los habitantes de una estancia van desgastando el silencio. Su taller, encajonado entre dos casonas desvencijadas en el callejón de los Cristales Rotos, olía a trementina, grasa mineral y papel quemado. Allí no entraba la luz del sol; entraba una claridad grisácea y sesgada que parecía filtrada a través de un vaso de ginebra turbia.</p>
+
+          <p>La noche del primer jueves de octubre, una mujer envuelta en un abrigo de paño azul pizarra empujó la cancela. Sobre el mostrador de nogal no depositó una joya de oro ni una fiambrera de repuesto, sino una caja de cedro sellada con alambre de cobre. «No se detiene nunca», susurró ella con una voz que carecía de aspaviento dramático. «Y temo que, si sigue sonando cuando llegue la medianoche del sábado, el testamento que firmó mi tío en Viena perderá su tinta».</p>
+
+          <p>Hermann aproximó la lupa de relojero a su cuenca izquierda. Al destapar la caja no halló ruedas dentadas de latón ni la espiral templada de acero suizo que esperaba, sino un laberinto concéntrico de varillas de hueso que golpeaban con sequedad rítmica una diminuta lámina de pizarra. Cada pulsación arrancaba del aire una partícula de polvo luminiscente. «Esto no lo fabricó ningún gremio de este lado del río», murmuró Hermann sin apartar la mirada. «Esto es un cronómetro de deuda. Alguien pagó para que el tiempo de esa casa no fuera hacia adelante, sino hacia el momento exacto en que ustedes cometieron la primera mentira».</p>
+
+          <p>La mujer no pestañeó. Dio un paso hacia la penumbra de la puerta y dejó sobre el mostrador una moneda de plata tan gastada que ya no ostentaba el rostro de ningún rey: «Solo le pido que lo atrase dos horas. Dos horas bastan para confesar antes de que la policía precinte la biblioteca».</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-vigilia-farero",
+
+        titulo: "Elegía para la última campana del muelle",
+
+        autor: "Cuaderno de Letras",
+
+        genero: "Poesía de Medianoche",
+
+        fecha: "Semana II · Octubre 2026",
+
+        tiempo: "3 min de lectura",
+
+        resumen: "Versos consagrados a la niebla portuaria, el óxido de los cabrestantes y el eco de los buques que zarpan sin retorno anunciado.",
+
+        imagen: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">Se oxida la aldaba sobre el muelle de piedra.</p>
+
+            <p class="poem-line">El agua negra sube sin consultar la hora,</p>
+
+            <p class="poem-line">trayendo entre las algas</p>
+
+            <p class="poem-line">los nombres de madera que el carbón olvidó.</p>
+
+          </div>
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">Tañe la campana con un metal herido,</p>
+
+            <p class="poem-line">no avisa del naufragio ni convoca al piloto:</p>
+
+            <p class="poem-line">tañe porque la noche pesa sobre los techos</p>
+
+            <p class="poem-line">como el sayal de plomo de un monje cenobita.</p>
+
+          </div>
+
+          <div class="poem-stanza">
+
+            <p class="poem-line">Quien mira la baliza desde el malecón yermo</p>
+
+            <p class="poem-line">aprende que la espera no es ausencia de ruido,</p>
+
+            <p class="poem-line">sino la forma exacta en que la sombra escucha</p>
+
+            <p class="poem-line">el paso de la quilla que jamás volverá.</p>
+
+          </div>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-manuscrito-archivo",
+
+        titulo: "El protocolo número catorce",
+
+        autor: "Ignacio de la Hoz",
+
+        genero: "Enigma & Relato Policial",
+
+        fecha: "Semana III · Octubre 2026",
+
+        tiempo: "9 min de lectura",
+
+        resumen: "En la sección de piezas de convicción de la Audiencia, un legajo de 1924 aparece con el sello lacrado intacto y un peso que desafía las leyes de la física documental.",
+
+        imagen: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>Don Valeriano llevaba treinta y dos años custodiando el sótano de legajos y piezas archivadas sin haber extraviado jamás una cuartilla. Conocía la caligrafía nerviosa de los escribanos del siglo XIX, la tinta ferrogaloplástica que carcomía el papel de estraza y el olor agrio que despedían los expedientes de homicidio cuando el verano recalentaba los sótanos del juzgado.</p>
+
+          <p>Por eso, cuando encontró la carpeta marcada con el número catorce sobre la mesa de clasificación, supo de inmediato que algo infringía la liturgia del recinto. No figuraba en el libro de registro de entradas de aquel año ni en el inventario de causas fenecidas de la década anterior. El legajo estaba precintado con una cinta de bramante rojo y un sello de lacre bermellón donde apenas se distinguía la impronta de un compás y una llave cruzada.</p>
+
+          <p>Al levantarlo para cotejar su signatura, Valeriano sintió un frío anómalo en la palma. El cartón pesaba el triple de lo ordinario, como si entre sus folios descansara una lámina de plomo. Con una plegadera de hueso quebró con reverencia el lacre seco. En el interior no había declaraciones sumariales, ni actas de autopsia, ni recibos de fianza. Había seis hojas de papel cebolla cubiertas de una caligrafía pulcra y diminuta donde se narraban, con fecha, hora y minuto exactos, todos los movimientos que el propio Valeriano había realizado desde que encendió el candil a las ocho de la mañana.</p>
+
+          <p>Al llegar al último párrafo de la página final, la tinta aún parecía húmeda: <em>«A las diez y diecisiete, el archivero comprenderá que este sumario no investiga un delito pasado, sino la causa formal de su propia desaparición...»</em>. Valeriano miró el reloj de pared: marcaba exactamente las diez y dieciséis con cincuenta segundos.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-jardin-ciegos",
+
+        titulo: "La biblioteca del botánico ausente",
+
+        autor: "Clara M. Soler",
+
+        genero: "Fantasía & Erudición",
+
+        fecha: "Semana IV · Octubre 2026",
+
+        tiempo: "8 min de lectura",
+
+        resumen: "Un herbario encuadernado en cuero marroquí cuyas hojas secas continúan germinando entre las páginas a medida que el lector avanza en su traducción.",
+
+        imagen: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>La biblioteca de fray Anselmo no contenía volúmenes de teología moral ni sermones de Cuaresma, sino una colección de setenta y cuatro herbarios mudos recolectados en las marismas durante las epidemias de 1834. Anselmo estaba convencido de que los vegetales no se secan al prensarse entre pliegos de papel secante, sino que aprenden a leer en silencio las frases que los aprisionan.</p>
+
+          <p>Cuando la joven botánica Elena recibió en herencia el tomo titulado <em>Taxonomía de las raíces umbrías</em>, advirtió que el lomo crujía con una elasticidad insólita para un libro de casi dos siglos. Al abrir la lámina correspondiente a la <em>Mandragora autumnalis</em>, observó que una filigrana de zarcillos verde oliva había perforado el margen del texto en latín, enlazando los verbos copulativos y estrangulando las notas al pie.</p>
+
+          <p>A lo largo de las noches de estudio, Elena comprendió la regla del manuscrito: cada vez que pronunciaba en voz alta el nombre vernáculo de una especie, las fibras secas palpitaban absorbiendo la humedad de su aliento. El libro no era un archivo de plantas extintas; era un invernadero de papel donde la memoria del viejo fraile se conservaba verde, esperando que una boca atenta le devolviera el oxígeno del mundo exterior.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-estacion-niebla",
+
+        titulo: "El último expreso de las tres y veinte",
+
+        autor: "S. P. Paredes",
+
+        genero: "Misterio Urbano",
+
+        fecha: "Semana V · Octubre 2026",
+
+        tiempo: "6 min de lectura",
+
+        resumen: "En el institutions andén tercero de una estación de paso, un hombre espera un tren que fue retirado del itinerario oficial hace cuarenta años por orden gubernativa.",
+
+        imagen: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>A las tres de la madrugada, la estación de término pierde su condición de edificio público y se convierte en una catedral de hierro donde resuena el goteo de las tuberías de vapor. El jefe de estación nocturno, don Emilio, sabía que ningún tren de pasajeros figuraba en el panel electromecánico a partir de la una y media.</p>
+
+          <p>Sin embargo, invariablemente los martes de otoño, la campana de aguja del desvío norte emitía dos tañidos secos. Por la curva de vía muerta aparecía una locomotora diésel sin matrícula que arrastraba un único coche de viajeros con las ventanillas empañadas. Del estribo no descendía ninguna multitud con maletas; solo bajaba un viajero con gabardina de paño verde oliva que cruzaba el andén con paso uniforme, dejaba un sobre manila sin señas sobre la ventanilla de billetes y se perdía por la escalinata que daba a los descampados.</p>
+
+          <p>Don Emilio nunca abrió ninguno de esos sobres durante veinte años. Los guardaba en un cajón de roble bajo la balanza de equipajes. La noche de su jubilación, antes de entregar el juego de llaves al nuevo titular, rasgó por fin el borde del sobre más antiguo. En su interior no encontró dinero, ni billetes caducados, ni confesiones de fugitivos: solo había una cuartilla blanca con una frase escrita a máquina: <em>«Gracias por no haber preguntado nunca la estación de donde venimos»</em>.</p>
+
+        `
+
+      },
+
+      {
+
+        id: "obra-soneto-tiempo",
+
+        titulo: "Tratado de la ceniza matinal",
+
+        autor: "Cuaderno de Letras",
+
+        genero: "Prosa Lírica",
+
+        fecha: "Semana VI · Octubre 2026",
+
+        tiempo: "4 min de lectura",
+
+        resumen: "Reflexión poética sobre el despertar solitario, los restos de lumbre en el hogar y la certidumbre de que escribir es custodiar brasas apagadas.",
+
+        imagen: "https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=800&q=80",
+
+        contenido: `
+
+          <p>La ceniza de la chimenea no es el testimonio de la destrucción de la madera, sino su descanso mineral. A las seis de la mañana, antes de que el vendedor de carbón golpee los adoquines, la casa entera pertenece a quien sabe permanecer inmóvil frente a los leños carbonizados.</p>
+
+          <p>Hay un arte riguroso en remover el rescoldo con el atizador de hierro sin levantar polvo: buscar el punto donde todavía titila un grano de luz roja, oculto bajo el manto gris como un secreto que se resiste a ser confesado. Ese pequeño punto incandescente basta para demostrar que la noche no venció por completo; que las palabras pronunciadas la víspera retienen su calor y que escribir no es otra cosa que soplar con paciencia sobre el residuo hasta que la llama vuelva a alumbrar la mesa de estudio.</p>
+
+        `
+
       }
+
     ];
 
     const OBRAS_POR_PAGINA = 4;
