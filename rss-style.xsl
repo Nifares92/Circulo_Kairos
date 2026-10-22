@@ -161,29 +161,6 @@
             </div>
           </header>
 
-          <h3 class="section-title">Últimas publicaciones indexadas</h3>
-
-          <main>
-            <xsl:for-each select="/rss/channel/item">
-              <article class="feed-item">
-                <span class="item-category"><xsl:value-of select="category"/></span>
-                <h2>
-                  <a>
-                    <xsl:attribute name="href"><xsl:value-of select="link"/></xsl:attribute>
-                    <xsl:value-of select="title"/>
-                  </a>
-                </h2>
-                <div class="item-meta">
-                  <span><xsl:value-of select="author"/></span> · 
-                  <time><xsl:value-of select="pubDate"/></time>
-                </div>
-                <p class="item-desc">
-                  <xsl:value-of select="description"/>
-                </p>
-              </article>
-            </xsl:for-each>
-          </main>
-
         </div>
       </body>
     </html>
