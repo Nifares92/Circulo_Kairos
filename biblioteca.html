@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Círculo Kairós — Biblioteca e Inventario Cronológico de Ensayos y Relatos.">
+  <title>Biblioteca e Inventario | Círculo Kairós</title>
+
+  <!-- Favicon SVG oficial -->
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fbf8f3;
+      --bg-surface: #f4ede1;
+      --bg-card: #f8f3ea;
+      --bg-accent-tint: #f1e6d4;
+      --text-main: #221f1d;
+      --text-muted: #6d665f;
+      --text-light: #8a8279;
+      --accent: #9e4734;
+      --accent-dark: #783324;
+      --border-soft: #e2d8c7;
+      --border-dark: #221f1d;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-reader: 'Newsreader', Garamond, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+      --max-width: 1240px;
+      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent); }
+
+    .top-bar-meta {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .top-bar-meta span strong { color: var(--accent); }
+
+    .site-header {
+      border-bottom: 1px solid var(--border-soft);
+      padding: 2.2rem 1.5rem 1.6rem;
+      background-color: var(--bg-color);
+      position: relative;
+    }
+    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+
+    .brand { position: relative; padding: 1rem 0 0.5rem; }
+
+    .brand-watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px; height: 250px;
+      pointer-events: none; z-index: 1; opacity: 0.13;
+      filter: blur(1px); mix-blend-mode: multiply;
+    }
+
+    .site-title {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+      position: relative; z-index: 2;
+    }
+    .site-title a { color: var(--text-main); transition: color var(--transition); }
+    .site-title a:hover { color: var(--accent); }
+
+    .site-tagline {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      position: relative; z-index: 2;
+    }
+
+    /* BARRA DE NAVEGACIÓN */
+    .main-nav { 
+      border-bottom: 3px double var(--border-dark);
+      padding: 0.9rem 1rem;
+      position: sticky; top: 0;
+      background-color: rgba(251, 248, 243, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+    }
+    .nav-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+    .nav-toggle-btn { display: none; }
+    .main-nav > .nav-container > ul { 
+      list-style: none; display: flex; justify-content: center; align-items: center; gap: 3.5rem;
+    }
+    .main-nav a {
+      font-size: 0.82rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.16em; color: var(--text-main); padding: 0.35rem 0; position: relative;
+    }
+    .main-nav a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
+      background-color: var(--accent); transition: width var(--transition);
+    }
+    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
+    .main-nav a.active { color: var(--accent); }
+
+    /* SUBMENÚ DESPLEGABLE */
+    .has-dropdown { position: relative; }
+    .dropdown-trigger { cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; }
+    .arrow-indicator { font-size: 0.65rem; transition: transform var(--transition); color: var(--accent); }
+    .has-dropdown:hover .arrow-indicator { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--bg-card); border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      min-width: 230px; padding: 0.8rem 0; list-style: none;
+      display: none; flex-direction: column; text-align: left; border-radius: 2px; z-index: 10000;
+    }
+    .dropdown-menu li { width: 100%; }
+    .dropdown-menu a {
+      display: block; padding: 0.65rem 1.4rem; font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-main); transition: all var(--transition);
+    }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-menu a:hover { background-color: var(--bg-surface); color: var(--accent); padding-left: 1.65rem; }
+    .has-dropdown:hover .dropdown-menu { display: flex; animation: aparecerDropdown 0.25s ease forwards; }
+    @keyframes aparecerDropdown {
+      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+    }
+
+    #contenido-principal { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    .section-hero-header {
+      text-align: center; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-soft);
+    }
+    .section-category-label {
+      font-family: var(--font-classical); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); display: inline-block; margin-bottom: 0.5rem;
+    }
+    .section-main-title {
+      font-family: var(--font-serif); font-size: 3rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 1rem;
+    }
+    .section-intro-text {
+      max-width: 760px; margin: 0 auto; font-family: var(--font-reader); font-size: 1.15rem;
+      line-height: 1.75; color: var(--text-muted); font-style: italic;
+    }
+
+    .layout-columns {
+      display: grid; grid-template-columns: 2.3fr 1fr; gap: 3.8rem; align-items: start;
+    }
+
+    .tabs-bar {
+      display: flex; gap: 0.5rem; border-bottom: 2px solid var(--border-soft); margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: transparent; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px;
+      padding: 0.75rem 1.2rem; font-family: var(--font-classical); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: all var(--transition);
+    }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active {
+      color: var(--accent); border-bottom-color: var(--accent); background-color: var(--bg-card);
+    }
+
+    .collection-stream { display: flex; flex-direction: column; gap: 1.5rem; }
+    .item-card {
+      background-color: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem;
+      box-shadow: var(--shadow-subtle); transition: transform var(--transition);
+    }
+    .item-card:hover { transform: translateY(-2px); }
+    .item-meta-tag {
+      font-family: var(--font-classical); font-size: 0.72rem; color: var(--accent); font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; display: block;
+    }
+    .item-card h4 { font-family: var(--font-serif); font-size: 1.35rem; line-height: 1.3; margin-bottom: 0.4rem; }
+    .item-card p { font-family: var(--font-reader); font-size: 0.98rem; color: var(--text-muted); line-height: 1.6; }
+    .item-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; flex-shrink: 0; }
+    .btn-goto {
+      font-family: var(--font-sans); font-size: 0.76rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--accent); background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft); padding: 0.4rem 0.8rem; border-radius: 2px; white-space: nowrap;
+    }
+    .btn-goto:hover { background-color: var(--accent); color: #fff; }
+
+    .empty-state {
+      text-align: center; padding: 4rem 2rem; background-color: var(--bg-card);
+      border: 1px dashed var(--border-soft); font-family: var(--font-reader); font-style: italic; color: var(--text-muted);
+    }
+
+    .sidebar-wrapper { position: sticky; top: 5rem; display: flex; flex-direction: column; gap: 2.5rem; }
+    .sidebar-widget {
+      background-color: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; box-shadow: var(--shadow-subtle); margin-bottom: 2rem;
+    }
+    .widget-heading {
+      font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--border-dark); padding-bottom: 0.4rem;
+    }
+    .stats-counter { display: grid; grid-template-columns: 1fr; gap: 1.2rem; text-align: center; }
+    .stat-box { background-color: var(--bg-surface); border: 1px solid var(--border-soft); padding: 1rem; }
+    .stat-number { font-family: var(--font-classical); font-size: 2rem; font-weight: 700; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+    .site-footer {
+      background-color: var(--bg-surface); border-top: 3px double var(--border-dark); padding: 4rem 1.5rem 2.5rem; margin-top: 5rem;
+    }
+    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3.5rem; }
+    .footer-brand h3 { font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+    .footer-brand p { font-family: var(--font-reader); font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; max-width: 440px; }
+    .footer-nav h4 {
+      font-family: var(--font-classical); font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.2rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 0.4rem;
+    }
+    .footer-nav ul { list-style: none; }
+    .footer-nav li { margin-bottom: 0.75rem; }
+    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
+    .footer-nav a:hover { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .main-nav { padding: 0.6rem 1rem; }
+      .nav-toggle-btn {
+        display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: 1px solid var(--border-soft);
+        padding: 0.45rem 1rem; font-family: var(--font-classical); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.16em;
+        text-transform: uppercase; color: var(--text-main); cursor: pointer; border-radius: 2px; margin: 0 auto;
+      }
+      .main-nav > .nav-container > ul {
+        display: none; flex-direction: column; align-items: center; gap: 1rem; width: 100%;
+        padding: 1.2rem 0 0.5rem; border-top: 1px solid var(--border-soft); margin-top: 0.6rem;
+      }
+      .main-nav > .nav-container > ul.nav-abierto { display: flex; }
+      .dropdown-menu {
+        position: static; transform: none; box-shadow: none; border: none; background-color: var(--bg-surface);
+        margin: 0.5rem auto 0; width: 90%; padding: 0.4rem 0;
+      }
+      .dropdown-menu.sub-abierto { display: flex !important; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <aside class="top-bar-meta" aria-label="Información de la publicación">
+    <span>Círculo Kairós · Biblioteca e Inventario General</span>
+    <span><strong>Archivo:</strong> Ensayos y Relatos ordenados por Cuaderno</span>
+    <span>Año I · Edición Continua</span>
+  </aside>
+
+  <!-- CABECERA PRINCIPAL -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
+        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
+        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN PRINCIPAL -->
+  <nav class="main-nav" aria-label="Navegación principal">
+    <div class="nav-container">
+      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
+        <span id="icono-menu-movil">☰</span>
+        <span>Menú</span>
+      </button>
+
+      <ul id="lista-navegacion">
+        <li><a href="index.html">Inicio</a></li>
+        
+        <li class="has-dropdown">
+          <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
+            Cuadernos <span class="arrow-indicator">▾</span>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
+            <li><a href="literatura.html">Literatura & Enigma</a></li>
+            <li><a href="cine.html">Cine & Mirada</a></li>
+            <li><a href="musica.html">Música & Acústica</a></li>
+            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+          </ul>
+        </li>
+
+        <li><a href="sobre-el-circulo.html">El Círculo</a></li>
+        <li><a href="biblioteca.html" class="active">Biblioteca</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="contenido-principal">
+
+    <header class="section-hero-header">
+      <span class="section-category-label">Inventario General y Archivo</span>
+      <h2 class="section-main-title">Biblioteca Cronológica por Cuaderno</h2>
+      <p class="section-intro-text">
+        «El orden del tiempo preserva el espíritu de las palabras.» Registro completo y riguroso de cada ensayo y tratado en sus cinco cuadernos, y de cada relato u obra en El Rincón del Lector.
+      </p>
+    </header>
+
+    <div class="layout-columns">
+
+      <!-- COLUMNA PRINCIPAL DE CONTENIDOS -->
+      <section>
+
+        <!-- Pestañas de Filtro Exactas por Cuaderno y Rincón del Lector -->
+        <nav class="tabs-bar" aria-label="Filtro de biblioteca">
+          <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todo el Archivo</button>
+          <button class="tab-btn" onclick="cambiarFiltro('pensamiento', this)">V · Pensamiento</button>
+          <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">IV · Filosofía</button>
+          <button class="tab-btn" onclick="cambiarFiltro('musica', this)">III · Música</button>
+          <button class="tab-btn" onclick="cambiarFiltro('cine', this)">II · Cine</button>
+          <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">I · Literatura</button>
+          <button class="tab-btn" onclick="cambiarFiltro('relatos', this)">Rincón del Lector</button>
+        </nav>
+
+        <!-- Stream de Obras -->
+        <div class="collection-stream" id="contenedor-biblioteca">
+          <!-- Se cargará automáticamente -->
+        </div>
+
+      </section>
+
+      <!-- BARRA LATERAL -->
+      <aside class="sidebar-wrapper" aria-label="Estadísticas de la biblioteca">
+        
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Censo del Archivo</h3>
+          <div class="stats-counter">
+            <div class="stat-box">
+              <span class="stat-number" id="conteo-total-biblioteca">0</span>
+              <span class="stat-label">Publicaciones Registradas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h3 class="widget-heading">Criterio de Orden</h3>
+          <p style="font-family: var(--font-reader); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
+            Este inventario separa estrictamente los Ensayos de cada Cuaderno y los Relatos del Rincón del Lector, ordenándolos cronológicamente de más reciente a más antiguo.
+          </p>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
+        <h3>CÍRCULO KAIRÓS</h3>
+        <p>Publicación cultural independiente consagrada al análisis pausado de las artes y el pensamiento.</p>
+        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <h4>Cuadernos</h4>
+        <ul>
+          <li><a href="literatura.html">Literatura & Enigma</a></li>
+          <li><a href="cine.html">Cine & Mirada</a></li>
+          <li><a href="musica.html">Música & Resonancias</a></li>
+          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h4>El Círculo</h4>
+        <ul>
+          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
+          <li><a href="biblioteca.html">Biblioteca & Inventario</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOTOR DE INVENTARIO MAESTRO SEPARADO CORRECTAMENTE -->
+  <script>
+    const inventarioMaestroKairos = [
+      // ==========================================
+      // CUADERNO V · PENSAMIENTO & TRIBUNA (pensamiento.html)
+      // ==========================================
+      {
+        titulo: "La arquitectura habitada por ausencias: Fenomenología, ontología y resistencia de la casa encantada",
+        autor: "Dirección Editorial",
+        tipo: "Ensayo (Cuaderno V)",
+        categoria: "pensamiento",
+        fecha: "2026-10-22",
+        fechaFormateada: "22 de Octubre, 2026",
+        enlace: "pensamiento.html#pensamiento-casas-encantadas",
+        resumen: "Tribuna de la Dirección consagrada a la resistencia metafísica y la memoria involuntaria de la casa encantada."
+      },
+      {
+        titulo: "El banquete de las sombras: Fenomenología de la vigilia fúnebre y el regreso de los ancestros",
+        autor: "Dirección Editorial",
+        tipo: "Ensayo (Cuaderno V)",
+        categoria: "pensamiento",
+        fecha: "2026-10-16",
+        fechaFormateada: "16 de Octubre, 2026",
+        enlace: "pensamiento.html#pensamiento-banquete-sombras",
+        resumen: "Tratado monográfico sobre Samhain, el luto insumiso y el deber sagrado de la memoria frente al olvido."
+      },
+      {
+        titulo: "La arquitectura de la ausencia: Fenomenología de la pérdida y el duelo insumiso",
+        autor: "Dirección Editorial",
+        tipo: "Ensayo (Cuaderno V)",
+        categoria: "pensamiento",
+        fecha: "2026-10-16",
+        fechaFormateada: "16 de Octubre, 2026",
+        enlace: "pensamiento.html#tratado-perdida-director",
+        resumen: "Reflexión profunda sobre los objetos huérfanos y la supervivencia de los afectos tras el naufragio."
+      },
+      {
+        titulo: "La rebelión del instante: Génesis y vocación de Círculo Kairós",
+        autor: "Dirección Editorial",
+        tipo: "Ensayo (Cuaderno V)",
+        categoria: "pensamiento",
+        fecha: "2026-10-16",
+        fechaFormateada: "16 de Octubre, 2026",
+        enlace: "pensamiento.html#pensamiento-origen-circulo-kairos",
+        resumen: "Manifiesto inaugural de la Dirección consagrado al rescate de la atención lúcida y la demora frente a la prisa."
+      },
+
+      // ==========================================
+      // CUADERNO IV · FILOSOFÍA & ENSAYO (filosofia.html)
+      // ==========================================
+      {
+        titulo: "La ontología del umbral: Arquitectura espectral, topología de la culpa y inversión del cosmos doméstico",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-10-21",
+        fechaFormateada: "21 de Octubre, 2026",
+        enlace: "filosofia.html#filosofia-casas-encantadas-ontologia",
+        resumen: "Tratado monográfico sobre cómo la arquitectura materializa en vigas y sótanos lo que la conciencia intenta reprimir."
+      },
+      {
+        titulo: "La mirada sin ojos: Espectrología, el huésped que no termina de morir y el retorno",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-10-15",
+        fechaFormateada: "15 de Octubre, 2026",
+        enlace: "filosofia.html#filosofia-espectrologia-fantasma",
+        resumen: "Análisis ontológico del efecto visera en Derrida, el tiempo desquiciado y la persistencia de las ausencias."
+      },
+      {
+        titulo: "El horizonte inexorable: La muerte como brújula del pensamiento",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "filosofia.html#filosofia-muerte-finitud",
+        resumen: "De Sócrates a Epicuro, Séneca y Heidegger: aprender a morir para habitar el presente."
+      },
+      {
+        titulo: "La campana de la finitud: Martin Heidegger, la caída en lo impersonal y el ser-para-la-muerte",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "filosofia.html#heidegger-tiempo",
+        resumen: "La dictadura del 'Se', la habladuría cotidiana y la resolución precursora ante la finitud."
+      },
+      {
+        titulo: "El gran peso del mediodía: Friedrich Nietzsche y la prueba suprema del eterno retorno",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "filosofia.html#eterno-retorno",
+        resumen: "El experimento del demonio en Sils-Maria y la afirmación absoluta del amor fati."
+      },
+      {
+        titulo: "Contra la tiranía del Cronos: la rebelión del Kairós y la recuperación del instante sagrado",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-09-28",
+        fechaFormateada: "28 de Septiembre, 2026",
+        enlace: "filosofia.html#kairos",
+        resumen: "Byung-Chul Han, Séneca y la insurgencia contemplativa frente a la prisa algorítmica."
+      },
+      {
+        titulo: "La fortaleza de la atención y el silencio del límite: de Epicteto a Wittgenstein",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno IV)",
+        categoria: "filosofia",
+        fecha: "2026-09-12",
+        fechaFormateada: "12 de Septiembre, 2026",
+        enlace: "filosofia.html#soberania",
+        resumen: "La dicotomía del control estoica y los confines lógicos de lo místico en el Tractatus."
+      },
+
+      // ==========================================
+      // CUADERNO III · MÚSICA & ACÚSTICA (musica.html)
+      // ==========================================
+      {
+        titulo: "La acústica de la penumbra: La casa embrujada como resonador sónico de la culpa",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-10-19",
+        fechaFormateada: "19 de Octubre, 2026",
+        enlace: "musica.html#mus-casas-embrujadas",
+        resumen: "Paisajes sonoros, el piano desafinado y los cimientos de madera como instrumentos de memoria."
+      },
+      {
+        titulo: "Lacrimosa dies illa: El Réquiem de Mozart y la partitura inacabada del abismo",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "musica.html#mus-requiem-mozart",
+        resumen: "Música sacra y liturgia: la instrumentación de las sombras y el corte en el octavo compás."
+      },
+      {
+        titulo: "La arquitectura del aire: La música y el misterio del tiempo habitado",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "musica.html#musica-orden-tiempo-emocion",
+        resumen: "Estética y lenguaje: Pitágoras, Schopenhauer y la dialéctica entre memoria y expectativa."
+      },
+      {
+        titulo: "Las Variaciones Goldberg: Johann Sebastian Bach y la arquitectura fractal del insomnio",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "musica.html#mus-goldberg",
+        resumen: "Contrapunto sagrado y el prodigio del bajo fundamental de treinta y dos compases."
+      },
+      {
+        titulo: "Tabula Rasa: Arvo Pärt, la arquitectura del silencio y la mística del tintinnabuli",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-10-05",
+        fechaFormateada: "05 de Octubre, 2026",
+        enlace: "musica.html#mus-part",
+        resumen: "El silencio creativo, el estudio de la polifonía medieval y la geometría sonora sagrada."
+      },
+      {
+        titulo: "Kind of Blue: Miles Davis, el modalismo y la invención del espacio en el jazz moderno",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-09-28",
+        fechaFormateada: "28 de Septiembre, 2026",
+        enlace: "musica.html#mus-miles",
+        resumen: "La abolición del bebop veloz y los campos modales dilatados en los estudios de la calle 30."
+      },
+      {
+        titulo: "The Blue Notebooks: Max Richter, elegía para cuerdas y la resistencia de la belleza",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-09-18",
+        fechaFormateada: "18 de Septiembre, 2026",
+        enlace: "musica.html#mus-richter",
+        resumen: "La máquina de escribir, los textos de Kafka y la pieza contra la guerra On the Nature of Daylight."
+      },
+      {
+        titulo: "Blade Runner OST: Vangelis, sintetizadores analógicos y la soledad del futuro",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-09-09",
+        fechaFormateada: "09 de Septiembre, 2026",
+        enlace: "musica.html#mus-vangelis",
+        resumen: "El sintetizador Yamaha CS-80 y el romanticismo crepuscular de la metrópoli distópica."
+      },
+      {
+        titulo: "Spiegel im Spiegel: Dos espejos enfrentados y la quietud absoluta de Arvo Pärt",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno III)",
+        categoria: "musica",
+        fecha: "2026-07-12",
+        fechaFormateada: "12 de Julio, 2026",
+        enlace: "musica.html#mus-spiegel",
+        resumen: "Geometría contemplativa en Fa mayor: arpegios en espejo e infinitud sonora."
+      },
+
+      // ==========================================
+      // CUADERNO II · CINE & MIRADA (cine.html)
+      // ==========================================
+      {
+        titulo: "La arquitectura de la espeluznancia: el hogar cinematográfico como organismo devorador",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-10-19",
+        fechaFormateada: "19 de Octubre, 2026",
+        enlace: "cine.html#cine-casas-encantadas-arquitectura",
+        resumen: "De Robert Wise a Stanley Kubrick y Guillermo del Toro: el caserón como máquina de digestión psicológica."
+      },
+      {
+        titulo: "La sinfonía del espanto: F.W. Murnau, 'Nosferatu' y la plaga que viaja en la mirada",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "cine.html#cine-nosferatu-murnau",
+        resumen: "El expresionismo alemán, el conde Orlok como parásito ontológico y la geometría de la sombra."
+      },
+      {
+        titulo: "El tablero sobre las piedras: Ingmar Bergman, la Muerte en la orilla y el silencio de Dios",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "cine.html#cine-bergman-septimo",
+        resumen: "Lectura metafísica de El séptimo sello, las fresas silvestres y la danza macabra."
+      },
+      {
+        titulo: "In the Mood for Love: Wong Kar-wai, el paso ralentizado y la melodía del dolor aplazado",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "cine.html#cine-wongkarwai",
+        resumen: "La contención erótica, la desaceleración temporal y el secreto sepultado en Angkor Wat."
+      },
+      {
+        titulo: "La sombra como destino: la geometría moral del cine negro y el claroscuro de posguerra",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-10-08",
+        fechaFormateada: "08 de Octubre, 2026",
+        enlace: "cine.html#cine-noir",
+        resumen: "Fritz Lang, Billy Wilder y el determinismo existencial de las persianas venecianas."
+      },
+      {
+        titulo: "Stalker: Andrei Tarkovski y la Zona como espejo del alma humana",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-10-02",
+        fechaFormateada: "02 de Octubre, 2026",
+        enlace: "cine.html#cine-stalker",
+        resumen: "La dialéctica cromática, la Trinidad arquetípica y el terror ante el umbral de la Habitación."
+      },
+      {
+        titulo: "La ventana indiscreta: Alfred Hitchcock y el ojo culpable del espectador",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-09-22",
+        fechaFormateada: "22 de Septiembre, 2026",
+        enlace: "cine.html#cine-hitchcock",
+        resumen: "El patio de vecinos como sala de cine, el efecto Kuleshov y la transgresión del voyeurismo."
+      },
+      {
+        titulo: "Blade Runner: Ridley Scott, lágrimas en la lluvia y la fragilidad del replicante",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-09-14",
+        fechaFormateada: "14 de Septiembre, 2026",
+        enlace: "cine.html#cine-bladerunner",
+        resumen: "Los Ángeles 2019, el test Voight-Kampff y el perdón final de Roy Batty en la cornisa."
+      },
+      {
+        titulo: "Perdición (Double Indemnity): Billy Wilder, el dictáfono y la geometría del crimen perfecto",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno II)",
+        categoria: "cine",
+        fecha: "2026-08-01",
+        fechaFormateada: "01 de Agosto, 2026",
+        enlace: "cine.html#cine-wilder",
+        resumen: "La estadística actuarial, la femme fatale y la última cerilla en el pasillo de la Pacific All-Risk."
+      },
+
+      // ==========================================
+      // CUADERNO I · LITERATURA & ENIGMA (literatura.html)
+      // ==========================================
+      {
+        titulo: "La mansión que recuerda: Anatomía literaria de la casa encantada",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-19",
+        fechaFormateada: "19 de Octubre, 2026",
+        enlace: "literatura.html#lit-casas-encantadas-arquitectura",
+        resumen: "Estudio gótico y fenomenológico del espacio corrompido en Walpole, Poe, James y Jackson."
+      },
+      {
+        titulo: "El frío en la nuca: La anatomía del cuento de fantasmas victoriano y el terror cotidiano",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "literatura.html#lit-fantasma-victoriano",
+        resumen: "Sheridan Le Fanu y M.R. James: la culpa burguesa y la textura física de lo repulsivo."
+      },
+      {
+        titulo: "Entre el velo y la tinta: La literatura ante el umbral de Halloween",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "literatura.html#halloween-literatura-espectral",
+        resumen: "De las raíces celtas de Samhain a la arquitectura del terror gótico moderno."
+      },
+      {
+        titulo: "El jardín de los senderos que se bifurcan: Jorge Luis Borges y la biblioteca del infinito",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-14",
+        fechaFormateada: "14 de Octubre, 2026",
+        enlace: "literatura.html#borges-laberintos",
+        resumen: "El tiempo como red de futuros divergentes y la metafísica convertida en literatura fantástica."
+      },
+      {
+        titulo: "El Aleph: Jorge Luis Borges y la angustia del infinito en un sótano de la calle Garay",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-13",
+        fechaFormateada: "13 de Octubre, 2026",
+        enlace: "literatura.html#borges-aleph",
+        resumen: "La pérdida de Beatriz Viterbo, el delirio poético de Daneri y la visión del punto universal."
+      },
+      {
+        titulo: "La arquitectura del enigma: el mecanismo de relojería en la novela policíaca clásica",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-10",
+        fechaFormateada: "10 de Octubre, 2026",
+        enlace: "literatura.html#enigma",
+        resumen: "De Poe y Dupin a la Edad de Oro británica, los cuartos cerrados y el Fair Play deductivo."
+      },
+      {
+        titulo: "Crimen y castigo: la geografía moral del remordimiento en el San Petersburgo de Dostoyevski",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-10-04",
+        fechaFormateada: "04 de Octubre, 2026",
+        enlace: "literatura.html#dostoyevski",
+        resumen: "El hachazo de Raskólnikov, el duelo dialéctico con Porfiri y la resurrección junto a Sonia."
+      },
+      {
+        titulo: "La niebla de Dartmoor: razón y mito en 'El sabueso de los Baskerville'",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-09-26",
+        fechaFormateada: "26 de Septiembre, 2026",
+        enlace: "literatura.html#baskerville",
+        resumen: "Sir Arthur Conan Doyle y la colisión entre el fango demoníaco de Grimpen y la química analítica."
+      },
+      {
+        titulo: "El laberinto invisible: cómo crear atmósfera antes que argumento en la ficción moderna",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-09-05",
+        fechaFormateada: "05 de Septiembre, 2026",
+        enlace: "literatura.html#atmosfera",
+        resumen: "La textura sensorial del escenario, la física de los sentidos y el ritmo sintáctico de la prosa."
+      },
+      {
+        titulo: "El maestro y Margarita: Mijaíl Bulgákov y los manuscritos que nunca arden",
+        autor: "Círculo Kairós",
+        tipo: "Ensayo (Cuaderno I)",
+        categoria: "literatura",
+        fecha: "2026-08-15",
+        fechaFormateada: "15 de Agosto, 2026",
+        enlace: "literatura.html#bulgakov",
+        resumen: "Satira mística bajo el estalinismo, Poncio Pilato y el triunfo inmarcesible del arte libre."
+      },
+
+      // ==========================================
+      // EL RINCÓN DEL LECTOR (RELATOS Y POEMAS)
+      // ==========================================
+      {
+        titulo: "NUNCA MÁS",
+        autor: "LIRC",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-24",
+        fechaFormateada: "24 de Octubre, 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Una pesadilla recurrente que se materializa al filo de las cuatro de la madrugada, cruzando la delgada línea entre el terror del subconsciente y la trampa de la realidad."
+      },
+      {
+        titulo: "El testamento de los metales mudos",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-20",
+        fechaFormateada: "Semana XVI · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un perito en manuscritos antiguos es convocado a una abadía alpina para descifrar el diario de un alquimista."
+      },
+      {
+        titulo: "Elegía del navegante ciego",
+        autor: "Cuaderno de Letras",
+        tipo: "Poema",
+        categoria: "relatos",
+        fecha: "2026-10-18",
+        fechaFormateada: "Semana XVI · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Versos oscuros consagrados a un farero que encendía la baliza en un océano muerto."
+      },
+      {
+        titulo: "La sinfonía de los resortes vencidos",
+        autor: "Clara M. Soler",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-17",
+        fechaFormateada: "Semana XVII · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Autómatas musicales que interpretan una partitura que predice muertes exactas."
+      },
+      {
+        titulo: "El buzón de las respuestas anticipadas",
+        autor: "Ignacio de la Hoz",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-16",
+        fechaFormateada: "Semana XVIII · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Cartas que llegan siempre tres días antes de ser escritas, hasta una fechada el día del propio entierro."
+      },
+      {
+        titulo: "El testimonio del diván invertido",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-15",
+        fechaFormateada: "Semana XI · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un analista atiende a un paciente que relata crímenes no consumados."
+      },
+      {
+        titulo: "El corrector de galeradas ajenas",
+        autor: "Clara M. Soler",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-14",
+        fechaFormateada: "Semana XII · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Una novela autobiográfica que predice los errores domésticos del corrector."
+      },
+      {
+        titulo: "La paradoja del tasador de alhajas",
+        autor: "Ignacio de la Hoz",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-13",
+        fechaFormateada: "Semana XIII · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un gemólogo descubre que la falsificación de unas joyas incluye su propia identidad."
+      },
+      {
+        titulo: "El protocolo de la tercera butaca",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-12",
+        fechaFormateada: "Semana XIV · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un proyeccionista proyecta películas para un espectador invisible."
+      },
+      {
+        titulo: "El censo de los nombres borrados",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-11",
+        fechaFormateada: "Semana VII · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Nombres que desaparecen de los libros sólo tras ser olvidados por todos."
+      },
+      {
+        titulo: "El azogue de la casa deshabitada",
+        autor: "Clara M. Soler",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-10",
+        fechaFormateada: "Semana VIII · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un espejo veneciano que refleja las habitaciones en ausencia de humanos."
+      },
+      {
+        titulo: "La marea de las palabras no pronunciadas",
+        autor: "Ignacio de la Hoz",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-09",
+        fechaFormateada: "Semana IX · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Confesiones que los náufragos callaron antes del naufragio."
+      },
+      {
+        titulo: "El desvío de las causas fenecidas",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-08",
+        fechaFormateada: "Semana X · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Cartas devueltas con sellos de ciudades que nunca se fundaron."
+      },
+      {
+        titulo: "El relojero de la calle de los Cristales Rotos",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-07",
+        fechaFormateada: "Semana I · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Relojes que marcan el ritmo con el que se olvidan las promesas."
+      },
+      {
+        titulo: "Elegía para la última campana del muelle",
+        autor: "Cuaderno de Letras",
+        tipo: "Poema",
+        categoria: "relatos",
+        fecha: "2026-10-06",
+        fechaFormateada: "Semana II · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Versos sobre la niebla portuaria y buques que zarpan sin retorno."
+      },
+      {
+        titulo: "El protocolo número catorce",
+        autor: "Ignacio de la Hoz",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-05",
+        fechaFormateada: "Semana III · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un legajo con sello lacrado que anticipa los movimientos del archivero."
+      },
+      {
+        titulo: "La biblioteca del botánico ausente",
+        autor: "Clara M. Soler",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-04",
+        fechaFormateada: "Semana IV · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un herbario cuyas páginas secas germinan al ser traducidas."
+      },
+      {
+        titulo: "El último expreso de las tres y veinte",
+        autor: "S. P. Paredes",
+        tipo: "Relato",
+        categoria: "relatos",
+        fecha: "2026-10-03",
+        fechaFormateada: "Semana V · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Un tren retirado hace cuarenta años que llega a un andén secundario."
+      },
+      {
+        titulo: "Tratado de la ceniza matinal",
+        autor: "Cuaderno de Letras",
+        tipo: "Poema",
+        categoria: "relatos",
+        fecha: "2026-10-02",
+        fechaFormateada: "Semana VI · Octubre 2026",
+        enlace: "index.html#dispatch-titulo",
+        resumen: "Reflexión poética sobre el despertar solitario y las brasas apagadas."
+      }
+    ];
+
+    let categoriaActivaBiblio = "todos";
+
+    function normalizarTextoBiblio(texto) {
+      return (texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    }
+
+    function cambiarFiltro(filtro, botonElemento) {
+      categoriaActivaBiblio = filtro;
+      document.querySelectorAll(".tabs-bar .tab-btn").forEach(btn => btn.classList.remove("active"));
+      if (botonElemento) botonElemento.classList.add("active");
+      renderizarBiblioteca();
+    }
+
+    function renderizarBiblioteca() {
+      const contenedor = document.getElementById("contenedor-biblioteca");
+      const conteoTotal = document.getElementById("conteo-total-biblioteca");
+      if (!contenedor) return;
+
+      // Ordenar cronológicamente (del más reciente al más antiguo)
+      const listaOrdenada = [...inventarioMaestroKairos].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+      const filtroLimpio = normalizarTextoBiblio(categoriaActivaBiblio);
+      const filtrados = listaOrdenada.filter(item => {
+        if (filtroLimpio === "todos") return true;
+        return normalizarTextoBiblio(item.categoria) === filtroLimpio;
+      });
+
+      if (conteoTotal) conteoTotal.textContent = listaOrdenada.length;
+
+      if (filtrados.length === 0) {
+        contenedor.innerHTML = `
+          <div class="empty-state">
+            <p>No se encontraron publicaciones en esta sección del inventario.</p>
+          </div>
+        `;
+        return;
+      }
+
+      contenedor.innerHTML = "";
+      filtrados.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "item-card";
+
+        card.innerHTML = `
+          <div>
+            <span class="item-meta-tag">${item.tipo} &mdash; ${item.fechaFormateada} ${item.autor ? '· ' + item.autor : ''}</span>
+            <h4><a href="${item.enlace}">${item.titulo}</a></h4>
+            <p>${item.resumen || 'Sin resumen disponible.'}</p>
+          </div>
+          <div class="item-actions">
+            <a href="${item.enlace}" class="btn-goto">Leer obra &rarr;</a>
+          </div>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+
+    // CONTROL DEL MENÚ MÓVIL
+    function configurarMenu() {
+      const botonMenu = document.getElementById("btn-menu-movil");
+      const listaNav = document.getElementById("lista-navegacion");
+      const iconoMenu = document.getElementById("icono-menu-movil");
+      const triggerCuadernos = document.getElementById("dropdown-cuadernos");
+      const submenuCuadernos = document.querySelector(".dropdown-menu");
+
+      if (!botonMenu || !listaNav) return;
+
+      botonMenu.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const abierto = listaNav.classList.toggle("nav-abierto");
+        botonMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
+        if (iconoMenu) iconoMenu.textContent = abierto ? "✕" : "☰";
+      });
+
+      if (triggerCuadernos && submenuCuadernos) {
+        triggerCuadernos.addEventListener("click", (e) => {
+          if (window.innerWidth <= 768) {
+            e.preventDefault();
+            submenuCuadernos.classList.toggle("sub-abierto");
+          }
+        });
+      }
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".main-nav")) {
+          listaNav.classList.remove("nav-abierto");
+          if (submenuCuadernos) submenuCuadernos.classList.remove("sub-abierto");
+          botonMenu.setAttribute("aria-expanded", "false");
+          if (iconoMenu) iconoMenu.textContent = "☰";
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderizarBiblioteca();
+      configurarMenu();
+    });
+  </script>
+</body>
+</html>
