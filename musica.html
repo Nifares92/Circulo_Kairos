@@ -17,6 +17,9 @@
   <meta name="description" content="Círculo Kairós — Cuaderno de Música: Monografías acústicas de fondo, minimalismo sacro, modalismo y paisajes analógicos.">
   <title>Música & Resonancias | Círculo Kairós</title>
 
+  <!-- Detección automática de RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Círculo Kairós · Feed RSS" href="feed.xml">
+
   <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
 
@@ -27,23 +30,23 @@
 
   <style>
     :root {
-      --bg-color: #fbf8f3;
-      --bg-surface: #f4ede1;
-      --bg-card: #f8f3ea;
-      --bg-accent-tint: #f1e6d4;
-      --text-main: #221f1d;
-      --text-muted: #6d665f;
+      --bg-color: #ffffff;
+      --bg-surface: #f9f8f6;
+      --bg-card: #ffffff;
+      --bg-accent-tint: #f4eee7;
+      --text-main: #181615;
+      --text-muted: #665f58;
       --text-light: #8a8279;
-      --accent: #9e4734;
-      --accent-dark: #783324;
-      --border-soft: #e2d8c7;
-      --border-dark: #221f1d;
+      --accent: #8b261e;
+      --accent-dark: #5c1813;
+      --border-soft: #e6dfd5;
+      --border-dark: #181615;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-reader: 'Newsreader', Garamond, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-classical: 'Cinzel', serif;
       --max-width: 1240px;
-      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
       --transition: 0.25s ease;
     }
 
@@ -55,8 +58,8 @@
       font-family: var(--font-sans);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
-      background-size: 24px 24px;
+      background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
+      background-attachment: fixed;
     }
 
     img { max-width: 100%; height: auto; display: block; object-fit: cover; }
@@ -73,88 +76,53 @@
       transition: width 0.1s linear;
     }
 
-    /* Cabecera */
-    .top-bar-meta {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* 1. BARRA SUPERIOR OSCURA */
+    .top-action-bar {
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.5rem 2rem;
       display: flex;
       justify-content: space-between;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      align-items: center;
+      font-size: 0.78rem;
+      font-family: var(--font-classical);
+      letter-spacing: 0.1em;
     }
-    .top-bar-meta span strong { color: var(--accent); }
-
-    .site-header {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 2.2rem 1.5rem 1.6rem;
-      background-color: var(--bg-color);
-      position: relative;
+    .top-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
-    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
-
-    .brand {
-      position: relative;
-      padding: 1rem 0 0.5rem;
+    .rss-link-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #fff;
     }
-
-    .brand-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px;
-      height: 250px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.13;
-      filter: blur(1px);
-      mix-blend-mode: multiply;
-    }
-
-    .site-title {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
+    .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
+    .btn-top-circle {
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      color: var(--text-main);
-      position: relative;
-      z-index: 2;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
     }
-    .site-title a {
-      color: var(--text-main);
-      transition: color var(--transition), opacity var(--transition);
-    }
-    .site-title a:hover {
-      color: var(--accent);
-    }
+    .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    .site-tagline {
-      font-family: var(--font-reader);
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      position: relative;
-      z-index: 2;
-    }
-
-   /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
+    /* 2. BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
-      border-bottom: 3px double var(--border-dark);
+      border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
       position: sticky;
       top: 0;
-      background-color: rgba(251, 248, 243, 0.98);
+      background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
-      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
     .nav-container {
       max-width: var(--max-width);
@@ -195,6 +163,13 @@
     .has-dropdown {
       position: relative;
     }
+    .has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%; height: 20px;
+      background: transparent;
+    }
     .dropdown-trigger {
       cursor: pointer;
       display: inline-flex;
@@ -213,26 +188,18 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%) translateY(5px);
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       min-width: 230px;
       padding: 0.8rem 0;
       list-style: none;
       display: none;
       flex-direction: column;
-      gap: 0;
       text-align: left;
       border-radius: 2px;
       z-index: 10000;
-    }
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px solid rgba(226, 216, 199, 0.4);
-      pointer-events: none;
     }
     .dropdown-menu li {
       width: 100%;
@@ -257,17 +224,17 @@
     }
     .has-dropdown:hover .dropdown-menu {
       display: flex;
-      animation: aparecerDropdown 0.25s ease forwards;
+      animation: aparecerDropdown 0.2s ease forwards;
     }
     @keyframes aparecerDropdown {
-      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
     }
 
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
+      padding: 3.5rem 1.5rem 5rem;
     }
 
     .section-header-box {
@@ -366,7 +333,7 @@
       content: '';
       position: absolute;
       top: 8px; left: 8px; right: 8px; bottom: 8px;
-      border: 1px solid rgba(226, 216, 199, 0.35);
+      border: 1px solid rgba(230, 223, 213, 0.35);
       pointer-events: none;
     }
 
@@ -727,7 +694,7 @@
         padding: 0.35rem 0;
       }
 
-     /* Acordeón del submenú en móvil adaptado y centrado */
+      /* Acordeón del submenú en móvil adaptado y centrado */
   .has-dropdown {
     width: 100%;
     display: flex;
@@ -775,25 +742,20 @@
 
   <div id="progress-bar"></div>
 
-  <aside class="top-bar-meta" aria-label="Información de publicación">
-    <span>Círculo Kairós · Cuaderno III</span>
-    <span><strong>Disciplina:</strong> Acústica, Liturgia & Resonancias</span>
-    <span>Año I · Edición Continua</span>
+  <!-- 1. BARRA SUPERIOR OSCURA -->
+  <aside class="top-action-bar" aria-label="Información de publicación">
+    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <div class="top-actions-right">
+      <span>Crítica de Fondo &amp; Artes</span>
+      <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
+        <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
+        RSS
+      </a>
+      <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
+    </div>
   </aside>
 
-  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand">
-        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
-        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- NAVEGACIÓN STICKY -->
-  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI CUADERNO -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -974,7 +936,7 @@
           </figure>
 
           <div class="article-prose">
-            <p class="dropcap">En los meses finales de 1791, en una Viena húmeda y helada por las primeras ventiscas del invierno, Wolfgang Amadeus Mozart se consumía en su lecho de la Rauhensteingasse con la convicción delirante de estar componiendo la misa de difuntos para su propio entierro. La visita de aquel mensajero anónimo vestido de gris —enviado por el excéntrico conde von Walsegg para encargar un réquiem que planeaba hacer pasar por propio— encendió en la mente febril del genio la chispa de una profecía fúnebre. Pocas creaciones en la historia de la música universal condensan con semejante dramatismo la cercanía física del umbral.</p>
+            <p class="dropcap">En los meses finales de 1791, en una Viena húmeda y helada por las primeras ventiscas del invierno, Wolfgang Amadeus Mozart se consumía en su lecho de la Rauhensteingasse con la convicción delirante de estar componiendo la misa de difuntos para su propio entierro. La visita de aquel mensajero anónimo vestido de gris —enviado por el excéntrico conde von Walsegg para encargaron réquiem que planeaba hacer pasar por propio— encendió en la mente febril del genio la chispa de una profecía fúnebre. Pocas creaciones en la historia de la música universal condensan con semejante dramatismo la cercanía física del umbral.</p>
 
             <p>La <em>Missa pro defunctis</em> en re menor (KV 626) no es una plegaria piadosa de consuelo doméstico ni un ejercicio cortesano de polifonía decorativa. Es el terremoto ontológico del hombre clásico que mira cara a cara el juicio final, la desintegración del cuerpo y la plegaria desesperada por un átomo de piedad divina ante el silencio absoluto de la tumba.</p>
 
@@ -1213,7 +1175,7 @@
           </figure>
 
           <div class="article-prose">
-            <p class="dropcap">A principios de los años ochenta, el compositor griego Vangelis se encerró en sus estudios Nemo de Londres frente a los montajes preliminares del largometraje de Ridley Scott. En lugar de encargar una orquesta sinfónica convencional, Vangelis se sentó ante el teclado colosal del sintetizador analógico Yamaha CS-80.</p>
+            <p class="dropcap">A principios de los años ochenta, el compositor griego Vangelis se encerró en sus estudios Nemo de Londres frente o los montajes preliminares del largometraje de Ridley Scott. En lugar de encargar una orquesta sinfónica convencional, Vangelis se sentó ante el teclado colosal del sintetizador analógico Yamaha CS-80.</p>
 
             <h3>I. La respiración del instrumento analógico</h3>
             <p>El CS-80 poseía sensibilidad de pulsación polifónica, lo que permitía modular el timbre de cada nota individualmente con la presión de los dedos. Al entrelazar estas ondas electrónicas con el saxofón solista de Dick Morrissey en <em>Love Theme</em>, Vangelis logró un milagro acústico: una música futurista empapada de un romanticismo crepuscular insustituible.</p>
