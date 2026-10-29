@@ -1115,13 +1115,13 @@
     </div>
   </nav>
 
-  <!-- 3. BLOQUE HERO DE IMPACTO A PANTALLA COMPLETA -->
-  <header class="hero-impact-section">
-    <div class="hero-impact-badge">✦ Edición Especial · Tribuna de la Dirección ✦</div>
-    <h1>El banquete de las sombras: Fenomenología de la vigilia fúnebre y el retorno de los ancestros</h1>
-    <p>«Cronos mide la cantidad inerte de los minutos; Kairós revela su peso interior. Este espacio nace para pausar el reloj y habitar la mirada.»</p>
-    <a href="pensamiento.html#pensamiento-banquete-sombras" class="btn-hero-kairos">Leer Tratado Completo &rarr;</a>
-  </header>
+<!-- 3. BLOQUE HERO DE IMPACTO A PANTALLA COMPLETA -->
+<header class="hero-impact-section" id="hero-impact-banner">
+  <div class="hero-impact-badge" id="hero-badge">✦ Edición Especial · Tribuna de la Dirección ✦</div>
+  <h1><a href="#" id="hero-title" style="color: #fff; text-decoration: none;">Cargando última publicación...</a></h1>
+  <p id="hero-excerpt">Por favor, espere mientras sincronizamos el archivo de cuadernos.</p>
+  <a href="#" id="hero-link" class="btn-hero-kairos">Leer Tratado Completo &rarr;</a>
+</header>
 
   <main id="contenido-principal">
 
@@ -2407,8 +2407,21 @@ async function actualizarCascadaEnsayos() {
       validos.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
 
       if (validos.length > 0) {
-        // 1. EL ÚLTIMO SUBIDO (Más reciente) -> Va en la tarjeta grande principal (Arriba)
+        // 1. EL ÚLTIMO SUBIDO (Más reciente) -> Actualiza el BLOQUE HERO SUPERIOR y la tarjeta grande principal
         const principal = validos[0];
+        
+        const heroBanner = document.getElementById("hero-impact-banner");
+        if (heroBanner && principal.img) {
+          heroBanner.style.background = `linear-gradient(rgba(18, 16, 15, 0.75), rgba(18, 16, 15, 0.9)), url('${principal.img}') center/cover no-repeat`;
+        }
+        if (document.getElementById("hero-badge")) document.getElementById("hero-badge").textContent = `✦ Edición Especial · ${principal.seccion} ✦`;
+        if (document.getElementById("hero-title")) {
+          document.getElementById("hero-title").innerHTML = `<a href="${principal.enlace}" style="color: #fff; text-decoration: none;">${principal.titulo}</a>`;
+        }
+        if (document.getElementById("hero-excerpt")) document.getElementById("hero-excerpt").textContent = principal.resumen;
+        if (document.getElementById("hero-link")) document.getElementById("hero-link").setAttribute("href", principal.enlace);
+
+        // Tarjeta grande de la portada (Lead)
         if (document.getElementById("lead-badge")) document.getElementById("lead-badge").textContent = principal.seccion;
         if (document.getElementById("lead-title")) {
           document.getElementById("lead-title").textContent = principal.titulo;
@@ -2440,7 +2453,6 @@ async function actualizarCascadaEnsayos() {
         }
       }
     }
-
     function configurarMenu() {
       const botonMenu = document.getElementById("btn-menu-movil");
       const listaNav = document.getElementById("lista-navegacion");
