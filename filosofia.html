@@ -17,6 +17,9 @@
   <meta name="description" content="Círculo Kairós — Cuaderno de Filosofía: Ensayos de fondo monográficos, kairología, ética estoica y la mística del límite.">
   <title>Filosofía & Pensamiento | Círculo Kairós</title>
 
+  <!-- Detección automática de RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Círculo Kairós · Feed RSS" href="feed.xml">
+
   <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
 
@@ -27,23 +30,23 @@
 
   <style>
     :root {
-      --bg-color: #fbf8f3;
-      --bg-surface: #f4ede1;
-      --bg-card: #f8f3ea;
-      --bg-accent-tint: #f1e6d4;
-      --text-main: #221f1d;
-      --text-muted: #6d665f;
+      --bg-color: #ffffff;
+      --bg-surface: #f9f8f6;
+      --bg-card: #ffffff;
+      --bg-accent-tint: #f4eee7;
+      --text-main: #181615;
+      --text-muted: #665f58;
       --text-light: #8a8279;
-      --accent: #9e4734;
-      --accent-dark: #783324;
-      --border-soft: #e2d8c7;
-      --border-dark: #221f1d;
+      --accent: #8b261e;
+      --accent-dark: #5c1813;
+      --border-soft: #e6dfd5;
+      --border-dark: #181615;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-reader: 'Newsreader', Garamond, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-classical: 'Cinzel', serif;
       --max-width: 1240px;
-      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
       --transition: 0.25s ease;
     }
 
@@ -55,8 +58,8 @@
       font-family: var(--font-sans);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
-      background-size: 24px 24px;
+      background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
+      background-attachment: fixed;
     }
 
     img { max-width: 100%; height: auto; display: block; object-fit: cover; }
@@ -73,90 +76,53 @@
       transition: width 0.1s linear;
     }
 
-    /* Cabecera */
-    .top-bar-meta {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* 1. BARRA SUPERIOR OSCURA */
+    .top-action-bar {
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.5rem 2rem;
       display: flex;
       justify-content: space-between;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      align-items: center;
+      font-size: 0.78rem;
+      font-family: var(--font-classical);
+      letter-spacing: 0.1em;
     }
-    .top-bar-meta span strong { color: var(--accent); }
-
-    .site-header {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 2.2rem 1.5rem 1.6rem;
-      background-color: var(--bg-color);
-      position: relative;
+    .top-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
-    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
-
-    /* CONTENEDOR DE MARCA CON MARCA DE AGUA DE FONDO */
-    .brand {
-      position: relative;
-      padding: 1rem 0 0.5rem;
+    .rss-link-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #fff;
     }
-
-    .brand-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px;
-      height: 250px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.13;
-      filter: blur(1px);
-      mix-blend-mode: multiply;
-    }
-
-    .site-title {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
+    .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
+    .btn-top-circle {
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      color: var(--text-main); /* <-- Cambiado a negro */
-      position: relative;
-      z-index: 2;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
     }
-    .site-title a {
-      color: var(--text-main); /* <-- Cambiado a negro */
-      transition: color var(--transition), opacity var(--transition);
-    }
-    .site-title a:hover {
-      color: #6a2c21;
-      opacity: 0.95;
-    }
+    .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    .site-tagline {
-      font-family: var(--font-reader);
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
+    /* 2. BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
-      border-bottom: 3px double var(--border-dark);
+      border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
       position: sticky;
       top: 0;
-      background-color: rgba(251, 248, 243, 0.98);
+      background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
-      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
     .nav-container {
       max-width: var(--max-width);
@@ -197,6 +163,13 @@
     .has-dropdown {
       position: relative;
     }
+    .has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%; height: 20px;
+      background: transparent;
+    }
     .dropdown-trigger {
       cursor: pointer;
       display: inline-flex;
@@ -215,26 +188,18 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%) translateY(5px);
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       min-width: 230px;
       padding: 0.8rem 0;
       list-style: none;
       display: none;
       flex-direction: column;
-      gap: 0;
       text-align: left;
       border-radius: 2px;
       z-index: 10000;
-    }
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px solid rgba(226, 216, 199, 0.4);
-      pointer-events: none;
     }
     .dropdown-menu li {
       width: 100%;
@@ -259,18 +224,18 @@
     }
     .has-dropdown:hover .dropdown-menu {
       display: flex;
-      animation: aparecerDropdown 0.25s ease forwards;
+      animation: aparecerDropdown 0.2s ease forwards;
     }
     @keyframes aparecerDropdown {
-      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
     }
 
     /* Contenedor Principal */
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
+      padding: 3.5rem 1.5rem 5rem;
     }
 
     .section-header-box {
@@ -371,7 +336,7 @@
       content: '';
       position: absolute;
       top: 8px; left: 8px; right: 8px; bottom: 8px;
-      border: 1px solid rgba(226, 216, 199, 0.35);
+      border: 1px solid rgba(230, 223, 213, 0.5);
       pointer-events: none;
     }
 
@@ -663,15 +628,17 @@
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
     .footer-nav a:hover { color: var(--accent); }
 
-    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 992px) {
       .toc-links-grid { grid-template-columns: 1fr; }
       .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
       .long-article { padding: 2.2rem 1.8rem; }
       .sidebar-wrapper { position: static; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+      .top-action-bar { flex-direction: column; gap: 0.5rem; text-align: center; padding: 0.6rem 1rem; }
+      .top-actions-right { gap: 1rem; }
     }
 
+    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 768px) {
       .main-nav {
         padding: 0.6rem 1rem;
@@ -721,41 +688,42 @@
         padding: 0.35rem 0;
       }
 
-     /* Acordeón del submenú en móvil adaptado y centrado */
-  .has-dropdown {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .has-dropdown:hover .dropdown-menu {
-    display: none;
-  }
-  .dropdown-menu {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border: 1px solid var(--border-soft);
-    background-color: var(--bg-surface);
-    margin: 0.6rem auto 0;
-    width: 90%;
-    max-width: 280px;
-    padding: 0.4rem 0;
-    text-align: center;
-  }
-  .dropdown-menu::before {
-    display: none;
-  }
-  .dropdown-menu.sub-abierto {
-    display: flex !important;
-  }
-  .dropdown-menu a {
-    text-align: center;
-    padding: 0.5rem 1rem;
-  }
-  .dropdown-menu a:hover {
-    padding-left: 1rem;
-  }
+      /* Acordeón del submenú en móvil adaptado y centrado */
+      .has-dropdown {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .has-dropdown:hover .dropdown-menu {
+        display: none;
+      }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: 1px solid var(--border-soft);
+        background-color: var(--bg-surface);
+        margin: 0.6rem auto 0;
+        width: 90%;
+        max-width: 280px;
+        padding: 0.4rem 0;
+        text-align: center;
+      }
+      .dropdown-menu::before {
+        display: none;
+      }
+      .dropdown-menu.sub-abierto {
+        display: flex !important;
+      }
+      .dropdown-menu a {
+        text-align: center;
+        padding: 0.5rem 1rem;
+      }
+      .dropdown-menu a:hover {
+        padding-left: 1rem;
+      }
+    }
 
     @media (max-width: 600px) {
       .site-title { font-size: 2.2rem; }
@@ -769,24 +737,20 @@
 
   <div id="progress-bar"></div>
 
-  <aside class="top-bar-meta" aria-label="Información de publicación">
-    <span>Círculo Kairós ·  IV</span>
-    <span><strong>Disciplina:</strong> Fenomenología, Dialéctica & Ética</span>
-    <span>Año I · Edición Continua</span>
+  <!-- 1. BARRA SUPERIOR OSCURA -->
+  <aside class="top-action-bar" aria-label="Información de publicación">
+    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <div class="top-actions-right">
+      <span>Crítica de Fondo &amp; Artes</span>
+      <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
+        <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
+        RSS
+      </a>
+      <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
+    </div>
   </aside>
 
-  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand">
-        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
-        <p class="site-tagline"> de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI  -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -868,7 +832,7 @@
             <hr>
 
             <h3>II. Espectrología de la víspera: Derrida, Jankélévitch y la hospitalidad hacia lo invisible</h3>
-            <p>¿Qué estatuto ontológico poseen aquellos a quienes invocamos en la noche del treinta y uno de octubre al primero de noviembre? Si nos limitamos a la lógica binaria de la metafísica clásica —que divide tajantemente la realidad entre el ser y el no-ser, entre la presencia física y la nada absoluta—, el recuerdo de los difuntos queda reducido a una proyección subjetiva, a un fantasma psicológico encerrado en el cráneo de los dolientes. Fue mérito de <strong>Jacques Derrida</strong>, en sus <em>Espectros de Marx</em> (1993), rehabilitar la categoría de la <strong>hantologie</strong> (espectrología) frente a la ontología tradicional: el espectro no es ni un cuerpo vivo ni un cadáver inerte, sino <em>aquello que retorna</em>, la presencia de una ausencia que desquicia el tiempo (<em>Time is out of joint</em>) y exige justicia desde su invisibilidad.</p>
+            <p>¿Qué estatuto ontológico poseen aquellos a quienes invocamos en la noche del treinta y uno de octubre al primero de noviembre? Si nos limitamos a la lógica binaria de la metafísica clásica —que divide tajantemente la realidad entre el ser y el no-ser, entre la presencia física y la nada absoluta—, el recuerdo de los difuntos queda reducido a una proyección subjetiva, a un fantasma psicológico encerrado en el cráneo de los dolientes. Fue mérito de <strong>Jacques Derrida</strong>, en sus <em>Espectros de Marx</em> (1993), rehabilitar la categoría de la <strong>hantologie</strong> (espectrología u ontología del asedio), jugando con la homofonía francesa entre el verbo <em>hanter</em> (asediar, frecuentar un espectro) y la <em>ontologie</em> tradicional: el espectro no es ni un cuerpo vivo ni un cadáver inerte, sino <em>aquello que retorna</em>, la presencia de una ausencia que desquicia el tiempo (<em>Time is out of joint</em>) y exige justicia desde su invisibilidad.</p>
 
             <p>En la noche de Todos los Santos, la filosofía aprende a practicar lo que Derrida denominó la <strong>hospitalidad absoluta</strong>: abrir la puerta de la conciencia y del hogar al huésped que no tiene cuerpo, al antepasado que nos mira desde detrás de su visera sin que podamos cruzar nuestra mirada con la suya. No se trata de invocar espíritus a la manera del ocultismo decimonónico, sino de sostener una fidelidad ética hacia lo irrevocable. Como escribió <strong>Vladimir Jankélévitch</strong> en su monumental tratado <em>La Muerte</em> (1966), aunque la muerte destruye el hecho de seguir viviendo (<em>el haber-sido</em>), es radicalmente impotente para aniquilar el hecho de <em>haber vivido</em> (<em>el haber-sido-una-vez</em>). Ese carácter indestructible del pasado, esa eternidad silenciosa de lo que aconteció una sola vez y para siempre, es el tesoro que custodiamos cuando encendemos una lámpara en la ventana de noviembre.</p>
 
@@ -922,7 +886,7 @@
 
             <p>Desde una perspectiva heideggeriana, habitar no es meramente estar en un sitio, sino cuidar de él (<em>Sorge</em>). En la casa encantada, ese cuidado se halla pervertido por una presencia anterior y más poderosa: la culpa ancestral. La casa encantada está, por regla general, anclada a un crimen originario, a una transgresión de los pactos de la sangre o a un sufrimiento no redimido que alteró la estructura molecular del edificio. El caserón gótico —desde el castillo de Otranto de Horace Walpole hasta las decrépitas haciendas de Edgar Allan Poe— no acoge pasivamente la maldición dinástica; <em>es</em> la maldición hecha mampostería.</p>
 
-            <p>En <em>La caída de la Casa Usher</em>, Poe ejecuta un prodigio de equivalencia semántica insuperable: la expresión «Casa Usher» designa de manera indistinta e intercambiable tanto la osamenta arquitectónica del caserón solariego como el árbol genealógico corrompido de sus últimos y neuróticos descendientes. No hay distancia ontológica entre Roderick Usher y las piedras cenicientas que lo acogen. La fachada agrietada exhibe dos vanos ciegos a modo de cuencas vacías; el lago negro estancado devuelve un reflejo invertido del desmoronamiento; y una fisura en zigzag apenas perceptible recorre el muro maestro desde la techumbre hasta hundirse en las aguas pantanosas.</p>
+            <p>En <em>La caída de la Casa Usher</em>, Poe ejecuta un prodigio de equivalencia semántica insuperable: la expresión «Casa Usher» designa de manera indistinta e intercambiable tanto la osamenta arquitectónica del caserón solariega como el árbol genealógico corrompido de sus últimos y neuróticos descendientes. No hay distancia ontológica entre Roderick Usher y las piedras cenicientas que lo acogen. La fachada agrietada exhibe dos vanos ciegos a modo de cuencas vacías; el lago negro estancado devuelve un reflejo invertido del desmoronamiento; y una fisura en zigzag apenas perceptible recorre el muro maestro desde la techumbre hasta hundirse en las aguas pantanosas.</p>
 
             <p>Ese quiebro en la piedra no es una avería geológica convencional; es la línea de sutura por la que la culpa ancestral de la estirpe respira sobre el mundo de los vivos. La topología de la culpa opera aquí con una lógica implacable: aquello que la conciencia moral intenta reprimir en los sótanos de la psique, la arquitectura lo materializa en vigas podridas, cimientos movedizos y sótanos inundados. La casa recuerda mecánicamente lo que el hombre intenta olvidar mediante el cinismo o el paso de los años. De este modo, la casa encantada se erige en un tribunal permanente e inapelable: cada crujimiento de la tarima es un veredicto; cada corriente de aire helado en el rellano, una acusación de los antepasados que exige ser escuchada.</p>
 
@@ -1531,7 +1495,7 @@
     });
   </script>
 
- <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (VINCULADO A CUENTAS DE USUARIO) -->
+  <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (VINCULADO A CUENTAS DE USUARIO) -->
 <script>
   const STORAGE_KEY = "kairos_favoritos_v1";
   const SESSION_KEY = "kairos_sesion_activa_v1";
