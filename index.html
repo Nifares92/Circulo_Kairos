@@ -2391,7 +2391,7 @@
       } catch { return null; }
     }
 
-    async function actualizarCascadaEnsayos() {
+async function actualizarCascadaEnsayos() {
       const fuentes = [
         { archivo: "pensamiento.html", seccion: "Pensamiento" },
         { archivo: "literatura.html", seccion: "Literatura" },
@@ -2402,10 +2402,12 @@
 
       const resultados = await Promise.all(fuentes.map(f => extraerUltimoEnsayo(f.archivo, f.seccion)));
       const validos = resultados.filter(item => item !== null && item.titulo);
+      
+      // Ordenar estrictamente de más reciente a más antiguo (el último subido primero)
       validos.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
 
       if (validos.length > 0) {
-        // validos[0] es el más reciente (aparece arriba en grande)
+        // 1. EL ÚLTIMO SUBIDO (Más reciente) -> Va en la tarjeta grande principal (Arriba)
         const principal = validos[0];
         if (document.getElementById("lead-badge")) document.getElementById("lead-badge").textContent = principal.seccion;
         if (document.getElementById("lead-title")) {
@@ -2416,29 +2418,25 @@
         if (document.getElementById("lead-image") && principal.img) document.getElementById("lead-image").setAttribute("src", principal.img);
         if (document.getElementById("lead-excerpt") && principal.resumen) document.getElementById("lead-excerpt").textContent = principal.resumen;
 
-        // validos[1] y validos[2] son los anteriores que van abajo en los bloques más pequeños
-        if (validos.length > 1) {
-          const lateral1 = validos[1];
-          if (document.getElementById("side-1-badge")) document.getElementById("side-1-badge").textContent = lateral1.seccion;
-          if (document.getElementById("side-1-title")) {
-            document.getElementById("side-1-title").textContent = lateral1.titulo;
-            document.getElementById("side-1-title").setAttribute("href", lateral1.enlace);
-          }
-          if (document.getElementById("side-1-link")) document.getElementById("side-1-link").setAttribute("href", lateral1.enlace);
-          if (document.getElementById("side-1-img") && lateral1.img) document.getElementById("side-1-img").setAttribute("src", lateral1.img);
-          if (document.getElementById("side-1-excerpt") && lateral1.resumen) document.getElementById("side-1-excerpt").textContent = lateral1.resumen;
-        }
+        // 2. LOS TRES SIGUIENTES EN TIEMPO (validos[1], validos[2], validos[3]) -> Van abajo
+        for (let i = 1; i <= 3; i++) {
+          if (validos[i]) {
+            const lateral = validos[i];
+            const badgeEl = document.getElementById(`side-${i}-badge`);
+            const titleEl = document.getElementById(`side-${i}-title`);
+            const linkEl = document.getElementById(`side-${i}-link`);
+            const imgEl = document.getElementById(`side-${i}-img`);
+            const excerptEl = document.getElementById(`side-${i}-excerpt`);
 
-        if (validos.length > 2) {
-          const lateral2 = validos[2];
-          if (document.getElementById("side-2-badge")) document.getElementById("side-2-badge").textContent = lateral2.seccion;
-          if (document.getElementById("side-2-title")) {
-            document.getElementById("side-2-title").textContent = lateral2.titulo;
-            document.getElementById("side-2-title").setAttribute("href", lateral2.enlace);
+            if (badgeEl) badgeEl.textContent = lateral.seccion;
+            if (titleEl) {
+              titleEl.textContent = lateral.titulo;
+              titleEl.setAttribute("href", lateral.enlace);
+            }
+            if (linkEl) linkEl.setAttribute("href", lateral.enlace);
+            if (imgEl && lateral.img) imgEl.setAttribute("src", lateral.img);
+            if (excerptEl && lateral.resumen) excerptEl.textContent = lateral.resumen;
           }
-          if (document.getElementById("side-2-link")) document.getElementById("side-2-link").setAttribute("href", lateral2.enlace);
-          if (document.getElementById("side-2-img") && lateral2.img) document.getElementById("side-2-img").setAttribute("src", lateral2.img);
-          if (document.getElementById("side-2-excerpt") && lateral2.resumen) document.getElementById("side-2-excerpt").textContent = lateral2.resumen;
         }
       }
     }
