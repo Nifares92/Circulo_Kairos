@@ -3,19 +3,21 @@
 <head>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TSBRXTJ1QL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TSBRXTJ1QL');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSBRXTJ1QL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TSBRXTJ1QL');
+  </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Círculo Kairós — Biblioteca e Inventario Cronológico de Ensayos y Relatos.">
   <title>Biblioteca e Inventario | Círculo Kairós</title>
+
+  <!-- Detección automática de RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Círculo Kairós · Feed RSS" href="feed.xml">
 
   <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
@@ -27,23 +29,23 @@
 
   <style>
     :root {
-      --bg-color: #fbf8f3;
-      --bg-surface: #f4ede1;
-      --bg-card: #f8f3ea;
-      --bg-accent-tint: #f1e6d4;
-      --text-main: #221f1d;
-      --text-muted: #6d665f;
+      --bg-color: #ffffff;
+      --bg-surface: #f9f8f6;
+      --bg-card: #ffffff;
+      --bg-accent-tint: #f4eee7;
+      --text-main: #181615;
+      --text-muted: #665f58;
       --text-light: #8a8279;
-      --accent: #9e4734;
-      --accent-dark: #783324;
-      --border-soft: #e2d8c7;
-      --border-dark: #221f1d;
+      --accent: #8b261e;
+      --accent-dark: #5c1813;
+      --border-soft: #e6dfd5;
+      --border-dark: #181615;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-reader: 'Newsreader', Garamond, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-classical: 'Cinzel', serif;
       --max-width: 1240px;
-      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
       --transition: 0.25s ease;
     }
 
@@ -55,119 +57,157 @@
       font-family: var(--font-sans);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
-      background-size: 24px 24px;
+      background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
+      background-attachment: fixed;
     }
 
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    .top-bar-meta {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* 1. BARRA SUPERIOR OSCURA */
+    .top-action-bar {
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.5rem 2rem;
       display: flex;
       justify-content: space-between;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      align-items: center;
+      font-size: 0.78rem;
+      font-family: var(--font-classical);
+      letter-spacing: 0.1em;
     }
-    .top-bar-meta span strong { color: var(--accent); }
-
-    .site-header {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 2.2rem 1.5rem 1.6rem;
-      background-color: var(--bg-color);
-      position: relative;
+    .top-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
-    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
-
-    .brand { position: relative; padding: 1rem 0 0.5rem; }
-
-    .brand-watermark {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px; height: 250px;
-      pointer-events: none; z-index: 1; opacity: 0.13;
-      filter: blur(1px); mix-blend-mode: multiply;
+    .rss-link-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #fff;
     }
-
-    .site-title {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
+    .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
+    .btn-top-circle {
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      color: var(--text-main);
-      position: relative; z-index: 2;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
     }
-    .site-title a { color: var(--text-main); transition: color var(--transition); }
-    .site-title a:hover { color: var(--accent); }
+    .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    .site-tagline {
-      font-family: var(--font-reader);
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      position: relative; z-index: 2;
-    }
-
-    /* BARRA DE NAVEGACIÓN */
+    /* 2. BARRA DE NAVEGACIÓN MODERNA */
     .main-nav { 
-      border-bottom: 3px double var(--border-dark);
+      border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
-      position: sticky; top: 0;
-      background-color: rgba(251, 248, 243, 0.98);
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
-      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
-    .nav-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
     .nav-toggle-btn { display: none; }
     .main-nav > .nav-container > ul { 
-      list-style: none; display: flex; justify-content: center; align-items: center; gap: 3.5rem;
+      list-style: none; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      gap: 3.5rem;
     }
     .main-nav a {
-      font-size: 0.82rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.16em; color: var(--text-main); padding: 0.35rem 0; position: relative;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-main);
+      padding: 0.35rem 0;
+      position: relative;
     }
     .main-nav a::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
-      background-color: var(--accent); transition: width var(--transition);
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0%; height: 2px;
+      background-color: var(--accent);
+      transition: width var(--transition);
     }
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    /* SUBMENÚ DESPLEGABLE */
+    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
     .has-dropdown { position: relative; }
-    .dropdown-trigger { cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; }
-    .arrow-indicator { font-size: 0.65rem; transition: transform var(--transition); color: var(--accent); }
+    .has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%; height: 20px;
+      background: transparent;
+    }
+    .dropdown-trigger {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .arrow-indicator {
+      font-size: 0.65rem;
+      transition: transform var(--transition);
+      color: var(--accent);
+    }
     .has-dropdown:hover .arrow-indicator { transform: rotate(180deg); }
     .dropdown-menu {
-      position: absolute; top: 100%; left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background-color: var(--bg-card); border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
-      min-width: 230px; padding: 0.8rem 0; list-style: none;
-      display: none; flex-direction: column; text-align: left; border-radius: 2px; z-index: 10000;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(5px);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      min-width: 230px;
+      padding: 0.8rem 0;
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      text-align: left;
+      border-radius: 2px;
+      z-index: 10000;
     }
     .dropdown-menu li { width: 100%; }
     .dropdown-menu a {
-      display: block; padding: 0.65rem 1.4rem; font-size: 0.76rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-main); transition: all var(--transition);
+      display: block;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      transition: all var(--transition);
     }
     .dropdown-menu a::after { display: none; }
-    .dropdown-menu a:hover { background-color: var(--bg-surface); color: var(--accent); padding-left: 1.65rem; }
-    .has-dropdown:hover .dropdown-menu { display: flex; animation: aparecerDropdown 0.25s ease forwards; }
+    .dropdown-menu a:hover {
+      background-color: var(--bg-surface);
+      color: var(--accent);
+      padding-left: 1.65rem;
+    }
+    .has-dropdown:hover .dropdown-menu {
+      display: flex;
+      animation: aparecerDropdown 0.2s ease forwards;
+    }
     @keyframes aparecerDropdown {
-      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
     }
 
     #contenido-principal { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
@@ -185,6 +225,39 @@
     .section-intro-text {
       max-width: 760px; margin: 0 auto; font-family: var(--font-reader); font-size: 1.15rem;
       line-height: 1.75; color: var(--text-muted); font-style: italic;
+    }
+
+    /* ESTILO DE IMAGEN DESTACADA EDITORIAL (.article-featured-media) */
+    .article-featured-media {
+      margin: 2.5rem auto 0.5rem;
+      max-width: 920px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 0.85rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .article-featured-media img {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(18%) contrast(104%) brightness(94%);
+      transition: filter 0.45s ease;
+    }
+    .article-featured-media:hover img {
+      filter: sepia(6%) contrast(102%) brightness(98%);
+    }
+    .article-featured-media figcaption {
+      margin-top: 0.75rem;
+      padding: 0.2rem 0.6rem 0.1rem;
+      font-family: var(--font-reader);
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.55;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 0.65rem;
     }
 
     .layout-columns {
@@ -259,6 +332,8 @@
     @media (max-width: 992px) {
       .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+      .top-action-bar { flex-direction: column; gap: 0.5rem; text-align: center; padding: 0.6rem 1rem; }
+      .top-actions-right { gap: 1rem; }
     }
 
     @media (max-width: 768px) {
@@ -278,29 +353,26 @@
         margin: 0.5rem auto 0; width: 90%; padding: 0.4rem 0;
       }
       .dropdown-menu.sub-abierto { display: flex !important; }
+      .article-featured-media img { height: 250px; }
     }
   </style>
 </head>
 <body id="top">
 
-  <aside class="top-bar-meta" aria-label="Información de la publicación">
-    <span>Círculo Kairós · Biblioteca e Inventario General</span>
-    <span><strong>Archivo:</strong> Ensayos y Relatos ordenados por Cuaderno</span>
-    <span>Año I · Edición Continua</span>
+  <!-- 1. BARRA SUPERIOR OSCURA -->
+  <aside class="top-action-bar" aria-label="Información de publicación">
+    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <div class="top-actions-right">
+      <span>Crítica de Fondo & Artes</span>
+      <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
+        <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
+        RSS
+      </a>
+      <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
+    </div>
   </aside>
 
-  <!-- CABECERA PRINCIPAL -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand">
-        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
-        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- NAVEGACIÓN PRINCIPAL -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -338,6 +410,14 @@
       <p class="section-intro-text">
         «El orden del tiempo preserva el espíritu de las palabras.» Registro completo y riguroso de cada ensayo y tratado en sus cinco cuadernos, y de cada relato u obra en El Rincón del Lector.
       </p>
+
+      <!-- IMAGEN DESTACADA CON ESTILO EDITORIAL -->
+      <figure class="article-featured-media">
+        <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=80" 
+             alt="Niebla espesa sobre piedra antigua y cipreses en penumbra" 
+             onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80'">
+        <figcaption>La piedra y la niebla: la vigilia de Todos los Santos como interrupción metafísica del tiempo profano y custodia de lo irreversible.</figcaption>
+      </figure>
     </header>
 
     <div class="layout-columns">
@@ -464,9 +544,6 @@
         resumen: "Manifiesto inaugural de la Dirección consagrado al rescate de la atención lúcida y la demora frente a la prisa."
       },
 
-      // ==========================================
-      // CUADERNO IV · FILOSOFÍA & ENSAYO (filosofia.html)
-      // ==========================================
       // ==========================================
       // CUADERNO IV · FILOSOFÍA & ENSAYO (filosofia.html)
       // ==========================================
@@ -658,8 +735,7 @@
       // ==========================================
       // CUADERNO II · CINE & MIRADA (cine.html)
       // ==========================================
-     
-     {
+      {
         titulo: "La geometría de la sombra: El Día de Todos los Santos y la contemplación de los ausentes en la poética cinematográfica",
         autor: "Redacción de Cine",
         tipo: "Ensayo (Cuaderno II)",
@@ -763,7 +839,6 @@
       // ==========================================
       // CUADERNO I · LITERATURA & ENIGMA (literatura.html)
       // ==========================================
-
       {
         titulo: "El umbral y el relicario: La literatura de difuntos, el arte de la elegía y la geografía secreta del Día de Todos los Santos",
         autor: "Redacción de Literatura",
@@ -1128,7 +1203,6 @@
       const conteoTotal = document.getElementById("conteo-total-biblioteca");
       if (!contenedor) return;
 
-      // Ordenar cronológicamente (del más reciente al más antiguo)
       const listaOrdenada = [...inventarioMaestroKairos].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
       const filtroLimpio = normalizarTextoBiblio(categoriaActivaBiblio);
@@ -1167,7 +1241,6 @@
       });
     }
 
-    // CONTROL DEL MENÚ MÓVIL
     function configurarMenu() {
       const botonMenu = document.getElementById("btn-menu-movil");
       const listaNav = document.getElementById("lista-navegacion");
@@ -1204,6 +1277,14 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+      const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const hoy = new Date();
+      const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
+      const metaSpan = document.getElementById("meta-fecha-hoy");
+      if (metaSpan) {
+        metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
+      }
+
       renderizarBiblioteca();
       configurarMenu();
     });
