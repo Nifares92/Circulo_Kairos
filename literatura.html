@@ -17,6 +17,9 @@
   <meta name="description" content="Círculo Kairós — Cuaderno de Literatura con paginación automática y ensayos extensos.">
   <title>Literatura & Recomendaciones | Círculo Kairós</title>
 
+  <!-- Detección automática de RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Círculo Kairós · Feed RSS" href="feed.xml">
+
   <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
 
@@ -27,23 +30,23 @@
 
   <style>
     :root {
-      --bg-color: #fbf8f3;
-      --bg-surface: #f4ede1;
-      --bg-card: #f8f3ea;
-      --bg-accent-tint: #f1e6d4;
-      --text-main: #221f1d;
-      --text-muted: #6d665f;
+      --bg-color: #ffffff;
+      --bg-surface: #f9f8f6;
+      --bg-card: #ffffff;
+      --bg-accent-tint: #f4eee7;
+      --text-main: #181615;
+      --text-muted: #665f58;
       --text-light: #8a8279;
-      --accent: #9e4734;
-      --accent-dark: #783324;
-      --border-soft: #e2d8c7;
-      --border-dark: #221f1d;
+      --accent: #8b261e;
+      --accent-dark: #5c1813;
+      --border-soft: #e6dfd5;
+      --border-dark: #181615;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-reader: 'Newsreader', Garamond, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-classical: 'Cinzel', serif;
       --max-width: 1240px;
-      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
       --transition: 0.25s ease;
     }
 
@@ -55,8 +58,8 @@
       font-family: var(--font-sans);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
-      background-size: 24px 24px;
+      background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
+      background-attachment: fixed;
     }
 
     img { max-width: 100%; height: auto; display: block; object-fit: cover; }
@@ -73,89 +76,53 @@
       transition: width 0.1s linear;
     }
 
-    /* Cabecera */
-    .top-bar-meta {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* 1. BARRA SUPERIOR OSCURA */
+    .top-action-bar {
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.5rem 2rem;
       display: flex;
       justify-content: space-between;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      align-items: center;
+      font-size: 0.78rem;
+      font-family: var(--font-classical);
+      letter-spacing: 0.1em;
     }
-    .top-bar-meta span strong { color: var(--accent); }
-
-    .site-header {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 2.2rem 1.5rem 1.6rem;
-      background-color: var(--bg-color);
-      position: relative;
+    .top-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
-    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
-
-    .brand {
-      position: relative;
-      padding: 1rem 0 0.5rem;
+    .rss-link-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #fff;
     }
-
-    .brand-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px;
-      height: 250px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.13;
-      filter: blur(1px);
-      mix-blend-mode: multiply;
-    }
-
-    .site-title {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
+    .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
+    .btn-top-circle {
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      color: var(--text-main); /* <-- Cambiado a negro */
-      position: relative;
-      z-index: 2;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
     }
-    .site-title a {
-      color: var(--text-main); /* <-- Cambiado a negro */
-      transition: color var(--transition), opacity var(--transition);
-    }
-    .site-title a:hover {
-      color: #6a2c21;
-      opacity: 0.95;
-    }
+    .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    .site-tagline {
-      font-family: var(--font-reader);
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
+    /* 2. BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
-      border-bottom: 3px double var(--border-dark);
+      border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
       position: sticky;
       top: 0;
-      background-color: rgba(251, 248, 243, 0.98);
+      background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
-      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
     .nav-container {
       max-width: var(--max-width);
@@ -196,6 +163,13 @@
     .has-dropdown {
       position: relative;
     }
+    .has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%; height: 20px;
+      background: transparent;
+    }
     .dropdown-trigger {
       cursor: pointer;
       display: inline-flex;
@@ -214,26 +188,18 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(10px);
+      transform: translateX(-50%) translateY(5px);
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       min-width: 230px;
       padding: 0.8rem 0;
       list-style: none;
       display: none;
       flex-direction: column;
-      gap: 0;
       text-align: left;
       border-radius: 2px;
       z-index: 10000;
-    }
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px solid rgba(226, 216, 199, 0.4);
-      pointer-events: none;
     }
     .dropdown-menu li {
       width: 100%;
@@ -258,18 +224,18 @@
     }
     .has-dropdown:hover .dropdown-menu {
       display: flex;
-      animation: aparecerDropdown 0.25s ease forwards;
+      animation: aparecerDropdown 0.2s ease forwards;
     }
     @keyframes aparecerDropdown {
-      from { opacity: 0; transform: translateX(-50%) translateY(14px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(4px); }
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
     }
 
     /* Contenedor Principal */
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
+      padding: 3.5rem 1.5rem 5rem;
     }
 
     .section-header-box {
@@ -370,7 +336,7 @@
       content: '';
       position: absolute;
       top: 8px; left: 8px; right: 8px; bottom: 8px;
-      border: 1px solid rgba(226, 216, 199, 0.35);
+      border: 1px solid rgba(230, 223, 213, 0.35);
       pointer-events: none;
     }
 
@@ -666,7 +632,6 @@
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
     .footer-nav a:hover { color: var(--accent); }
 
-    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 992px) {
       .toc-links-grid { grid-template-columns: 1fr; }
       .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
@@ -724,41 +689,42 @@
         padding: 0.35rem 0;
       }
 
-    /* Acordeón del submenú en móvil adaptado y centrado */
-  .has-dropdown {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .has-dropdown:hover .dropdown-menu {
-    display: none;
-  }
-  .dropdown-menu {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border: 1px solid var(--border-soft);
-    background-color: var(--bg-surface);
-    margin: 0.6rem auto 0;
-    width: 90%;
-    max-width: 280px;
-    padding: 0.4rem 0;
-    text-align: center;
-  }
-  .dropdown-menu::before {
-    display: none;
-  }
-  .dropdown-menu.sub-abierto {
-    display: flex !important;
-  }
-  .dropdown-menu a {
-    text-align: center;
-    padding: 0.5rem 1rem;
-  }
-  .dropdown-menu a:hover {
-    padding-left: 1rem;
-  }
+      /* Acordeón del submenú en móvil adaptado y centrado */
+      .has-dropdown {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .has-dropdown:hover .dropdown-menu {
+        display: none;
+      }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: 1px solid var(--border-soft);
+        background-color: var(--bg-surface);
+        margin: 0.6rem auto 0;
+        width: 90%;
+        max-width: 280px;
+        padding: 0.4rem 0;
+        text-align: center;
+      }
+      .dropdown-menu::before {
+        display: none;
+      }
+      .dropdown-menu.sub-abierto {
+        display: flex !important;
+      }
+      .dropdown-menu a {
+        text-align: center;
+        padding: 0.5rem 1rem;
+      }
+      .dropdown-menu a:hover {
+        padding-left: 1rem;
+      }
+    }
 
     @media (max-width: 600px) {
       .site-title { font-size: 2.2rem; }
@@ -772,24 +738,20 @@
 
   <div id="progress-bar"></div>
 
-  <aside class="top-bar-meta" aria-label="Información de publicación">
-    <span>Círculo Kairós · Cuaderno I</span>
-    <span><strong>Disciplina:</strong> Letras & Pensamiento Narrativo</span>
-    <span>Año I · Edición Continua</span>
+  <!-- 1. BARRA SUPERIOR OSCURA -->
+  <aside class="top-action-bar" aria-label="Información de publicación">
+    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <div class="top-actions-right">
+      <span>Crítica de Fondo &amp; Artes</span>
+      <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
+        <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
+        RSS
+      </a>
+      <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
+    </div>
   </aside>
 
-  <!-- CABECERA PRINCIPAL CON FILIGRANA DE FONDO -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand">
-        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
-        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI CUADERNO -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -919,7 +881,7 @@
             <h3>I. La grieta en la estirpe: De Walpole a la cripta viva de Poe</h3>
             <p>El nacimiento formal del arquetipo se gesta a mediados del siglo XVIII con <em>El castillo de Otranto</em> (1764) de Horace Walpole, pero en ese estadio inaugural la fortaleza aún funciona como un mecanismo teatral externo. El edificio acoge la maldición dinástica, hace crujir sus portones y deja caer yelmos colosales sobre los herederos usurpadores, pero continúa siendo piedra dócil al servicio de la trama caballeresca. Fue necesario el genio concentrado y neurótico de Edgar Allan Poe para consumar la fusión absoluta entre la mampostería exterior y la psique patológica.</p>
 
-            <p>En <em>La caída de la Casa Usher</em> (1839), Poe ejecuta un prodigio de equivalencia semántica: la expresión «Casa Usher» designa de manera indistinta tanto la osamenta arquitectónica del caserón solariego como el árbol genealógico podrido de sus últimos descendientes. No hay distancia entre Roderick Usher y las piedras cenicientas que lo acogen. La fachada exhibe dos vanos ciegos a modo de cuencas vacías; el lago negro estancado devuelve un reflejo invertido del desmoronamiento; y una fisura en zigzag apenas perceptible recorre el muro desde el tejado hasta hundirse en las aguas pantanosas.</p>
+            <p>En <em>La caída de la Casa Usher</em> (1839), Poe ejecuta un prodigio de equivalencia semántica: la expresión «Casa Usher» designa de manera indistinta tanto la osamenta arquitectónica del caserón solariega como el árbol genealógico podrido de sus últimos descendientes. No hay distancia entre Roderick Usher y las piedras cenicientas que lo acogen. La fachada exhibe dos vanos ciegos a modo de cuencas vacías; el lago negro estancado devuelve un reflejo invertido del desmoronamiento; y una fisura en zigzag apenas perceptible recorre el muro desde el tejado hasta hundirse en las aguas pantanosas.</p>
 
             <blockquote>«Aquella fisura que zigzagueaba desde la techumbre hasta la base no era una avería geológica: era la línea de sutura por la que la culpa ancestral de la estirpe respiraba sobre el mundo de los vivos.»<cite>— Edgar Allan Poe, Cuadernos de análisis literario</cite></blockquote>
 
@@ -958,7 +920,9 @@
             <h3>V. Epílogo: El espejo del que no se puede escapar</h3>
             <p>¿Por qué seguimos leyendo relatos de casas encantadas cuando el vendaval de otoño azota nuestras ventanas? La respuesta no reside en el morbo del sobresalto, sino en la catarsis de una revelación íntima. La casa encantada es el recordatorio físico de que el pasado no se entierra derribando un tabique ni revocando una pared con yeso fresco.</p>
 
-            <p>Los crímenes de los ancestros, las palabras rencorosas pronunciadas en la mesa familiar y el silencio helado tras una ruptura no desaparecen en el aire: impregnan los zócalos de madera, tiñen el azogue de los espejos viejos y aguardan en los desvanes polvorientos a que apaguemos la última lámpara de la noche. Cuando una puerta cruje en la penumbra de un caserón gótico, lo que se abre no es el umbral de otra dimensión: es la puerta clausurada de nuestra propia memoria.</p>
+            <p>Los crímenes de los ancestros, las palabras rencorosas pronunciadas en la mesa familiar y el silencio helado tras una ruptura no desaparecen en el aire: impregnan los zócalos de madera, tiñen el azogue de los espejos viejos y aguardan en los desvanes polvorientos a que apagues la última lámpara de la noche para reclamar su derecho a la existencia.</p>
+
+            <p>Cuando una puerta cruje en la penumbra de un caserón gótico, lo que se abre no es el umbral de otra dimensión: es la puerta clausurada de nuestra propia memoria.</p>
           </div>
 
           <footer class="article-bottom-actions">
@@ -1041,7 +1005,7 @@
             <h3>I. La grieta del año: Raíces celtas y la palabra hablada</h3>
             <p>En el corazón del antiguo calendario celta, la festividad de Samhain marcaba el fin de las cosechas y la bienvenida al invierno, la mitad oscura del año. No era únicamente una transición meteorológica, sino una ruptura en la trama de la realidad. Se creía que durante esas horas el <em>velo</em> entre el mundo visible y el Más Allá se adelgazaba hasta volverse transparente. Los espíritus de los antepasados regresaban a sus antiguos hogares, pero con ellos se filtraban también criaturas hostiles del submundo: hadas crueles, entidades sin rostro y ánimas errantes.</p>
 
-            <p>En ese entorno agrario y vulnerable, la palabra era la primera línea de defensa y el principal instrumento de comunión. Alrededor del fuego comunitario, los druidas y los ancianos no se limitaban a realizar ofrendas; contaban historias. Relatar mitos sobre el Otro Mundo cumplía una función ritual: recordaba los pactos, establecía los límites morales de la comunidad y explicaba por qué no se debía caminar solo por los páramos tras la puesta del sol.</p>
+            <p>En ese entorno agrario y vulnerable, la palabra era la primera línea de defensa y el principal instrumento de comunión. Alrededor del fuego comunitario, los druidas y los ancianos no se limitaban a ofrecer ofrendas; contaban historias. Relatar mitos sobre el Otro Mundo cumplía una función ritual: recordaba los pactos, establecía los límites morales de la comunidad y explicaba por qué no se debía caminar solo por los páramos tras la puesta del sol.</p>
 
             <hr>
 
@@ -1309,7 +1273,7 @@
     <a href="#sumario-box" class="back-to-toc-link">&uarr; Volver al sumario</a>
   </footer>
 </article>
-       
+        
         <!-- ENSAYO 3: BASKERVILLE -->
 <article class="long-article" id="baskerville" data-titulo="III. El sabueso de los Baskerville">
   <header class="article-header">
@@ -1329,7 +1293,7 @@
     <p>El regreso de Sherlock Holmes a la escena literaria —tras su aparente muerte en las cataratas de Reichenbach descrita en 1893— no se produjo en los escenarios familiares del laberinto urbano londinense, sino en una geografía liminal. Al desplazar el centro de gravedad de Baker Street a la desolación de Dartmoor, Doyle no solo revive al mito: lo somete a una prueba de fuego epistemológica. El caso no desafía meramente la perspicacia del analista ante un enigma ordinario; confronta todo el edificio de la ilustración científica contra las sombras primordiales del folclore rural británico.</p>
 
     <h3>I. El choque entre la superstición y la deducción química</h3>
-    <p>Sherlock Holmes representa el estandarte supremo del positivismo victoriano: la convicción inquebrantable de que el universo material es cognoscible, clasificable y susceptible de ser desarmado en un laboratorio mediante reactivos, lupas y cenizas de tabaco tabuladas. Sin embargo, la muerte de sir Charles Baskerville en la avenida de los tejos se presenta ante el mundo acompañada de un pergamino dieciochesco que evoca el pecado original de Hugo Baskerville y la maldición demoníaca de un perro colosal de ojos de fuego.</p>
+    <p>Sherlock Holmes representa el estandarte supremo del positivismo victoriano: la convicción inquebrantable de que el universo material es cognoscible, clasificable y susceptible de ser desarmado en un laboratorio mediante reactivos, lupas y cenizas de tabaco tabuladas. Sin embargo, la muerte de sir Charles Baskerville en la avenida de los tejos se presenta ante oídos analíticos acompañada de un pergamino dieciochesco que evoca el pecado original de Hugo Baskerville y la maldición demoníaca de un perro colosal de ojos de fuego.</p>
 
     <p>Al situar la trama en las inmediaciones del fango de Grimpen, Doyle orquesta un contraste deliberado. En la primera escena, el bastón de madera del doctor Mortimer es sometido al examen empírico de Holmes y Watson: marcas de dientes de un spaniel, iniciales gastadas, deducciones exactas sobre un médico rural que ha abandonado un gran hospital docente. Este ejercicio de brillante sobriedad racional salta por los aires en cuanto Mortimer pronuncia la frase que inaugura la verdadera pesadilla:</p>
 
@@ -1661,10 +1625,12 @@
       if (bar) bar.style.width = scrolled + '%';
     });
 
-    document.addEventListener("DOMContentLoaded", inicializarPaginacion);
+    document.addEventListener("DOMContentLoaded", () => {
+      inicializarPaginacion();
+    });
   </script>
 
- <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (VINCULADO A CUENTAS DE USUARIO) -->
+  <!-- MOTOR AUTOMÁTICO DE BOTÓN DE FAVORITOS (VINCULADO A CUENTAS DE USUARIO) -->
 <script>
   const STORAGE_KEY = "kairos_favoritos_v1";
   const SESSION_KEY = "kairos_sesion_activa_v1";
