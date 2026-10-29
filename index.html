@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TSBRXTJ1QL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TSBRXTJ1QL');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TSBRXTJ1QL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TSBRXTJ1QL');
+  </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,23 +28,24 @@
 
   <style>
     :root {
-      --bg-color: #fbf8f3;
-      --bg-surface: #f4ede1;
-      --bg-card: #f8f3ea;
-      --bg-accent-tint: #f1e6d4;
-      --text-main: #221f1d;
-      --text-muted: #6d665f;
+      /* Fondo blanco puro arriba que transiciona a papel sutil con el scroll */
+      --bg-color: #ffffff;
+      --bg-surface: #f9f8f6;
+      --bg-card: #ffffff;
+      --bg-accent-tint: #f4eee7;
+      --text-main: #181615;
+      --text-muted: #665f58;
       --text-light: #8a8279;
-      --accent: #9e4734;
-      --accent-dark: #783324;
-      --border-soft: #e2d8c7;
-      --border-dark: #221f1d;
+      --accent: #8b261e;
+      --accent-dark: #5c1813;
+      --border-soft: #e6dfd5;
+      --border-dark: #181615;
       --font-serif: 'Playfair Display', Georgia, serif;
       --font-reader: 'Newsreader', Garamond, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-classical: 'Cinzel', serif;
       --max-width: 1240px;
-      --shadow-subtle: 0 4px 18px rgba(34, 31, 29, 0.05);
+      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
       --transition: 0.25s ease;
     }
 
@@ -58,123 +57,69 @@
       font-family: var(--font-sans);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      background-image: radial-gradient(rgba(158, 71, 52, 0.03) 1px, transparent 0);
-      background-size: 24px 24px;
+      /* Gradiente sutil y elegante de blanco a papel sutil conforme se desciende */
+      background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
+      background-attachment: fixed;
     }
 
     img { max-width: 100%; height: auto; display: block; object-fit: cover; }
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    .top-bar-meta {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
+    /* 1. BARRA SUPERIOR OSCURA (Estilo Revuelta) */
+    .top-action-bar {
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      font-size: 0.78rem;
+      font-family: var(--font-classical);
+      letter-spacing: 0.1em;
     }
-    .top-bar-meta span strong { color: var(--accent); }
-
+    .top-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
     .rss-link-meta {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      font-family: var(--font-classical);
-      font-size: 0.74rem;
-      letter-spacing: 0.14em;
-      color: var(--text-muted);
-      transition: color var(--transition);
+      color: #fff;
     }
-    .rss-link-meta svg {
-      width: 12px;
-      height: 12px;
-      fill: currentColor;
-      transition: fill var(--transition);
-    }
-    .rss-link-meta:hover {
-      color: var(--accent);
-    }
-
-    .site-header {
-      border-bottom: 1px solid var(--border-soft);
-      padding: 2.2rem 1.5rem 1.6rem;
-      background-color: var(--bg-color);
-      position: relative;
-    }
-    .header-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
-
-    .brand { position: relative; padding: 1rem 0 0.5rem; }
-
-    .brand-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px;
-      height: 250px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.13;
-      filter: blur(1px);
-      mix-blend-mode: multiply;
-    }
-
-    .site-title {
-      font-family: var(--font-serif);
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
+    .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
+    .btn-top-circle {
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      font-weight: 600;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      color: var(--text-main); /* <-- Cambiado a negro */
-      position: relative;
-      z-index: 2;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
     }
-    .site-title a {
-      color: var(--text-main); /* <-- Cambiado a negro */
-      transition: color var(--transition), opacity var(--transition);
-    }
-    .site-title a:hover {
-      color: #6a2c21;
-      opacity: 0.95;
-    }
+    .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    .site-tagline {
-      font-family: var(--font-reader);
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
+    /* 2. BARRA DE NAVEGACIÓN MODERNA */
     .main-nav { 
-      border-bottom: 3px double var(--border-dark);
+      border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
       position: sticky;
       top: 0;
-      background-color: rgba(251, 248, 243, 0.98);
+      background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
-      box-shadow: 0 4px 14px rgba(34, 31, 29, 0.06);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
     .nav-container {
       max-width: var(--max-width);
       margin: 0 auto;
       text-align: center;
     }
-    .nav-toggle-btn {
-      display: none;
-    }
+    .nav-toggle-btn { display: none; }
     .main-nav > .nav-container > ul { 
       list-style: none; 
       display: flex; 
@@ -202,22 +147,15 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-   /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
-    .has-dropdown {
-      position: relative;
-    }
-
-    /* Puente invisible para evitar que el menú se cierre al cruzar el ratón */
+    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
+    .has-dropdown { position: relative; }
     .has-dropdown::after {
       content: '';
       position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      height: 20px; /* Cubre el espacio de separación */
+      top: 100%; left: 0;
+      width: 100%; height: 20px;
       background: transparent;
     }
-
     .dropdown-trigger {
       cursor: pointer;
       display: inline-flex;
@@ -229,37 +167,25 @@
       transition: transform var(--transition);
       color: var(--accent);
     }
-    .has-dropdown:hover .arrow-indicator {
-      transform: rotate(180deg);
-    }
+    .has-dropdown:hover .arrow-indicator { transform: rotate(180deg); }
     .dropdown-menu {
       position: absolute;
-      top: 100%; /* Justo debajo del elemento padre */
+      top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(5px); /* Posición inicial más cercana y estable */
+      transform: translateX(-50%) translateY(5px);
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(34, 31, 29, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       min-width: 230px;
       padding: 0.8rem 0;
       list-style: none;
       display: none;
       flex-direction: column;
-      gap: 0;
       text-align: left;
       border-radius: 2px;
       z-index: 10000;
     }
-    .dropdown-menu::before {
-      content: '';
-      position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px solid rgba(226, 216, 199, 0.4);
-      pointer-events: none;
-    }
-    .dropdown-menu li {
-      width: 100%;
-    }
+    .dropdown-menu li { width: 100%; }
     .dropdown-menu a {
       display: block;
       padding: 0.65rem 1.4rem;
@@ -270,9 +196,7 @@
       color: var(--text-main);
       transition: all var(--transition);
     }
-    .dropdown-menu a::after {
-      display: none;
-    }
+    .dropdown-menu a::after { display: none; }
     .dropdown-menu a:hover {
       background-color: var(--bg-surface);
       color: var(--accent);
@@ -287,6 +211,64 @@
       to { opacity: 1; transform: translateX(-50%) translateY(0px); }
     }
 
+    /* 3. BLOQUE HERO DE IMPACTO A PANTALLA COMPLETA */
+    .hero-impact-section {
+      position: relative;
+      padding: 6rem 2rem 5rem;
+      background: linear-gradient(rgba(18, 16, 15, 0.7), rgba(18, 16, 15, 0.88)), url('https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      color: #ffffff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 3px double var(--border-soft);
+    }
+    .hero-impact-badge {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #e2a09a;
+      background-color: rgba(139, 38, 30, 0.35);
+      border: 1px solid rgba(139, 38, 30, 0.6);
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-impact-section h1 {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 1050px;
+      margin-bottom: 1.2rem;
+    }
+    .hero-impact-section p {
+      font-family: var(--font-reader);
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin-bottom: 2.2rem;
+      color: #f1ede6;
+      font-style: italic;
+      line-height: 1.7;
+    }
+    .btn-hero-kairos {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-classical);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      background-color: var(--accent);
+      padding: 0.8rem 2rem;
+      border-radius: 2px;
+      transition: background-color var(--transition);
+    }
+    .btn-hero-kairos:hover { background-color: var(--accent-dark); color: #fff; }
+
     #contenido-principal {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -295,13 +277,13 @@
     
     /* Módulo Monográfico Mensual */
     .monthly-theme-monograph {
-      background: linear-gradient(145deg, #1f1b1a 0%, #2a2422 100%);
-      color: #e9e2d7;
+      background: linear-gradient(145deg, #181615 0%, #262220 100%);
+      color: #f3efe9;
       border: 1px solid #3c3430;
       border-radius: 3px;
       padding: 2.8rem 2.8rem;
       margin-bottom: 4rem;
-      box-shadow: 0 14px 34px rgba(25, 20, 18, 0.22);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
     }
@@ -334,9 +316,9 @@
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #df8876;
-      background-color: rgba(158, 71, 52, 0.22);
-      border: 1px solid rgba(158, 71, 52, 0.45);
+      color: #e2a09a;
+      background-color: rgba(139, 38, 30, 0.25);
+      border: 1px solid rgba(139, 38, 30, 0.4);
       padding: 0.35rem 0.85rem;
       border-radius: 2px;
     }
@@ -345,13 +327,13 @@
       font-size: 0.78rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #a89f94;
+      color: #b0a69c;
     }
     .monthly-theme-monograph h2 {
       font-family: var(--font-serif);
       font-size: 2.3rem;
       line-height: 1.25;
-      color: #f7f3ed;
+      color: #ffffff;
       margin-bottom: 1rem;
       font-weight: 700;
       letter-spacing: 0.02em;
@@ -359,7 +341,7 @@
     .monthly-theme-monograph p {
       font-family: var(--font-reader);
       font-size: 1.15rem;
-      color: #cfc6b8;
+      color: #ded6cc;
       line-height: 1.8;
       max-width: 980px;
       margin-bottom: 1.6rem;
@@ -369,7 +351,7 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 1rem;
       padding-top: 1.5rem;
-      border-top: 1px solid rgba(226, 216, 199, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
     .theme-node {
       background-color: rgba(255, 255, 255, 0.03);
@@ -383,14 +365,14 @@
       font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #df8876;
+      color: #e2a09a;
       margin-bottom: 0.25rem;
       font-weight: 700;
     }
     .theme-node-text {
       font-family: var(--font-sans);
       font-size: 0.8rem;
-      color: #e5ddd0;
+      color: #f1ede6;
       line-height: 1.5;
     }
 
@@ -416,7 +398,7 @@
       content: '';
       position: absolute;
       top: 6px; left: 6px; right: 6px; bottom: 6px;
-      border: 1px solid rgba(226, 216, 199, 0.4);
+      border: 1px solid rgba(230, 223, 213, 0.5);
       pointer-events: none;
     }
     .hero-badge-row {
@@ -542,7 +524,7 @@
       position: absolute;
       top: -12px; left: 50%;
       transform: translateX(-50%);
-      background: var(--bg-color);
+      background: #ffffff;
       padding: 0 1rem;
       font-family: var(--font-classical);
       color: var(--accent);
@@ -704,7 +686,7 @@
     }
     .news-item-box:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(34, 31, 29, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
       border-color: var(--accent);
     }
 
@@ -870,7 +852,7 @@
     .reader-modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-color: rgba(34, 31, 29, 0.78);
+      background-color: rgba(18, 16, 15, 0.75);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       z-index: 100000;
@@ -894,7 +876,7 @@
       overflow-y: auto;
       border: 1px solid var(--border-dark);
       padding: 3.5rem 3.5rem 3rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
       position: relative;
       animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -974,18 +956,14 @@
       margin-bottom: 1.5rem;
       text-indent: 1.5rem;
     }
-    .modal-story-prose p:first-of-type {
-      text-indent: 0;
-    }
+    .modal-story-prose p:first-of-type { text-indent: 0; }
     .modal-story-prose p.poem-line {
       text-indent: 0;
       text-align: center;
       margin-bottom: 0.4rem;
       font-style: italic;
     }
-    .modal-story-prose .poem-stanza {
-      margin: 2rem 0;
-    }
+    .modal-story-prose .poem-stanza { margin: 2rem 0; }
     .modal-closing-seal {
       text-align: center;
       margin-top: 3rem;
@@ -1048,22 +1026,19 @@
       .sidebar-ephemeris-column { position: static; }
     }
     
-    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 768px) {
       .hero-editorial-grid { grid-template-columns: 1fr; }
       .penta-grid { grid-template-columns: repeat(2, 1fr); }
       .news-card-feed { grid-template-columns: 1fr; }
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
-      .brand-watermark { width: 190px; height: 190px; }
       .theme-monograph-grid { grid-template-columns: 1fr; }
       .monthly-theme-monograph { padding: 1.8rem; }
       .monthly-theme-monograph h2 { font-size: 1.75rem; }
       .reader-modal-sheet { padding: 2.2rem 1.6rem; }
       .modal-story-title { font-size: 1.7rem; }
+      .hero-impact-section h1 { font-size: 2.2rem; }
 
-      .main-nav {
-        padding: 0.6rem 1rem;
-      }
+      .main-nav { padding: 0.6rem 1rem; }
       .nav-toggle-btn {
         display: inline-flex;
         align-items: center;
@@ -1080,11 +1055,6 @@
         cursor: pointer;
         border-radius: 2px;
         margin: 0 auto;
-        transition: all var(--transition);
-      }
-      .nav-toggle-btn:hover {
-        border-color: var(--accent);
-        color: var(--accent);
       }
       .main-nav > .nav-container > ul {
         display: none;
@@ -1096,85 +1066,26 @@
         border-top: 1px solid var(--border-soft);
         margin-top: 0.6rem;
       }
-      .main-nav > .nav-container > ul.nav-abierto {
-        display: flex;
-        animation: desplegarMenu 0.25s ease-out;
-      }
-      @keyframes desplegarMenu {
-        from { opacity: 0; transform: translateY(-8px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .main-nav a {
-        font-size: 0.88rem;
-        padding: 0.35rem 0;
-      }
-
-     /* Acordeón del submenú en móvil adaptado y centrado */
-  .has-dropdown {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .has-dropdown:hover .dropdown-menu {
-    display: none;
-  }
-  .dropdown-menu {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border: 1px solid var(--border-soft);
-    background-color: var(--bg-surface);
-    margin: 0.6rem auto 0;
-    width: 90%;
-    max-width: 280px;
-    padding: 0.4rem 0;
-    text-align: center;
-  }
-  .dropdown-menu::before {
-    display: none;
-  }
-  .dropdown-menu.sub-abierto {
-    display: flex !important;
-  }
-  .dropdown-menu a {
-    text-align: center;
-    padding: 0.5rem 1rem;
-  }
-  .dropdown-menu a:hover {
-    padding-left: 1rem;
-  }
-
-    @media (max-width: 500px) {
-      .site-title { font-size: 2.2rem; letter-spacing: 0.14em; }
-      .penta-grid { grid-template-columns: 1fr; }
-      .hero-lead-card { padding: 1.5rem; }
-      .brand-watermark { width: 160px; height: 160px; }
+      .main-nav > .nav-container > ul.nav-abierto { display: flex; }
     }
   </style>
 </head>
 <body>
 
-  <aside class="top-bar-meta" aria-label="Información de publicación">
+  <!-- 1. BARRA SUPERIOR OSCURA -->
+  <aside class="top-action-bar" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
-    <span><strong>Disciplina:</strong> Crítica de Fondo, Artes & Creación Literaria</span>
-    <a href="feed.xml" class="rss-link-meta" title="Suscribirse al canal RSS de Círculo Kairós" target="_blank">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
-      Canal RSS
-    </a>
+    <div class="top-actions-right">
+      <span>Crítica de Fondo & Artes</span>
+      <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
+        <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
+        RSS
+      </a>
+      <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
+    </div>
   </aside>
 
-  <header class="site-header">
-    <div class="header-container">
-      <div class="brand">
-        <img src="logo-kairos.svg" alt="" aria-hidden="true" class="brand-watermark">
-        <h1 class="site-title"><a href="index.html">CÍRCULO KAIRÓS</a></h1>
-        <p class="site-tagline">Cuaderno de Letras, Cinematografía, Acústica y Pensamiento Filosófico</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- NAVEGACIÓN MODERNA Y JERÁRQUICA: INICIO · CUADERNOS ▾ · EL CÍRCULO · MI CUADERNO -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -1185,7 +1096,6 @@
       <ul id="lista-navegacion">
         <li><a href="index.html" class="active">Inicio</a></li>
         
-        <!-- Pestaña desplegable de Cuadernos -->
         <li class="has-dropdown">
           <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
             Cuadernos <span class="arrow-indicator">▾</span>
@@ -1205,8 +1115,17 @@
     </div>
   </nav>
 
+  <!-- 3. BLOQUE HERO DE IMPACTO A PANTALLA COMPLETA -->
+  <header class="hero-impact-section">
+    <div class="hero-impact-badge">✦ Edición Especial · Tribuna de la Dirección ✦</div>
+    <h1>El banquete de las sombras: Fenomenología de la vigilia fúnebre y el retorno de los ancestros</h1>
+    <p>«Cronos mide la cantidad inerte de los minutos; Kairós revela su peso interior. Este espacio nace para pausar el reloj y habitar la mirada.»</p>
+    <a href="pensamiento.html#pensamiento-banquete-sombras" class="btn-hero-kairos">Leer Tratado Completo &rarr;</a>
+  </header>
+
   <main id="contenido-principal">
 
+    <!-- Módulo Monográfico Mensual -->
     <section class="monthly-theme-monograph" aria-labelledby="tema-del-mes-titulo">
       <div class="theme-monograph-header">
         <span class="theme-monograph-badge">✦ Cuaderno Octubre · Monografía</span>
@@ -1240,10 +1159,10 @@
       </div>
     </section>
 
-    <!-- PORTADA DINÁMICA: ENSAYO MÁS RECIENTE + 2 LATERALES -->
+    <!-- PORTADA DINÁMICA: EL ÚLTIMO ENSAYO ARRIBA (GRANDE) + LOS 3 ANTERIORES ABAJO -->
     <section class="hero-editorial-grid" aria-labelledby="portada-principal-titulo">
 
-      <!-- 1. ENSAYO MÁS RECIENTE -->
+      <!-- 1. ENSAYO MÁS RECIENTE (El último subido) -->
       <article class="hero-lead-card" id="portada-lead-article">
         <div class="hero-badge-row">
           <span class="discipline-badge" id="lead-badge">Pensamiento</span>
@@ -1258,18 +1177,18 @@
         <div class="hero-lead-image">
           <img id="lead-image" 
                src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1200&q=80" 
-               alt="Leopardo en penumbra"
+               alt="Ilustración principal"
                onerror="this.src='https://images.unsplash.com/photo-1517825738774-7de9363ef735?auto=format&fit=crop&w=1200&q=80'">
         </div>
 
         <p class="hero-lead-excerpt" id="lead-excerpt">
-          Hay una hora secreta a mediados de otoño en la que la tierra deja de exhalar el calor acumulado durante el estío y comienza a replegarse en una quietud mineral. Los bosques desprenden su último ropaje de cobre, los cursos de agua se vuelven lentos y plomizos bajo un cielo bajo de nubes pardas, y el ser humano busca instintivamente el calor del hogar y el amparo de la lumbre.
+          Hay una hora secreta a mediados de otoño en la que la tierra deja de exhalar el calor acumulado durante el estío y comienza a replegarse en una quietud mineral. Los bosques desprenden su último ropaje de cobre, los cursos de agua se vuelven lentos y plomizos bajo un cielo bajo de nubes pardas...
         </p>
 
         <a href="pensamiento.html#pensamiento-banquete-sombras" id="lead-link" class="btn-kairos">Continuar leyendo el tratado completo &rarr;</a>
       </article>
 
-      <!-- 2. LOS DOS ENSAYOS ANTERIORES -->
+      <!-- 2. LOS TRES ENSAYOS ANTERIORES (Ordenados en la columna lateral) -->
       <aside class="hero-side-column" aria-label="Lecturas anteriores destacadas">
         
         <article class="side-story-card" id="side-card-1">
@@ -1277,11 +1196,11 @@
           <div class="side-story-media">
             <img id="side-1-img" 
                  src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80" 
-                 alt="Manuscrito antiguo, cartas y pluma en penumbra">
+                 alt="Manuscrito antiguo">
           </div>
           <h3><a href="pensamiento.html#tratado-perdida-director" id="side-1-title">La arquitectura de la ausencia: Fenomenología de la pérdida y el duelo</a></h3>
           <p id="side-1-excerpt">
-            Toda pérdida verdadera comienza mucho antes de que la ausencia sea formalmente proclamada. Comienza en el instante imperceptible en que la mente advierte que el presente se transforma en monumento.
+            Toda pérdida verdadera comienza mucho antes de que la ausencia sea formalmente proclamada en el presente...
           </p>
           <a href="pensamiento.html#tratado-perdida-director" id="side-1-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver tratado completo &rarr;</a>
         </article>
@@ -1291,11 +1210,11 @@
           <div class="side-story-media">
             <img id="side-2-img" 
                  src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80" 
-                 alt="Silueta espectral en corredor gótico">
+                 alt="Silueta espectral">
           </div>
           <h3><a href="filosofia.html#filosofia-espectrologia-fantasma" id="side-2-title">La mirada sin ojos: Espectrología y retorno ontológico</a></h3>
           <p id="side-2-excerpt">
-            El «efecto visera» de Derrida y la fractura de Cronos: el fantasma como escándalo ontológico que se niega al olvido.
+            El «efecto visera» de Derrida y la fractura de Cronos: el fantasma como escándalo ontológico...
           </p>
           <a href="filosofia.html#filosofia-espectrologia-fantasma" id="side-2-link" class="btn-kairos" style="margin-top: auto; padding-top: 0.8rem;">Ver ensayo completo &rarr;</a>
         </article>
@@ -1327,9 +1246,7 @@
             <img id="quad-lit-img" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Literatura">
           </div>
           <h3><a href="literatura.html" id="quad-lit-title">Literatura</a></h3>
-          <p id="quad-lit-desc">
-            Crítica literaria de fondo, la relojería deductiva del enigma policial, el realismo trágico y el arte de la atmósfera narrativa.
-          </p>
+          <p id="quad-lit-desc">Crítica literaria de fondo, la relojería deductiva del enigma policial y realismo trágico.</p>
           <a href="literatura.html" id="quad-lit-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
@@ -1339,9 +1256,7 @@
             <img id="quad-cine-img" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80" alt="Cine">
           </div>
           <h3><a href="cine.html" id="quad-cine-title">Cine</a></h3>
-          <p id="quad-cine-desc">
-            Poética del plano secuencia, la geometría moral del claroscuro en el cine negro clásico y la ciencia ficción existencial.
-          </p>
+          <p id="quad-cine-desc">Poética del plano secuencia, geometría moral del claroscuro y cine negro clásico.</p>
           <a href="cine.html" id="quad-cine-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
@@ -1351,9 +1266,7 @@
             <img id="quad-mus-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" alt="Música">
           </div>
           <h3><a href="musica.html" id="quad-mus-title">Música</a></h3>
-          <p id="quad-mus-desc">
-            Monografías sonoras de fondo, la liturgia minimalista del tintinnabuli, el modalismo de medianoche y la textura analógica.
-          </p>
+          <p id="quad-mus-desc">Monografías sonoras de fondo, liturgia minimalista y textura analógica.</p>
           <a href="musica.html" id="quad-mus-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
@@ -1363,23 +1276,17 @@
             <img id="quad-filo-img" src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=500&q=80" alt="Filosofía">
           </div>
           <h3><a href="filosofia.html" id="quad-filo-title">Filosofía</a></h3>
-          <p id="quad-filo-desc">
-            Tratados monográficos sobre el tiempo kairológico, la soberanía interior estoica del juicio y la fenomenología del límite.
-          </p>
+          <p id="quad-filo-desc">Tratados monográficos sobre el tiempo kairológico y soberanía interior estoica.</p>
           <a href="filosofia.html" id="quad-filo-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
         <article class="penta-card" id="quad-card-pens">
-          <span class="discipline-badge" style="align-self: flex-start; background-color: rgba(158, 71, 52, 0.15);">Pensamiento</span>
+          <span class="discipline-badge" style="align-self: flex-start; background-color: rgba(139, 38, 30, 0.15);">Pensamiento</span>
           <div class="penta-media">
-            <img id="quad-pens-img" 
-                 src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&q=80" 
-                 alt="Pensamiento">
+            <img id="quad-pens-img" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&q=80" alt="Pensamiento">
           </div>
           <h3><a href="pensamiento.html" id="quad-pens-title">Pensamiento</a></h3>
-          <p id="quad-pens-desc">
-            Tribuna de la Dirección consagrada a la deliberación profunda, el duelo insumiso y la custodia de la memoria viva.
-          </p>
+          <p id="quad-pens-desc">Tribuna de la Dirección consagrada a la deliberación profunda y la memoria viva.</p>
           <a href="pensamiento.html" id="quad-pens-link" class="penta-link">Abrir Cuaderno &rarr;</a>
         </article>
 
@@ -1435,133 +1342,64 @@
   </main>
 
   <!-- GABINETE DE LECTURA (MODAL INTERNO) -->
-
-  
-
   <div class="reader-modal-overlay" id="lector-intrapagina" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-hidden="true">
-
     <div class="reader-modal-sheet">
-
       <button class="btn-close-modal" onclick="cerrarLectorIntrapagina()" aria-label="Cerrar lectura">✕ Cerrar cuaderno</button>
-
       
-
       <div class="modal-reading-header">
-
         <span class="modal-genre-badge" id="modal-genero">Relato</span>
-
         <h2 class="modal-story-title" id="modal-titulo">Título del Relato</h2>
-
         <div class="modal-story-meta" id="modal-meta">Por Autor · Entrega Semanal</div>
-
       </div>
-
-
 
       <div class="modal-featured-image" id="modal-image-container">
-
         <img id="modal-img" src="" alt="Ilustración de la obra">
-
       </div>
-
-
 
       <div class="modal-story-prose" id="modal-contenido"></div>
 
-
-
       <div class="modal-closing-seal">
-
         ✦ Círculo Kairós · Fin de la Pieza Literaria ✦
-
       </div>
-
     </div>
-
   </div>
 
-
-
   <footer class="site-footer">
-
     <div class="footer-container">
-
-      
-
       <div class="footer-brand">
-
         <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
-
         <h3>CÍRCULO KAIRÓS</h3>
-
         <p>
-
           Publicación cultural independiente consagrada al rescate de la atención lúcida, la crítica rigurosa de las artes y la contemplación frente a la prisa cotidiana.
-
         </p>
-
         <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
-
       </div>
-
-
 
       <nav class="footer-nav" aria-label="Navegación del pie">
-
         <h4>Cuadernos</h4>
-
         <ul>
-
           <li><a href="literatura.html">Literatura & Enigma</a></li>
-
           <li><a href="cine.html">Cine & Mirada</a></li>
-
           <li><a href="musica.html">Música & Acústica</a></li>
-
           <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
-
           <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
-
         </ul>
-
       </nav>
 
-
-
       <div class="footer-nav">
-
         <h4>El Círculo</h4>
-
         <ul>
-
           <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
-
           <li><a href="sobre-el-circulo.html#buzon-correspondencia">Buzón de Correspondencia</a></li>
-
           <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
-
           <li><a href="feed.xml" target="_blank">Canal RSS (Cuadernos)</a></li>
-
         </ul>
-
       </div>
-
-
-
     </div>
-
   </footer>
 
-
-
   <script>
-
-    
-
-    /* CATÁLOGO DE RELATOS Y POEMAS: EL RINCÓN DEL LECTOR */
-
     const OBRAS_RINCON_LECTOR = [
-
       {
         id: "obra-inventario-horas",
         titulo: "El inventario de las horas no vividas",
@@ -2456,9 +2294,8 @@
         });
 
         if (indicador) {
-          indicador.textContent = `${indicePaginaLector + 1} / ${totalPaginasLector}`;
+          indicador.textContent = `${indicePaginaLector + 1} / ${totalPaginasLector || 1}`;
         }
-
         contenedor.style.opacity = "1";
       }, 180);
     }
@@ -2473,17 +2310,13 @@
     function abrirLectorIntrapagina(idObra) {
       const obra = OBRAS_RINCON_LECTOR.find(o => o.id === idObra);
       if (!obra) return;
-
       const modal = document.getElementById("lector-intrapagina");
       document.getElementById("modal-genero").textContent = obra.genero;
       document.getElementById("modal-titulo").textContent = obra.titulo;
       document.getElementById("modal-meta").textContent = `Por ${obra.autor} · ${obra.fecha} · ${obra.tiempo}`;
-      
       const img = document.getElementById("modal-img");
       if (img) img.src = obra.imagen;
-
       document.getElementById("modal-contenido").innerHTML = obra.contenido;
-
       if (modal) {
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
@@ -2511,43 +2344,22 @@
     function guardarObraEnCuaderno(titulo, autor, categoria) {
       const STORAGE_KEY = "kairos_favoritos_v1";
       let actual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
-
       if (actual.some(item => item.titulo === titulo)) {
         alert("Ya tienes esta pieza guardada en tu Cuaderno.");
         return;
       }
-
-      actual.unshift({
-        id: Date.now(),
-        titulo: titulo,
-        autor: autor,
-        categoria: categoria,
-        enlace: "index.html#dispatch-titulo",
-        nota: "Obra guardada desde El Rincón del Lector."
-      });
-
+      actual.unshift({ id: Date.now(), titulo, autor, categoria, enlace: "index.html#dispatch-titulo", nota: "Guardada desde El Rincón del Lector." });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(actual));
       alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
     }
 
     const CITAS_MARGINAL = [
       { texto: "«La vida no examinada con sosiego no merece la pena de ser vivida.»", autor: "— Sócrates" },
-      { texto: "«Un libro debe ser el hacha que rompa el mar helado dentro de nosotros.»", autor: "— Franz Kafka" },
-      { texto: "«Las notas que no tadas son tan importantes como las que tocas.»", autor: "— Thelonious Monk" },
-      { texto: "«El cine no es un arte que filma la vida; es algo que está entre el arte y la vida.»", autor: "— Jean-Luc Godard" },
-      { texto: "«No son las cosas las que atormentan a los hombres, sino los juicios que se forman sobre ellas.»", autor: "— Epicteto" },
-      { texto: "«Cada libro, cada tomo que ves, tiene alma. El alma de quien lo escribió y de quienes lo leyeron.»", autor: "— Carlos Ruiz Zafón" },
-      { texto: "«La belleza salvará al mundo.»", autor: "— Fiódor Dostoyevski" },
-      { texto: "«El tiempo es un río que me arrebata, pero yo soy el río; es un tigre que me destroza, pero yo soy el tigre.»", autor: "— Jorge Luis Borges" },
-      { texto: "«Quien tiene un porqué para vivir puede soportar casi cualquier cómo.»", autor: "— Friedrich Nietzsche" },
-      { texto: "«No tenemos un tiempo escaso, sino que perdemos mucho.»", autor: "— Lucio Anneo Séneca" },
-      { texto: "«No hay nada más engañoso que un hecho obvio cuando la mirada carece de método analítico.»", autor: "— Sir Arthur Conan Doyle" }
+      { texto: "«Un libro debe ser el hacha que rompa el mar helado dentro de nosotros.»", autor: "— Franz Kafka" }
     ];
 
     const NOTAS_EDITOR = [
-      { badge: "Octubre · Cuaderno I", titulo: "Sobre la paciencia del lector contemporáneo", cuerpo: "Un libro denso no exige velocidad de consumo, sino hospitalidad mental. Quien se demora en las páginas lentas de un clásico entabla un diálogo que el algoritmo jamás podrá gobernar." },
-      { badge: "Octubre · Cuaderno II", titulo: "La penumbra como espacio estético", cuerpo: "El cine que perdura no teme a la oscuridad ni a los silencios prolongados; concede al espectador el tiempo necesario para habitar la atmósfera del plano." },
-      { badge: "Octubre · Cuaderno III", titulo: "El valor del silencio sonoro", cuerpo: "Entre nota y nota, el pentagrama guarda el auténtico misterio de la música. Aprender a escuchar es descifrar los espacios donde el sonido se retira." }
+      { badge: "Octubre · Cuaderno I", titulo: "Sobre la paciencia del lector contemporáneo", cuerpo: "Un libro denso no exige velocidad de consumo, sino hospitalidad mental..." }
     ];
 
     async function extraerUltimoEnsayo(nombreArchivo, seccionNombre) {
@@ -2555,54 +2367,28 @@
         const respuesta = await fetch(nombreArchivo);
         if (!respuesta.ok) return null;
         const htmlTexto = await respuesta.text();
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlTexto, "text/html");
-
+        const doc = new DOMParser().parseFromString(htmlTexto, "text/html");
         const primerArticulo = doc.querySelector(".long-article");
         if (!primerArticulo) return null;
 
         const id = primerArticulo.id || "";
         const titularEl = primerArticulo.querySelector(".article-headline") || primerArticulo.querySelector("h2");
         const titulo = titularEl ? titularEl.textContent.trim() : "";
-        
         const imgEl = primerArticulo.querySelector(".article-featured-media img") || primerArticulo.querySelector("img");
         const img = imgEl ? (imgEl.getAttribute("src") || "") : "";
-
         const timeEl = primerArticulo.querySelector("time");
         const fechaRaw = timeEl ? (timeEl.getAttribute("datetime") || timeEl.textContent) : "";
         const fechaEpoch = fechaRaw ? new Date(fechaRaw).getTime() : 0;
-
         const metaEl = primerArticulo.querySelector(".article-meta-line");
         const tiempoLectura = metaEl ? metaEl.textContent.trim() : "Lectura de fondo";
-
         const badgeEl = primerArticulo.querySelector(".article-topic");
         const badge = badgeEl ? badgeEl.textContent.trim() : seccionNombre;
-
         const primerParrafo = primerArticulo.querySelector(".article-prose p");
-        let resumen = "";
-        if (primerParrafo) {
-          resumen = primerParrafo.textContent.trim();
-          if (resumen.length > 280) {
-            resumen = resumen.substring(0, 280) + "...";
-          }
-        }
+        let resumen = primerParrafo ? primerParrafo.textContent.trim() : "";
+        if (resumen.length > 280) resumen = resumen.substring(0, 280) + "...";
 
-        return {
-          id,
-          archivo: nombreArchivo,
-          seccion: seccionNombre,
-          enlace: `${nombreArchivo}#${id}`,
-          titulo,
-          img,
-          tiempoLectura,
-          badge,
-          resumen,
-          fechaEpoch: isNaN(fechaEpoch) ? 0 : fechaEpoch
-        };
-      } catch (error) {
-        return null;
-      }
+        return { id, archivo: nombreArchivo, seccion: seccionNombre, enlace: `${nombreArchivo}#${id}`, titulo, img, tiempoLectura, badge, resumen, fechaEpoch: isNaN(fechaEpoch) ? 0 : fechaEpoch };
+      } catch { return null; }
     }
 
     async function actualizarCascadaEnsayos() {
@@ -2614,69 +2400,49 @@
         { archivo: "filosofia.html", seccion: "Filosofía" }
       ];
 
-      const resultados = await Promise.all(
-        fuentes.map(f => extraerUltimoEnsayo(f.archivo, f.seccion))
-      );
-
+      const resultados = await Promise.all(fuentes.map(f => extraerUltimoEnsayo(f.archivo, f.seccion)));
       const validos = resultados.filter(item => item !== null && item.titulo);
       validos.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
 
       if (validos.length > 0) {
+        // validos[0] es el más reciente (aparece arriba en grande)
         const principal = validos[0];
-        const leadBadge = document.getElementById("lead-badge");
-        const leadTitle = document.getElementById("lead-title");
-        const leadLink = document.getElementById("lead-link");
-        const leadImg = document.getElementById("lead-image");
-        const leadExcerpt = document.getElementById("lead-excerpt");
-
-        if (leadBadge) leadBadge.textContent = principal.seccion;
-        if (leadTitle) {
-          leadTitle.textContent = principal.titulo;
-          leadTitle.setAttribute("href", principal.enlace);
+        if (document.getElementById("lead-badge")) document.getElementById("lead-badge").textContent = principal.seccion;
+        if (document.getElementById("lead-title")) {
+          document.getElementById("lead-title").textContent = principal.titulo;
+          document.getElementById("lead-title").setAttribute("href", principal.enlace);
         }
-        if (leadLink) leadLink.setAttribute("href", principal.enlace);
-        if (leadImg && principal.img) leadImg.setAttribute("src", principal.img);
-        if (leadExcerpt && principal.resumen) leadExcerpt.textContent = principal.resumen;
+        if (document.getElementById("lead-link")) document.getElementById("lead-link").setAttribute("href", principal.enlace);
+        if (document.getElementById("lead-image") && principal.img) document.getElementById("lead-image").setAttribute("src", principal.img);
+        if (document.getElementById("lead-excerpt") && principal.resumen) document.getElementById("lead-excerpt").textContent = principal.resumen;
 
+        // validos[1] y validos[2] son los anteriores que van abajo en los bloques más pequeños
         if (validos.length > 1) {
           const lateral1 = validos[1];
-          const s1Badge = document.getElementById("side-1-badge");
-          const s1Title = document.getElementById("side-1-title");
-          const s1Link = document.getElementById("side-1-link");
-          const s1Img = document.getElementById("side-1-img");
-          const s1Excerpt = document.getElementById("side-1-excerpt");
-
-          if (s1Badge) s1Badge.textContent = lateral1.seccion;
-          if (s1Title) {
-            s1Title.textContent = lateral1.titulo;
-            s1Title.setAttribute("href", lateral1.enlace);
+          if (document.getElementById("side-1-badge")) document.getElementById("side-1-badge").textContent = lateral1.seccion;
+          if (document.getElementById("side-1-title")) {
+            document.getElementById("side-1-title").textContent = lateral1.titulo;
+            document.getElementById("side-1-title").setAttribute("href", lateral1.enlace);
           }
-          if (s1Link) s1Link.setAttribute("href", lateral1.enlace);
-          if (s1Img && lateral1.img) s1Img.setAttribute("src", lateral1.img);
-          if (s1Excerpt && lateral1.resumen) s1Excerpt.textContent = lateral1.resumen;
+          if (document.getElementById("side-1-link")) document.getElementById("side-1-link").setAttribute("href", lateral1.enlace);
+          if (document.getElementById("side-1-img") && lateral1.img) document.getElementById("side-1-img").setAttribute("src", lateral1.img);
+          if (document.getElementById("side-1-excerpt") && lateral1.resumen) document.getElementById("side-1-excerpt").textContent = lateral1.resumen;
         }
 
         if (validos.length > 2) {
           const lateral2 = validos[2];
-          const s2Badge = document.getElementById("side-2-badge");
-          const s2Title = document.getElementById("side-2-title");
-          const s2Link = document.getElementById("side-2-link");
-          const s2Img = document.getElementById("side-2-img");
-          const s2Excerpt = document.getElementById("side-2-excerpt");
-
-          if (s2Badge) s2Badge.textContent = lateral2.seccion;
-          if (s2Title) {
-            s2Title.textContent = lateral2.titulo;
-            s2Title.setAttribute("href", lateral2.enlace);
+          if (document.getElementById("side-2-badge")) document.getElementById("side-2-badge").textContent = lateral2.seccion;
+          if (document.getElementById("side-2-title")) {
+            document.getElementById("side-2-title").textContent = lateral2.titulo;
+            document.getElementById("side-2-title").setAttribute("href", lateral2.enlace);
           }
-          if (s2Link) s2Link.setAttribute("href", lateral2.enlace);
-          if (s2Img && lateral2.img) s2Img.setAttribute("src", lateral2.img);
-          if (s2Excerpt && lateral2.resumen) s2Excerpt.textContent = lateral2.resumen;
+          if (document.getElementById("side-2-link")) document.getElementById("side-2-link").setAttribute("href", lateral2.enlace);
+          if (document.getElementById("side-2-img") && lateral2.img) document.getElementById("side-2-img").setAttribute("src", lateral2.img);
+          if (document.getElementById("side-2-excerpt") && lateral2.resumen) document.getElementById("side-2-excerpt").textContent = lateral2.resumen;
         }
       }
     }
 
-    /* CONTROL DEL MENÚ: ACORDEÓN EN MÓVIL Y DESPLEGABLE EN ORDENADOR */
     function configurarMenu() {
       const botonMenu = document.getElementById("btn-menu-movil");
       const listaNav = document.getElementById("lista-navegacion");
@@ -2690,12 +2456,9 @@
         e.stopPropagation();
         const abierto = listaNav.classList.toggle("nav-abierto");
         botonMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
-        if (iconoMenu) {
-          iconoMenu.textContent = abierto ? "✕" : "☰";
-        }
+        if (iconoMenu) iconoMenu.textContent = abierto ? "✕" : "☰";
       });
 
-      // En pantallas táctiles o móviles, alternar acordeón de Cuadernos
       if (triggerCuadernos && submenuCuadernos) {
         triggerCuadernos.addEventListener("click", (e) => {
           if (window.innerWidth <= 768) {
@@ -2705,15 +2468,12 @@
         });
       }
 
-      // Cerrar al pulsar fuera del menú
       document.addEventListener("click", (e) => {
         if (!e.target.closest(".main-nav")) {
           listaNav.classList.remove("nav-abierto");
           if (submenuCuadernos) submenuCuadernos.classList.remove("sub-abierto");
           botonMenu.setAttribute("aria-expanded", "false");
-          if (iconoMenu) {
-            iconoMenu.textContent = "☰";
-          }
+          if (iconoMenu) iconoMenu.textContent = "☰";
         }
       });
     }
