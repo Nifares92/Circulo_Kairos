@@ -2418,7 +2418,7 @@ async function actualizarCascadaEnsayos() {
         if (document.getElementById("lead-image") && principal.img) document.getElementById("lead-image").setAttribute("src", principal.img);
         if (document.getElementById("lead-excerpt") && principal.resumen) document.getElementById("lead-excerpt").textContent = principal.resumen;
 
-        // 2. LOS TRES SIGUIENTES EN TIEMPO (validos[1], validos[2], validos[3]) -> Van abajo
+        // 2. LOS TRES SIGUIENTES EN TIEMPO (validos[1], validos[2], validos[3]) -> Van abajo en las tarjetas laterales
         for (let i = 1; i <= 3; i++) {
           if (validos[i]) {
             const lateral = validos[i];
