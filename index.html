@@ -275,28 +275,29 @@
       padding: 3rem 1.5rem 5rem;
     }
     
-    /* Módulo Monográfico Mensual */
+    /* Módulo Monográfico Mensual (Edición Noviembre: Azul Pizarra Ceniza y Bronce Pálido) */
     .monthly-theme-monograph {
-      background: linear-gradient(145deg, #181615 0%, #262220 100%);
-      color: #f3efe9;
-      border: 1px solid #3c3430;
+      background: linear-gradient(145deg, #1b2228 0%, #28313a 55%, #1e242b 100%);
+      color: #eef1f4;
+      border: 1px solid #3d4a57;
+      border-top: 3px solid #b89f7d;
       border-radius: 3px;
       padding: 2.8rem 2.8rem;
       margin-bottom: 4rem;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 14px 34px rgba(20, 26, 33, 0.16);
       position: relative;
       overflow: hidden;
     }
     .monthly-theme-monograph::before {
-      content: 'OCTUBRE';
+      content: 'NOVIEMBRE';
       position: absolute;
-      right: -20px;
+      right: -15px;
       bottom: -35px;
       font-family: var(--font-classical);
-      font-size: 8rem;
+      font-size: 7.2rem;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.03);
-      letter-spacing: 0.1em;
+      color: rgba(214, 224, 235, 0.035);
+      letter-spacing: 0.08em;
       pointer-events: none;
     }
     .theme-monograph-header {
@@ -316,9 +317,9 @@
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #e2a09a;
-      background-color: rgba(139, 38, 30, 0.25);
-      border: 1px solid rgba(139, 38, 30, 0.4);
+      color: #e3ceb0;
+      background-color: rgba(184, 159, 125, 0.16);
+      border: 1px solid rgba(184, 159, 125, 0.42);
       padding: 0.35rem 0.85rem;
       border-radius: 2px;
     }
@@ -327,7 +328,7 @@
       font-size: 0.78rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: #b0a69c;
+      color: #a9b5c2;
     }
     .monthly-theme-monograph h2 {
       font-family: var(--font-serif);
@@ -341,7 +342,7 @@
     .monthly-theme-monograph p {
       font-family: var(--font-reader);
       font-size: 1.15rem;
-      color: #ded6cc;
+      color: #d4dce3;
       line-height: 1.8;
       max-width: 980px;
       margin-bottom: 1.6rem;
@@ -351,13 +352,18 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 1rem;
       padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(212, 220, 227, 0.14);
     }
     .theme-node {
-      background-color: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 220, 227, 0.1);
       padding: 0.9rem 0.8rem;
       border-radius: 2px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+    .theme-node:hover {
+      background-color: rgba(255, 255, 255, 0.07);
+      border-color: rgba(184, 159, 125, 0.45);
     }
     .theme-node-tag {
       display: block;
@@ -365,17 +371,17 @@
       font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #e2a09a;
+      color: #e3ceb0;
       margin-bottom: 0.25rem;
       font-weight: 700;
     }
     .theme-node-text {
       font-family: var(--font-sans);
       font-size: 0.8rem;
-      color: #f1ede6;
+      color: #e6ecf2;
       line-height: 1.5;
     }
-
+    
     /* Portada Editorial Asimétrica */
     .hero-editorial-grid {
       display: grid;
@@ -1125,36 +1131,36 @@
 
   <main id="contenido-principal">
 
-    <!-- Módulo Monográfico Mensual -->
+<!-- Módulo Monográfico Mensual -->
     <section class="monthly-theme-monograph" aria-labelledby="tema-del-mes-titulo">
       <div class="theme-monograph-header">
-        <span class="theme-monograph-badge">✦ Cuaderno Octubre · Monografía</span>
-        <span class="theme-monograph-date">Vigilia de Otoño · Octubre 2026</span>
+        <span class="theme-monograph-badge">✦ Cuaderno Noviembre · Monografía</span>
+        <span class="theme-monograph-date">Liturgia de la Ausencia · Noviembre 2026</span>
       </div>
-      <h2 id="tema-del-mes-titulo">El Umbral de las Sombras: Halloween, los Difuntos y el Más Allá</h2>
+      <h2 id="tema-del-mes-titulo">La Arquitectura de la Ausencia: Fenomenología de la Pérdida, el Luto y el Duelo Insumiso</h2>
       <p>
-        Durante el mes de octubre consagramos los cinco cuadernos de estudio a la frontera invisible entre la vida y la extinción. Indagamos en el retorno de las sombras, la liturgia fúnebre y el coraje de mirar de frente al no-ser:
+        Durante el mes de noviembre consagramos los cinco cuadernos de estudio al peso ontológico de lo que ya no está. Indagamos en la dignidad del luto frente a la amnesia contemporánea, la mudez de los objetos huérfanos y la transmutación del dolor en memoria lúcida:
       </p>
       <div class="theme-monograph-grid">
         <div class="theme-node">
           <span class="theme-node-tag">I. Literatura</span>
-          <span class="theme-node-text">Fantasmas victorianos, el rito de Samhain y la catarsis del miedo.</span>
+          <span class="theme-node-text">La poética de la elegía, los diarios de duelo y la palabra como relicario.</span>
         </div>
         <div class="theme-node">
           <span class="theme-node-tag">II. Cine</span>
-          <span class="theme-node-text">La silueta de Nosferatu y la partida de ajedrez contra la Parca.</span>
+          <span class="theme-node-text">El encuadre vacío, la melancolía del plano fijo y la huella de los ausentes.</span>
         </div>
         <div class="theme-node">
           <span class="theme-node-tag">III. Música</span>
-          <span class="theme-node-text">Réquiems, polifonía sacra de difuntos y el tañido de campanas.</span>
+          <span class="theme-node-text">El silencio entre compases, cantos de consolación y elegías para cuerda.</span>
         </div>
         <div class="theme-node">
           <span class="theme-node-tag">IV. Filosofía</span>
-          <span class="theme-node-text">El ser-para-la-muerte, el instante lúcido y la dignidad del límite.</span>
+          <span class="theme-node-text">Ontología de lo irreversible, fidelidad al pasado y ética del recuerdo.</span>
         </div>
         <div class="theme-node">
           <span class="theme-node-tag">V. Pensamiento</span>
-          <span class="theme-node-text">La arquitectura de la pérdida y la custodia de lo irrecuperable.</span>
+          <span class="theme-node-text">El duelo insumiso frente a la prisa terapéutica y la custodia del vínculo.</span>
         </div>
       </div>
     </section>
