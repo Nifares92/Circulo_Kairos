@@ -28,7 +28,6 @@
 
   <style>
     :root {
-      /* Fondo blanco puro arriba que transiciona a papel sutil con el scroll */
       --bg-color: #ffffff;
       --bg-surface: #f9f8f6;
       --bg-card: #ffffff;
@@ -57,7 +56,6 @@
       font-family: var(--font-sans);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      /* Gradiente sutil y elegante de blanco a papel sutil conforme se desciende */
       background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
       background-attachment: fixed;
     }
@@ -66,7 +64,7 @@
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    /* 1. BARRA SUPERIOR OSCURA (Estilo Revuelta) */
+    /* 1. BARRA SUPERIOR OSCURA */
     .top-action-bar {
       background-color: #111111;
       color: #ffffff;
@@ -275,7 +273,7 @@
       padding: 3rem 1.5rem 5rem;
     }
     
-    /* Módulo Monográfico Mensual (Edición Noviembre: Azul Pizarra Ceniza y Bronce Pálido) */
+    /* Módulo Monográfico Mensual (Edición Noviembre) */
     .monthly-theme-monograph {
       background: linear-gradient(145deg, #1b2228 0%, #28313a 55%, #1e242b 100%);
       color: #eef1f4;
@@ -381,7 +379,7 @@
       color: #e6ecf2;
       line-height: 1.5;
     }
-    
+
     /* Portada Editorial Asimétrica */
     .hero-editorial-grid {
       display: grid;
@@ -982,6 +980,108 @@
       color: var(--accent);
     }
 
+    /* NOTIFICACIÓN EMERGENTE UNIVERSAL DE NUEVA OBRA (TOAST EDITORIAL) */
+    .new-story-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 385px;
+      max-width: calc(100vw - 2.5rem);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 16px 40px rgba(18, 16, 15, 0.22);
+      padding: 1.4rem 1.5rem 1.3rem;
+      z-index: 99990;
+      transform: translateY(25px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+    }
+    .new-story-toast::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid rgba(230, 223, 213, 0.55);
+      pointer-events: none;
+    }
+    .new-story-toast.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .toast-close-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.85rem;
+      background: none;
+      border: none;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      transition: color var(--transition);
+    }
+    .toast-close-btn:hover { color: var(--accent); }
+    .toast-badge {
+      font-family: var(--font-classical);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    .toast-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.3;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+      padding-right: 1.2rem;
+    }
+    .toast-meta {
+      font-family: var(--font-reader);
+      font-style: italic;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .toast-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 0.75rem;
+    }
+    .toast-btn-read {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 0.45rem 1rem;
+      font-family: var(--font-classical);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background-color var(--transition);
+      text-decoration: none;
+    }
+    .toast-btn-read:hover { background-color: var(--accent-dark); color: #fff; }
+    .toast-btn-dismiss {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .toast-btn-dismiss:hover { color: var(--text-main); }
+
     .site-footer {
       background-color: var(--bg-surface);
       border-top: 3px double var(--border-dark);
@@ -1131,7 +1231,7 @@
 
   <main id="contenido-principal">
 
-<!-- Módulo Monográfico Mensual -->
+    <!-- Módulo Monográfico Mensual -->
     <section class="monthly-theme-monograph" aria-labelledby="tema-del-mes-titulo">
       <div class="theme-monograph-header">
         <span class="theme-monograph-badge">✦ Cuaderno Noviembre · Monografía</span>
@@ -1326,9 +1426,9 @@
         </div>
 
         <article class="ephemeris-card">
-          <span class="ephemeris-date-badge" id="editor-fecha-badge">Octubre · Cuaderno I</span>
-          <h4 id="editor-titulo">Sobre la paciencia del lector contemporáneo</h4>
-          <p id="editor-cuerpo">Un libro denso no exige velocidad de consumo, sino hospitalidad mental. Quien se demora en las páginas lentas de un clásico entabla un diálogo que el algoritmo jamás podrá gobernar.</p>
+          <span class="ephemeris-date-badge" id="editor-fecha-badge">Noviembre · Cuaderno II</span>
+          <h4 id="editor-titulo">Contra la prisa por olvidar</h4>
+          <p id="editor-cuerpo">Nuestra época exige clausurar el duelo con la misma rapidez con que se archiva un trámite. En Círculo Kairós reivindicamos la demora del luto: recordar con rigor es la forma más alta de lealtad hacia lo que amamos.</p>
         </article>
 
         <div class="block-header" style="margin-top: 1.5rem;">
@@ -1370,6 +1470,18 @@
     </div>
   </div>
 
+  <!-- AVISO EMERGENTE UNIVERSAL (NUEVA OBRA / ENSAYO O RELATO) -->
+  <aside class="new-story-toast" id="toast-nueva-obra" role="status" aria-live="polite" aria-hidden="true">
+    <button class="toast-close-btn" onclick="cerrarToastNuevaObra(true)" aria-label="Cerrar aviso">✕</button>
+    <span class="toast-badge" id="toast-obra-categoria">✦ Nueva Publicación en Círculo Kairós</span>
+    <h4 class="toast-title" id="toast-obra-titulo">Título de la obra</h4>
+    <p class="toast-meta" id="toast-obra-meta">Sección y autor</p>
+    <div class="toast-actions">
+      <a href="#" class="toast-btn-read" id="toast-btn-enlace">Leer obra &rarr;</a>
+      <button class="toast-btn-dismiss" onclick="cerrarToastNuevaObra(true)">Ya lo he leído</button>
+    </div>
+  </aside>
+
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
@@ -1405,7 +1517,7 @@
   </footer>
 
   <script>
-    const OBRAS_RINCON_LECTOR = [
+     const OBRAS_RINCON_LECTOR = [
       {
         id: "obra-autopsia-eco",
         titulo: "La autopsia del eco",
@@ -2450,7 +2562,7 @@
     ];
 
     const NOTAS_EDITOR = [
-      { badge: "Octubre · Cuaderno I", titulo: "Sobre la paciencia del lector contemporáneo", cuerpo: "Un libro denso no exige velocidad de consumo, sino hospitalidad mental..." }
+      { badge: "Noviembre · Cuaderno II", titulo: "Contra la prisa por olvidar", cuerpo: "Nuestra época exige clausurar el duelo con la misma rapidez con que se archiva un trámite. En Círculo Kairós reivindicamos la demora del luto." }
     ];
 
     async function extraerUltimoEnsayo(nombreArchivo, seccionNombre) {
@@ -2482,7 +2594,7 @@
       } catch { return null; }
     }
 
-async function actualizarCascadaEnsayos() {
+    async function actualizarCascadaEnsayos() {
       const fuentes = [
         { archivo: "pensamiento.html", seccion: "Pensamiento" },
         { archivo: "literatura.html", seccion: "Literatura" },
@@ -2493,14 +2605,10 @@ async function actualizarCascadaEnsayos() {
 
       const resultados = await Promise.all(fuentes.map(f => extraerUltimoEnsayo(f.archivo, f.seccion)));
       const validos = resultados.filter(item => item !== null && item.titulo);
-      
-      // Ordenar estrictamente de más reciente a más antiguo (el último subido primero)
       validos.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
 
       if (validos.length > 0) {
-        // 1. EL ÚLTIMO SUBIDO (Más reciente) -> Actualiza el BLOQUE HERO SUPERIOR y la tarjeta grande principal
         const principal = validos[0];
-        
         const heroBanner = document.getElementById("hero-impact-banner");
         if (heroBanner && principal.img) {
           heroBanner.style.background = `linear-gradient(rgba(18, 16, 15, 0.75), rgba(18, 16, 15, 0.9)), url('${principal.img}') center/cover no-repeat`;
@@ -2512,7 +2620,6 @@ async function actualizarCascadaEnsayos() {
         if (document.getElementById("hero-excerpt")) document.getElementById("hero-excerpt").textContent = principal.resumen;
         if (document.getElementById("hero-link")) document.getElementById("hero-link").setAttribute("href", principal.enlace);
 
-        // Tarjeta grande de la portada (Lead)
         if (document.getElementById("lead-badge")) document.getElementById("lead-badge").textContent = principal.seccion;
         if (document.getElementById("lead-title")) {
           document.getElementById("lead-title").textContent = principal.titulo;
@@ -2522,7 +2629,6 @@ async function actualizarCascadaEnsayos() {
         if (document.getElementById("lead-image") && principal.img) document.getElementById("lead-image").setAttribute("src", principal.img);
         if (document.getElementById("lead-excerpt") && principal.resumen) document.getElementById("lead-excerpt").textContent = principal.resumen;
 
-        // 2. LOS TRES SIGUIENTES EN TIEMPO (validos[1], validos[2], validos[3]) -> Van abajo en las tarjetas laterales
         for (let i = 1; i <= 3; i++) {
           if (validos[i]) {
             const lateral = validos[i];
@@ -2544,6 +2650,7 @@ async function actualizarCascadaEnsayos() {
         }
       }
     }
+
     function configurarMenu() {
       const botonMenu = document.getElementById("btn-menu-movil");
       const listaNav = document.getElementById("lista-navegacion");
@@ -2605,11 +2712,130 @@ async function actualizarCascadaEnsayos() {
       }
 
       actualizarCascadaEnsayos();
+      comprobarNovedadUniversal(); 
       configurarMenu();
     }
 
     document.addEventListener("DOMContentLoaded", cargarDinamicos);
-  </script>
 
+    // LÓGICA DEL POP-UP UNIVERSAL DE NOVEDADES
+    const STORAGE_KEY_ULTIMA_OBRA_VISTA = "kairos_ultima_obra_vista_v2";
+
+    async function comprobarNovedadUniversal() {
+      const fuentes = [
+        { archivo: "pensamiento.html", seccion: "Cuaderno V · Pensamiento" },
+        { archivo: "filosofia.html", seccion: "Cuaderno IV · Filosofía" },
+        { archivo: "musica.html", seccion: "Cuaderno III · Música" },
+        { archivo: "cine.html", seccion: "Cuaderno II · Cine" },
+        { archivo: "literatura.html", seccion: "Cuaderno I · Literatura" }
+      ];
+
+      try {
+        const promesasEnsayos = fuentes.map(f => extraerUltimoEnsayoParaToast(f.archivo, f.seccion));
+        const resultadosEnsayos = await Promise.all(promesasEnsayos);
+        const ensayosValidos = resultadosEnsayos.filter(item => item !== null && item.titulo);
+
+        let candidatoPrincipal = null;
+
+        if (OBRAS_RINCON_LECTOR && OBRAS_RINCON_LECTOR.length > 0) {
+          const r = OBRAS_RINCON_LECTOR[0];
+          candidatoPrincipal = {
+            id: r.id,
+            titulo: r.titulo,
+            autor: r.autor,
+            categoria: `El Rincón del Lector · ${r.genero}`,
+            enlace: `index.html#${r.id}`,
+            esRelato: true,
+            fechaEpoch: Date.parse(r.fecha) || Date.now()
+          };
+        }
+
+        let listaTotal = [...ensayosValidos];
+        if (candidatoPrincipal) listaTotal.push(candidatoPrincipal);
+
+        if (listaTotal.length === 0) return;
+
+        listaTotal.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
+        const masReciente = listaTotal[0];
+
+        const vistoAnteriormente = localStorage.getItem(STORAGE_KEY_ULTIMA_OBRA_VISTA);
+
+        if (vistoAnteriormente !== masReciente.id) {
+          const toast = document.getElementById("toast-nueva-obra");
+          const catEl = document.getElementById("toast-obra-categoria");
+          const tituloEl = document.getElementById("toast-obra-titulo");
+          const metaEl = document.getElementById("toast-obra-meta");
+          const btnEnlace = document.getElementById("toast-btn-enlace");
+
+          if (!toast || !catEl || !tituloEl || !metaEl || !btnEnlace) return;
+
+          catEl.textContent = `✦ Nueva Publicación · ${masReciente.categoria}`;
+          tituloEl.textContent = `«${masReciente.titulo}»`;
+          metaEl.textContent = `Por ${masReciente.autor || 'Redacción de Kairós'} · ${masReciente.tiempoLectura || 'Lectura de fondo'}`;
+
+          if (masReciente.esRelato) {
+            btnEnlace.href = "javascript:void(0)";
+            btnEnlace.onclick = (e) => {
+              e.preventDefault();
+              cerrarToastNuevaObra(true);
+              abrirLectorIntrapagina(masReciente.id);
+            };
+          } else {
+            btnEnlace.href = masReciente.enlace;
+            btnEnlace.onclick = () => cerrarToastNuevaObra(true);
+          }
+
+          setTimeout(() => {
+            toast.classList.add("visible");
+            toast.setAttribute("aria-hidden", "false");
+          }, 1800);
+        }
+      } catch (err) {
+        console.error("Error al comprobar novedades:", err);
+      }
+    }
+
+    async function extraerUltimoEnsayoParaToast(nombreArchivo, seccionNombre) {
+      try {
+        const respuesta = await fetch(nombreArchivo);
+        if (!respuesta.ok) return null;
+        const htmlTexto = await respuesta.text();
+        const doc = new DOMParser().parseFromString(htmlTexto, "text/html");
+        const primerArticulo = doc.querySelector(".long-article");
+        if (!primerArticulo) return null;
+
+        const id = primerArticulo.id || "";
+        const titularEl = primerArticulo.querySelector(".article-headline") || primerArticulo.querySelector("h2");
+        const titulo = titularEl ? titularEl.textContent.trim() : "";
+        const timeEl = primerArticulo.querySelector("time");
+        const fechaRaw = timeEl ? (timeEl.getAttribute("datetime") || timeEl.textContent) : "";
+        const fechaEpoch = fechaRaw ? new Date(fechaRaw).getTime() : 0;
+        const metaEl = primerArticulo.querySelector(".article-meta-line");
+        const tiempoLectura = metaEl ? metaEl.textContent.trim() : "Lectura de fondo";
+
+        return {
+          id: id || nombreArchivo,
+          titulo,
+          autor: seccionNombre,
+          categoria: seccionNombre,
+          enlace: `${nombreArchivo}#${id}`,
+          tiempoLectura,
+          esRelato: false,
+          fechaEpoch: isNaN(fechaEpoch) ? 0 : fechaEpoch
+        };
+      } catch { return null; }
+    }
+
+    function cerrarToastNuevaObra(marcarComoVisto = true) {
+      const toast = document.getElementById("toast-nueva-obra");
+      if (toast) {
+        toast.classList.remove("visible");
+        toast.setAttribute("aria-hidden", "true");
+      }
+      if (marcarComoVisto && OBRAS_RINCON_LECTOR.length > 0) {
+        localStorage.setItem(STORAGE_KEY_ULTIMA_OBRA_VISTA, OBRAS_RINCON_LECTOR[0].id);
+      }
+    }
+  </script>
 </body>
 </html>
