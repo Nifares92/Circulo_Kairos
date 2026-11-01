@@ -2720,123 +2720,127 @@
     document.addEventListener("DOMContentLoaded", cargarDinamicos);
 
     // LÓGICA DEL POP-UP UNIVERSAL DE NOVEDADES
-    const STORAGE_KEY_ULTIMA_OBRA_VISTA = "kairos_ultima_obra_vista_v2";
+  const STORAGE_KEY_ULTIMA_OBRA_VISTA = "kairos_ultima_obra_vista_v2";
 
-    async function comprobarNovedadUniversal() {
-      const fuentes = [
-        { archivo: "pensamiento.html", seccion: "Cuaderno V · Pensamiento" },
-        { archivo: "filosofia.html", seccion: "Cuaderno IV · Filosofía" },
-        { archivo: "musica.html", seccion: "Cuaderno III · Música" },
-        { archivo: "cine.html", seccion: "Cuaderno II · Cine" },
-        { archivo: "literatura.html", seccion: "Cuaderno I · Literatura" }
-      ];
+  async function comprobarNovedadUniversal() {
+    const fuentes = [
+      { archivo: "pensamiento.html", seccion: "Cuaderno V · Pensamiento" },
+      { archivo: "filosofia.html", seccion: "Cuaderno IV · Filosofía" },
+      { archivo: "musica.html", seccion: "Cuaderno III · Música" },
+      { archivo: "cine.html", seccion: "Cuaderno II · Cine" },
+      { archivo: "literatura.html", seccion: "Cuaderno I · Literatura" }
+    ];
 
-      try {
-        const promesasEnsayos = fuentes.map(f => extraerUltimoEnsayoParaToast(f.archivo, f.seccion));
-        const resultadosEnsayos = await Promise.all(promesasEnsayos);
-        const ensayosValidos = resultadosEnsayos.filter(item => item !== null && item.titulo);
+    try {
+      const promesasEnsayos = fuentes.map(f => extraerUltimoEnsayoParaToast(f.archivo, f.seccion));
+      const resultadosEnsayos = await Promise.all(promesasEnsayos);
+      const ensayosValidos = resultadosEnsayos.filter(item => item !== null && item.titulo);
 
-        let candidatoPrincipal = null;
+      let candidatoPrincipal = null;
 
-        if (OBRAS_RINCON_LECTOR && OBRAS_RINCON_LECTOR.length > 0) {
-          const r = OBRAS_RINCON_LECTOR[0];
-          candidatoPrincipal = {
-            id: r.id,
-            titulo: r.titulo,
-            autor: r.autor,
-            categoria: `El Rincón del Lector · ${r.genero}`,
-            enlace: `index.html#${r.id}`,
-            esRelato: true,
-            fechaEpoch: Date.parse(r.fecha) || Date.now()
-          };
-        }
-
-        let listaTotal = [...ensayosValidos];
-        if (candidatoPrincipal) listaTotal.push(candidatoPrincipal);
-
-        if (listaTotal.length === 0) return;
-
-        listaTotal.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
-        const masReciente = listaTotal[0];
-
-        const vistoAnteriormente = localStorage.getItem(STORAGE_KEY_ULTIMA_OBRA_VISTA);
-
-        if (vistoAnteriormente !== masReciente.id) {
-          const toast = document.getElementById("toast-nueva-obra");
-          const catEl = document.getElementById("toast-obra-categoria");
-          const tituloEl = document.getElementById("toast-obra-titulo");
-          const metaEl = document.getElementById("toast-obra-meta");
-          const btnEnlace = document.getElementById("toast-btn-enlace");
-
-          if (!toast || !catEl || !tituloEl || !metaEl || !btnEnlace) return;
-
-          catEl.textContent = `✦ Nueva Publicación · ${masReciente.categoria}`;
-          tituloEl.textContent = `«${masReciente.titulo}»`;
-          metaEl.textContent = `Por ${masReciente.autor || 'Redacción de Kairós'} · ${masReciente.tiempoLectura || 'Lectura de fondo'}`;
-
-          if (masReciente.esRelato) {
-            btnEnlace.href = "javascript:void(0)";
-            btnEnlace.onclick = (e) => {
-              e.preventDefault();
-              cerrarToastNuevaObra(true);
-              abrirLectorIntrapagina(masReciente.id);
-            };
-          } else {
-            btnEnlace.href = masReciente.enlace;
-            btnEnlace.onclick = () => cerrarToastNuevaObra(true);
-          }
-
-          setTimeout(() => {
-            toast.classList.add("visible");
-            toast.setAttribute("aria-hidden", "false");
-          }, 1800);
-        }
-      } catch (err) {
-        console.error("Error al comprobar novedades:", err);
-      }
-    }
-
-    async function extraerUltimoEnsayoParaToast(nombreArchivo, seccionNombre) {
-      try {
-        const respuesta = await fetch(nombreArchivo);
-        if (!respuesta.ok) return null;
-        const htmlTexto = await respuesta.text();
-        const doc = new DOMParser().parseFromString(htmlTexto, "text/html");
-        const primerArticulo = doc.querySelector(".long-article");
-        if (!primerArticulo) return null;
-
-        const id = primerArticulo.id || "";
-        const titularEl = primerArticulo.querySelector(".article-headline") || primerArticulo.querySelector("h2");
-        const titulo = titularEl ? titularEl.textContent.trim() : "";
-        const timeEl = primerArticulo.querySelector("time");
-        const fechaRaw = timeEl ? (timeEl.getAttribute("datetime") || timeEl.textContent) : "";
-        const fechaEpoch = fechaRaw ? new Date(fechaRaw).getTime() : 0;
-        const metaEl = primerArticulo.querySelector(".article-meta-line");
-        const tiempoLectura = metaEl ? metaEl.textContent.trim() : "Lectura de fondo";
-
-        return {
-          id: id || nombreArchivo,
-          titulo,
-          autor: seccionNombre,
-          categoria: seccionNombre,
-          enlace: `${nombreArchivo}#${id}`,
-          tiempoLectura,
-          esRelato: false,
-          fechaEpoch: isNaN(fechaEpoch) ? 0 : fechaEpoch
+      if (OBRAS_RINCON_LECTOR && OBRAS_RINCON_LECTOR.length > 0) {
+        const r = OBRAS_RINCON_LECTOR[0];
+        candidatoPrincipal = {
+          id: r.id,
+          titulo: r.titulo,
+          autor: r.autor,
+          categoria: `El Rincón del Lector · ${r.genero}`,
+          enlace: `index.html#${r.id}`,
+          esRelato: true,
+          fechaEpoch: Date.parse(r.fecha) || Date.now()
         };
-      } catch { return null; }
-    }
+      }
 
-    function cerrarToastNuevaObra(marcarComoVisto = true) {
-      const toast = document.getElementById("toast-nueva-obra");
-      if (toast) {
-        toast.classList.remove("visible");
-        toast.setAttribute("aria-hidden", "true");
+      let listaTotal = [...ensayosValidos];
+      if (candidatoPrincipal) listaTotal.push(candidatoPrincipal);
+
+      if (listaTotal.length === 0) return;
+
+      listaTotal.sort((a, b) => b.fechaEpoch - a.fechaEpoch);
+      const masReciente = listaTotal[0];
+
+      // Guardamos globalmente el ID de la obra más reciente detectada
+      window._kairosUltimaObraDetectadaId = masReciente.id;
+
+      const vistoAnteriormente = localStorage.getItem(STORAGE_KEY_ULTIMA_OBRA_VISTA);
+
+      if (vistoAnteriormente !== masReciente.id) {
+        const toast = document.getElementById("toast-nueva-obra");
+        const catEl = document.getElementById("toast-obra-categoria");
+        const tituloEl = document.getElementById("toast-obra-titulo");
+        const metaEl = document.getElementById("toast-obra-meta");
+        const btnEnlace = document.getElementById("toast-btn-enlace");
+
+        if (!toast || !catEl || !tituloEl || !metaEl || !btnEnlace) return;
+
+        catEl.textContent = `✦ Nueva Publicación · ${masReciente.categoria}`;
+        tituloEl.textContent = `«${masReciente.titulo}»`;
+        metaEl.textContent = `Por ${masReciente.autor || 'Redacción de Kairós'} · ${masReciente.tiempoLectura || 'Lectura de fondo'}`;
+
+        if (masReciente.esRelato) {
+          btnEnlace.href = "javascript:void(0)";
+          btnEnlace.onclick = (e) => {
+            e.preventDefault();
+            cerrarToastNuevaObra(true);
+            abrirLectorIntrapagina(masReciente.id);
+          };
+        } else {
+          btnEnlace.href = masReciente.enlace;
+          btnEnlace.onclick = () => cerrarToastNuevaObra(true);
+        }
+
+        setTimeout(() => {
+          toast.classList.add("visible");
+          toast.setAttribute("aria-hidden", "false");
+        }, 1800);
       }
-      if (marcarComoVisto && OBRAS_RINCON_LECTOR.length > 0) {
-        localStorage.setItem(STORAGE_KEY_ULTIMA_OBRA_VISTA, OBRAS_RINCON_LECTOR[0].id);
-      }
+    } catch (err) {
+      console.error("Error al comprobar novedades:", err);
     }
+  }
+
+  async function extraerUltimoEnsayoParaToast(nombreArchivo, seccionNombre) {
+    try {
+      const respuesta = await fetch(nombreArchivo);
+      if (!respuesta.ok) return null;
+      const htmlTexto = await respuesta.text();
+      const doc = new DOMParser().parseFromString(htmlTexto, "text/html");
+      const primerArticulo = doc.querySelector(".long-article");
+      if (!primerArticulo) return null;
+
+      const id = primerArticulo.id || "";
+      const titularEl = primerArticulo.querySelector(".article-headline") || primerArticulo.querySelector("h2");
+      const titulo = titularEl ? titularEl.textContent.trim() : "";
+      const timeEl = primerArticulo.querySelector("time");
+      const fechaRaw = timeEl ? (timeEl.getAttribute("datetime") || timeEl.textContent) : "";
+      const fechaEpoch = fechaRaw ? new Date(fechaRaw).getTime() : 0;
+      const metaEl = primerArticulo.querySelector(".article-meta-line");
+      const tiempoLectura = metaEl ? metaEl.textContent.trim() : "Lectura de fondo";
+
+      return {
+        id: id || nombreArchivo,
+        titulo,
+        autor: seccionNombre,
+        categoria: seccionNombre,
+        enlace: `${nombreArchivo}#${id}`,
+        tiempoLectura,
+        esRelato: false,
+        fechaEpoch: isNaN(fechaEpoch) ? 0 : fechaEpoch
+      };
+    } catch { return null; }
+  }
+
+  function cerrarToastNuevaObra(marcarComoVisto = true) {
+    const toast = document.getElementById("toast-nueva-obra");
+    if (toast) {
+      toast.classList.remove("visible");
+      toast.setAttribute("aria-hidden", "true");
+    }
+    // Guarda el ID exacto que se acaba de mostrar (sea un ensayo de cualquier cuaderno o un relato)
+    if (marcarComoVisto && window._kairosUltimaObraDetectadaId) {
+      localStorage.setItem(STORAGE_KEY_ULTIMA_OBRA_VISTA, window._kairosUltimaObraDetectadaId);
+    }
+  }
   </script>
 </body>
 </html>
