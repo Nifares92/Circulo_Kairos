@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso y Registro | Círculo Kairós</title>
+  <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --bg-surface: #f9f8f6;
+      --text-main: #181615;
+      --text-muted: #665f58;
+      --accent: #8b261e;
+      --accent-dark: #5c1813;
+      --border-soft: #e6dfd5;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-classical: 'Cinzel', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .auth-card {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-soft);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 2px;
+    }
+    .auth-header { text-align: center; margin-bottom: 2rem; }
+    .auth-header h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .auth-header p {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+      color: var(--text-muted);
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--border-soft);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      border-radius: 2px;
+    }
+    .form-group input:focus { border-color: var(--accent); }
+    .btn-auth {
+      width: 100%;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.85rem;
+      font-family: var(--font-classical);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    .btn-auth:hover { background-color: var(--accent-dark); }
+    .auth-switch {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .auth-switch a {
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <p>Círculo Kairós</p>
+      <h1 id="titulo-modo">Iniciar Sesión</h1>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" placeholder="tu@correo.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+
+    <button class="btn-auth" id="btn-accion" onclick="manejarAutenticacion()">Entrar a mi Cuaderno</button>
+
+    <div class="auth-switch">
+      <span id="texto-switch">¿No tienes cuenta?</span> 
+      <a onclick="cambiarModo()" id="enlace-switch">Regístrate aquí</a>
+    </div>
+
+    <a href="index.html" class="back-home">&larr; Volver al inicio</a>
+  </div>
+
+  <!-- Importamos los SDKs de Firebase (versión modular moderna) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Tus credenciales sacadas de la imagen anterior
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.appspot.com",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    let esRegistro = false;
+
+    window.cambiarModo = function() {
+      esRegistro = !esRegistro;
+      document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
+      document.getElementById("btn-accion").textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
+      document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
+      document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
+    };
+
+    window.manejarAutenticacion = async function() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Por favor, rellena todos los campos.");
+        return;
+      }
+
+      try {
+        if (esRegistro) {
+          await createUserWithEmailAndPassword(auth, email, password);
+          alert("¡Cuenta creada con éxito! Bienvenido a Círculo Kairós.");
+        } else {
+          await signInWithEmailAndPassword(auth, email, password);
+          alert("¡Has iniciado sesión correctamente!");
+        }
+        // Redirigir al perfil o inicio tras el éxito
+        window.location.href = "perfil.html";
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
+    };
+  </script>
+</body>
+</html>
