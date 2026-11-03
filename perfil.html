@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSRPCR2JS"></script>
 <script>
@@ -274,11 +273,11 @@
       border: none;
       border-bottom: 2px solid transparent;
       margin-bottom: -2px;
-      padding: 0.75rem 1.4rem;
+      padding: 0.75rem 1.2rem;
       font-family: var(--font-classical);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
       cursor: pointer;
@@ -515,11 +514,8 @@
       .top-actions-right { gap: 1rem; }
     }
 
-    /* REGLAS EXCLUSIVAS PARA MÓVIL (< 768px): MENÚ COMPACTO CON ACORDEÓN */
     @media (max-width: 768px) {
-      .main-nav {
-        padding: 0.6rem 1rem;
-      }
+      .main-nav { padding: 0.6rem 1rem; }
       .nav-toggle-btn {
         display: inline-flex;
         align-items: center;
@@ -536,11 +532,6 @@
         cursor: pointer;
         border-radius: 2px;
         margin: 0 auto;
-        transition: all var(--transition);
-      }
-      .nav-toggle-btn:hover {
-        border-color: var(--accent);
-        color: var(--accent);
       }
       .main-nav > .nav-container > ul {
         display: none;
@@ -552,29 +543,7 @@
         border-top: 1px solid var(--border-soft);
         margin-top: 0.6rem;
       }
-      .main-nav > .nav-container > ul.nav-abierto {
-        display: flex;
-        animation: desplegarMenu 0.25s ease-out;
-      }
-      @keyframes desplegarMenu {
-        from { opacity: 0; transform: translateY(-8px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .main-nav a {
-        font-size: 0.88rem;
-        padding: 0.35rem 0;
-      }
-
-      /* Acordeón del submenú en móvil adaptado y centrado */
-      .has-dropdown {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .has-dropdown:hover .dropdown-menu {
-        display: none;
-      }
+      .main-nav > .nav-container > ul.nav-abierto { display: flex; }
       .dropdown-menu {
         position: static;
         transform: none;
@@ -584,33 +553,15 @@
         margin: 0.6rem auto 0;
         width: 90%;
         max-width: 280px;
-        padding: 0.4rem 0;
         text-align: center;
       }
-      .dropdown-menu::before {
-        display: none;
-      }
-      .dropdown-menu.sub-abierto {
-        display: flex !important;
-      }
-      .dropdown-menu a {
-        text-align: center;
-        padding: 0.5rem 1rem;
-      }
-      .dropdown-menu a:hover {
-        padding-left: 1rem;
-      }
-    }
-    @media (max-width: 600px) {
-      .section-main-title { font-size: 2.2rem; }
-      .add-form-grid { grid-template-columns: 1fr; }
-      .main-nav ul { gap: 1.2rem; }
+      .dropdown-menu.sub-abierto { display: flex !important; }
     }
   </style>
 </head>
 <body id="top">
 
-  <!-- 1. BARRA SUPERIOR OSCURA (Estilo Revuelta / Biblioteca) -->
+  <!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
     <div class="top-actions-right">
@@ -623,7 +574,7 @@
     </div>
   </aside>
 
-  <!-- 2. NAVEGACIÓN MODERNA Y JERÁRQUICA -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -633,8 +584,6 @@
 
       <ul id="lista-navegacion">
         <li><a href="index.html">Inicio</a></li>
-        
-        <!-- Pestaña desplegable de Cuadernos -->
         <li class="has-dropdown">
           <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
             Cuadernos <span class="arrow-indicator">▾</span>
@@ -647,7 +596,6 @@
             <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
           </ul>
         </li>
-
         <li><a href="perfil.html" class="active" aria-current="page">Mi Cuaderno</a></li>
         <li><a href="biblioteca.html">Biblioteca</a></li>
         <li><a href="podcast.html">Podcast</a></li>
@@ -656,48 +604,43 @@
   </nav>
 
   <main id="contenido-principal">
-
     <header class="section-hero-header">
       <span class="section-category-label">Archivo Interior</span>
       <h2 class="section-main-title">Mi Cuaderno de Favoritos</h2>
       <p class="section-intro-text">
-        «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado de lectura para custodiar ensayos, citas, libros y películas que han merecido tu demora, guardados directamente en este dispositivo sin necesidad de registros.
+        «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado de lectura para custodiar ensayos, citas, podcasts y notas personales.
       </p>
     </header>
 
-    <!-- ZONA ÚNICA Y DIRECTA DEL CUADERNO -->
     <div class="layout-columns">
-
-      <!-- COLUMNA PRINCIPAL -->
       <section>
-
-        <!-- Pestañas de Filtro -->
+        <!-- Pestañas de Filtro (Incluye Podcast) -->
         <nav class="tabs-bar" aria-label="Filtro de colecciones">
           <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todos</button>
-          <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
           <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">Literatura</button>
           <button class="tab-btn" onclick="cambiarFiltro('cine', this)">Cine</button>
           <button class="tab-btn" onclick="cambiarFiltro('musica', this)">Música</button>
+          <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
           <button class="tab-btn" onclick="cambiarFiltro('pensamiento', this)">Pensamiento</button>
+          <button class="tab-btn" onclick="cambiarFiltro('podcast', this)">Podcast</button>
           <button class="tab-btn" onclick="cambiarFiltro('propio', this)">Mis Notas</button>
         </nav>
 
-        <!-- Lista de Favoritos y Notas del Lector -->
         <div class="collection-stream" id="contenedor-favoritos"></div>
 
-        <!-- Formulario manual para añadir notas u obras -->
         <section class="add-custom-panel">
           <h3>+ Anotar una obra o referencia en mi cuaderno</h3>
-          <p>Puedes anotar un libro pendiente, una película o una reflexión personal que desees asociar a tu memoria:</p>
+          <p>Puedes anotar un libro pendiente, un podcast o una reflexión personal:</p>
           <div class="add-form-grid">
-            <input type="text" id="nuevo-titulo" placeholder="Título de la obra o ensayo *" required>
-            <input type="text" id="nuevo-autor" placeholder="Autor / Director / Compositor">
+            <input type="text" id="nuevo-titulo" placeholder="Título de la obra o episodio *" required>
+            <input type="text" id="nuevo-autor" placeholder="Autor / Narrador">
             <select id="nueva-categoria">
-              <option value="filosofia">Filosofía</option>
               <option value="literatura">Literatura</option>
               <option value="cine">Cine</option>
               <option value="musica">Música</option>
+              <option value="filosofia">Filosofía</option>
               <option value="pensamiento">Pensamiento</option>
+              <option value="podcast">Podcast</option>
               <option value="propio">Reflexión / Nota propia</option>
             </select>
             <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
@@ -705,12 +648,9 @@
             <button class="btn-add-item" onclick="agregarItemManual()">Añadir a mi archivo &rarr;</button>
           </div>
         </section>
-
       </section>
 
-      <!-- BARRA LATERAL -->
       <aside class="sidebar-wrapper" aria-label="Estadísticas de lectura">
-        
         <div class="sidebar-widget">
           <h3 class="widget-heading">Censo del Cuaderno</h3>
           <div class="stats-counter">
@@ -720,7 +660,7 @@
             </div>
             <div class="stat-box">
               <span class="stat-number" id="conteo-ensayos">0</span>
-              <span class="stat-label">Ensayos Kairós</span>
+              <span class="stat-label">Ensayos & Audio</span>
             </div>
           </div>
         </div>
@@ -728,16 +668,13 @@
         <div class="sidebar-widget">
           <h3 class="widget-heading">Acceso & Privacidad</h3>
           <p style="font-family: var(--font-reader); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
-            Tus apuntes y favoritos se almacenan de forma local en tu navegador. Nadie más tiene acceso a ellos.
+            Tus apuntes y favoritos se almacenan de forma local en tu navegador.
           </p>
           <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
           <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto;">Vaciar cuaderno completo</button>
         </div>
-
       </aside>
-
     </div>
-
   </main>
 
   <footer class="site-footer">
@@ -768,7 +705,6 @@
     </div>
   </footer>
 
-  <!-- MOTOR SIMPLIFICADO DE FAVORITOS LOCALES -->
   <script>
     const STORAGE_KEY = "kairos_favoritos_v1";
     let categoriaActiva = "todos";
@@ -795,18 +731,14 @@
     function cambiarFiltro(cat, botonElemento) {
       categoriaActiva = cat;
       document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-      if (botonElemento) {
-        botonElemento.classList.add("active");
-      }
+      if (botonElemento) botonElemento.classList.add("active");
       renderizarFavoritos();
     }
 
     function normalizarEnlace(enlace) {
       if (!enlace) return "";
       let limpio = enlace.trim();
-      if (limpio.startsWith("http://") || limpio.startsWith("https://")) {
-        return limpio;
-      }
+      if (limpio.startsWith("http://") || limpio.startsWith("https://")) return limpio;
       const partes = limpio.split("/");
       return partes[partes.length - 1];
     }
@@ -816,7 +748,6 @@
       if (!cont) return;
 
       const lista = obtenerFavoritos();
-
       const filtroLimpio = normalizarTexto(categoriaActiva);
       const filtrados = filtroLimpio === "todos"
         ? lista
@@ -825,8 +756,8 @@
       if (filtrados.length === 0) {
         cont.innerHTML = `
           <div class="empty-state">
-            <p>Todavía no has guardado ninguna obra en esta sección.</p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Explora los ensayos de la revista o añade tus libros y notas con el formulario inferior.</p>
+            <p>Todavía no has guardado ninguna obra o episodio en esta sección.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Explora los ensayos o episodios de podcast para añadirlos a tu archivo.</p>
           </div>
         `;
         return;
@@ -871,11 +802,11 @@
 
       const nuevo = {
         id: Date.now(),
-        titulo: titulo,
-        autor: autor,
-        categoria: categoria,
-        enlace: enlace,
-        nota: nota
+        titulo,
+        autor,
+        categoria,
+        enlace,
+        nota
       };
 
       const lista = obtenerFavoritos();
@@ -900,8 +831,8 @@
 
       if (totalEl) totalEl.textContent = lista.length;
       if (ensayosEl) {
-        const deEnsayos = lista.filter(item => item.enlace && item.enlace.includes(".html")).length;
-        ensayosEl.textContent = deEnsayos;
+        const deWeb = lista.filter(item => item.enlace && item.enlace.includes(".html")).length;
+        ensayosEl.textContent = deWeb;
       }
     }
 
@@ -921,7 +852,6 @@
       }
     }
 
-    /* CONTROL DEL MENÚ: ACORDEÓN EN MÓVIL Y DESPLEGABLE EN ORDENADOR */
     function configurarMenu() {
       const botonMenu = document.getElementById("btn-menu-movil");
       const listaNav = document.getElementById("lista-navegacion");
@@ -935,9 +865,7 @@
         e.stopPropagation();
         const abierto = listaNav.classList.toggle("nav-abierto");
         botonMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
-        if (iconoMenu) {
-          iconoMenu.textContent = abierto ? "✕" : "☰";
-        }
+        if (iconoMenu) iconoMenu.textContent = abierto ? "✕" : "☰";
       });
 
       if (triggerCuadernos && submenuCuadernos) {
@@ -954,15 +882,12 @@
           listaNav.classList.remove("nav-abierto");
           if (submenuCuadernos) submenuCuadernos.classList.remove("sub-abierto");
           botonMenu.setAttribute("aria-expanded", "false");
-          if (iconoMenu) {
-            iconoMenu.textContent = "☰";
-          }
+          if (iconoMenu) iconoMenu.textContent = "☰";
         }
       });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Configurar fecha dinámica en la barra superior
       const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const hoy = new Date();
       const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
