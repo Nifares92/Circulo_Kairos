@@ -12,8 +12,8 @@
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Círculo Kairós — Cuaderno de Podcast y Acústica: reflexiones habladas, lecturas y ensayos sonoros de fondo.">
-  <title>Círculo Kairós | Cuaderno de Podcast & Acústica</title>
+  <meta name="description" content="El Peregrino de la Medianoche — Espacio sonoro de misterio, ficción dramatizada, ensayo y crónica real en Círculo Kairós.">
+  <title>El Peregrino de la Medianoche | Podcast de Círculo Kairós</title>
 
   <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
@@ -97,7 +97,7 @@
     }
     .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    /* 2. BARRA DE NAVEGACIÓN MODERNA (Con desplegable exacto) */
+    /* 2. BARRA DE NAVEGACIÓN MODERNA */
     .main-nav { 
       border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
@@ -118,7 +118,7 @@
       list-style: none; 
       display: flex; 
       justify-content: center; 
-      align-items: center;
+      align-items: center; 
       gap: 3.5rem;
     }
     .main-nav a {
@@ -141,7 +141,7 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
+    /* SUBMENÚ DESPLEGABLE */
     .has-dropdown { position: relative; }
     .has-dropdown::after {
       content: '';
@@ -205,7 +205,7 @@
       to { opacity: 1; transform: translateX(-50%) translateY(0px); }
     }
 
-    /* CONTENIDO PRINCIPAL DEL PODCAST */
+    /* CONTENIDO PRINCIPAL */
     .podcast-main-wrap {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -214,8 +214,8 @@
     .podcast-hero-header {
       text-align: center;
       border-bottom: 3px double var(--border-dark);
-      padding-bottom: 3rem;
-      margin-bottom: 3.5rem;
+      padding-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
     .podcast-section-tag {
       font-family: var(--font-classical);
@@ -234,7 +234,7 @@
       font-family: var(--font-serif);
       font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       letter-spacing: 0.02em;
     }
     .podcast-hero-header p {
@@ -242,8 +242,98 @@
       font-style: italic;
       font-size: 1.25rem;
       color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* PORTADA DEL PODCAST */
+    .podcast-cover-wrapper {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-subtle);
+    }
+    .podcast-cover-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* MANIFIESTO Y ESTRUCTURA DEL PODCAST */
+    .podcast-manifesto {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 2.5rem 2.2rem;
+      margin-bottom: 4rem;
+      border-radius: 2px;
+      position: relative;
+    }
+    .podcast-manifesto p.lead-intro {
+      font-family: var(--font-reader);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #332f2c;
+      text-align: justify;
+      margin-bottom: 2rem;
+    }
+    .triad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 2rem;
+    }
+    .triad-item {
+      position: relative;
+      padding-left: 1.2rem;
+      border-left: 2px solid var(--accent);
+    }
+    .triad-step {
+      font-family: var(--font-classical);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .triad-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+    .triad-desc {
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .triad-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    }
+
+    /* CABECERA DE LISTA DE EPISODIOS */
+    .episodes-section-heading {
+      font-family: var(--font-classical);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .episodes-section-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--border-soft);
     }
 
     /* TARJETA DEL EPISODIO */
@@ -297,7 +387,7 @@
     }
     .episode-prose p { margin-bottom: 1.2rem; }
 
-    /* REPRODUCTOR DE AUDIO ESTILIZADO */
+    /* REPRODUCTOR DE AUDIO */
     .audio-player-box {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-soft);
@@ -366,11 +456,11 @@
 </head>
 <body>
 
-  <!-- 1. BARRA SUPERIOR OSCURA (Botón derecho apuntando a "El Círculo") -->
+  <!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
     <span>Círculo Kairós · Edición Sonora</span>
     <div class="top-actions-right">
-      <span>Crítica de Fondo & Artes</span>
+      <span>Misterio, Relato & Crónica</span>
       <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
         <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
         RSS
@@ -379,10 +469,10 @@
     </div>
   </aside>
 
-  <!-- 2. NAVEGACIÓN MODERNA (Con menú desplegable de Cuadernos) -->
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
-      <ul style="list-style: none; display: flex; justify-content: center; align-items: center; gap: 3.5rem;">
+      <ul>
         <li><a href="index.html">Inicio</a></li>
         
         <li class="has-dropdown">
@@ -409,23 +499,56 @@
   <main class="podcast-main-wrap">
     
     <header class="podcast-hero-header">
-      <span class="podcast-section-tag">✦ Acústica & Voz ✦</span>
-      <h1>Cuaderno Sonoro de Kairós</h1>
-      <p>Pensamientos, conversaciones de fondo, lecturas dramatizadas y ensayos hablados para pausar el ruido del mundo.</p>
+      <span class="podcast-section-tag">✦ Espacio Sonoro ✦</span>
+      <h1>El Peregrino de la Medianoche</h1>
+      <p>Relatos de umbral, desasosiego y crónicas al otro lado de la vigilia.</p>
+
+      <!-- PORTADA DEL PODCAST -->
+      <div class="podcast-cover-wrapper">
+        <img src="peregrino-midnight.jpg" alt="Portada de El Peregrino de la Medianoche">
+      </div>
     </header>
+
+    <!-- MANIFIESTO Y MÉTODO DEL PROGRAMA -->
+    <section class="podcast-manifesto" aria-label="Estructura del programa">
+      <p class="lead-intro">
+        Hay historias que solo encuentran su cauce cuando la ciudad enmudece y la razón relaja su vigilancia. <strong>El Peregrino de la Medianoche</strong> es el gabinete sonoro de <em>Círculo Kairós</em> consagrado al misterio, lo insólito y los ángulos más oscuros de la experiencia humana. Cada entrega toma un enigma o terror transversal y lo aborda a través de una cuidada progresión en tres fases:
+      </p>
+
+      <div class="triad-grid">
+        <div class="triad-item">
+          <span class="triad-step">I. La Ficción</span>
+          <h3 class="triad-title">Relato Dramatizado</h3>
+          <p class="triad-desc">Inmersión narrativa y atmósferas envolventes diseñadas para situarnos en la piel del desasosiego antes de cualquier juicio racional.</p>
+        </div>
+
+        <div class="triad-item">
+          <span class="triad-step">II. La Mirada</span>
+          <h3 class="triad-title">Análisis de Fondo</h3>
+          <p class="triad-desc">Reflexión crítica y desgranado del símbolo: qué dice ese miedo sobre nosotros, su calado cultural y sus raíces antropológicas.</p>
+        </div>
+
+        <div class="triad-item">
+          <span class="triad-step">III. La Crónica</span>
+          <h3 class="triad-title">El Caso Real</h3>
+          <p class="triad-desc">Archivos, testimonios y expedientes documentados donde lo inexplicable traspasa el papel para instalarse en nuestro mundo.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="episodes-section-heading">Archivo de Emisiones</div>
 
     <!-- EPISODIO 1 -->
     <article class="episode-card">
-      <span class="episode-number">Capítulo 01 · Parte I: La Mirada. </span>
+      <span class="episode-number">Capítulo 01 · Parte I: La Mirada</span>
       <h2>Topología de la Casa Moral, Cine de Sombras y Filosofía del Límite</h2>
       <div class="episode-meta-line">
         Por Redacción de Kairós · Publicado el 2 de noviembre de 2026 · <span>Duración: 32 min</span>
       </div>
 
       <div class="episode-prose">
-        <p>Hoy nos adentramos en el territorio del umbral. Coincidiendo exactamente con la noche de los difuntos, con esa larga, fría y solemne vigilia de noviembre en la que convergen el viejo rito celta de Samhain, la melancolía sobria y pétrea de los cementerios católicos de nuestra tradición mediterránea y la profunda necesidad antropológica de recordar a los que ya no están.
-</p>
-        <p>Ajusta tus auriculares, acomódate en tu gabinete de lectura y permítenos acompañarte en esta travesía por el pensamiento pausado.</p>
+        <p>Hoy nos adentramos en el territorio del umbral. Coincidiendo exactamente con la noche de los difuntos, con esa larga, fría y solemne vigilia de noviembre en la que convergen el viejo rito celta de Samhain, la melancolía sobria y pétrea de los cementerios católicos de nuestra tradición mediterránea y la profunda necesidad antropológica de recordar a los que ya no están.</p>
+        <p>Ajusta tus auriculares, acomódate en tu gabinete de lectura y permítenos acompañarte en esta travesía por el pensamiento pausado y las sombras.</p>
       </div>
 
       <!-- REPRODUCTOR DE AUDIO -->
