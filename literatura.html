@@ -1790,5 +1790,40 @@
 
   document.addEventListener("DOMContentLoaded", inyectarBotonesFavoritos);
 </script>
+
+  <!-- SCRIPT DE CONTROL DE SESIÓN CON FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.appspot.com",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Comprobar si hay un usuario logueado en tiempo real en la navegación
+    onAuthStateChanged(auth, (user) => {
+      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      
+      enlacesPerfil.forEach(enlace => {
+        if (user) {
+          enlace.href = "perfil.html";
+          enlace.textContent = "Mi Cuaderno";
+        } else {
+          enlace.href = "auth.html";
+          enlace.textContent = "Acceso / Registro";
+        }
+      });
+    });
+  </script>
+  
 </body>
 </html>
