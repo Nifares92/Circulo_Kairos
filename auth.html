@@ -131,7 +131,8 @@
       <input type="password" id="password" placeholder="••••••••" required>
     </div>
 
-    <button class="btn-auth" id="btn-accion" onclick="manejarAutenticacion()">Entrar a mi Cuaderno</button>
+    <!-- CAMBIO: Añadido id directo y tipo botón para asegurar el enlace -->
+    <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
 
     <div class="auth-switch">
       <span id="texto-switch">¿No tienes cuenta?</span> 
@@ -141,14 +142,12 @@
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
   </div>
 
-  <!-- SCRIPT DE AUTENTICACIÓN CON FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    // Configuración exacta obtenida de tu consola de Firebase
     const firebaseConfig = {
-      apiKey: "AIzaSyDVp031ubgijh8LuY8uVuKX1uMLED7gtaE",
+      apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
       authDomain: "circulokairos-d1b8a.firebaseapp.com",
       projectId: "circulokairos-d1b8a",
       storageBucket: "circulokairos-d1b8a.firebasestorage.app",
@@ -170,7 +169,7 @@
       document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
     };
 
-    window.manejarAutenticacion = async function() {
+    async function manejarAutenticacion() {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
@@ -182,17 +181,20 @@
       try {
         if (esRegistro) {
           await createUserWithEmailAndPassword(auth, email, password);
-          alert("¡Cuenta creada con éxito! Bienvenido a Círculo Kairós.");
+          alert("¡Cuenta creada con éxito!");
         } else {
           await signInWithEmailAndPassword(auth, email, password);
-          alert("¡Has iniciado sesión correctamente!");
+          alert("¡Sesión iniciada correctamente!");
         }
         window.location.href = "perfil.html";
       } catch (error) {
-        console.error("Error detallado de Firebase:", error);
-        alert("Error de Autenticación: " + error.message);
+        console.error("Error de Firebase:", error);
+        alert("Error: " + error.code + " - " + error.message);
       }
-    };
+    }
+
+    // Enlace seguro al botón nativo para evitar fallos de onclick en módulos
+    document.getElementById("btn-accion").addEventListener("click", manejarAutenticacion);
   </script>
 </body>
 </html>
