@@ -123,42 +123,38 @@
       <h1 id="titulo-modo">Iniciar Sesión</h1>
     </div>
 
-    <!-- Usamos un formulario HTML nativo para garantizar que el botón responda al instante -->
-    <form id="form-auth">
-      <!-- Campos de Registro -->
-      <div id="campos-registro" class="registro-oculto">
-        <div class="form-group">
-          <label for="nombreUsuario">Nombre de usuario</label>
-          <input type="text" id="nombreUsuario" placeholder="Tu alias o nombre">
-        </div>
-        <div class="form-group">
-          <label for="cumpleaños">Fecha de nacimiento</label>
-          <input type="date" id="cumpleaños">
-        </div>
-        <div class="form-group">
-          <label for="genero">Género</label>
-          <select id="genero">
-            <option value="">Selecciona una opción</option>
-            <option value="Hombre">Hombre</option>
-            <option value="Mujer">Mujer</option>
-            <option value="Otro">Prefiero no decirlo</option>
-          </select>
-        </div>
-      </div>
-
+    <!-- Campos exclusivos de Registro -->
+    <div id="campos-registro" class="registro-oculto">
       <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" placeholder="tu@correo.com" required>
+        <label for="nombreUsuario">Nombre de usuario</label>
+        <input type="text" id="nombreUsuario" placeholder="Tu alias o nombre">
       </div>
-
       <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="••••••••" required>
+        <label for="cumpleaños">Fecha de nacimiento</label>
+        <input type="date" id="cumpleaños">
       </div>
+      <div class="form-group">
+        <label for="genero">Género</label>
+        <select id="genero">
+          <option value="">Selecciona una opción</option>
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Otro">Prefiero no decirlo</option>
+        </select>
+      </div>
+    </div>
 
-      <!-- El botón de tipo submit procesará el formulario de inmediato -->
-      <button class="btn-auth" id="btn-accion" type="submit">Entrar a mi Cuaderno</button>
-    </form>
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" placeholder="tu@correo.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+
+    <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
 
     <div class="auth-switch">
       <span id="texto-switch">¿No tienes cuenta?</span> 
@@ -168,7 +164,7 @@
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
   </div>
 
-<script type="module">
+  <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -189,51 +185,45 @@
 
     let esRegistro = false;
 
-    // Esperar a que el DOM esté listo antes de asignar eventos
-    document.addEventListener("DOMContentLoaded", () => {
-      const enlaceSwitch = document.getElementById("enlace-switch");
-      const btnAccion = document.getElementById("btn-accion");
+    // Control del cambio de modo
+    document.getElementById("enlace-switch").addEventListener("click", () => {
+      esRegistro = !esRegistro;
       const camposReg = document.getElementById("campos-registro");
+      camposReg.style.display = esRegistro ? "block" : "none";
 
-      // Control del cambio de modo (Login / Registro)
-      enlaceSwitch.addEventListener("click", () => {
-        esRegistro = !esRegistro;
-        camposReg.style.display = esRegistro ? "block" : "none";
+      document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
+      document.getElementById("btn-accion").textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
+      document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
+      document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
+    });
 
-        document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
-        btnAccion.textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
-        document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
-        enlaceSwitch.textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
-      });
+    // Evento de clic en el botón principal
+    document.getElementById("btn-accion").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
 
-      // Evento de clic en el botón principal
-      btnAccion.addEventListener("click", async () => {
-        console.log("¡Botón pulsado correctamente!"); // Esto saldrá en la consola F12
+      if (!email || !password) {
+        alert("Por favor, rellena los campos obligatorios.");
+        return;
+      }
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
+      try {
+        if (esRegistro) {
+          const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
+          const cumpleaños = document.getElementById("cumpleaños").value;
+          const genero = document.getElementById("genero").value;
 
-        if (!email || !password) {
-          alert("Por favor, rellena los campos obligatorios.");
-          return;
-        }
+          if (!nombreUsuario) {
+            alert("Por favor, introduce tu nombre de usuario.");
+            return;
+          }
 
-        try {
-          if (esRegistro) {
-            const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
-            const cumpleaños = document.getElementById("cumpleaños").value;
-            const genero = document.getElementById("genero").value;
+          // 1. Crear el usuario en Auth
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
 
-            if (!nombreUsuario) {
-              alert("Por favor, introduce tu nombre de usuario.");
-              return;
-            }
-
-            // 1. Crear el usuario en Auth
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            // 2. Guardar los datos del perfil en Firestore
+          // 2. Guardar los datos del perfil en Firestore
+          try {
             await setDoc(doc(db, "usuarios_perfil", user.uid), {
               nombreUsuario: nombreUsuario,
               cumpleaños: cumpleaños,
@@ -241,26 +231,35 @@
               email: email,
               creado: new Date().toISOString()
             });
-
-            alert("¡Cuenta creada con éxito y perfil guardado!");
-            window.location.href = "perfil.html";
-
-          } else {
-            // Inicio de sesión normal
-            await signInWithEmailAndPassword(auth, email, password);
-            alert("¡Sesión iniciada correctamente!");
-            window.location.href = "perfil.html";
+          } catch (firestoreError) {
+            console.error("Error al guardar en Firestore:", firestoreError);
+            alert("Aviso: La cuenta se creó, pero hubo un problema guardando el perfil en la base de datos: " + firestoreError.message);
           }
 
-        } catch (error) {
-          console.error("Error de Firebase:", error);
-          if (error.code === 'auth/email-already-in-use') {
-            alert("Este correo ya está registrado. Por favor, inicia sesión con él.");
-          } else {
-            alert("Error: " + error.code + " - " + error.message);
-          }
+          alert("¡Cuenta creada con éxito! Redirigiendo a tu cuaderno...");
+          window.location.href = "perfil.html";
+
+        } else {
+          // Inicio de sesión normal
+          await signInWithEmailAndPassword(auth, email, password);
+          alert("¡Sesión iniciada correctamente!");
+          window.location.href = "perfil.html";
         }
-      });
+
+      } catch (error) {
+        console.error("Error general de Firebase:", error);
+        if (error.code === 'auth/email-already-in-use') {
+          alert("Este correo ya está registrado. Iniciando sesión de forma automática...");
+          try {
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.href = "perfil.html";
+          } catch (e) {
+            alert("La cuenta ya existe. Por favor, introduce la contraseña correcta.");
+          }
+        } else {
+          alert("Error: " + error.code + " - " + error.message);
+        }
+      }
     });
   </script>
 </body>
