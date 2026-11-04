@@ -1,24 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CSRPCR2JS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-CSRPCR2JS');
-</script>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Notas del Lector.">
   <title>Mi Cuaderno & Archivo | Círculo Kairós</title>
 
-  <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
-
-  <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -28,7 +16,6 @@
       --bg-color: #ffffff;
       --bg-surface: #f9f8f6;
       --bg-card: #ffffff;
-      --bg-accent-tint: #f4eee7;
       --text-main: #181615;
       --text-muted: #665f58;
       --text-light: #8a8279;
@@ -52,7 +39,6 @@
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
       background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
       background-attachment: fixed;
     }
@@ -60,7 +46,6 @@
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
-    /* 1. BARRA SUPERIOR OSCURA */
     .top-action-bar {
       background-color: #111111;
       color: #ffffff;
@@ -72,17 +57,8 @@
       font-family: var(--font-classical);
       letter-spacing: 0.1em;
     }
-    .top-actions-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .rss-link-meta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: #fff;
-    }
+    .top-actions-right { display: flex; align-items: center; gap: 1.5rem; }
+    .rss-link-meta { display: inline-flex; align-items: center; gap: 0.4rem; color: #fff; }
     .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
     .btn-top-circle {
       background-color: var(--accent);
@@ -96,7 +72,6 @@
     }
     .btn-top-circle:hover { background-color: var(--accent-dark); }
 
-    /* 2. BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
       border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
@@ -104,25 +79,12 @@
       top: 0;
       background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
-    .nav-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      text-align: center;
-    }
-    .nav-toggle-btn {
-      display: none;
-    }
-    .main-nav > .nav-container > ul { 
-      list-style: none; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center;
-      gap: 3.5rem;
-    }
+    .nav-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+    .nav-toggle-btn { display: none; }
+    .main-nav > .nav-container > ul { list-style: none; display: flex; justify-content: center; align-items: center; gap: 3.5rem; }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -143,90 +105,9 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
-    .has-dropdown {
-      position: relative;
-    }
-    .has-dropdown::after {
-      content: '';
-      position: absolute;
-      top: 100%; left: 0;
-      width: 100%; height: 20px;
-      background: transparent;
-    }
-    .dropdown-trigger {
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-    .arrow-indicator {
-      font-size: 0.65rem;
-      transition: transform var(--transition);
-      color: var(--accent);
-    }
-    .has-dropdown:hover .arrow-indicator {
-      transform: rotate(180deg);
-    }
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%) translateY(5px);
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      min-width: 230px;
-      padding: 0.8rem 0;
-      list-style: none;
-      display: none;
-      flex-direction: column;
-      text-align: left;
-      border-radius: 2px;
-      z-index: 10000;
-    }
-    .dropdown-menu li {
-      width: 100%;
-    }
-    .dropdown-menu a {
-      display: block;
-      padding: 0.65rem 1.4rem;
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-main);
-      transition: all var(--transition);
-    }
-    .dropdown-menu a::after {
-      display: none;
-    }
-    .dropdown-menu a:hover {
-      background-color: var(--bg-surface);
-      color: var(--accent);
-      padding-left: 1.65rem;
-    }
-    .has-dropdown:hover .dropdown-menu {
-      display: flex;
-      animation: aparecerDropdown 0.2s ease forwards;
-    }
-    @keyframes aparecerDropdown {
-      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
-    }
+    #contenido-principal { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
 
-    #contenido-principal {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
-    }
-
-    .section-hero-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border-soft);
-    }
+    .section-hero-header { text-align: center; margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-soft); }
     .section-category-label {
       font-family: var(--font-classical);
       font-size: 0.78rem;
@@ -237,37 +118,27 @@
       display: inline-block;
       margin-bottom: 0.5rem;
     }
-    .section-main-title {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 1rem;
+    .section-main-title { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .saludo-usuario {
+      font-family: var(--font-classical);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 0.4rem;
     }
     .section-intro-text {
       max-width: 760px;
-      margin: 0 auto;
+      margin: 1rem auto 0;
       font-family: var(--font-reader);
       font-size: 1.15rem;
-      line-height: 1.75;
       color: var(--text-muted);
       font-style: italic;
     }
 
-    .layout-columns {
-      display: grid;
-      grid-template-columns: 2.3fr 1fr;
-      gap: 3.8rem;
-      align-items: start;
-    }
+    .layout-columns { display: grid; grid-template-columns: 2.3fr 1fr; gap: 3.8rem; align-items: start; }
 
-    .tabs-bar {
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 2px solid var(--border-soft);
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
+    .tabs-bar { display: flex; gap: 0.5rem; border-bottom: 2px solid var(--border-soft); margin-bottom: 2rem; flex-wrap: wrap; }
     .tab-btn {
       background: transparent;
       border: none;
@@ -281,20 +152,11 @@
       text-transform: uppercase;
       color: var(--text-muted);
       cursor: pointer;
-      transition: all var(--transition);
     }
     .tab-btn:hover { color: var(--accent); }
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      background-color: var(--bg-card);
-    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background-color: var(--bg-card); }
 
-    .collection-stream {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+    .collection-stream { display: flex; flex-direction: column; gap: 1.5rem; }
     .item-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -304,301 +166,68 @@
       align-items: flex-start;
       gap: 1.5rem;
       box-shadow: var(--shadow-subtle);
-      transition: transform var(--transition);
     }
-    .item-card:hover { transform: translateY(-2px); }
-    .item-meta-tag {
-      font-family: var(--font-classical);
-      font-size: 0.72rem;
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.3rem;
-      display: block;
-    }
-    .item-card h4 {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      line-height: 1.3;
-      margin-bottom: 0.4rem;
-    }
-    .item-card p {
-      font-family: var(--font-reader);
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .item-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-end;
-      flex-shrink: 0;
-    }
+    .item-meta-tag { font-family: var(--font-classical); font-size: 0.72rem; color: var(--accent); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; display: block; }
+    .item-card h4 { font-family: var(--font-serif); font-size: 1.35rem; margin-bottom: 0.4rem; }
+    .item-card p { font-family: var(--font-reader); font-size: 0.98rem; color: var(--text-muted); }
+    .item-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; flex-shrink: 0; }
     .btn-goto {
-      font-family: var(--font-sans);
-      font-size: 0.76rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      padding: 0.4rem 0.8rem;
-      border-radius: 2px;
-      white-space: nowrap;
+      font-size: 0.76rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--accent); background-color: var(--bg-surface); border: 1px solid var(--border-soft);
+      padding: 0.4rem 0.8rem; border-radius: 2px;
     }
     .btn-goto:hover { background-color: var(--accent); color: #fff; }
-    .btn-delete {
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      font-size: 0.75rem;
-      cursor: pointer;
-      text-decoration: underline;
-    }
+    .btn-delete { background: transparent; border: none; color: var(--text-light); font-size: 0.75rem; cursor: pointer; text-decoration: underline; }
     .btn-delete:hover { color: var(--accent); }
 
-    .empty-state {
-      text-align: center;
-      padding: 4rem 2rem;
-      background-color: var(--bg-card);
-      border: 1px dashed var(--border-soft);
-      font-family: var(--font-reader);
-      font-style: italic;
-      color: var(--text-muted);
-    }
+    .empty-state { text-align: center; padding: 4rem 2rem; background-color: var(--bg-card); border: 1px dashed var(--border-soft); font-family: var(--font-reader); font-style: italic; color: var(--text-muted); }
 
-    .add-custom-panel {
-      margin-top: 3rem;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      padding: 2rem;
-    }
-    .add-custom-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-    .add-custom-panel p {
-      font-family: var(--font-reader);
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-    .add-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    .add-form-grid input, .add-form-grid select {
-      background-color: var(--bg-color);
-      border: 1px solid var(--border-soft);
-      padding: 0.7rem 0.9rem;
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      outline: none;
-    }
-    .add-form-grid input:focus, .add-form-grid select:focus {
-      border-color: var(--accent);
-    }
-    .btn-add-item {
-      grid-column: 1 / -1;
-      background-color: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 0.8rem;
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      transition: background-color var(--transition);
-    }
-    .btn-add-item:hover { background-color: var(--accent-dark); }
+    .add-custom-panel { margin-top: 3rem; background-color: var(--bg-surface); border: 1px solid var(--border-soft); padding: 2rem; }
+    .add-custom-panel h3 { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .add-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .add-form-grid input, .add-form-grid select { background-color: var(--bg-color); border: 1px solid var(--border-soft); padding: 0.7rem 0.9rem; font-family: var(--font-sans); outline: none; }
+    .btn-add-item { grid-column: 1 / -1; background-color: var(--accent); color: #fff; border: none; padding: 0.8rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
 
-    .sidebar-wrapper {
-      position: sticky;
-      top: 5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
+    .sidebar-widget { background-color: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; box-shadow: var(--shadow-subtle); margin-bottom: 2rem; }
+    .widget-heading { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--border-dark); padding-bottom: 0.4rem; }
+    .stats-counter { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; text-align: center; }
+    .stat-box { background-color: var(--bg-surface); border: 1px solid var(--border-soft); padding: 1rem; }
+    .stat-number { font-family: var(--font-classical); font-size: 2rem; font-weight: 700; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); }
 
-    .sidebar-widget {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      padding: 1.8rem;
-      box-shadow: var(--shadow-subtle);
-      margin-bottom: 2rem;
-    }
-    .widget-heading {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      margin-bottom: 1.2rem;
-      border-bottom: 2px solid var(--border-dark);
-      padding-bottom: 0.4rem;
-    }
-    .stats-counter {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      text-align: center;
-    }
-    .stat-box {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      padding: 1rem;
-    }
-    .stat-number {
-      font-family: var(--font-classical);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-      display: block;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-    }
-
-    .site-footer {
-      background-color: var(--bg-surface);
-      border-top: 3px double var(--border-dark);
-      padding: 4rem 1.5rem 2.5rem;
-      margin-top: 5rem;
-    }
-    .footer-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 3.5rem;
-    }
-    .footer-brand h3 {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      letter-spacing: 0.15em;
-      margin-bottom: 0.75rem;
-    }
-    .footer-brand p {
-      font-family: var(--font-reader);
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 440px;
-    }
-    .footer-nav h4 {
-      font-family: var(--font-classical);
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      border-bottom: 1px solid var(--border-soft);
-      padding-bottom: 0.4rem;
-    }
+    .site-footer { background-color: var(--bg-surface); border-top: 3px double var(--border-dark); padding: 4rem 1.5rem 2.5rem; margin-top: 5rem; }
+    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3.5rem; }
+    .footer-brand h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.75rem; }
     .footer-nav ul { list-style: none; }
     .footer-nav li { margin-bottom: 0.75rem; }
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
-    .footer-nav a:hover { color: var(--accent); }
 
-    @media (max-width: 992px) {
-      .layout-columns { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
-      .top-action-bar { flex-direction: column; gap: 0.5rem; text-align: center; padding: 0.6rem 1rem; }
-      .top-actions-right { gap: 1rem; }
-    }
-
-    @media (max-width: 768px) {
-      .main-nav { padding: 0.6rem 1rem; }
-      .nav-toggle-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: none;
-        border: 1px solid var(--border-soft);
-        padding: 0.45rem 1rem;
-        font-family: var(--font-classical);
-        font-size: 0.76rem;
-        font-weight: 700;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--text-main);
-        cursor: pointer;
-        border-radius: 2px;
-        margin: 0 auto;
-      }
-      .main-nav > .nav-container > ul {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
-        padding: 1.2rem 0 0.5rem;
-        border-top: 1px solid var(--border-soft);
-        margin-top: 0.6rem;
-      }
-      .main-nav > .nav-container > ul.nav-abierto { display: flex; }
-      .dropdown-menu {
-        position: static;
-        transform: none;
-        box-shadow: none;
-        border: 1px solid var(--border-soft);
-        background-color: var(--bg-surface);
-        margin: 0.6rem auto 0;
-        width: 90%;
-        max-width: 280px;
-        text-align: center;
-      }
-      .dropdown-menu.sub-abierto { display: flex !important; }
-    }
+    @media (max-width: 992px) { .layout-columns { grid-template-columns: 1fr; } .footer-container { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body id="top">
 
-  <!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
     <div class="top-actions-right">
       <span>Crítica de Fondo &amp; Artes</span>
-      <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
-        <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
-        RSS
-      </a>
+      <a href="feed.xml" class="rss-link-meta" target="_blank">RSS</a>
       <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
     </div>
   </aside>
 
-  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
-      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
-        <span id="icono-menu-movil">☰</span>
-        <span>Menú</span>
-      </button>
-
       <ul id="lista-navegacion">
         <li><a href="index.html">Inicio</a></li>
-        <li class="has-dropdown">
-          <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
-            Cuadernos <span class="arrow-indicator">▾</span>
-          </a>
-          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
-            <li><a href="literatura.html">Literatura & Enigma</a></li>
-            <li><a href="cine.html">Cine & Mirada</a></li>
-            <li><a href="musica.html">Música & Acústica</a></li>
-            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
-            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
-          </ul>
-        </li>
-        <li><a href="perfil.html" class="active" aria-current="page">Mi Cuaderno</a></li>
+        <li><a href="literatura.html">Literatura</a></li>
+        <li><a href="cine.html">Cine</a></li>
+        <li><a href="musica.html">Música</a></li>
+        <li><a href="filosofia.html">Filosofía</a></li>
         <li><a href="biblioteca.html">Biblioteca</a></li>
         <li><a href="podcast.html">Podcast</a></li>
+        <!-- Este enlace se transformará automáticamente según la sesión -->
+        <li><a href="auth.html" id="enlace-dinamico-nav" class="active">Acceso / Registro</a></li>
       </ul>
     </div>
   </nav>
@@ -607,21 +236,21 @@
     <header class="section-hero-header">
       <span class="section-category-label">Archivo Interior</span>
       <h2 class="section-main-title">Mi Cuaderno de Favoritos</h2>
+      <!-- Indicador sutil del nombre de usuario -->
+      <p class="saludo-usuario" id="saludo-nombre-usuario">Cargando perfil...</p>
       <p class="section-intro-text">
-        «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado de lectura para custodiar ensayos, citas, podcasts y notas personales.
+        «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado de lectura para custodiar ensayos, citas y notas personales.
       </p>
     </header>
 
     <div class="layout-columns">
       <section>
-        <!-- Pestañas de Filtro (Incluye Podcast) -->
         <nav class="tabs-bar" aria-label="Filtro de colecciones">
           <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todos</button>
           <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">Literatura</button>
           <button class="tab-btn" onclick="cambiarFiltro('cine', this)">Cine</button>
           <button class="tab-btn" onclick="cambiarFiltro('musica', this)">Música</button>
           <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
-          <button class="tab-btn" onclick="cambiarFiltro('pensamiento', this)">Pensamiento</button>
           <button class="tab-btn" onclick="cambiarFiltro('podcast', this)">Podcast</button>
           <button class="tab-btn" onclick="cambiarFiltro('propio', this)">Mis Notas</button>
         </nav>
@@ -630,49 +259,46 @@
 
         <section class="add-custom-panel">
           <h3>+ Anotar una obra o referencia en mi cuaderno</h3>
-          <p>Puedes anotar un libro pendiente, un podcast o una reflexión personal:</p>
           <div class="add-form-grid">
-            <input type="text" id="nuevo-titulo" placeholder="Título de la obra o episodio *" required>
+            <input type="text" id="nuevo-titulo" placeholder="Título de la obra *" required>
             <input type="text" id="nuevo-autor" placeholder="Autor / Narrador">
             <select id="nueva-categoria">
               <option value="literatura">Literatura</option>
               <option value="cine">Cine</option>
               <option value="musica">Música</option>
               <option value="filosofia">Filosofía</option>
-              <option value="pensamiento">Pensamiento</option>
               <option value="podcast">Podcast</option>
-              <option value="propio">Reflexión / Nota propia</option>
+              <option value="propio">Reflexión propia</option>
             </select>
             <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
-            <input type="text" id="nueva-nota" placeholder="Nota o cita breve sobre la obra" style="grid-column: 1 / -1;">
+            <input type="text" id="nueva-nota" placeholder="Nota o cita breve" style="grid-column: 1 / -1;">
             <button class="btn-add-item" onclick="agregarItemManual()">Añadir a mi archivo &rarr;</button>
           </div>
         </section>
       </section>
 
-      <aside class="sidebar-wrapper" aria-label="Estadísticas de lectura">
+      <aside class="sidebar-wrapper" aria-label="Estadísticas">
         <div class="sidebar-widget">
           <h3 class="widget-heading">Censo del Cuaderno</h3>
           <div class="stats-counter">
             <div class="stat-box">
               <span class="stat-number" id="conteo-total">0</span>
-              <span class="stat-label">Obras Guardadas</span>
+              <span class="stat-label">Guardadas</span>
             </div>
             <div class="stat-box">
               <span class="stat-number" id="conteo-ensayos">0</span>
-              <span class="stat-label">Ensayos & Audio</span>
+              <span class="stat-label">Ensayos</span>
             </div>
           </div>
         </div>
 
         <div class="sidebar-widget">
-          <h3 class="widget-heading">Acceso & Privacidad</h3>
-          <p style="font-family: var(--font-reader); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;" id="texto-estado-sesion">
-            Gestionando tu cuenta de Círculo Kairós.
-          </p>
+          <h3 class="widget-heading">Gestión de Sesión</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;" id="texto-estado-sesion">Verificando estado...</p>
           <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
-          <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto; margin-bottom: 0.8rem;">Vaciar cuaderno completo</button>
-          <button id="btn-cerrar-sesion" onclick="cerrarSesionUsuario()" class="btn-delete" style="display: none; margin: 0 auto; color: var(--accent); font-weight: 600;">Cerrar sesión</button>
+          <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto; margin-bottom: 1rem;">Vaciar cuaderno</button>
+          <!-- Botón de Cerrar Sesión solicitado -->
+          <button onclick="cerrarSesionUsuario()" class="btn-auth" style="background-color: #111; margin-top: 0;">Cerrar Sesión</button>
         </div>
       </aside>
     </div>
@@ -681,76 +307,49 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
-        <img src="logo-kairos.svg" alt="Sello Círculo Kairós" style="width: 52px; height: 52px; margin-bottom: 1.1rem; opacity: 0.85;">
         <h3>CÍRCULO KAIRÓS</h3>
-        <p>Publicación cultural independiente consagrada al análisis pausado de las artes y el pensamiento.</p>
-        <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 1rem;">&copy; 2026 Círculo Kairós. Todos los derechos reservados.</p>
+        <p>Publicación cultural independiente consagrada al análisis pausado de las artes.</p>
       </div>
-      <nav class="footer-nav" aria-label="Navegación del pie">
+      <nav class="footer-nav">
         <h4>Cuadernos</h4>
         <ul>
-          <li><a href="literatura.html">Literatura & Enigma</a></li>
-          <li><a href="cine.html">Cine & Mirada</a></li>
-          <li><a href="musica.html">Música & Resonancias</a></li>
-          <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
-          <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+          <li><a href="literatura.html">Literatura</a></li>
+          <li><a href="cine.html">Cine</a></li>
         </ul>
       </nav>
-      <div class="footer-nav">
-        <h4>El Círculo</h4>
-        <ul>
-          <li><a href="sobre-el-circulo.html">Manifiesto Fundacional</a></li>
-          <li><a href="perfil.html">Mi Cuaderno de Favoritos</a></li>
-        </ul>
-      </div>
     </div>
   </footer>
 
-  <!-- SCRIPT DE FIREBASE Y GESTIÓN DE FAVORITOS EN CLOUD FIRESTORE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
-  apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
-  authDomain: "circulokairos-d1b8a.firebaseapp.com",
-  projectId: "circulokairos-d1b8a",
-  storageBucket: "circulokairos-d1b8a.firebasestorage.app",
-  messagingSenderId: "83122572556",
-  appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
-  measurementId: "G-FCKBNP0K8C"
-};
+      apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.firebasestorage.app",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    let usuarioActual = null;
     const STORAGE_KEY = "kairos_favoritos_v1";
     let categoriaActiva = "todos";
-    let usuarioActual = null;
 
-    function normalizarTexto(texto) {
-      return (texto || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
-    }
-
-    // Obtener favoritos (de Firestore si hay usuario, o de localStorage si es invitado)
     async function obtenerFavoritos() {
       if (usuarioActual) {
         try {
           const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
           const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            return docSnap.data().lista || [];
-          } else {
-            return [];
-          }
+          return docSnap.exists() ? docSnap.data().lista || [] : [];
         } catch (e) {
-          console.error("Error al leer de Firestore:", e);
           return [];
         }
       } else {
@@ -759,14 +358,12 @@
       }
     }
 
-    // Guardar favoritos
     async function guardarFavoritos(lista) {
       if (usuarioActual) {
         try {
-          const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
-          await setDoc(docRef, { lista: lista });
+          await setDoc(doc(db, "usuarios_favoritos", usuarioActual.uid), { lista });
         } catch (e) {
-          console.error("Error al guardar en Firestore:", e);
+          console.error(e);
         }
       } else {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
@@ -775,38 +372,21 @@
       actualizarEstadisticas();
     }
 
-    window.cambiarFiltro = function(cat, botonElemento) {
+    window.cambiarFiltro = function(cat, btn) {
       categoriaActiva = cat;
-      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-      if (botonElemento) botonElemento.classList.add("active");
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
       renderizarFavoritos();
-    }
-
-    function normalizarEnlace(enlace) {
-      if (!enlace) return "";
-      let limpio = enlace.trim();
-      if (limpio.startsWith("http://") || limpio.startsWith("https://")) return limpio;
-      const partes = limpio.split("/");
-      return partes[partes.length - 1];
     }
 
     async function renderizarFavoritos() {
       const cont = document.getElementById("contenedor-favoritos");
       if (!cont) return;
-
       const lista = await obtenerFavoritos();
-      const filtroLimpio = normalizarTexto(categoriaActiva);
-      const filtrados = filtroLimpio === "todos"
-        ? lista
-        : lista.filter(item => normalizarTexto(item.categoria) === filtroLimpio);
+      const filtrados = categoriaActiva === "todos" ? lista : lista.filter(i => i.categoria === categoriaActiva);
 
       if (filtrados.length === 0) {
-        cont.innerHTML = `
-          <div class="empty-state">
-            <p>Todavía no has guardado ninguna obra o episodio en esta sección.</p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Explora los ensayos o episodios de podcast para añadirlos a tu archivo.</p>
-          </div>
-        `;
+        cont.innerHTML = `<div class="empty-state"><p>No hay obras guardadas en esta sección.</p></div>`;
         return;
       }
 
@@ -814,20 +394,14 @@
       filtrados.forEach(item => {
         const card = document.createElement("article");
         card.className = "item-card";
-
-        const enlaceLimpio = normalizarEnlace(item.enlace);
-        const botonVer = enlaceLimpio 
-          ? `<a href="${enlaceLimpio}" class="btn-goto">Ver obra &rarr;</a>` 
-          : '';
-
         card.innerHTML = `
           <div>
-            <span class="item-meta-tag">${item.categoria || 'Lectura'} ${item.autor ? '· ' + item.autor : ''}</span>
+            <span class="item-meta-tag">${item.categoria} ${item.autor ? '· ' + item.autor : ''}</span>
             <h4>${item.titulo}</h4>
-            <p>${item.nota || 'Sin notas adicionales.'}</p>
+            <p>${item.nota || 'Sin notas.'}</p>
           </div>
           <div class="item-actions">
-            ${botonVer}
+            ${item.enlace ? `<a href="${item.enlace}" class="btn-goto">Ver &rarr;</a>` : ''}
             <button class="btn-delete" onclick="window.eliminarItem(${item.id})">Eliminar</button>
           </div>
         `;
@@ -837,29 +411,18 @@
 
     window.agregarItemManual = async function() {
       const titulo = document.getElementById("nuevo-titulo").value.trim();
-      const autor = document.getElementById("nuevo-autor").value.trim();
-      const categoria = document.getElementById("nueva-categoria").value;
-      const enlace = document.getElementById("nuevo-enlace").value.trim();
-      const nota = document.getElementById("nueva-nota").value.trim();
-
-      if (!titulo) {
-        alert("Por favor, introduce al menos el título de la obra.");
-        return;
-      }
-
+      if (!titulo) return alert("Introduce un título.");
       const nuevo = {
         id: Date.now(),
         titulo,
-        autor,
-        categoria,
-        enlace,
-        nota
+        autor: document.getElementById("nuevo-autor").value.trim(),
+        categoria: document.getElementById("nueva-categoria").value,
+        enlace: document.getElementById("nuevo-enlace").value.trim(),
+        nota: document.getElementById("nueva-nota").value.trim()
       };
-
       const lista = await obtenerFavoritos();
       lista.unshift(nuevo);
       await guardarFavoritos(lista);
-
       document.getElementById("nuevo-titulo").value = "";
       document.getElementById("nuevo-autor").value = "";
       document.getElementById("nuevo-enlace").value = "";
@@ -868,123 +431,72 @@
 
     window.eliminarItem = async function(id) {
       const lista = await obtenerFavoritos();
-      const nuevaLista = lista.filter(item => item.id !== id);
-      await guardarFavoritos(nuevaLista);
+      await guardarFavoritos(lista.filter(i => i.id !== id));
     }
 
     async function actualizarEstadisticas() {
       const lista = await obtenerFavoritos();
-      const totalEl = document.getElementById("conteo-total");
-      const ensayosEl = document.getElementById("conteo-ensayos");
-
-      if (totalEl) totalEl.textContent = lista.length;
-      if (ensayosEl) {
-        const deWeb = lista.filter(item => item.enlace && item.enlace.includes(".html")).length;
-        ensayosEl.textContent = deWeb;
-      }
+      document.getElementById("conteo-total").textContent = lista.length;
+      document.getElementById("conteo-ensayos").textContent = lista.filter(i => i.enlace && i.enlace.includes(".html")).length;
     }
 
     window.exportarColeccion = async function() {
       const lista = await obtenerFavoritos();
-      const data = JSON.stringify(lista, null, 2);
-      const blob = new Blob([data], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
+      const blob = new Blob([JSON.stringify(lista, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
-      a.href = url;
-      a.download = "mis_favoritos_circulo_kairos.json";
+      a.href = URL.createObjectURL(blob);
+      a.download = "mi_cuaderno_kairos.json";
       a.click();
     }
 
     window.borrarTodo = async function() {
-      if (confirm("¿Seguro que deseas vaciar todas las obras guardadas en tu cuaderno?")) {
-        await guardarFavoritos([]);
-      }
+      if (confirm("¿Vaciar cuaderno?")) await guardarFavoritos([]);
     }
 
     window.cerrarSesionUsuario = function() {
       signOut(auth).then(() => {
-        alert("Has cerrado sesión correctamente.");
+        alert("Sesión cerrada.");
         window.location.href = "auth.html";
-      }).catch((error) => {
-        console.error("Error al cerrar sesión", error);
       });
     }
 
-    // Control de Sesión, Navegación y Carga en Tiempo Real
+    // Control dinámico de sesión y navbar en todas las páginas
     onAuthStateChanged(auth, async (user) => {
       usuarioActual = user;
-      
-      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      const enlaceNav = document.getElementById("enlace-dinamico-nav");
       const textoEstado = document.getElementById("texto-estado-sesion");
-      const btnCerrar = document.getElementById("btn-cerrar-sesion");
-
-      enlacesPerfil.forEach(enlace => {
-        if (user) {
-          enlace.href = "perfil.html";
-          enlace.textContent = "Mi Cuaderno";
-        } else {
-          enlace.href = "auth.html";
-          enlace.textContent = "Acceso / Registro";
-        }
-      });
+      const saludoUsuario = document.getElementById("saludo-nombre-usuario");
 
       if (user) {
-        if (textoEstado) textoEstado.innerHTML = `Sesión iniciada como: <br><strong>${user.email}</strong>`;
-        if (btnCerrar) btnCerrar.style.display = "block";
+        if (enlaceNav) {
+          enlaceNav.href = "perfil.html";
+          enlaceNav.textContent = "Mi Cuaderno";
+        }
+        if (textoEstado) textoEstado.innerHTML = `Conectado como: <strong>${user.email}</strong>`;
+
+        // Recuperar nombre de usuario personalizado desde Firestore
+        try {
+          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
+          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
+            if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de ${perfilSnap.data().nombreUsuario}`;
+          } else {
+            if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
+          }
+        } catch (e) {
+          if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
+        }
+
       } else {
-        if (textoEstado) textoEstado.innerHTML = `Estás navegando como invitado. Tus datos se guardan solo en este dispositivo. <a href="auth.html" style="color:var(--accent); font-weight:600;">Inicia sesión</a> para sincronizar en la nube.`;
-        if (btnCerrar) btnCerrar.style.display = "none";
+        if (enlaceNav) {
+          enlaceNav.href = "auth.html";
+          enlaceNav.textContent = "Acceso / Registro";
+        }
+        if (textoEstado) textoEstado.innerHTML = `Modo invitado. <a href="auth.html" style="color:var(--accent);">Inicia sesión</a> para sincronizar.`;
+        if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de Invitado`;
       }
 
       await renderizarFavoritos();
       await actualizarEstadisticas();
-    });
-
-    // Configuración del menú móvil
-    function configurarMenu() {
-      const botonMenu = document.getElementById("btn-menu-movil");
-      const listaNav = document.getElementById("lista-navegacion");
-      const iconoMenu = document.getElementById("icono-menu-movil");
-      const triggerCuadernos = document.getElementById("dropdown-cuadernos");
-      const submenuCuadernos = document.querySelector(".dropdown-menu");
-
-      if (!botonMenu || !listaNav) return;
-
-      botonMenu.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const abierto = listaNav.classList.toggle("nav-abierto");
-        botonMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
-        if (iconoMenu) iconoMenu.textContent = abierto ? "✕" : "☰";
-      });
-
-      if (triggerCuadernos && submenuCuadernos) {
-        triggerCuadernos.addEventListener("click", (e) => {
-          if (window.innerWidth <= 768) {
-            e.preventDefault();
-            submenuCuadernos.classList.toggle("sub-abierto");
-          }
-        });
-      }
-
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest(".main-nav")) {
-          listaNav.classList.remove("nav-abierto");
-          if (submenuCuadernos) submenuCuadernos.classList.remove("sub-abierto");
-          botonMenu.setAttribute("aria-expanded", "false");
-          if (iconoMenu) iconoMenu.textContent = "☰";
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const hoy = new Date();
-      const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
-      const metaSpan = document.getElementById("meta-fecha-hoy");
-      if (metaSpan) {
-        metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
-      }
-      configurarMenu();
     });
   </script>
 </body>
