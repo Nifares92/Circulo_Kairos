@@ -63,7 +63,7 @@
       margin-bottom: 0.4rem;
       color: var(--text-muted);
     }
-    .form-group input {
+    .form-group input, .form-group select {
       width: 100%;
       padding: 0.75rem 0.9rem;
       border: 1px solid var(--border-soft);
@@ -71,8 +71,10 @@
       font-size: 0.95rem;
       outline: none;
       border-radius: 2px;
+      background-color: #fff;
     }
-    .form-group input:focus { border-color: var(--accent); }
+    .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+    .registro-oculto { display: none; }
     .btn-auth {
       width: 100%;
       background-color: var(--accent);
@@ -121,6 +123,27 @@
       <h1 id="titulo-modo">Iniciar Sesión</h1>
     </div>
 
+    <!-- Campos exclusivos de Registro (Ocultos por defecto) -->
+    <div id="campos-registro" class="registro-oculto">
+      <div class="form-group">
+        <label for="nombreUsuario">Nombre de usuario</label>
+        <input type="text" id="nombreUsuario" placeholder="Tu alias o nombre">
+      </div>
+      <div class="form-group">
+        <label for="cumpleaños">Fecha de nacimiento</label>
+        <input type="date" id="cumpleaños">
+      </div>
+      <div class="form-group">
+        <label for="genero">Género</label>
+        <select id="genero">
+          <option value="">Selecciona una opción</option>
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Otro">Prefiero no decirlo</option>
+        </select>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="email">Correo electrónico</label>
       <input type="email" id="email" placeholder="tu@correo.com" required>
@@ -131,7 +154,6 @@
       <input type="password" id="password" placeholder="••••••••" required>
     </div>
 
-    <!-- CAMBIO: Añadido id directo y tipo botón para asegurar el enlace -->
     <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
 
     <div class="auth-switch">
@@ -145,6 +167,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
@@ -158,11 +181,15 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
     let esRegistro = false;
 
     window.cambiarModo = function() {
       esRegistro = !esRegistro;
+      const camposReg = document.getElementById("campos-registro");
+      camposReg.style.display = esRegistro ? "block" : "none";
+
       document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
       document.getElementById("btn-accion").textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
       document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
@@ -174,13 +201,33 @@
       const password = document.getElementById("password").value.trim();
 
       if (!email || !password) {
-        alert("Por favor, rellena todos los campos.");
+        alert("Por favor, rellena los campos obligatorios.");
         return;
       }
 
       try {
         if (esRegistro) {
-          await createUserWithEmailAndPassword(auth, email, password);
+          const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
+          const cumpleaños = document.getElementById("cumpleaños").value;
+          const genero = document.getElementById("genero").value;
+
+          if (!nombreUsuario) {
+            alert("Por favor, introduce tu nombre de usuario.");
+            return;
+          }
+
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // Guardar metadatos adicionales del perfil en Firestore
+          await setDoc(doc(db, "usuarios_perfil", user.uid), {
+            nombreUsuario,
+            cumpleaños,
+            genero,
+            email,
+            creado: new Date().toISOString()
+          });
+
           alert("¡Cuenta creada con éxito!");
         } else {
           await signInWithEmailAndPassword(auth, email, password);
@@ -193,7 +240,6 @@
       }
     }
 
-    // Enlace seguro al botón nativo para evitar fallos de onclick en módulos
     document.getElementById("btn-accion").addEventListener("click", manejarAutenticacion);
   </script>
 </body>
