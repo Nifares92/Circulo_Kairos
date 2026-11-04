@@ -512,11 +512,16 @@
 </head>
 <body>
 
-  <!-- 1. BARRA SUPERIOR OSCURA -->
+ <!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
-    <span>Círculo Kairós · Edición Sonora</span>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <span>Círculo Kairós · Edición Sonora</span>
+      <!-- ESPACIO PARA EL NOMBRE DE USUARIO -->
+      <span id="header-nombre-usuario" style="color: #d4af37; font-weight: 600;"></span>
+    </div>
+    
     <div class="top-actions-right">
-      <span>Misterio, Relato & Crónica</span>
+      <span>Misterio, Relato &amp; Crónica</span>
       <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
         <svg viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.46-4.44-9.9-9.9-9.9z"/></svg>
         RSS
@@ -642,21 +647,21 @@
     </div>
   </footer>
 
-<!-- SCRIPT UNIVERSAL DE GESTIÓN DE FAVORITOS (PODCAST) Y SESIÓN CON FIREBASE -->
+<!-- SCRIPT UNIVERSAL DE GESTIÓN DE FAVORITOS (PODCAST), SESIÓN Y NOMBRE EN FIRESTORE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
-  apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
-  authDomain: "circulokairos-d1b8a.firebaseapp.com",
-  projectId: "circulokairos-d1b8a",
-  storageBucket: "circulokairos-d1b8a.firebasestorage.app",
-  messagingSenderId: "83122572556",
-  appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
-  measurementId: "G-FCKBNP0K8C"
-};
+      apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.firebasestorage.app",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -671,6 +676,8 @@
       
       // Actualizar enlaces de la barra de navegación
       const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      const spanUsuario = document.getElementById("header-nombre-usuario");
+
       enlacesPerfil.forEach(enlace => {
         if (user) {
           enlace.href = "perfil.html";
@@ -680,6 +687,23 @@
           enlace.textContent = "Acceso / Registro";
         }
       });
+
+      // Consultar y pintar el nombre de usuario en Firestore
+      if (user) {
+        try {
+          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
+          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
+            const nombre = perfilSnap.data().nombreUsuario;
+            if (spanUsuario) spanUsuario.textContent = `👤 ${nombre}`;
+          } else {
+            if (spanUsuario) spanUsuario.textContent = `👤 Mi Cuenta`;
+          }
+        } catch (e) {
+          console.error("Error al cargar el nombre de usuario:", e);
+        }
+      } else {
+        if (spanUsuario) spanUsuario.textContent = "";
+      }
 
       // Inyectar y actualizar el estado de los botones de favoritos del podcast
       await inyectarBotonPodcast();
