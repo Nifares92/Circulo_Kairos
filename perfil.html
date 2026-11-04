@@ -216,18 +216,31 @@
     </div>
   </aside>
 
+  <!-- 2. NAVEGACIÓN MODERNA -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
+      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
+        <span id="icono-menu-movil">☰</span>
+        <span>Menú</span>
+      </button>
+
       <ul id="lista-navegacion">
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="literatura.html">Literatura</a></li>
-        <li><a href="cine.html">Cine</a></li>
-        <li><a href="musica.html">Música</a></li>
-        <li><a href="filosofia.html">Filosofía</a></li>
+        <li class="has-dropdown">
+          <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
+            Cuadernos <span class="arrow-indicator">▾</span>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
+            <li><a href="literatura.html">Literatura & Enigma</a></li>
+            <li><a href="cine.html">Cine & Mirada</a></li>
+            <li><a href="musica.html">Música & Acústica</a></li>
+            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
+            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
+          </ul>
+        </li>
+        <li><a href="perfil.html" class="active" aria-current="page">Mi Cuaderno</a></li>
         <li><a href="biblioteca.html">Biblioteca</a></li>
         <li><a href="podcast.html">Podcast</a></li>
-        <!-- Este enlace se transformará automáticamente según la sesión -->
-        <li><a href="auth.html" id="enlace-dinamico-nav" class="active">Acceso / Registro</a></li>
       </ul>
     </div>
   </nav>
