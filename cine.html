@@ -1603,7 +1603,7 @@
     });
   </script>
   
- <!-- SCRIPT UNIVERSAL DE GESTIÓN DE FAVORITOS, SESIÓN Y NOMBRE EN FIRESTORE -->
+<!-- SCRIPT DE DIAGNÓSTICO PARA FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -1626,42 +1626,37 @@
     const STORAGE_KEY = "kairos_favoritos_v1";
     let usuarioActual = null;
 
-    // Detectar sesión de usuario en tiempo real
     onAuthStateChanged(auth, async (user) => {
       usuarioActual = user;
-      
-      // Actualizar enlaces de la barra de navegación
-      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
       const spanUsuario = document.getElementById("header-nombre-usuario");
 
-      enlacesPerfil.forEach(enlace => {
-        if (user) {
-          enlace.href = "perfil.html";
-          enlace.textContent = "Mi Cuaderno";
-        } else {
-          enlace.href = "auth.html";
-          enlace.textContent = "Acceso / Registro";
-        }
-      });
-
-      // Consultar y pintar el nombre de usuario en Firestore
       if (user) {
+        console.log("Usuario autenticado con UID:", user.uid);
         try {
-          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
-          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
+          const perfilRef = doc(db, "usuarios_perfil", user.uid);
+          const perfilSnap = await getDoc(perfilRef);
+          
+          if (perfilSnap.exists()) {
+            console.log("Datos de Firestore encontrados:", perfilSnap.data());
             const nombre = perfilSnap.data().nombreUsuario;
-            if (spanUsuario) spanUsuario.textContent = `👤 ${nombre}`;
+            if (spanUsuario) {
+              spanUsuario.textContent = `👤 ${nombre}`;
+              console.log("Nombre pintado con éxito en la barra:", nombre);
+            } else {
+              console.error("¡No se encontró el elemento #header-nombre-usuario en el HTML!");
+            }
           } else {
+            console.warn("El documento de Firestore no existe para este UID.");
             if (spanUsuario) spanUsuario.textContent = `👤 Mi Cuenta`;
           }
         } catch (e) {
-          console.error("Error al cargar el nombre de usuario:", e);
+          console.error("Error crítico al leer Firestore:", e);
         }
       } else {
+        console.log("No hay ningun usuario con sesión iniciada.");
         if (spanUsuario) spanUsuario.textContent = "";
       }
 
-      // Inyectar y actualizar el estado de los botones de favoritos con los datos reales
       await inyectarBotonesFavoritos();
     });
 
@@ -1670,14 +1665,8 @@
         try {
           const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
           const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            return docSnap.data().lista || [];
-          }
-          return [];
-        } catch (e) {
-          console.error("Error al leer favoritos de Firestore:", e);
-          return [];
-        }
+          return docSnap.exists() ? docSnap.data().lista || [] : [];
+        } catch (e) { return []; }
       } else {
         const data = localStorage.getItem(STORAGE_KEY);
         return data ? JSON.parse(data) : [];
@@ -1689,9 +1678,7 @@
         try {
           const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
           await setDoc(docRef, { lista: lista });
-        } catch (e) {
-          console.error("Error al guardar favoritos en Firestore:", e);
-        }
+        } catch (e) {}
       } else {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
       }
@@ -1700,63 +1687,34 @@
     window.conmutarFavorito = async function(idArticulo, titulo, categoria, enlace) {
       let lista = await obtenerListaFavoritos();
       const existe = lista.some(item => item.enlace === enlace);
-
       if (existe) {
         lista = lista.filter(item => item.enlace !== enlace);
         await guardarListaFavoritos(lista);
         actualizarEstadoBoton(idArticulo, false);
-        alert(`«${titulo}» se ha eliminado de tu Cuaderno de Favoritos.`);
       } else {
-        lista.unshift({
-          id: Date.now(),
-          titulo: titulo,
-          autor: "Círculo Kairós",
-          categoria: categoria,
-          enlace: enlace,
-          nota: "Guardado desde la lectura del ensayo."
-        });
+        lista.unshift({ id: Date.now(), titulo, autor: "Círculo Kairós", categoria, enlace, nota: "Guardado." });
         await guardarListaFavoritos(lista);
         actualizarEstadoBoton(idArticulo, true);
-        alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
       }
     }
 
     function actualizarEstadoBoton(idArticulo, guardado) {
       const btn = document.getElementById(`btn-fav-${idArticulo}`);
       if (!btn) return;
-      if (guardado) {
-        btn.innerHTML = "&#9733; En tu Cuaderno";
-        btn.style.backgroundColor = "var(--accent)";
-        btn.style.color = "#ffffff";
-        btn.style.borderColor = "var(--accent)";
-      } else {
-        btn.innerHTML = "&#9734; Guardar en mi perfil";
-        btn.style.backgroundColor = "var(--bg-surface)";
-        btn.style.color = "var(--accent)";
-        btn.style.borderColor = "var(--border-soft)";
-      }
+      btn.innerHTML = guardado ? "&#9733; En tu Cuaderno" : "&#9734; Guardar en mi perfil";
     }
 
     async function inyectarBotonesFavoritos() {
       const articulos = document.querySelectorAll(".long-article");
       const listaActual = await obtenerListaFavoritos();
-      const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop().split("#")[0];
-
-      let catNombre = "Cine";
-      if (archivoActual.includes("filosofia")) catNombre = "Filosofía";
-      else if (archivoActual.includes("literatura")) catNombre = "Literatura";
-      else if (archivoActual.includes("cine")) catNombre = "Cine";
-      else if (archivoActual.includes("musica")) catNombre = "Música";
-      else if (archivoActual.includes("pensamiento")) catNombre = "Pensamiento";
+      const archivoActual = window.location.pathname.split("/").pop() || "cine.html";
 
       articulos.forEach(art => {
         const pieAcciones = art.querySelector(".article-bottom-actions");
         if (!pieAcciones) return;
-
         const id = art.id;
         const titularEl = art.querySelector(".article-headline");
-        const titulo = titularEl ? titularEl.textContent.trim() : (art.getAttribute("data-titulo") || "Ensayo");
-
+        const titulo = titularEl ? titularEl.textContent.trim() : "Ensayo";
         const enlaceCompleto = `${archivoActual}#${id}`;
         const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
 
@@ -1769,8 +1727,7 @@
           btn.style.marginRight = "auto";
           pieAcciones.insertBefore(btn, pieAcciones.querySelector(".back-to-toc-link"));
         }
-
-        btn.onclick = () => window.conmutarFavorito(id, titulo, catNombre, enlaceCompleto);
+        btn.onclick = () => window.conmutarFavorito(id, titulo, "Cine", enlaceCompleto);
         actualizarEstadoBoton(id, yaGuardado);
       });
     }
