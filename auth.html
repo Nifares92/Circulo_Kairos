@@ -216,10 +216,11 @@
             return;
           }
 
+          // Crear la cuenta nueva en Auth
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // Guardar metadatos adicionales del perfil en Firestore
+          // Guardar los datos del perfil en Firestore
           await setDoc(doc(db, "usuarios_perfil", user.uid), {
             nombreUsuario,
             cumpleaños,
@@ -228,15 +229,21 @@
             creado: new Date().toISOString()
           });
 
-          alert("¡Cuenta creada con éxito!");
+          alert("¡Cuenta creada con éxito! Bienvenido a Círculo Kairós.");
         } else {
+          // Inicio de sesión normal
           await signInWithEmailAndPassword(auth, email, password);
           alert("¡Sesión iniciada correctamente!");
         }
+
         window.location.href = "perfil.html";
       } catch (error) {
         console.error("Error de Firebase:", error);
-        alert("Error: " + error.code + " - " + error.message);
+        if (error.code === 'auth/email-already-in-use') {
+          alert("Este correo ya está registrado. Por favor, inicia sesión en su lugar.");
+        } else {
+          alert("Error: " + error.code + " - " + error.message);
+        }
       }
     }
 
