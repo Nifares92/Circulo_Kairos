@@ -1534,7 +1534,7 @@
       const listaActual = await obtenerListaFavoritos();
       const archivoActual = window.location.pathname.split("/").pop() || window.location.href.split("/").pop().split("#")[0];
 
-      let catNombre = "Música";
+      let catNombre = "Pensamiento";
       if (archivoActual.includes("filosofia")) catNombre = "Filosofía";
       else if (archivoActual.includes("literatura")) catNombre = "Literatura";
       else if (archivoActual.includes("cine")) catNombre = "Cine";
