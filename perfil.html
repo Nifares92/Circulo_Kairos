@@ -463,11 +463,16 @@
 </head>
 <body id="top">
 
-  <!-- 1. BARRA SUPERIOR OSCURA -->
+<!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
-    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+      <!-- ESPACIO PARA EL NOMBRE DE USUARIO EN LA BARRA -->
+      <span id="header-nombre-usuario" style="color: #d4af37; font-weight: 600;"></span>
+    </div>
+    
     <div class="top-actions-right">
-      <span>Crítica de Fondo & Artes</span>
+      <span>Crítica de Fondo &amp; Artes</span>
       <a href="feed.xml" class="rss-link-meta" target="_blank">RSS</a>
       <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
     </div>
@@ -724,10 +729,12 @@
     }
 
     // Control de sesión y sincronización del navbar idéntico al resto de la web
+    // Control de sesión y sincronización del navbar y barra superior
     onAuthStateChanged(auth, async (user) => {
       usuarioActual = user;
       const textoEstado = document.getElementById("texto-estado-sesion");
       const saludoUsuario = document.getElementById("saludo-nombre-usuario");
+      const spanBarraSuperior = document.getElementById("header-nombre-usuario");
       const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
 
       enlacesPerfil.forEach(enlace => {
@@ -746,16 +753,21 @@
         try {
           const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
           if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
-            if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de ${perfilSnap.data().nombreUsuario}`;
+            const nombre = perfilSnap.data().nombreUsuario;
+            if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de ${nombre}`;
+            if (spanBarraSuperior) spanBarraSuperior.textContent = `👤 ${nombre}`;
           } else {
             if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
+            if (spanBarraSuperior) spanBarraSuperior.textContent = `👤 Mi Cuenta`;
           }
         } catch (e) {
           if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
+          if (spanBarraSuperior) spanBarraSuperior.textContent = `👤 Mi Cuenta`;
         }
       } else {
         if (textoEstado) textoEstado.innerHTML = `Modo invitado. <a href="auth.html" style="color:var(--accent);">Inicia sesión</a> para sincronizar.`;
         if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de Invitado`;
+        if (spanBarraSuperior) spanBarraSuperior.textContent = "";
       }
 
       await renderizarFavoritos();
