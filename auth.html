@@ -168,7 +168,7 @@
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
   </div>
 
-  <script type="module">
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -189,73 +189,78 @@
 
     let esRegistro = false;
 
-    // Control del cambio de modo
-    document.getElementById("enlace-switch").addEventListener("click", (e) => {
-      e.preventDefault();
-      esRegistro = !esRegistro;
+    // Esperar a que el DOM esté listo antes de asignar eventos
+    document.addEventListener("DOMContentLoaded", () => {
+      const enlaceSwitch = document.getElementById("enlace-switch");
+      const btnAccion = document.getElementById("btn-accion");
       const camposReg = document.getElementById("campos-registro");
-      camposReg.style.display = esRegistro ? "block" : "none";
 
-      document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
-      document.getElementById("btn-accion").textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
-      document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
-      document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
-    });
+      // Control del cambio de modo (Login / Registro)
+      enlaceSwitch.addEventListener("click", () => {
+        esRegistro = !esRegistro;
+        camposReg.style.display = esRegistro ? "block" : "none";
 
-    // Envío del formulario nativo
-    document.getElementById("form-auth").addEventListener("submit", async (e) => {
-      e.preventDefault(); // Evitamos que recargue la página de forma por defecto
+        document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
+        btnAccion.textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
+        document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
+        enlaceSwitch.textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
+      });
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+      // Evento de clic en el botón principal
+      btnAccion.addEventListener("click", async () => {
+        console.log("¡Botón pulsado correctamente!"); // Esto saldrá en la consola F12
 
-      if (!email || !password) {
-        alert("Por favor, rellena los campos obligatorios.");
-        return;
-      }
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-      try {
-        if (esRegistro) {
-          const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
-          const cumpleaños = document.getElementById("cumpleaños").value;
-          const genero = document.getElementById("genero").value;
+        if (!email || !password) {
+          alert("Por favor, rellena los campos obligatorios.");
+          return;
+        }
 
-          if (!nombreUsuario) {
-            alert("Por favor, introduce tu nombre de usuario.");
-            return;
+        try {
+          if (esRegistro) {
+            const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
+            const cumpleaños = document.getElementById("cumpleaños").value;
+            const genero = document.getElementById("genero").value;
+
+            if (!nombreUsuario) {
+              alert("Por favor, introduce tu nombre de usuario.");
+              return;
+            }
+
+            // 1. Crear el usuario en Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // 2. Guardar los datos del perfil en Firestore
+            await setDoc(doc(db, "usuarios_perfil", user.uid), {
+              nombreUsuario: nombreUsuario,
+              cumpleaños: cumpleaños,
+              genero: genero,
+              email: email,
+              creado: new Date().toISOString()
+            });
+
+            alert("¡Cuenta creada con éxito y perfil guardado!");
+            window.location.href = "perfil.html";
+
+          } else {
+            // Inicio de sesión normal
+            await signInWithEmailAndPassword(auth, email, password);
+            alert("¡Sesión iniciada correctamente!");
+            window.location.href = "perfil.html";
           }
 
-          // 1. Crear cuenta en Firebase Auth
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
-
-          // 2. Guardar perfil en Firestore
-          await setDoc(doc(db, "usuarios_perfil", user.uid), {
-            nombreUsuario: nombreUsuario,
-            cumpleaños: cumpleaños,
-            genero: genero,
-            email: email,
-            creado: new Date().toISOString()
-          });
-
-          alert("¡Cuenta creada con éxito! Redirigiendo a tu cuaderno...");
-          window.location.href = "perfil.html";
-
-        } else {
-          // Iniciar sesión
-          await signInWithEmailAndPassword(auth, email, password);
-          alert("¡Sesión iniciada con éxito!");
-          window.location.href = "perfil.html";
+        } catch (error) {
+          console.error("Error de Firebase:", error);
+          if (error.code === 'auth/email-already-in-use') {
+            alert("Este correo ya está registrado. Por favor, inicia sesión con él.");
+          } else {
+            alert("Error: " + error.code + " - " + error.message);
+          }
         }
-
-      } catch (error) {
-        console.error("Error en Firebase:", error);
-        if (error.code === 'auth/email-already-in-use') {
-          alert("Este correo ya está registrado. Por favor, cambia a la opción de Iniciar Sesión.");
-        } else {
-          alert("Error de autenticación: " + error.code + " - " + error.message);
-        }
-      }
+      });
     });
   </script>
 </body>
