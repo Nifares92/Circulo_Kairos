@@ -1,592 +1,173 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSRPCR2JS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-CSRPCR2JS');
-  </script>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Notas del Lector.">
-  <title>Mi Cuaderno & Archivo | Círculo Kairós</title>
-
-  <!-- Favicon SVG oficial -->
+  <title>Acceso y Registro | Círculo Kairós</title>
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
-
-  <!-- Tipografías de Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --bg-color: #ffffff;
       --bg-surface: #f9f8f6;
-      --bg-card: #ffffff;
-      --bg-accent-tint: #f4eee7;
       --text-main: #181615;
       --text-muted: #665f58;
-      --text-light: #8a8279;
       --accent: #8b261e;
       --accent-dark: #5c1813;
       --border-soft: #e6dfd5;
-      --border-dark: #181615;
       --font-serif: 'Playfair Display', Georgia, serif;
-      --font-reader: 'Newsreader', Garamond, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-classical: 'Cinzel', serif;
-      --max-width: 1240px;
-      --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.04);
-      --transition: 0.25s ease;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg-surface);
       color: var(--text-main);
       font-family: var(--font-sans);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
-      background-attachment: fixed;
-    }
-
-    a { color: inherit; text-decoration: none; transition: color var(--transition); }
-    a:hover { color: var(--accent); }
-
-    /* 1. BARRA SUPERIOR OSCURA */
-    .top-action-bar {
-      background-color: #111111;
-      color: #ffffff;
-      padding: 0.5rem 2rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      font-size: 0.78rem;
-      font-family: var(--font-classical);
-      letter-spacing: 0.1em;
+      min-height: 100vh;
+      padding: 1.5rem;
     }
-    .top-actions-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .rss-link-meta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: #fff;
-    }
-    .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
-    .btn-top-circle {
-      background-color: var(--accent);
-      color: #ffffff;
-      padding: 0.35rem 1rem;
+    .auth-card {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-soft);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       border-radius: 2px;
-      font-weight: 600;
+    }
+    .auth-header { text-align: center; margin-bottom: 2rem; }
+    .auth-header h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .auth-header p {
+      font-family: var(--font-classical);
+      font-size: 0.75rem;
       text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
+      color: var(--accent);
     }
-    .btn-top-circle:hover { background-color: var(--accent-dark); }
-
-    /* 2. BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
-    .main-nav { 
-      border-bottom: 2px solid var(--border-dark);
-      padding: 0.9rem 1rem;
-      position: sticky;
-      top: 0;
-      background-color: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 9999;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-    }
-    .nav-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      text-align: center;
-    }
-    .nav-toggle-btn { display: none; }
-    .main-nav > .nav-container > ul { 
-      list-style: none; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center;
-      gap: 3.5rem;
-    }
-    .main-nav a {
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
       font-size: 0.82rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-main);
-      padding: 0.35rem 0;
-      position: relative;
-    }
-    .main-nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0%; height: 2px;
-      background-color: var(--accent);
-      transition: width var(--transition);
-    }
-    .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
-    .main-nav a.active { color: var(--accent); }
-
-    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
-    .has-dropdown { position: relative; }
-    .has-dropdown::after {
-      content: '';
-      position: absolute;
-      top: 100%; left: 0;
-      width: 100%; height: 20px;
-      background: transparent;
-    }
-    .dropdown-trigger {
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-    .arrow-indicator {
-      font-size: 0.65rem;
-      transition: transform var(--transition);
-      color: var(--accent);
-    }
-    .has-dropdown:hover .arrow-indicator { transform: rotate(180deg); }
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%) translateY(5px);
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      min-width: 230px;
-      padding: 0.8rem 0;
-      list-style: none;
-      display: none;
-      flex-direction: column;
-      text-align: left;
-      border-radius: 2px;
-      z-index: 10000;
-    }
-    .dropdown-menu li { width: 100%; list-style: none; }
-    .dropdown-menu a {
-      display: block;
-      padding: 0.65rem 1.4rem;
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-main);
-      transition: all var(--transition);
-    }
-    .dropdown-menu a::after { display: none; }
-    .dropdown-menu a:hover {
-      background-color: var(--bg-surface);
-      color: var(--accent);
-      padding-left: 1.65rem;
-    }
-    .has-dropdown:hover .dropdown-menu {
-      display: flex;
-      animation: aparecerDropdown 0.2s ease forwards;
-    }
-    @keyframes aparecerDropdown {
-      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
-    }
-
-    #contenido-principal {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 3rem 1.5rem 5rem;
-    }
-
-    .section-hero-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border-soft);
-    }
-    .section-category-label {
-      font-family: var(--font-classical);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: inline-block;
-      margin-bottom: 0.5rem;
-    }
-    .section-main-title {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.5rem;
-    }
-    .saludo-usuario {
-      font-family: var(--font-classical);
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-top: 0.4rem;
-    }
-    .section-intro-text {
-      max-width: 760px;
-      margin: 1rem auto 0;
-      font-family: var(--font-reader);
-      font-size: 1.15rem;
-      line-height: 1.75;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    .layout-columns {
-      display: grid;
-      grid-template-columns: 2.3fr 1fr;
-      gap: 3.8rem;
-      align-items: start;
-    }
-
-    .tabs-bar {
-      display: flex;
-      gap: 0.5rem;
-      border-bottom: 2px solid var(--border-soft);
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      padding: 0.75rem 1.2rem;
-      font-family: var(--font-classical);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .tab-btn:hover { color: var(--accent); }
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      background-color: var(--bg-card);
-    }
-
-    .collection-stream {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .item-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      padding: 1.8rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1.5rem;
-      box-shadow: var(--shadow-subtle);
-      transition: transform var(--transition);
-    }
-    .item-card:hover { transform: translateY(-2px); }
-    .item-meta-tag {
-      font-family: var(--font-classical);
-      font-size: 0.72rem;
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.3rem;
-      display: block;
-    }
-    .item-card h4 {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      line-height: 1.3;
-      margin-bottom: 0.4rem;
-    }
-    .item-card p {
-      font-family: var(--font-reader);
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .item-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-end;
-      flex-shrink: 0;
-    }
-    .btn-goto {
-      font-family: var(--font-sans);
-      font-size: 0.76rem;
-      font-weight: 600;
-      text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--accent);
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      padding: 0.4rem 0.8rem;
-      border-radius: 2px;
-      white-space: nowrap;
-    }
-    .btn-goto:hover { background-color: var(--accent); color: #fff; }
-    .btn-delete {
-      background: transparent;
-      border: none;
-      color: var(--text-light);
-      font-size: 0.75rem;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    .btn-delete:hover { color: var(--accent); }
-
-    .empty-state {
-      text-align: center;
-      padding: 4rem 2rem;
-      background-color: var(--bg-card);
-      border: 1px dashed var(--border-soft);
-      font-family: var(--font-reader);
-      font-style: italic;
+      margin-bottom: 0.4rem;
       color: var(--text-muted);
     }
-
-    .add-custom-panel {
-      margin-top: 3rem;
-      background-color: var(--bg-surface);
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
       border: 1px solid var(--border-soft);
-      padding: 2rem;
-    }
-    .add-custom-panel h3 {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-    .add-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .add-form-grid input, .add-form-grid select {
-      background-color: var(--bg-color);
-      border: 1px solid var(--border-soft);
-      padding: 0.7rem 0.9rem;
       font-family: var(--font-sans);
+      font-size: 0.95rem;
       outline: none;
+      border-radius: 2px;
+      background-color: #fff;
     }
-    .btn-add-item {
-      grid-column: 1 / -1;
+    .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+    .registro-oculto { display: none; }
+    .btn-auth {
+      width: 100%;
       background-color: var(--accent);
       color: #fff;
       border: none;
-      padding: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .sidebar-widget {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      padding: 1.8rem;
-      box-shadow: var(--shadow-subtle);
-      margin-bottom: 2rem;
-    }
-    .widget-heading {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      margin-bottom: 1.2rem;
-      border-bottom: 2px solid var(--border-dark);
-      padding-bottom: 0.4rem;
-    }
-    .stats-counter {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      text-align: center;
-    }
-    .stat-box {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-soft);
-      padding: 1rem;
-    }
-    .stat-number {
+      padding: 0.85rem;
       font-family: var(--font-classical);
-      font-size: 2rem;
+      font-size: 0.78rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    .btn-auth:hover { background-color: var(--accent-dark); }
+    .auth-switch {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .auth-switch a {
       color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .back-home {
       display: block;
-    }
-    .stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); }
-
-    .site-footer {
-      background-color: var(--bg-surface);
-      border-top: 3px double var(--border-dark);
-      padding: 4rem 1.5rem 2.5rem;
-      margin-top: 5rem;
-    }
-    .footer-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 3.5rem;
-    }
-    .footer-brand h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.75rem; }
-    .footer-nav ul { list-style: none; }
-    .footer-nav li { margin-bottom: 0.75rem; }
-    .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
-
-    @media (max-width: 992px) {
-      .layout-columns { grid-template-columns: 1fr; }
-      .footer-container { grid-template-columns: 1fr; }
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
   </style>
 </head>
-<body id="top">
+<body>
 
-  <!-- 1. BARRA SUPERIOR OSCURA -->
-  <aside class="top-action-bar" aria-label="Información de publicación">
-    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
-    <div class="top-actions-right">
-      <span>Crítica de Fondo & Artes</span>
-      <a href="feed.xml" class="rss-link-meta" target="_blank">RSS</a>
-      <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
+  <div class="auth-card">
+    <div class="auth-header">
+      <p>Círculo Kairós</p>
+      <h1 id="titulo-modo">Iniciar Sesión</h1>
     </div>
-  </aside>
 
-  <!-- 2. NAVEGACIÓN MODERNA CON DESPLEGABLE CORRECTO -->
-  <nav class="main-nav" aria-label="Navegación principal">
-    <div class="nav-container">
-      <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
-        <span id="icono-menu-movil">☰</span>
-        <span>Menú</span>
-      </button>
-
-      <ul id="lista-navegacion">
-        <li><a href="index.html">Inicio</a></li>
-        
-        <li class="has-dropdown">
-          <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
-            Cuadernos <span class="arrow-indicator">▾</span>
-          </a>
-          <ul class="dropdown-menu" aria-label="Submenú de Cuadernos">
-            <li><a href="literatura.html">Literatura & Enigma</a></li>
-            <li><a href="cine.html">Cine & Mirada</a></li>
-            <li><a href="musica.html">Música & Acústica</a></li>
-            <li><a href="filosofia.html">Filosofía & Ensayo</a></li>
-            <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
-          </ul>
-        </li>
-
-        <li><a href="perfil.html" class="active">Mi Cuaderno</a></li>
-        <li><a href="biblioteca.html">Biblioteca</a></li>
-        <li><a href="podcast.html">Podcast</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main id="contenido-principal">
-    <header class="section-hero-header">
-      <span class="section-category-label">Archivo Interior</span>
-      <h2 class="section-main-title">Mi Cuaderno de Favoritos</h2>
-      <p class="saludo-usuario" id="saludo-nombre-usuario">Cargando perfil...</p>
-      <p class="section-intro-text">
-        «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado de lectura para custodiar ensayos, citas y notas personales.
-      </p>
-    </header>
-
-    <div class="layout-columns">
-      <section>
-        <nav class="tabs-bar" aria-label="Filtro de colecciones">
-          <button class="tab-btn active" onclick="cambiarFiltro('todos', this)">Todos</button>
-          <button class="tab-btn" onclick="cambiarFiltro('literatura', this)">Literatura</button>
-          <button class="tab-btn" onclick="cambiarFiltro('cine', this)">Cine</button>
-          <button class="tab-btn" onclick="cambiarFiltro('musica', this)">Música</button>
-          <button class="tab-btn" onclick="cambiarFiltro('filosofia', this)">Filosofía</button>
-          <button class="tab-btn" onclick="cambiarFiltro('podcast', this)">Podcast</button>
-          <button class="tab-btn" onclick="cambiarFiltro('propio', this)">Mis Notas</button>
-        </nav>
-
-        <div class="collection-stream" id="contenedor-favoritos"></div>
-
-        <section class="add-custom-panel">
-          <h3>+ Anotar una obra o referencia en mi cuaderno</h3>
-          <div class="add-form-grid">
-            <input type="text" id="nuevo-titulo" placeholder="Título de la obra *" required>
-            <input type="text" id="nuevo-autor" placeholder="Autor / Narrador">
-            <select id="nueva-categoria">
-              <option value="literatura">Literatura</option>
-              <option value="cine">Cine</option>
-              <option value="musica">Música</option>
-              <option value="filosofia">Filosofía</option>
-              <option value="podcast">Podcast</option>
-              <option value="propio">Reflexión propia</option>
-            </select>
-            <input type="text" id="nuevo-enlace" placeholder="Enlace web (opcional)">
-            <input type="text" id="nueva-nota" placeholder="Nota o cita breve" style="grid-column: 1 / -1;">
-            <button class="btn-add-item" onclick="agregarItemManual()">Añadir a mi archivo &rarr;</button>
-          </div>
-        </section>
-      </section>
-
-      <aside class="sidebar-wrapper" aria-label="Estadísticas">
-        <div class="sidebar-widget">
-          <h3 class="widget-heading">Censo del Cuaderno</h3>
-          <div class="stats-counter">
-            <div class="stat-box">
-              <span class="stat-number" id="conteo-total">0</span>
-              <span class="stat-label">Guardadas</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-number" id="conteo-ensayos">0</span>
-              <span class="stat-label">Ensayos</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="sidebar-widget">
-          <h3 class="widget-heading">Gestión de Sesión</h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;" id="texto-estado-sesion">Verificando estado...</p>
-          <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
-          <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto; margin-bottom: 1rem;">Vaciar cuaderno</button>
-          <button onclick="cerrarSesionUsuario()" class="btn-goto" style="width: 100%; text-align: center; background-color: var(--accent); color: #fff; cursor: pointer;">Cerrar Sesión</button>
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <h3>CÍRCULO KAIRÓS</h3>
-        <p>Publicación cultural independiente consagrada al análisis pausado de las artes.</p>
+    <!-- Campos exclusivos de Registro (Ocultos por defecto) -->
+    <div id="campos-registro" class="registro-oculto">
+      <div class="form-group">
+        <label for="nombreUsuario">Nombre de usuario</label>
+        <input type="text" id="nombreUsuario" placeholder="Tu alias o nombre">
+      </div>
+      <div class="form-group">
+        <label for="cumpleaños">Fecha de nacimiento</label>
+        <input type="date" id="cumpleaños">
+      </div>
+      <div class="form-group">
+        <label for="genero">Género</label>
+        <select id="genero">
+          <option value="">Selecciona una opción</option>
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Otro">Prefiero no decirlo</option>
+        </select>
       </div>
     </div>
-  </footer>
+
+    <div class="form-group">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" placeholder="tu@correo.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+
+    <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
+
+    <div class="auth-switch">
+      <span id="texto-switch">¿No tienes cuenta?</span> 
+      <a onclick="cambiarModo()" id="enlace-switch">Regístrate aquí</a>
+    </div>
+
+    <a href="index.html" class="back-home">&larr; Volver al inicio</a>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
@@ -602,165 +183,71 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    let usuarioActual = null;
-    const STORAGE_KEY = "kairos_favoritos_v1";
-    let categoriaActiva = "todos";
+    let esRegistro = false;
 
-    async function obtenerFavoritos() {
-      if (usuarioActual) {
-        try {
-          const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
-          const docSnap = await getDoc(docRef);
-          return docSnap.exists() ? docSnap.data().lista || [] : [];
-        } catch (e) {
-          return [];
-        }
-      } else {
-        const data = localStorage.getItem(STORAGE_KEY);
-        return data ? JSON.parse(data) : [];
-      }
-    }
+    window.cambiarModo = function() {
+      esRegistro = !esRegistro;
+      const camposReg = document.getElementById("campos-registro");
+      camposReg.style.display = esRegistro ? "block" : "none";
 
-    async function guardarFavoritos(lista) {
-      if (usuarioActual) {
-        try {
-          await setDoc(doc(db, "usuarios_favoritos", usuarioActual.uid), { lista });
-        } catch (e) {
-          console.error(e);
-        }
-      } else {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-      }
-      renderizarFavoritos();
-      actualizarEstadisticas();
-    }
+      document.getElementById("titulo-modo").textContent = esRegistro ? "Crear una Cuenta" : "Iniciar Sesión";
+      document.getElementById("btn-accion").textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
+      document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
+      document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
+    };
 
-    window.cambiarFiltro = function(cat, btn) {
-      categoriaActiva = cat;
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      if (btn) btn.classList.add("active");
-      renderizarFavoritos();
-    }
+    async function manejarAutenticacion() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
 
-    async function renderizarFavoritos() {
-      const cont = document.getElementById("contenedor-favoritos");
-      if (!cont) return;
-      const lista = await obtenerFavoritos();
-      const filtrados = categoriaActiva === "todos" ? lista : lista.filter(i => i.categoria === categoriaActiva);
-
-      if (filtrados.length === 0) {
-        cont.innerHTML = `<div class="empty-state"><p>No hay obras guardadas en esta sección.</p></div>`;
+      if (!email || !password) {
+        alert("Por favor, rellena los campos obligatorios.");
         return;
       }
 
-      cont.innerHTML = "";
-      filtrados.forEach(item => {
-        const card = document.createElement("article");
-        card.className = "item-card";
-        card.innerHTML = `
-          <div>
-            <span class="item-meta-tag">${item.categoria} ${item.autor ? '· ' + item.autor : ''}</span>
-            <h4>${item.titulo}</h4>
-            <p>${item.nota || 'Sin notas.'}</p>
-          </div>
-          <div class="item-actions">
-            ${item.enlace ? `<a href="${item.enlace}" class="btn-goto">Ver &rarr;</a>` : ''}
-            <button class="btn-delete" onclick="window.eliminarItem(${item.id})">Eliminar</button>
-          </div>
-        `;
-        cont.appendChild(card);
-      });
-    }
+      try {
+        if (esRegistro) {
+          const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
+          const cumpleaños = document.getElementById("cumpleaños").value;
+          const genero = document.getElementById("genero").value;
 
-    window.agregarItemManual = async function() {
-      const titulo = document.getElementById("nuevo-titulo").value.trim();
-      if (!titulo) return alert("Introduce un título.");
-      const nuevo = {
-        id: Date.now(),
-        titulo,
-        autor: document.getElementById("nuevo-autor").value.trim(),
-        categoria: document.getElementById("nueva-categoria").value,
-        enlace: document.getElementById("nuevo-enlace").value.trim(),
-        nota: document.getElementById("nueva-nota").value.trim()
-      };
-      const lista = await obtenerFavoritos();
-      lista.unshift(nuevo);
-      await guardarFavoritos(lista);
-      document.getElementById("nuevo-titulo").value = "";
-      document.getElementById("nuevo-autor").value = "";
-      document.getElementById("nuevo-enlace").value = "";
-      document.getElementById("nueva-nota").value = "";
-    }
-
-    window.eliminarItem = async function(id) {
-      const lista = await obtenerFavoritos();
-      await guardarFavoritos(lista.filter(i => i.id !== id));
-    }
-
-    async function actualizarEstadisticas() {
-      const lista = await obtenerFavoritos();
-      document.getElementById("conteo-total").textContent = lista.length;
-      document.getElementById("conteo-ensayos").textContent = lista.filter(i => i.enlace && i.enlace.includes(".html")).length;
-    }
-
-    window.exportarColeccion = async function() {
-      const lista = await obtenerFavoritos();
-      const blob = new Blob([JSON.stringify(lista, null, 2)], { type: "application/json" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "mi_cuaderno_kairos.json";
-      a.click();
-    }
-
-    window.borrarTodo = async function() {
-      if (confirm("¿Vaciar cuaderno?")) await guardarFavoritos([]);
-    }
-
-    window.cerrarSesionUsuario = function() {
-      signOut(auth).then(() => {
-        alert("Sesión cerrada.");
-        window.location.href = "auth.html";
-      });
-    }
-
-    // Control de sesión y sincronización del navbar idéntico al resto de la web
-    onAuthStateChanged(auth, async (user) => {
-      usuarioActual = user;
-      const textoEstado = document.getElementById("texto-estado-sesion");
-      const saludoUsuario = document.getElementById("saludo-nombre-usuario");
-      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
-
-      enlacesPerfil.forEach(enlace => {
-        if (user) {
-          enlace.href = "perfil.html";
-          enlace.textContent = "Mi Cuaderno";
-        } else {
-          enlace.href = "auth.html";
-          enlace.textContent = "Acceso / Registro";
-        }
-      });
-
-      if (user) {
-        if (textoEstado) textoEstado.innerHTML = `Conectado como: <strong>${user.email}</strong>`;
-
-        try {
-          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
-          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
-            if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de ${perfilSnap.data().nombreUsuario}`;
-          } else {
-            if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
+          if (!nombreUsuario) {
+            alert("Por favor, introduce tu nombre de usuario.");
+            return;
           }
-        } catch (e) {
-          if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
-        }
-      } else {
-        if (textoEstado) textoEstado.innerHTML = `Modo invitado. <a href="auth.html" style="color:var(--accent);">Inicia sesión</a> para sincronizar.`;
-        if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de Invitado`;
-      }
 
-      await renderizarFavoritos();
-      await actualizarEstadisticas();
-    });
+          // Crear la cuenta nueva en Auth
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // Guardar obligatoriamente los datos en Firestore
+          await setDoc(doc(db, "usuarios_perfil", user.uid), {
+            nombreUsuario,
+            cumpleaños,
+            genero,
+            email,
+            creado: new Date().toISOString()
+          });
+
+          alert("¡Cuenta creada con éxito! Bienvenido a Círculo Kairós.");
+        } else {
+          // Inicio de sesión normal
+          await signInWithEmailAndPassword(auth, email, password);
+          alert("¡Sesión iniciada correctamente!");
+        }
+
+        window.location.href = "perfil.html";
+      } catch (error) {
+        console.error("Error de Firebase:", error);
+        if (error.code === 'auth/email-already-in-use') {
+          alert("Este correo ya está registrado. Por favor, inicia sesión en su lugar.");
+        } else {
+          alert("Error: " + error.code + " - " + error.message);
+        }
+      }
+    }
+
+    document.getElementById("btn-accion").addEventListener("click", manejarAutenticacion);
   </script>
 </body>
 </html>
