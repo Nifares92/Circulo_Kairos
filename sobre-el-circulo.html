@@ -697,9 +697,14 @@
 </head>
 <body id="top">
 
-  <!-- 1. BARRA SUPERIOR OSCURA -->
+<!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
-    <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+    <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
+      <!-- ESPACIO PARA EL NOMBRE DE USUARIO -->
+      <span id="header-nombre-usuario" style="color: #d4af37; font-weight: 600;"></span>
+    </div>
+    
     <div class="top-actions-right">
       <span>Crítica de Fondo &amp; Artes</span>
       <a href="feed.xml" class="rss-link-meta" title="Canal RSS" target="_blank">
@@ -1000,27 +1005,30 @@
     document.addEventListener("DOMContentLoaded", configurarMenu);
   </script>
 
-  <!-- SCRIPT DE CONTROL DE SESIÓN CON FIREBASE -->
+<!-- SCRIPT DE CONTROL DE SESIÓN Y NOMBRE EN FIRESTORE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
-  apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
-  authDomain: "circulokairos-d1b8a.firebaseapp.com",
-  projectId: "circulokairos-d1b8a",
-  storageBucket: "circulokairos-d1b8a.firebasestorage.app",
-  messagingSenderId: "83122572556",
-  appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
-  measurementId: "G-FCKBNP0K8C"
-};
+      apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.firebasestorage.app",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    // Comprobar si hay un usuario logueado en tiempo real en la navegación
-    onAuthStateChanged(auth, (user) => {
+    // Comprobar si hay un usuario logueado en tiempo real en la navegación y barra superior
+    onAuthStateChanged(auth, async (user) => {
       const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      const spanUsuario = document.getElementById("header-nombre-usuario");
       
       enlacesPerfil.forEach(enlace => {
         if (user) {
@@ -1031,6 +1039,22 @@
           enlace.textContent = "Acceso / Registro";
         }
       });
+
+      if (user) {
+        try {
+          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
+          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
+            const nombre = perfilSnap.data().nombreUsuario;
+            if (spanUsuario) spanUsuario.textContent = `👤 ${nombre}`;
+          } else {
+            if (spanUsuario) spanUsuario.textContent = `👤 Mi Cuenta`;
+          }
+        } catch (e) {
+          console.error("Error al cargar el nombre de usuario:", e);
+        }
+      } else {
+        if (spanUsuario) spanUsuario.textContent = "";
+      }
     });
   </script>
 
