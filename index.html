@@ -2847,7 +2847,7 @@
  <!-- SCRIPT DE CONTROL DE SESIÓN CON FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
@@ -2862,18 +2862,15 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Comprobar si hay un usuario logueado en tiempo real
+    // Comprobar si hay un usuario logueado en tiempo real para la navegación
     onAuthStateChanged(auth, (user) => {
-      // Buscamos el enlace de "Mi Cuaderno" en la barra de navegación
       const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
       
       enlacesPerfil.forEach(enlace => {
         if (user) {
-          // Si ha iniciado sesión, el enlace le lleva a su cuaderno y cambia el texto
           enlace.href = "perfil.html";
           enlace.textContent = "Mi Cuaderno";
         } else {
-          // Si no ha iniciado sesión, el enlace le lleva a la página de acceso/registro
           enlace.href = "auth.html";
           enlace.textContent = "Acceso / Registro";
         }
