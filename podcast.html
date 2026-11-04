@@ -642,17 +642,88 @@
     </div>
   </footer>
 
-  <!-- SCRIPT PARA GUARDAR EPISODIOS DE PODCAST -->
-  <script>
-    const STORAGE_KEY = "kairos_favoritos_v1";
+<!-- SCRIPT UNIVERSAL DE GESTIÓN DE FAVORITOS (PODCAST) Y SESIÓN CON FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    function conmutarFavorito(idArticulo, titulo, categoria, enlace) {
-      let lista = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+    const firebaseConfig = {
+      apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.appspot.com",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const STORAGE_KEY = "kairos_favoritos_v1";
+    let usuarioActual = null;
+
+    // Detectar sesión de usuario en tiempo real
+    onAuthStateChanged(auth, async (user) => {
+      usuarioActual = user;
+      
+      // Actualizar enlaces de la barra de navegación
+      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      enlacesPerfil.forEach(enlace => {
+        if (user) {
+          enlace.href = "perfil.html";
+          enlace.textContent = "Mi Cuaderno";
+        } else {
+          enlace.href = "auth.html";
+          enlace.textContent = "Acceso / Registro";
+        }
+      });
+
+      // Inyectar y actualizar el estado de los botones de favoritos del podcast
+      await inyectarBotonPodcast();
+    });
+
+    async function obtenerListaFavoritos() {
+      if (usuarioActual) {
+        try {
+          const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            return docSnap.data().lista || [];
+          }
+          return [];
+        } catch (e) {
+          console.error("Error al leer favoritos de Firestore:", e);
+          return [];
+        }
+      } else {
+        const data = localStorage.getItem(STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+      }
+    }
+
+    async function guardarListaFavoritos(lista) {
+      if (usuarioActual) {
+        try {
+          const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
+          await setDoc(docRef, { lista: lista });
+        } catch (e) {
+          console.error("Error al guardar favoritos en Firestore:", e);
+        }
+      } else {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+      }
+    }
+
+    window.conmutarFavoritoPodcast = async function(idArticulo, titulo, enlace) {
+      let lista = await obtenerListaFavoritos();
       const existe = lista.some(item => item.enlace === enlace);
 
       if (existe) {
         lista = lista.filter(item => item.enlace !== enlace);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+        await guardarListaFavoritos(lista);
         actualizarEstadoBoton(idArticulo, false);
         alert(`«${titulo}» se ha eliminado de tu Cuaderno.`);
       } else {
@@ -664,7 +735,7 @@
           enlace: enlace,
           nota: "Episodio sonoro guardado desde la sección de Podcast."
         });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+        await guardarListaFavoritos(lista);
         actualizarEstadoBoton(idArticulo, true);
         alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
       }
@@ -686,9 +757,9 @@
       }
     }
 
-    function inyectarBotonPodcast() {
+    async function inyectarBotonPodcast() {
       const episodios = document.querySelectorAll(".episode-card");
-      const listaActual = localStorage.getItem(STORAGE_KEY) ? JSON.parse(localStorage.getItem(STORAGE_KEY)) : [];
+      const listaActual = await obtenerListaFavoritos();
       const archivoActual = "podcast.html";
 
       episodios.forEach(ep => {
@@ -701,53 +772,20 @@
         const enlaceCompleto = `${archivoActual}#${id}`;
         const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
 
-        const btn = document.createElement("button");
-        btn.id = `btn-fav-${id}`;
-        btn.className = "back-to-toc-link";
-        btn.style.cursor = "pointer";
-        btn.style.marginRight = "auto";
-        btn.onclick = () => conmutarFavorito(id, titulo, "podcast", enlaceCompleto);
+        let btn = document.getElementById(`btn-fav-${id}`);
+        if (!btn) {
+          btn = document.createElement("button");
+          btn.id = `btn-fav-${id}`;
+          btn.className = "back-to-toc-link";
+          btn.style.cursor = "pointer";
+          btn.style.marginRight = "auto";
+          pieAcciones.appendChild(btn);
+        }
 
-        pieAcciones.appendChild(btn);
+        btn.onclick = () => window.conmutarFavoritoPodcast(id, titulo, enlaceCompleto);
         actualizarEstadoBoton(id, yaGuardado);
       });
     }
-
-    document.addEventListener("DOMContentLoaded", inyectarBotonPodcast);
-  </script>
-
-  <!-- SCRIPT DE CONTROL DE SESIÓN CON FIREBASE -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
-      authDomain: "circulokairos-d1b8a.firebaseapp.com",
-      projectId: "circulokairos-d1b8a",
-      storageBucket: "circulokairos-d1b8a.appspot.com",
-      messagingSenderId: "83122572556",
-      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
-      measurementId: "G-FCKBNP0K8C"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Comprobar si hay un usuario logueado en tiempo real en la navegación
-    onAuthStateChanged(auth, (user) => {
-      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
-      
-      enlacesPerfil.forEach(enlace => {
-        if (user) {
-          enlace.href = "perfil.html";
-          enlace.textContent = "Mi Cuaderno";
-        } else {
-          enlace.href = "auth.html";
-          enlace.textContent = "Acceso / Registro";
-        }
-      });
-    });
   </script>
   
 </body>
