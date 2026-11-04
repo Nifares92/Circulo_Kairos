@@ -154,7 +154,7 @@
       <input type="password" id="password" placeholder="••••••••" required>
     </div>
 
-    <!-- Botón limpio sin atributos conflictivos -->
+    <!-- Botón principal -->
     <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
 
     <div class="auth-switch">
@@ -198,7 +198,7 @@
       document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
     });
 
-    // Evento de clic en el botón principal controlado de forma nativa por JavaScript
+    // Evento de clic en el botón principal
     document.getElementById("btn-accion").addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
@@ -209,6 +209,7 @@
       }
 
       try {
+        // Si estamos en modo registro O si los campos de registro están visibles en pantalla
         if (esRegistro) {
           const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
           const cumpleaños = document.getElementById("cumpleaños").value;
@@ -223,7 +224,7 @@
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // 2. Guardar los datos del perfil en Firestore
+          // 2. Guardar los datos del perfil en Firestore de forma segura
           await setDoc(doc(db, "usuarios_perfil", user.uid), {
             nombreUsuario: nombreUsuario,
             cumpleaños: cumpleaños,
@@ -232,7 +233,7 @@
             creado: new Date().toISOString()
           });
 
-          alert("¡Cuenta creada con éxito y perfil guardado!");
+          alert("¡Cuenta creada con éxito! Te damos la bienvenida a Círculo Kairós.");
           window.location.href = "perfil.html";
 
         } else {
@@ -243,11 +244,13 @@
         }
 
       } catch (error) {
-        console.error("Error de Firebase:", error);
+        console.error("Error detallado de Firebase:", error);
         if (error.code === 'auth/email-already-in-use') {
-          alert("Este correo ya está registrado. Por favor, inicia sesión con él.");
+          alert("Este correo electrónico ya está registrado. Por favor, inicia sesión con él.");
+        } else if (error.code === 'auth/weak-password') {
+          alert("La contraseña es demasiado débil. Debe tener al menos 6 caracteres.");
         } else {
-          alert("Error: " + error.code + " - " + error.message);
+          alert("Error de autenticación: " + error.code + " - " + error.message);
         }
       }
     });
