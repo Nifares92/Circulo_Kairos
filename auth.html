@@ -154,11 +154,12 @@
       <input type="password" id="password" placeholder="••••••••" required>
     </div>
 
-    <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
+    <!-- Se añade onclick directo para evitar bloqueos de eventos en módulos -->
+    <button class="btn-auth" id="btn-accion" type="button" onclick="window.ejecutarAccion()">Entrar a mi Cuaderno</button>
 
     <div class="auth-switch">
       <span id="texto-switch">¿No tienes cuenta?</span> 
-      <a onclick="cambiarModo()" id="enlace-switch">Regístrate aquí</a>
+      <a onclick="window.cambiarModo()" id="enlace-switch">Regístrate aquí</a>
     </div>
 
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
@@ -196,7 +197,7 @@
       document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
     };
 
-    async function manejarAutenticacion() {
+    window.ejecutarAccion = async function() {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
@@ -220,7 +221,7 @@
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // 2. Esperar obligatoriamente a que Firestore guarde el documento con el nombre
+          // 2. Guardar los datos del perfil en Firestore
           await setDoc(doc(db, "usuarios_perfil", user.uid), {
             nombreUsuario: nombreUsuario,
             cumpleaños: cumpleaños,
@@ -229,8 +230,7 @@
             creado: new Date().toISOString()
           });
 
-          // 3. Mostrar la alerta de éxito y esperar a que el usuario pulse OK antes de redirigir
-          alert("¡Cuenta creada con éxito y perfil guardado!");
+          alert("¡Cuenta creada con éxito! Bienvenido.");
           window.location.href = "perfil.html";
 
         } else {
@@ -241,16 +241,14 @@
         }
 
       } catch (error) {
-        console.error("Error de Firebase:", error);
+        console.error("Error detallado de Firebase:", error);
         if (error.code === 'auth/email-already-in-use') {
-          alert("Este correo ya está registrado. Por favor, inicia sesión con él.");
+          alert("Este correo ya está registrado. Por favor, inicia sesión en su lugar.");
         } else {
           alert("Error: " + error.code + " - " + error.message);
         }
       }
-    }
-
-    document.getElementById("btn-accion").addEventListener("click", manejarAutenticacion);
+    };
   </script>
 </body>
 </html>
