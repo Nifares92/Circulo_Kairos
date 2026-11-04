@@ -141,12 +141,12 @@
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
   </div>
 
-  <!-- Importamos los SDKs de Firebase (versión modular moderna) -->
+  <!-- SCRIPT DE AUTENTICACIÓN CON FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    // Tus credenciales sacadas de la imagen anterior
+    // Configuración exacta obtenida de tu consola de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
       authDomain: "circulokairos-d1b8a.firebaseapp.com",
@@ -187,10 +187,10 @@
           await signInWithEmailAndPassword(auth, email, password);
           alert("¡Has iniciado sesión correctamente!");
         }
-        // Redirigir al perfil o inicio tras el éxito
         window.location.href = "perfil.html";
       } catch (error) {
-        alert("Error: " + error.message);
+        console.error("Error detallado de Firebase:", error);
+        alert("Error de Autenticación: " + error.message);
       }
     };
   </script>
