@@ -1340,11 +1340,10 @@
     });
   </script>
 
-  <!-- SCRIPT UNIVERSAL DE CONTROL DE SESIÓN Y FAVORITOS CON FIREBASE -->
+  <!-- SCRIPT DE CONTROL DE SESIÓN CON FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDVp031ubgih8LuY8uVuKX1uMLED7gtaE",
@@ -1358,15 +1357,11 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
 
-    const STORAGE_KEY = "kairos_favoritos_v1";
-    let usuarioActual = null;
-
-    onAuthStateChanged(auth, async (user) => {
-      usuarioActual = user;
-      
+    // Comprobar si hay un usuario logueado en tiempo real para la navegación
+    onAuthStateChanged(auth, (user) => {
       const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      
       enlacesPerfil.forEach(enlace => {
         if (user) {
           enlace.href = "perfil.html";
