@@ -154,12 +154,12 @@
       <input type="password" id="password" placeholder="••••••••" required>
     </div>
 
-    <!-- Se añade onclick directo para evitar bloqueos de eventos en módulos -->
-    <button class="btn-auth" id="btn-accion" type="button" onclick="window.ejecutarAccion()">Entrar a mi Cuaderno</button>
+    <!-- Botón limpio sin atributos conflictivos -->
+    <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
 
     <div class="auth-switch">
       <span id="texto-switch">¿No tienes cuenta?</span> 
-      <a onclick="window.cambiarModo()" id="enlace-switch">Regístrate aquí</a>
+      <a id="enlace-switch">Regístrate aquí</a>
     </div>
 
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
@@ -186,7 +186,8 @@
 
     let esRegistro = false;
 
-    window.cambiarModo = function() {
+    // Control del cambio de modo (Login / Registro)
+    document.getElementById("enlace-switch").addEventListener("click", () => {
       esRegistro = !esRegistro;
       const camposReg = document.getElementById("campos-registro");
       camposReg.style.display = esRegistro ? "block" : "none";
@@ -195,9 +196,10 @@
       document.getElementById("btn-accion").textContent = esRegistro ? "Registrarse" : "Entrar a mi Cuaderno";
       document.getElementById("texto-switch").textContent = esRegistro ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?";
       document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
-    };
+    });
 
-    window.ejecutarAccion = async function() {
+    // Evento de clic en el botón principal controlado de forma nativa por JavaScript
+    document.getElementById("btn-accion").addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
@@ -230,7 +232,7 @@
             creado: new Date().toISOString()
           });
 
-          alert("¡Cuenta creada con éxito! Bienvenido.");
+          alert("¡Cuenta creada con éxito y perfil guardado!");
           window.location.href = "perfil.html";
 
         } else {
@@ -241,14 +243,14 @@
         }
 
       } catch (error) {
-        console.error("Error detallado de Firebase:", error);
+        console.error("Error de Firebase:", error);
         if (error.code === 'auth/email-already-in-use') {
-          alert("Este correo ya está registrado. Por favor, inicia sesión en su lugar.");
+          alert("Este correo ya está registrado. Por favor, inicia sesión con él.");
         } else {
           alert("Error: " + error.code + " - " + error.message);
         }
       }
-    };
+    });
   </script>
 </body>
 </html>
