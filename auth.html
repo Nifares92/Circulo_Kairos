@@ -123,7 +123,7 @@
       <h1 id="titulo-modo">Iniciar Sesión</h1>
     </div>
 
-    <!-- Campos exclusivos de Registro (Ocultos por defecto) -->
+    <!-- Campos exclusivos de Registro -->
     <div id="campos-registro" class="registro-oculto">
       <div class="form-group">
         <label for="nombreUsuario">Nombre de usuario</label>
@@ -216,31 +216,34 @@
             return;
           }
 
-          // Crear la cuenta nueva en Auth
+          // 1. Crear el usuario en Auth
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // Guardar los datos del perfil en Firestore
+          // 2. Esperar obligatoriamente a que Firestore guarde el documento con el nombre
           await setDoc(doc(db, "usuarios_perfil", user.uid), {
-            nombreUsuario,
-            cumpleaños,
-            genero,
-            email,
+            nombreUsuario: nombreUsuario,
+            cumpleaños: cumpleaños,
+            genero: genero,
+            email: email,
             creado: new Date().toISOString()
           });
 
-          alert("¡Cuenta creada con éxito! Bienvenido a Círculo Kairós.");
+          // 3. Mostrar la alerta de éxito y esperar a que el usuario pulse OK antes de redirigir
+          alert("¡Cuenta creada con éxito y perfil guardado!");
+          window.location.href = "perfil.html";
+
         } else {
           // Inicio de sesión normal
           await signInWithEmailAndPassword(auth, email, password);
           alert("¡Sesión iniciada correctamente!");
+          window.location.href = "perfil.html";
         }
 
-        window.location.href = "perfil.html";
       } catch (error) {
         console.error("Error de Firebase:", error);
         if (error.code === 'auth/email-already-in-use') {
-          alert("Este correo ya está registrado. Por favor, inicia sesión en su lugar.");
+          alert("Este correo ya está registrado. Por favor, inicia sesión con él.");
         } else {
           alert("Error: " + error.code + " - " + error.message);
         }
