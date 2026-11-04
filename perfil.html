@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSRPCR2JS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CSRPCR2JS');
+  </script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Círculo Kairós — Cuaderno Personal, Ensayos Favoritos y Notas del Lector.">
   <title>Mi Cuaderno & Archivo | Círculo Kairós</title>
 
+  <!-- Favicon SVG oficial -->
   <link rel="icon" type="image/svg+xml" href="logo-kairos.svg">
+
+  <!-- Tipografías de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -16,6 +28,7 @@
       --bg-color: #ffffff;
       --bg-surface: #f9f8f6;
       --bg-card: #ffffff;
+      --bg-accent-tint: #f4eee7;
       --text-main: #181615;
       --text-muted: #665f58;
       --text-light: #8a8279;
@@ -39,6 +52,7 @@
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
       background-image: linear-gradient(to bottom, #ffffff 0%, #fcfbf9 40%, #f6f1eb 100%);
       background-attachment: fixed;
     }
@@ -46,6 +60,7 @@
     a { color: inherit; text-decoration: none; transition: color var(--transition); }
     a:hover { color: var(--accent); }
 
+    /* 1. BARRA SUPERIOR OSCURA */
     .top-action-bar {
       background-color: #111111;
       color: #ffffff;
@@ -57,8 +72,17 @@
       font-family: var(--font-classical);
       letter-spacing: 0.1em;
     }
-    .top-actions-right { display: flex; align-items: center; gap: 1.5rem; }
-    .rss-link-meta { display: inline-flex; align-items: center; gap: 0.4rem; color: #fff; }
+    .top-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .rss-link-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #fff;
+    }
     .rss-link-meta svg { width: 12px; height: 12px; fill: currentColor; }
     .btn-top-circle {
       background-color: var(--accent);
@@ -72,6 +96,7 @@
     }
     .btn-top-circle:hover { background-color: var(--accent-dark); }
 
+    /* 2. BARRA DE NAVEGACIÓN MODERNA Y JERÁRQUICA */
     .main-nav { 
       border-bottom: 2px solid var(--border-dark);
       padding: 0.9rem 1rem;
@@ -79,12 +104,23 @@
       top: 0;
       background-color: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       z-index: 9999;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     }
-    .nav-container { max-width: var(--max-width); margin: 0 auto; text-align: center; }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
     .nav-toggle-btn { display: none; }
-    .main-nav > .nav-container > ul { list-style: none; display: flex; justify-content: center; align-items: center; gap: 3.5rem; }
+    .main-nav > .nav-container > ul { 
+      list-style: none; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      gap: 3.5rem;
+    }
     .main-nav a {
       font-size: 0.82rem;
       font-weight: 600;
@@ -105,9 +141,82 @@
     .main-nav a:hover::after, .main-nav a.active::after { width: 100%; }
     .main-nav a.active { color: var(--accent); }
 
-    #contenido-principal { max-width: var(--max-width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    /* SUBMENÚ DESPLEGABLE EN ORDENADOR */
+    .has-dropdown { position: relative; }
+    .has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%; height: 20px;
+      background: transparent;
+    }
+    .dropdown-trigger {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .arrow-indicator {
+      font-size: 0.65rem;
+      transition: transform var(--transition);
+      color: var(--accent);
+    }
+    .has-dropdown:hover .arrow-indicator { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(5px);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      min-width: 230px;
+      padding: 0.8rem 0;
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      text-align: left;
+      border-radius: 2px;
+      z-index: 10000;
+    }
+    .dropdown-menu li { width: 100%; list-style: none; }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      transition: all var(--transition);
+    }
+    .dropdown-menu a::after { display: none; }
+    .dropdown-menu a:hover {
+      background-color: var(--bg-surface);
+      color: var(--accent);
+      padding-left: 1.65rem;
+    }
+    .has-dropdown:hover .dropdown-menu {
+      display: flex;
+      animation: aparecerDropdown 0.2s ease forwards;
+    }
+    @keyframes aparecerDropdown {
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0px); }
+    }
 
-    .section-hero-header { text-align: center; margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-soft); }
+    #contenido-principal {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .section-hero-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
     .section-category-label {
       font-family: var(--font-classical);
       font-size: 0.78rem;
@@ -118,7 +227,13 @@
       display: inline-block;
       margin-bottom: 0.5rem;
     }
-    .section-main-title { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .section-main-title {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
     .saludo-usuario {
       font-family: var(--font-classical);
       font-size: 0.85rem;
@@ -132,13 +247,25 @@
       margin: 1rem auto 0;
       font-family: var(--font-reader);
       font-size: 1.15rem;
+      line-height: 1.75;
       color: var(--text-muted);
       font-style: italic;
     }
 
-    .layout-columns { display: grid; grid-template-columns: 2.3fr 1fr; gap: 3.8rem; align-items: start; }
+    .layout-columns {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 3.8rem;
+      align-items: start;
+    }
 
-    .tabs-bar { display: flex; gap: 0.5rem; border-bottom: 2px solid var(--border-soft); margin-bottom: 2rem; flex-wrap: wrap; }
+    .tabs-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border-soft);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
     .tab-btn {
       background: transparent;
       border: none;
@@ -152,11 +279,20 @@
       text-transform: uppercase;
       color: var(--text-muted);
       cursor: pointer;
+      transition: all var(--transition);
     }
     .tab-btn:hover { color: var(--accent); }
-    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background-color: var(--bg-card); }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      background-color: var(--bg-card);
+    }
 
-    .collection-stream { display: flex; flex-direction: column; gap: 1.5rem; }
+    .collection-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
     .item-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -166,57 +302,178 @@
       align-items: flex-start;
       gap: 1.5rem;
       box-shadow: var(--shadow-subtle);
+      transition: transform var(--transition);
     }
-    .item-meta-tag { font-family: var(--font-classical); font-size: 0.72rem; color: var(--accent); font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; display: block; }
-    .item-card h4 { font-family: var(--font-serif); font-size: 1.35rem; margin-bottom: 0.4rem; }
-    .item-card p { font-family: var(--font-reader); font-size: 0.98rem; color: var(--text-muted); }
-    .item-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; flex-shrink: 0; }
+    .item-card:hover { transform: translateY(-2px); }
+    .item-meta-tag {
+      font-family: var(--font-classical);
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    .item-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+    .item-card p {
+      font-family: var(--font-reader);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
     .btn-goto {
-      font-size: 0.76rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--accent); background-color: var(--bg-surface); border: 1px solid var(--border-soft);
-      padding: 0.4rem 0.8rem; border-radius: 2px;
+      font-family: var(--font-sans);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+      white-space: nowrap;
     }
     .btn-goto:hover { background-color: var(--accent); color: #fff; }
-    .btn-delete { background: transparent; border: none; color: var(--text-light); font-size: 0.75rem; cursor: pointer; text-decoration: underline; }
+    .btn-delete {
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
     .btn-delete:hover { color: var(--accent); }
 
-    .empty-state { text-align: center; padding: 4rem 2rem; background-color: var(--bg-card); border: 1px dashed var(--border-soft); font-family: var(--font-reader); font-style: italic; color: var(--text-muted); }
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--bg-card);
+      border: 1px dashed var(--border-soft);
+      font-family: var(--font-reader);
+      font-style: italic;
+      color: var(--text-muted);
+    }
 
-    .add-custom-panel { margin-top: 3rem; background-color: var(--bg-surface); border: 1px solid var(--border-soft); padding: 2rem; }
-    .add-custom-panel h3 { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.5rem; }
-    .add-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-    .add-form-grid input, .add-form-grid select { background-color: var(--bg-color); border: 1px solid var(--border-soft); padding: 0.7rem 0.9rem; font-family: var(--font-sans); outline: none; }
-    .btn-add-item { grid-column: 1 / -1; background-color: var(--accent); color: #fff; border: none; padding: 0.8rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+    .add-custom-panel {
+      margin-top: 3rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 2rem;
+    }
+    .add-custom-panel h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .add-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .add-form-grid input, .add-form-grid select {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-soft);
+      padding: 0.7rem 0.9rem;
+      font-family: var(--font-sans);
+      outline: none;
+    }
+    .btn-add-item {
+      grid-column: 1 / -1;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
 
-    .sidebar-widget { background-color: var(--bg-card); border: 1px solid var(--border-soft); padding: 1.8rem; box-shadow: var(--shadow-subtle); margin-bottom: 2rem; }
-    .widget-heading { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--border-dark); padding-bottom: 0.4rem; }
-    .stats-counter { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; text-align: center; }
-    .stat-box { background-color: var(--bg-surface); border: 1px solid var(--border-soft); padding: 1rem; }
-    .stat-number { font-family: var(--font-classical); font-size: 2rem; font-weight: 700; color: var(--accent); display: block; }
+    .sidebar-widget {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1.8rem;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 2rem;
+    }
+    .widget-heading {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-dark);
+      padding-bottom: 0.4rem;
+    }
+    .stats-counter {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      text-align: center;
+    }
+    .stat-box {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+    }
+    .stat-number {
+      font-family: var(--font-classical);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
     .stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); }
 
-    .site-footer { background-color: var(--bg-surface); border-top: 3px double var(--border-dark); padding: 4rem 1.5rem 2.5rem; margin-top: 5rem; }
-    .footer-container { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3.5rem; }
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 3px double var(--border-dark);
+      padding: 4rem 1.5rem 2.5rem;
+      margin-top: 5rem;
+    }
+    .footer-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+    }
     .footer-brand h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.75rem; }
     .footer-nav ul { list-style: none; }
     .footer-nav li { margin-bottom: 0.75rem; }
     .footer-nav a { font-size: 0.88rem; color: var(--text-muted); }
 
-    @media (max-width: 992px) { .layout-columns { grid-template-columns: 1fr; } .footer-container { grid-template-columns: 1fr; } }
+    @media (max-width: 992px) {
+      .layout-columns { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body id="top">
 
+  <!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
     <span id="meta-fecha-hoy">Círculo Kairós · Edición del Día</span>
     <div class="top-actions-right">
-      <span>Crítica de Fondo &amp; Artes</span>
+      <span>Crítica de Fondo & Artes</span>
       <a href="feed.xml" class="rss-link-meta" target="_blank">RSS</a>
       <a href="sobre-el-circulo.html" class="btn-top-circle">El Círculo</a>
     </div>
   </aside>
 
-  <!-- 2. NAVEGACIÓN MODERNA -->
+  <!-- 2. NAVEGACIÓN MODERNA CON DESPLEGABLE CORRECTO -->
   <nav class="main-nav" aria-label="Navegación principal">
     <div class="nav-container">
       <button class="nav-toggle-btn" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">
@@ -226,6 +483,7 @@
 
       <ul id="lista-navegacion">
         <li><a href="index.html">Inicio</a></li>
+        
         <li class="has-dropdown">
           <a href="javascript:void(0)" class="dropdown-trigger" id="dropdown-cuadernos">
             Cuadernos <span class="arrow-indicator">▾</span>
@@ -238,7 +496,8 @@
             <li><a href="pensamiento.html">Pensamiento (Director)</a></li>
           </ul>
         </li>
-        <li><a href="perfil.html" class="active" aria-current="page">Mi Cuaderno</a></li>
+
+        <li><a href="perfil.html" class="active">Mi Cuaderno</a></li>
         <li><a href="biblioteca.html">Biblioteca</a></li>
         <li><a href="podcast.html">Podcast</a></li>
       </ul>
@@ -249,7 +508,6 @@
     <header class="section-hero-header">
       <span class="section-category-label">Archivo Interior</span>
       <h2 class="section-main-title">Mi Cuaderno de Favoritos</h2>
-      <!-- Indicador sutil del nombre de usuario -->
       <p class="saludo-usuario" id="saludo-nombre-usuario">Cargando perfil...</p>
       <p class="section-intro-text">
         «El lector que colecciona instantes rescata al tiempo de su disolución.» Tu espacio privado de lectura para custodiar ensayos, citas y notas personales.
@@ -310,8 +568,7 @@
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;" id="texto-estado-sesion">Verificando estado...</p>
           <button onclick="exportarColeccion()" class="btn-goto" style="width: 100%; text-align: center; cursor: pointer; margin-bottom: 0.6rem;">Exportar copia (JSON)</button>
           <button onclick="borrarTodo()" class="btn-delete" style="display: block; margin: 0 auto; margin-bottom: 1rem;">Vaciar cuaderno</button>
-          <!-- Botón de Cerrar Sesión solicitado -->
-          <button onclick="cerrarSesionUsuario()" class="btn-auth" style="background-color: #111; color: #fff; margin-top: 0;">Cerrar Sesión</button>
+          <button onclick="cerrarSesionUsuario()" class="btn-goto" style="width: 100%; text-align: center; background-color: var(--accent); color: #fff; cursor: pointer;">Cerrar Sesión</button>
         </div>
       </aside>
     </div>
@@ -323,13 +580,6 @@
         <h3>CÍRCULO KAIRÓS</h3>
         <p>Publicación cultural independiente consagrada al análisis pausado de las artes.</p>
       </div>
-      <nav class="footer-nav">
-        <h4>Cuadernos</h4>
-        <ul>
-          <li><a href="literatura.html">Literatura</a></li>
-          <li><a href="cine.html">Cine</a></li>
-        </ul>
-      </nav>
     </div>
   </footer>
 
@@ -473,21 +723,26 @@
       });
     }
 
-    // Control dinámico de sesión y navbar en todas las páginas
+    // Control de sesión y sincronización del navbar idéntico al resto de la web
     onAuthStateChanged(auth, async (user) => {
       usuarioActual = user;
-      const enlaceNav = document.getElementById("enlace-dinamico-nav");
       const textoEstado = document.getElementById("texto-estado-sesion");
       const saludoUsuario = document.getElementById("saludo-nombre-usuario");
+      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+
+      enlacesPerfil.forEach(enlace => {
+        if (user) {
+          enlace.href = "perfil.html";
+          enlace.textContent = "Mi Cuaderno";
+        } else {
+          enlace.href = "auth.html";
+          enlace.textContent = "Acceso / Registro";
+        }
+      });
 
       if (user) {
-        if (enlaceNav) {
-          enlaceNav.href = "perfil.html";
-          enlaceNav.textContent = "Mi Cuaderno";
-        }
         if (textoEstado) textoEstado.innerHTML = `Conectado como: <strong>${user.email}</strong>`;
 
-        // Recuperar nombre de usuario personalizado desde Firestore
         try {
           const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
           if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
@@ -498,12 +753,7 @@
         } catch (e) {
           if (saludoUsuario) saludoUsuario.textContent = `Cuaderno Personal`;
         }
-
       } else {
-        if (enlaceNav) {
-          enlaceNav.href = "auth.html";
-          enlaceNav.textContent = "Acceso / Registro";
-        }
         if (textoEstado) textoEstado.innerHTML = `Modo invitado. <a href="auth.html" style="color:var(--accent);">Inicia sesión</a> para sincronizar.`;
         if (saludoUsuario) saludoUsuario.textContent = `Cuaderno de Invitado`;
       }
