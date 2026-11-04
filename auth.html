@@ -123,43 +123,46 @@
       <h1 id="titulo-modo">Iniciar Sesión</h1>
     </div>
 
-    <!-- Campos exclusivos de Registro -->
-    <div id="campos-registro" class="registro-oculto">
-      <div class="form-group">
-        <label for="nombreUsuario">Nombre de usuario</label>
-        <input type="text" id="nombreUsuario" placeholder="Tu alias o nombre">
+    <!-- Usamos un formulario HTML nativo para garantizar que el botón responda al instante -->
+    <form id="form-auth">
+      <!-- Campos de Registro -->
+      <div id="campos-registro" class="registro-oculto">
+        <div class="form-group">
+          <label for="nombreUsuario">Nombre de usuario</label>
+          <input type="text" id="nombreUsuario" placeholder="Tu alias o nombre">
+        </div>
+        <div class="form-group">
+          <label for="cumpleaños">Fecha de nacimiento</label>
+          <input type="date" id="cumpleaños">
+        </div>
+        <div class="form-group">
+          <label for="genero">Género</label>
+          <select id="genero">
+            <option value="">Selecciona una opción</option>
+            <option value="Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+            <option value="Otro">Prefiero no decirlo</option>
+          </select>
+        </div>
       </div>
+
       <div class="form-group">
-        <label for="cumpleaños">Fecha de nacimiento</label>
-        <input type="date" id="cumpleaños">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tu@correo.com" required>
       </div>
+
       <div class="form-group">
-        <label for="genero">Género</label>
-        <select id="genero">
-          <option value="">Selecciona una opción</option>
-          <option value="Hombre">Hombre</option>
-          <option value="Mujer">Mujer</option>
-          <option value="Otro">Prefiero no decirlo</option>
-        </select>
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="••••••••" required>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="email">Correo electrónico</label>
-      <input type="email" id="email" placeholder="tu@correo.com" required>
-    </div>
-
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" placeholder="••••••••" required>
-    </div>
-
-    <!-- Botón principal -->
-    <button class="btn-auth" id="btn-accion" type="button">Entrar a mi Cuaderno</button>
+      <!-- El botón de tipo submit procesará el formulario de inmediato -->
+      <button class="btn-auth" id="btn-accion" type="submit">Entrar a mi Cuaderno</button>
+    </form>
 
     <div class="auth-switch">
       <span id="texto-switch">¿No tienes cuenta?</span> 
-      <a id="enlace-switch">Regístrate aquí</a>
+      <a id="enlace-switch" style="cursor:pointer;">Regístrate aquí</a>
     </div>
 
     <a href="index.html" class="back-home">&larr; Volver al inicio</a>
@@ -186,8 +189,9 @@
 
     let esRegistro = false;
 
-    // Control del cambio de modo (Login / Registro)
-    document.getElementById("enlace-switch").addEventListener("click", () => {
+    // Control del cambio de modo
+    document.getElementById("enlace-switch").addEventListener("click", (e) => {
+      e.preventDefault();
       esRegistro = !esRegistro;
       const camposReg = document.getElementById("campos-registro");
       camposReg.style.display = esRegistro ? "block" : "none";
@@ -198,8 +202,10 @@
       document.getElementById("enlace-switch").textContent = esRegistro ? "Inicia sesión" : "Regístrate aquí";
     });
 
-    // Evento de clic en el botón principal
-    document.getElementById("btn-accion").addEventListener("click", async () => {
+    // Envío del formulario nativo
+    document.getElementById("form-auth").addEventListener("submit", async (e) => {
+      e.preventDefault(); // Evitamos que recargue la página de forma por defecto
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
@@ -209,7 +215,6 @@
       }
 
       try {
-        // Si estamos en modo registro O si los campos de registro están visibles en pantalla
         if (esRegistro) {
           const nombreUsuario = document.getElementById("nombreUsuario").value.trim();
           const cumpleaños = document.getElementById("cumpleaños").value;
@@ -220,11 +225,11 @@
             return;
           }
 
-          // 1. Crear el usuario en Auth
+          // 1. Crear cuenta en Firebase Auth
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // 2. Guardar los datos del perfil en Firestore de forma segura
+          // 2. Guardar perfil en Firestore
           await setDoc(doc(db, "usuarios_perfil", user.uid), {
             nombreUsuario: nombreUsuario,
             cumpleaños: cumpleaños,
@@ -233,22 +238,20 @@
             creado: new Date().toISOString()
           });
 
-          alert("¡Cuenta creada con éxito! Te damos la bienvenida a Círculo Kairós.");
+          alert("¡Cuenta creada con éxito! Redirigiendo a tu cuaderno...");
           window.location.href = "perfil.html";
 
         } else {
-          // Inicio de sesión normal
+          // Iniciar sesión
           await signInWithEmailAndPassword(auth, email, password);
-          alert("¡Sesión iniciada correctamente!");
+          alert("¡Sesión iniciada con éxito!");
           window.location.href = "perfil.html";
         }
 
       } catch (error) {
-        console.error("Error detallado de Firebase:", error);
+        console.error("Error en Firebase:", error);
         if (error.code === 'auth/email-already-in-use') {
-          alert("Este correo electrónico ya está registrado. Por favor, inicia sesión con él.");
-        } else if (error.code === 'auth/weak-password') {
-          alert("La contraseña es demasiado débil. Debe tener al menos 6 caracteres.");
+          alert("Este correo ya está registrado. Por favor, cambia a la opción de Iniciar Sesión.");
         } else {
           alert("Error de autenticación: " + error.code + " - " + error.message);
         }
