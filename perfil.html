@@ -774,5 +774,16 @@
       await actualizarEstadisticas();
     });
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const hoy = new Date();
+      const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
+      const metaSpan = document.getElementById("meta-fecha-hoy");
+      if (metaSpan) {
+        metaSpan.innerHTML = `Círculo Kairós · <strong>${fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)}</strong>`;
+      }
+    });
+  </script>
 </body>
 </html>
