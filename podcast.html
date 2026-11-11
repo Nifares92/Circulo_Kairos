@@ -246,12 +246,13 @@
       margin: 0 auto 2.5rem;
     }
 
-    /* PORTADA DEL PODCAST */
+    /* PORTADA DEL PODCAST (TAMAÑO MÁS EQUILIBRADO Y VISIBLE) */
     .podcast-cover-wrapper {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
-      padding: 1rem;
-      margin-bottom: 3rem;
+      padding: 0.9rem;
+      margin: 0 auto 3rem;
+      max-width: 440px;
       box-shadow: var(--shadow-subtle);
     }
     .podcast-cover-wrapper img {
@@ -260,29 +261,37 @@
       display: block;
     }
 
-    /* MANIFIESTO Y ESTRUCTURA */
+    /* MANIFIESTO Y ESTRUCTURA AMPLIADA */
     .podcast-manifesto {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-soft);
-      padding: 2.5rem 2.2rem;
+      padding: 3rem 2.8rem;
       margin-bottom: 4rem;
       border-radius: 2px;
       position: relative;
     }
     .podcast-manifesto p.lead-intro {
       font-family: var(--font-reader);
-      font-size: 1.15rem;
-      line-height: 1.8;
+      font-size: 1.2rem;
+      line-height: 1.85;
       color: #332f2c;
       text-align: justify;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .podcast-manifesto p.secondary-intro {
+      font-family: var(--font-reader);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      text-align: justify;
+      margin-bottom: 2.5rem;
     }
     .triad-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.8rem;
       border-top: 1px solid var(--border-soft);
-      padding-top: 2rem;
+      padding-top: 2.2rem;
     }
     .triad-item {
       position: relative;
@@ -411,7 +420,7 @@
       height: 40px;
     }
 
-    /* ACCIONES INFERIORES Y BOTÓN DE FAVORITOS */
+    /* ACCIONES INFERIORES */
     .article-bottom-actions {
       border-top: 1px solid var(--border-soft);
       padding-top: 1.5rem;
@@ -512,11 +521,10 @@
 </head>
 <body>
 
- <!-- 1. BARRA SUPERIOR OSCURA -->
+  <!-- 1. BARRA SUPERIOR OSCURA -->
   <aside class="top-action-bar" aria-label="Información de publicación">
     <div style="display: flex; align-items: center; gap: 1.5rem;">
       <span>Círculo Kairós · Edición Sonora</span>
-      <!-- ESPACIO PARA EL NOMBRE DE USUARIO -->
       <span id="header-nombre-usuario" style="color: #d4af37; font-weight: 600;"></span>
     </div>
     
@@ -561,52 +569,80 @@
       <h1>El Peregrino de la Medianoche</h1>
       <p>Relatos de umbral, desasosiego y crónicas al otro lado de la vigilia.</p>
 
+      <!-- PORTADA AMPLIADA Y EQUILIBRADA -->
       <div class="podcast-cover-wrapper">
-        <img src="PORTADAPEREGRINOCORRECTO.jpg" alt="Portada de El Peregrino de la Medianoche">
+        <img src="peregrino-midnight.jpg" alt="Portada de El Peregrino de la Medianoche">
       </div>
     </header>
 
-    <section class="podcast-manifesto" aria-label="Estructura del programa">
+    <!-- MANIFIESTO Y EXPLICACIÓN DETALLADA DEL PODCAST EN LA PARTE SUPERIOR -->
+    <section class="podcast-manifesto" aria-label="Estructura y filosofía del programa">
       <p class="lead-intro">
-        Hay historias que solo encuentran su cauce cuando la ciudad enmudece y la razón relaja su vigilancia. <strong>El Peregrino de la Medianoche</strong> es el gabinete sonoro de <em>Círculo Kairós</em> consagrado al misterio, lo insólito y los ángulos más oscuros de la experiencia humana.
+        Cuando la ciudad enmudece y la razón relaja su vigilancia nocturna, <strong>El Peregrino de la Medianoche</strong> se alza como el gabinete sonoro y literario de <em>Círculo Kairós</em>. Concebido no como un pasatiempo de terror convencional, sino como una exploración rigurosa de las fronteras de la conciencia, el espacio investiga aquellos rincones donde el desasosiego, el misterio y la extrañeza cotidiana quiebran las certezas del mundo ordinario.
       </p>
+      <p class="secondary-intro">
+        Cada emisión quincenal opera como una pieza de orfebrería acústica estructurada rigurosamente en tres actos inquebrantables, diseñados para guiar al oyente desde la inmersión literaria hasta el rigor del ensayo y la crudeza del documento histórico:
+      </p>
+
       <div class="triad-grid">
         <div class="triad-item">
           <span class="triad-step">I. La Ficción</span>
           <h3 class="triad-title">Relato Dramatizado</h3>
-          <p class="triad-desc">Inmersión narrativa y atmósferas envolventes diseñadas para situarnos en la piel del desasosiego.</p>
+          <p class="triad-desc">Una inmersión narrativa envolvente con atmósferas sonoras de suspense y terror gótico, diseñadas para situar al oyente en la piel del desconcierto y la paranoia.</p>
         </div>
         <div class="triad-item">
           <span class="triad-step">II. La Mirada</span>
           <h3 class="triad-title">Análisis de Fondo</h3>
-          <p class="triad-desc">Reflexión crítica y desgranado del símbolo y sus raíces antropológicas.</p>
+          <p class="triad-desc">Un ensayo crítico, psicológico y filosófico que desentraña el origen profundo del miedo, los mitos ancestrales y los resortes científicos de la mente humana.</p>
         </div>
         <div class="triad-item">
           <span class="triad-step">III. La Crónica</span>
           <h3 class="triad-title">El Caso Real</h3>
-          <p class="triad-desc">Archivos, testimonios y expedientes documentados donde lo inexplicable traspasa el papel.</p>
+          <p class="triad-desc">Expedientes judiciales verídicos, sucesos históricos y crónicas forenses donde lo inexplicable y terrible traspasa los límites de la página escrita.</p>
         </div>
       </div>
     </section>
 
     <div class="episodes-section-heading">Archivo de Emisiones</div>
 
-<!-- EPISODIO 1 (Con título y descripción adaptados al contenido de pesadillas y terror nocturno) -->
+    <!-- CAPÍTULO 01 -->
     <article class="episode-card" id="podcast-ep-01" data-titulo="Capítulo 01: Pesadillas, Sombras de la Vigilia y Muerte Súbita Nocturna">
       <span class="episode-number">Capítulo 01 · Tribuna Sonora</span>
       <h2 class="article-headline">Pesadillas, Sombras de la Vigilia y Muerte Súbita Nocturna</h2>
       <div class="episode-meta-line">
-        Por Círculo Kairós · Publicado el 2 de noviembre de 2026 · <span>Duración: 29 min</span>
+        Por Círculo Kairós · Publicado el 2 de noviembre de 2026 · <span>Duración: 32 min</span>
       </div>
-
       <div class="episode-prose">
-        <p>En este primer gabinete sonoro cruzamos el umbral de la vigilia para adentrarnos en los territorios más oscuros de la mente. Un viaje en tres actos que discurre entre la ficción dramatizada de la pesadilla y el terror claustrofóbico de <em>«Nunca más»</em>, el análisis histórico y antropológico de los íncubos, súcubos y la parálisis del sueño, y una inquietante crónica real en torno al enigma médico del <em>Síndrome de la Muerte Nocturna Inesperada</em>.</p>
+        <p>Un viaje en tres actos que discurre entre la ficción dramatizada del relato <em>«Nunca más»</em>, el análisis histórico de la parálisis del sueño y el enigma médico del Síndrome de la Muerte Nocturna Inesperada.</p>
       </div>
-
       <div class="audio-player-box">
         <label for="reproductor-ep1">Escuchar episodio completo:</label>
         <audio id="reproductor-ep1" controls preload="metadata">
           <source src="https://ia601001.us.archive.org/14/items/elperegrino-1/ELPEREGRINO1.mp3" type="audio/mp4">
+          Tu navegador no soporta el elemento de audio.
+        </audio>
+      </div>
+      <footer class="article-bottom-actions">
+        <span class="signature-note">— Círculo Kairós · El Peregrino de la Medianoche</span>
+      </footer>
+    </article>
+
+    <!-- CAPÍTULO 02: ALUCINACIONES (BREVE Y CONCISO) -->
+    <article class="episode-card" id="podcast-ep-02" data-titulo="Capítulo 02: Alucinaciones, El Peso de la Culpa y El Naufragio del Mignonette">
+      <span class="episode-number">Capítulo 02 · Tribuna Sonora</span>
+      <h2 class="article-headline">Alucinaciones: Sombras del Remordimiento, Espectros Domésticos y el Caso del Mignonette</h2>
+      <div class="episode-meta-line">
+        Por Círculo Kairós · Publicado el 11 de noviembre de 2026 · <span>Duración: 35 min</span>
+      </div>
+
+      <div class="episode-prose">
+        <p>En este segundo gabinete sonoro cruzamos los umbrales de la percepción para adentrarnos en uno de los territorios más oscuros de la mente: las alucinaciones nacidas de la culpa y el remordimiento. A través de la trilogía habitual del programa, el episodio explora la ficción de un escritor atormentado en <em>«Un intruso en la noche»</em>, la base psicológica de las proyecciones mentales y la tétrica crónica real del naufragio y canibalismo a bordo del velero <em>Mignonette</em> en 1884.</p>
+      </div>
+
+      <div class="audio-player-box">
+        <label for="reproductor-ep2">Escuchar episodio completo:</label>
+        <audio id="reproductor-ep2" controls preload="metadata">
+          <source src="https://ia601001.us.archive.org/14/items/elperegrino-2/ELPEREGRINO2.mp3" type="audio/mp4">
           Tu navegador no soporta el elemento de audio.
         </audio>
       </div>
@@ -647,170 +683,5 @@
     </div>
   </footer>
 
-<!-- SCRIPT UNIVERSAL DE GESTIÓN DE FAVORITOS (PODCAST), SESIÓN Y NOMBRE EN FIRESTORE -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
-      authDomain: "circulokairos-d1b8a.firebaseapp.com",
-      projectId: "circulokairos-d1b8a",
-      storageBucket: "circulokairos-d1b8a.firebasestorage.app",
-      messagingSenderId: "83122572556",
-      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
-      measurementId: "G-FCKBNP0K8C"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    const STORAGE_KEY = "kairos_favoritos_v1";
-    let usuarioActual = null;
-
-    // Detectar sesión de usuario en tiempo real
-    onAuthStateChanged(auth, async (user) => {
-      usuarioActual = user;
-      
-      // Actualizar enlaces de la barra de navegación
-      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
-      const spanUsuario = document.getElementById("header-nombre-usuario");
-
-      enlacesPerfil.forEach(enlace => {
-        if (user) {
-          enlace.href = "perfil.html";
-          enlace.textContent = "Mi Cuaderno";
-        } else {
-          enlace.href = "auth.html";
-          enlace.textContent = "Acceso / Registro";
-        }
-      });
-
-      // Consultar y pintar el nombre de usuario en Firestore
-      if (user) {
-        try {
-          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
-          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
-            const nombre = perfilSnap.data().nombreUsuario;
-            if (spanUsuario) spanUsuario.textContent = `👤 ${nombre}`;
-          } else {
-            if (spanUsuario) spanUsuario.textContent = `👤 Mi Cuenta`;
-          }
-        } catch (e) {
-          console.error("Error al cargar el nombre de usuario:", e);
-        }
-      } else {
-        if (spanUsuario) spanUsuario.textContent = "";
-      }
-
-      // Inyectar y actualizar el estado de los botones de favoritos del podcast
-      await inyectarBotonPodcast();
-    });
-
-    async function obtenerListaFavoritos() {
-      if (usuarioActual) {
-        try {
-          const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
-          const docSnap = await getDoc(docRef);
-          if (docSnap.exists()) {
-            return docSnap.data().lista || [];
-          }
-          return [];
-        } catch (e) {
-          console.error("Error al leer favoritos de Firestore:", e);
-          return [];
-        }
-      } else {
-        const data = localStorage.getItem(STORAGE_KEY);
-        return data ? JSON.parse(data) : [];
-      }
-    }
-
-    async function guardarListaFavoritos(lista) {
-      if (usuarioActual) {
-        try {
-          const docRef = doc(db, "usuarios_favoritos", usuarioActual.uid);
-          await setDoc(docRef, { lista: lista });
-        } catch (e) {
-          console.error("Error al guardar favoritos en Firestore:", e);
-        }
-      } else {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-      }
-    }
-
-    window.conmutarFavoritoPodcast = async function(idArticulo, titulo, enlace) {
-      let lista = await obtenerListaFavoritos();
-      const existe = lista.some(item => item.enlace === enlace);
-
-      if (existe) {
-        lista = lista.filter(item => item.enlace !== enlace);
-        await guardarListaFavoritos(lista);
-        actualizarEstadoBoton(idArticulo, false);
-        alert(`«${titulo}» se ha eliminado de tu Cuaderno.`);
-      } else {
-        lista.unshift({
-          id: Date.now(),
-          titulo: titulo,
-          autor: "El Peregrino de la Medianoche",
-          categoria: "podcast",
-          enlace: enlace,
-          nota: "Episodio sonoro guardado desde la sección de Podcast."
-        });
-        await guardarListaFavoritos(lista);
-        actualizarEstadoBoton(idArticulo, true);
-        alert(`«${titulo}» se ha guardado en tu Cuaderno de Favoritos.`);
-      }
-    }
-
-    function actualizarEstadoBoton(idArticulo, guardado) {
-      const btn = document.getElementById(`btn-fav-${idArticulo}`);
-      if (!btn) return;
-      if (guardado) {
-        btn.innerHTML = "&#9733; En tu Cuaderno";
-        btn.style.backgroundColor = "var(--accent)";
-        btn.style.color = "#ffffff";
-        btn.style.borderColor = "var(--accent)";
-      } else {
-        btn.innerHTML = "&#9734; Guardar episodio";
-        btn.style.backgroundColor = "var(--bg-surface)";
-        btn.style.color = "var(--accent)";
-        btn.style.borderColor = "var(--border-soft)";
-      }
-    }
-
-    async function inyectarBotonPodcast() {
-      const episodios = document.querySelectorAll(".episode-card");
-      const listaActual = await obtenerListaFavoritos();
-      const archivoActual = "podcast.html";
-
-      episodios.forEach(ep => {
-        const pieAcciones = ep.querySelector(".article-bottom-actions");
-        if (!pieAcciones) return;
-
-        const id = ep.id || "ep-podcast";
-        const titularEl = ep.querySelector("h2");
-        const titulo = titularEl ? titularEl.textContent.trim() : "Episodio de Podcast";
-        const enlaceCompleto = `${archivoActual}#${id}`;
-        const yaGuardado = listaActual.some(item => item.enlace === enlaceCompleto);
-
-        let btn = document.getElementById(`btn-fav-${id}`);
-        if (!btn) {
-          btn = document.createElement("button");
-          btn.id = `btn-fav-${id}`;
-          btn.className = "back-to-toc-link";
-          btn.style.cursor = "pointer";
-          btn.style.marginRight = "auto";
-          pieAcciones.appendChild(btn);
-        }
-
-        btn.onclick = () => window.conmutarFavoritoPodcast(id, titulo, enlaceCompleto);
-        actualizarEstadoBoton(id, yaGuardado);
-      });
-    }
-  </script>
-  
 </body>
 </html>
