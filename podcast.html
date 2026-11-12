@@ -246,7 +246,7 @@
       margin: 0 auto 2.5rem;
     }
 
-    /* PORTADA DEL PODCAST (TAMAÑO MÁS EQUILIBRADO Y VISIBLE) */
+    /* PORTADA DEL PODCAST */
     .podcast-cover-wrapper {
       background-color: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -575,7 +575,7 @@
       </div>
     </header>
 
-    <!-- MANIFIESTO Y EXPLICACIÓN DETALLADA DEL PODCAST EN LA PARTE SUPERIOR -->
+    <!-- MANIFIESTO Y ESTRUCTURA AMPLIADA -->
     <section class="podcast-manifesto" aria-label="Estructura y filosofía del programa">
       <p class="lead-intro">
         Cuando la ciudad enmudece y la razón relaja su vigilancia nocturna, <strong>El Peregrino de la Medianoche</strong> se alza como el gabinete sonoro y literario de <em>Círculo Kairós</em>. Concebido no como un pasatiempo de terror convencional, sino como una exploración rigurosa de las fronteras de la conciencia, el espacio investiga aquellos rincones donde el desasosiego, el misterio y la extrañeza cotidiana quiebran las certezas del mundo ordinario.
@@ -627,7 +627,7 @@
       </footer>
     </article>
 
-    <!-- CAPÍTULO 02: ALUCINACIONES (BREVE Y CONCISO) -->
+    <!-- CAPÍTULO 02: ALUCINACIONES -->
     <article class="episode-card" id="podcast-ep-02" data-titulo="Capítulo 02: Alucinaciones, El Peso de la Culpa y El Naufragio del Mignonette">
       <span class="episode-number">Capítulo 02 · Tribuna Sonora</span>
       <h2 class="article-headline">Alucinaciones: Sombras del Remordimiento, Espectros Domésticos y el Caso del Mignonette</h2>
@@ -682,6 +682,58 @@
       </div>
     </div>
   </footer>
+
+  <!-- SCRIPT DE CONTROL DE SESIÓN Y NOMBRE EN FIRESTORE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDikrZaNQqoPKRz48K4rn1pcp7tDmF0FNg",
+      authDomain: "circulokairos-d1b8a.firebaseapp.com",
+      projectId: "circulokairos-d1b8a",
+      storageBucket: "circulokairos-d1b8a.firebasestorage.app",
+      messagingSenderId: "83122572556",
+      appId: "1:83122572556:web:d79c6c66a0ac1bbfacd29",
+      measurementId: "G-FCKBNP0K8C"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+      const enlacesPerfil = document.querySelectorAll('a[href="perfil.html"], a[href="auth.html"]');
+      const spanUsuario = document.getElementById("header-nombre-usuario");
+      
+      enlacesPerfil.forEach(enlace => {
+        if (user) {
+          enlace.href = "perfil.html";
+          enlace.textContent = "Mi Cuaderno";
+        } else {
+          enlace.href = "auth.html";
+          enlace.textContent = "Acceso / Registro";
+        }
+      });
+
+      if (user) {
+        try {
+          const perfilSnap = await getDoc(doc(db, "usuarios_perfil", user.uid));
+          if (perfilSnap.exists() && perfilSnap.data().nombreUsuario) {
+            const nombre = perfilSnap.data().nombreUsuario;
+            if (spanUsuario) spanUsuario.textContent = `👤 ${nombre}`;
+          } else {
+            if (spanUsuario) spanUsuario.textContent = `👤 Mi Cuenta`;
+          }
+        } catch (e) {
+          console.error("Error al cargar el nombre de usuario:", e);
+        }
+      } else {
+        if (spanUsuario) spanUsuario.textContent = "";
+      }
+    });
+  </script>
 
 </body>
 </html>
