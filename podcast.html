@@ -395,36 +395,51 @@
     }
     .episode-prose p { margin-bottom: 1.2rem; }
 
-    /* REPRODUCTOR DE AUDIO */
-    .audio-player-box {
+    /* BOTÓN DE ACCESO OFICIAL A LA WEB DEL PODCAST */
+    .podcast-external-action {
       background-color: var(--bg-surface);
       border: 1px solid var(--border-soft);
-      padding: 1.5rem 1.8rem;
+      padding: 1.8rem;
       border-radius: 2px;
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
-    .audio-player-box label {
-      font-family: var(--font-classical);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-main);
-      display: block;
-      margin-bottom: 0.6rem;
+    .podcast-external-action p {
+      font-family: var(--font-reader);
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .btn-official-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--accent);
+      color: #ffffff;
+      padding: 0.75rem 1.6rem;
+      border-radius: 2px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: background-color var(--transition);
+      box-shadow: 0 4px 12px rgba(139, 38, 30, 0.2);
     }
-    audio {
-      width: 100%;
-      accent-color: var(--accent);
-      height: 40px;
+    .btn-official-site:hover {
+      background-color: var(--accent-dark);
+      color: #ffffff;
     }
 
     /* ACCIONES INFERIORES */
     .article-bottom-actions {
       border-top: 1px solid var(--border-soft);
       padding-top: 1.5rem;
-      margin-top: 1.5rem;
+      margin-top: 1.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -436,25 +451,6 @@
       color: var(--text-muted);
       font-style: italic;
       font-family: var(--font-reader);
-    }
-    .back-to-toc-link {
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      background-color: var(--bg-surface);
-      padding: 0.45rem 0.95rem;
-      border: 1px solid var(--border-soft);
-      border-radius: 2px;
-      transition: all var(--transition);
-      cursor: pointer;
-    }
-    .back-to-toc-link:hover {
-      background-color: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
     }
 
     .back-to-home {
@@ -516,6 +512,7 @@
       .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
       .top-action-bar { flex-direction: column; gap: 0.5rem; text-align: center; padding: 0.6rem 1rem; }
       .top-actions-right { gap: 1rem; }
+      .podcast-external-action { flex-direction: column; align-items: stretch; text-align: center; }
     }
   </style>
 </head>
@@ -615,13 +612,16 @@
       <div class="episode-prose">
         <p>Un viaje en tres actos que discurre entre la ficción dramatizada del relato <em>«Nunca más»</em>, el análisis histórico de la parálisis del sueño y el enigma médico del Síndrome de la Muerte Nocturna Inesperada.</p>
       </div>
-      <div class="audio-player-box">
-        <label for="reproductor-ep1">Escuchar episodio completo:</label>
-        <audio id="reproductor-ep1" controls preload="metadata">
-          <source src="https://ia601001.us.archive.org/14/items/elperegrino-1/ELPEREGRINO1.mp3" type="audio/mp4">
-          Tu navegador no soporta el elemento de audio.
-        </audio>
+
+      <!-- REDIRECCIÓN OFICIAL EN LUGAR DE REPRODUCTOR -->
+      <div class="podcast-external-action">
+        <p>Este episodio forma parte de la emisión sonora oficial de El Peregrino de la Medianoche. Escucha la dramatización completa y accede al expediente en el portal especializado.</p>
+        <a href="https://www.peregrinomedianoche.es/" target="_blank" rel="noopener noreferrer" class="btn-official-site">
+          <span>Acceder a la Web Oficial</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </div>
+
       <footer class="article-bottom-actions">
         <span class="signature-note">— Círculo Kairós · El Peregrino de la Medianoche</span>
       </footer>
@@ -639,12 +639,13 @@
         <p>En este segundo gabinete sonoro cruzamos los umbrales de la percepción para adentrarnos en uno de los territorios más oscuros de la mente: las alucinaciones nacidas de la culpa y el remordimiento. A través de la trilogía habitual del programa, el episodio explora la ficción de un escritor atormentado en <em>«Un intruso en la noche»</em>, la base psicológica de las proyecciones mentales y la tétrica crónica real del naufragio y canibalismo a bordo del velero <em>Mignonette</em> en 1884.</p>
       </div>
 
-      <div class="audio-player-box">
-        <label for="reproductor-ep2">Escuchar episodio completo:</label>
-        <audio id="reproductor-ep2" controls preload="metadata">
-          <source src="https://ia600805.us.archive.org/2/items/peregrinomedianoche-capitulo-2.-final/PEREGRINOMEDIANOCHE%20CAPITULO2.FINAL.mp3" type="audio/mp4">
-          Tu navegador no soporta el elemento de audio.
-        </audio>
+      <!-- REDIRECCIÓN OFICIAL EN LUGAR DE REPRODUCTOR -->
+      <div class="podcast-external-action">
+        <p>Este episodio forma parte de la emisión sonora oficial de El Peregrino de la Medianoche. Escucha la dramatización completa y accede al expediente en el portal especializado.</p>
+        <a href="https://www.peregrinomedianoche.es/" target="_blank" rel="noopener noreferrer" class="btn-official-site">
+          <span>Acceder a la Web Oficial</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </div>
 
       <footer class="article-bottom-actions">
